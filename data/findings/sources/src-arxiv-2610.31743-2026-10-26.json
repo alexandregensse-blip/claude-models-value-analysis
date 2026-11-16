@@ -1,0 +1,2474 @@
+{
+ "id": "src-arxiv-2610.31743-2026-10-26",
+ "publisher": "arxiv-2610.31743",
+ "urls": [
+  "https://arxiv.org/abs/2610.31743v2"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.pdf": "b9977b174d13ce6def244de05a71bcb5d1914d1dab1d74be715e4e124a54d330",
+  "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt": "72ce629dccc2e2943b32da19a0a1b1a878ace5462822aa1e90ff44fd773e9615"
+ },
+ "harvested_at": "2026-11-09T14:40:56Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.31743v2",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.pdf"
+  }
+ ],
+ "published": {
+  "value": "2026-10-26",
+  "where": "arXiv stamp of the saved PDF (v2; v1 of 22 Oct per the research file)",
+  "quote": "arXiv:2610.31743v2 [cs.MA] 26 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-deepseek. UniMASO (arXiv 2610.31743v2), Table 2 (centralized topology): DeepSeek-V4-Flash and DeepSeek-V4-Pro with Vanilla MAS (research file: 18 values) plus the prompt-optimizer variants +TPE/+SPO/+MASPOB/+MASPO (research file: not reported) and the V4-Pro single-agent baselines (Single Agent, +CoT, +TPE, +SPO): 14 rows x 6 columns (5 benchmarks and their mean), each with its weighted-token cost. Not converted: Table 9 (the other four topologies with homogeneous DeepSeek models), the optimization-side costs (Table 7) and the UniMASO rows.",
+ "agent": "convertisseur k-deepseek (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "note",
+   "about": null,
+   "value": "Task quality and deployment cost under the centralized topology.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2 caption",
+   "quote": "Table 2: Task quality and deployment cost under the centralized topology. Prompt-only baselines use homogeneous models; UniMASO jointly optimizes prompts and model assignments.",
+   "note": "whole multi-agent system (centralized topology, homogeneous DeepSeek model for all agents), not the model alone; prompt-only baselines (TPE, SPO, MASPO, MASPOB) are prompt optimizers applied to the system; Avg. = unweighted mean of the five benchmark scores and total deployment cost"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "Task agents use temperature0.0",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "section 4.1 (Implementation Details)",
+   "quote": "Task agents use temperature0.0, and optimizer and evaluator set-",
+   "note": "temperature 0.0 for the task agents; reasoning effort / thinking mode not written; route not written; V4 snapshot not written (DeepSeek-V4-Flash, DeepSeek-V4-Pro, model card 2026)"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "The cost coefficients are relative token-price weights rather than monetary prices.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Appendix E.1 (Relative cost model)",
+   "quote": "The cost coefficients are relative token-price weights rather than monetary prices.",
+   "note": "FLAG not money: the cost is in millions of weighted-token units (M), relative weights (DeepSeek-V4-Flash 24 in / 72 out, DeepSeek-V4-Pro 72 in / 216 out, Table 10), \"a reproducible cost ranking and not a claim about the exact currency amount charged\"; optimization overhead, evaluator and Co-Evolver calls are excluded (Appendix E)"
+  },
+  {
+   "id": "F4",
+   "says": "unit",
+   "about": null,
+   "value": "millions of weighted-token units (M)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "section 4.1 (Metrics)",
+   "quote": "We report the cost of executing the selected configuration in millions of weighted-token units (M).",
+   "term": "rel-cost"
+  },
+  {
+   "id": "F5",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Flash",
+   "value": "DeepSeek-V4-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, block header DeepSeek-V4-Flash",
+   "quote": "DeepSeek-V4-Flash Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F6",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Pro",
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, block header DeepSeek-V4-Pro (centralized MAS)",
+   "quote": "DeepSeek-V4-Pro Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Pro",
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, block header DeepSeek-V4-Pro (single agent)",
+   "quote": "DeepSeek-V4-Pro Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F8",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "72.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column agieval, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F9",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "57.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column agieval, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "70.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column gpqa, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "24.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column gpqa, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "92.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column bfcl, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "73.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column bfcl, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "38.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column lcb, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "39.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column lcb, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "59.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column hotpot, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F17",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "100.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column hotpot, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.41",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row Vanilla MAS, column avg, score",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "59.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column avg, cost (M)",
+   "quote": "Vanilla MAS 72.27 57.3 70.20 24.8 92.20 73.1 38.17 39.6 59.20 100.2 66.41 59.00"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "72.66",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column agieval, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F21",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "64.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column agieval, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "67.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column gpqa, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F23",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "27.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column gpqa, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "92.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column bfcl, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "81.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column bfcl, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "38.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column lcb, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F27",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "44.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column lcb, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "59.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column hotpot, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "112.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column hotpot, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +TPE MAS, column avg, score",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column avg, cost (M)",
+   "quote": "+TPE 72.66 64.2 67.68 27.4 92.60 81.5 38.93 44.6 59.60 112.7 66.30 66.08"
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "73.05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column agieval, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "64.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column agieval, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "70.71",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column gpqa, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F35",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "27.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column gpqa, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "92.40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column bfcl, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "81.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column bfcl, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "40.46",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column lcb, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "43.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column lcb, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "62.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column hotpot, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "114.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column hotpot, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "67.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +SPO MAS, column avg, score",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column avg, cost (M)",
+   "quote": "+SPO 73.05 64.1 70.71 27.7 92.40 81.5 40.46 43.8 62.00 114.7 67.72 66.36"
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "73.83",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column agieval, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F45",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "64.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column agieval, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "71.72",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column gpqa, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "28.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column gpqa, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "92.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column bfcl, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "82.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column bfcl, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "39.69",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column lcb, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "45.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column lcb, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "60.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column hotpot, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F53",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "114.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column hotpot, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "67.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPOB MAS, column avg, score",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.96",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column avg, cost (M)",
+   "quote": "+MASPOB 73.83 64.0 71.72 28.0 92.80 82.8 39.69 45.5 60.00 114.5 67.61 66.96"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "73.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column agieval, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "63.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column agieval, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "72.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column gpqa, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "28.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column gpqa, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "93.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column bfcl, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "83.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column bfcl, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F62",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "41.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column lcb, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F63",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "44.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column lcb, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "59.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column hotpot, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "113.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column hotpot, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F66",
+   "says": "score",
+   "about": "DeepSeek-V4-Flash",
+   "value": "67.97",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, row +MASPO MAS, column avg, score",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F67",
+   "says": "cost",
+   "about": "DeepSeek-V4-Flash",
+   "value": "66.38",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Flash, same row, column avg, cost (M)",
+   "quote": "+MASPO 73.44 63.3 72.22 28.1 93.20 83.4 41.22 44.0 59.80 113.1 67.97 66.38"
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "76.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column agieval, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "217.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "78.28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column gpqa, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "103.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F72",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column bfcl, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "195.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "32.82",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column lcb, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "112.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F76",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "61.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column hotpot, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "295.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F78",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "68.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Vanilla MAS, column avg, score",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F79",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "184.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "Vanilla MAS 76.17 217.3 78.28 103.4 92.00 195.1 32.82 112.0 61.60 295.0 68.17 184.55"
+  },
+  {
+   "id": "F80",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "76.95",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column agieval, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "249.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "78.79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column gpqa, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F83",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "118.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column bfcl, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F85",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "219.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F86",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "30.53",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column lcb, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F87",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "128.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F88",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "62.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column hotpot, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F89",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "330.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "68.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE MAS, column avg, score",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F91",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "209.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+TPE 76.95 249.3 78.79 118.6 92.20 219.9 30.53 128.7 62.00 330.7 68.09 209.44"
+  },
+  {
+   "id": "F92",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "76.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column agieval, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F93",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "239.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "79.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column gpqa, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F95",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "116.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F96",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "94.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column bfcl, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F97",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "219.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F98",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "33.59",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column lcb, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F99",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "125.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "61.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column hotpot, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F101",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "335.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F102",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "69.31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO MAS, column avg, score",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F103",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "207.28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+SPO 76.56 239.2 79.80 116.6 94.80 219.6 33.59 125.2 61.80 335.8 69.31 207.28"
+  },
+  {
+   "id": "F104",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "77.34",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column agieval, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F105",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "246.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "79.29",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column gpqa, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F107",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "117.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F108",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column bfcl, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F109",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "219.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F110",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "35.88",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column lcb, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F111",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "125.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F112",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "62.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column hotpot, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F113",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "338.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F114",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "69.58",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPOB MAS, column avg, score",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F115",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "209.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+MASPOB 77.34 246.9 79.29 117.2 92.80 219.2 35.88 125.8 62.60 338.4 69.58 209.50"
+  },
+  {
+   "id": "F116",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "78.12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column agieval, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F117",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "249.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F118",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "80.30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column gpqa, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F119",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "115.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F120",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column bfcl, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F121",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "216.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F122",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "35.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column lcb, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F123",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "124.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F124",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "62.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column hotpot, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F125",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "336.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F126",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "69.79",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +MASPO MAS, column avg, score",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F127",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "208.28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+MASPO 78.12 249.6 80.30 115.2 92.60 216.6 35.11 124.0 62.80 336.0 69.79 208.28"
+  },
+  {
+   "id": "F128",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "74.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column agieval, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F129",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "36.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F130",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "76.77",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column gpqa, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F131",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "23.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F132",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.80",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column bfcl, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F133",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "25.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F134",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "36.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column lcb, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F135",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "16.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F136",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "52.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column hotpot, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F137",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "55.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F138",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "66.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row Single, column avg, score",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F139",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "31.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "Single Agent 74.61 36.5 76.77 23.0 92.80 25.9 36.64 16.9 52.60 55.2 66.68 31.50"
+  },
+  {
+   "id": "F140",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "75.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column agieval, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F141",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "42.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F142",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "75.76",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column gpqa, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F143",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "26.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F144",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "85.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column bfcl, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F145",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "26.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F146",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "38.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column lcb, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F147",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "21.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F148",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "61.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column hotpot, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F149",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "69.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F150",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "67.22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +CoT, column avg, score",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F151",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "37.41",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+CoT 75.39 42.3 75.76 26.5 85.00 26.6 38.93 21.9 61.00 69.8 67.22 37.41"
+  },
+  {
+   "id": "F152",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "71.09",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column agieval, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F153",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "37.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F154",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "73.74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column gpqa, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F155",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "16.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F156",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "92.60",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column bfcl, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F157",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "26.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F158",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "36.64",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column lcb, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F159",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "16.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F160",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "61.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column hotpot, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F161",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "54.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F162",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "67.05",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +TPE, column avg, score",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F163",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "30.04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+TPE 71.09 37.2 73.74 16.1 92.60 26.5 36.64 16.3 61.20 54.2 67.05 30.04"
+  },
+  {
+   "id": "F164",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "75.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column agieval, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "AGIEval-MATH accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F165",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "39.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column agieval, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  },
+  {
+   "id": "F166",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "73.74",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column gpqa, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "GPQA-Diamond accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F167",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "16.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column gpqa, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  },
+  {
+   "id": "F168",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "93.00",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column bfcl, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "BFCL-V3 accuracy (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F169",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "26.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column bfcl, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  },
+  {
+   "id": "F170",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "38.93",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column lcb, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "LiveCodeBench pass@1 (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F171",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "16.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column lcb, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  },
+  {
+   "id": "F172",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "60.20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column hotpot, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "HotpotQA exact match (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F173",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "54.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column hotpot, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  },
+  {
+   "id": "F174",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "68.25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, row +SPO, column avg, score",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65",
+   "term": "average of the five scores (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F175",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "30.65",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "where": "Table 2, DeepSeek-V4-Pro, same row, column avg, cost (M)",
+   "quote": "+SPO 75.39 39.9 73.74 16.9 93.00 26.4 38.93 16.0 60.20 54.1 68.25 30.65"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.txt",
+   "from": "/work/.salvo14/mig/s6/ev/c-deepseek/arxiv/2610.31743.pdf",
+   "tool": "not recorded (text saved by the research agent)"
+  }
+ ]
+}

@@ -5,6 +5,477 @@ and what moved. The measured rows themselves are in `raw-data.csv`; the method i
 (*How the numbers are built*) and detailed in `METHODOLOGY.md`. Section headings are kept as written at the time, so figures inside an older
 section describe the state after that pass, not today's.
 
+## The fit of 12 Nov 2026, and the page's header counts
+
+**Fit.** Data of 8e5e27c (the findings chain), `lqm_ext4.stan`, nutpie on both axes, converged: cost R̂ 1.0083, ESS
+526 / 1,806 at 13,500 draws per chain (13 extensions; the slowest parameter was Anthropic's couple × task-type spread on
+cost, close to zero); quality R̂ 1.0066, ESS 1,048 / 2,128 at 2,700 draws per chain; no divergence. Cost 9,746 rows in
+1,170 groups, quality 22,153 rows in 2,316 groups. Published as v2026.11.12; Fable 5.2 shown afterwards (12 Nov, main
+49db04e), Fable 5 moved to the older models.
+
+**Header counts.** The page's header counts the sources, benchmarks and measurements of the groups that have a shown
+Claude couple in the fit. From v2026.10.21 to v2026.11.12 it went from 574 sources · 1,927 benchmarks · 8,509
+measurements to 332 · 1,545 · 7,100 (334 · 1,556 · 7,353 once Fable 5.2 is shown). Of the 575 source ids of
+v2026.10.21, 288 remain; of the 287 others, 47 no longer exist as sources (the makers' charts, system cards, docs,
+cookbooks and launch posts are now one source per maker: `anthropic`, `openai`, `google`, `xai`, `deepseek`,
+`moonshot`), 226 have all their Claude rows out of the fit (mostly effort not established: 1,024 Claude rows), 12 have
+no Claude row, 2 keep Claude rows under another group. 46 sources entered. The drop comes from the count by publisher and
+from the rule that a row whose effort is not established stays out of the fit.
+
+## Salvo s5, integration 2: the maintainer's decisions of 5 Nov 2026, names, remaining conversions
+
+**Method.** No fit, no web, no agent. Scripts S/s5/integ2/py/ of the session's scratchpad (decisions.py, names.py,
+fixes.py, convert2.py; compare2.py for the before / after). Every new quote checked once, at the writing
+(`validate.py --check-files` on the changed files: 0 error); `validate.py`: 0 error.
+
+**Decisions (the maintainer, 5 Nov 2026; headline decisions D2–D31 in data/decisions.json).**
+1. LiveBench per task: one run does not count 23 times. Only the global average may enter, and only once the site's
+   categories (which define it) are in the findings with their quote. The saved copies of table_2026_01_08.csv hold the
+   tasks only: the 23 task setups stay pending (out:not-headline), with the reason in their note. No row moved.
+2. OckBench: headline accuracy ('Accuracy is still reported separately', README), not the OckScore (D2, D3): 22 rows
+   enter (Opus 4.7/4.8/5, GPT-5.4/5.5, Gemini 3.1 Pro, GLM-5.2, DeepSeek V4 Pro preview).
+3. Context Arena: headline AUC @128k, the same range for every model (D4–D7; overall_score, AUC @1M and the average are
+   not the headline): 3 rows enter (qwen3.8-max low / medium / xhigh).
+4. Names: 130 spellings of the salvo's sources added to models.json as display names (ARC Prize's « … - Provider
+   Adapter » labels, Dubesor's « … Thinking » and local-build labels, HolmesGPT, ChessBench, arXiv 2610.31274,
+   theaggregate…), each with the source's quote as evidence and the interval of the registered name it extends;
+   `selects` null (a level comes from the measure's own effort facts, never from the spelling). 169 measures cite them:
+   59 quality and 41 cost rows enter (ARC 38, Dubesor 13 quality / 3 cost, arXiv 2610.31274 8). Left unattached, with
+   the reason (S/s5/integ2/names-left.json): Epoch's 'Model version' spellings (155; Hugging Face names without their
+   organization, typed as API ids: no namespace for them), LiveBench's and ReactBench's own ids, Context Arena's
+   OpenRouter-like slugs (no saved OpenRouter listing proves them), the aliases that moved (gemini-pro,
+   gemini-1.5-flash, grok-2…), and the names of models the registry does not hold. Android Bench's first row had read
+   the column tooltip into the model name: corrected to 'Claude Sonnet 5.5'.
+5. Aggregators that copy: lmcouncil's 18 cards get headline decisions (D8–D25). The 12 whose linked board is held join
+   that board's family (Epoch's GPQA Diamond, OTIS, MATH L5, FrontierMath 1–3 and 4, SWE-bench Verified, GeoBench;
+   WeirdML; SimpleBench; GSO 12 Jul; METR v1.1, the card's Minutes read as p50-horizon-min; LMArena WebDev); 6 keep
+   their own family (origin not held: Scale's HLE, OpenAI's GDPval, Fiction.liveBench, BALROG, VPCT, Terminal-Bench).
+   Effect: the 4 rows that had passed every earlier step are now out:single-couple; the others stop on the effort.
+   aiagentstore's « Overall » (not LiveBench's figure) and DataLearner (no origin named) stay pending.
+6. RVG-Bench: headline mIoU (D26–D29). Epoch's two SpireClimb tables without a metadata row: 'Best score' (D30, D31). No
+   row moved (models or efforts not established).
+
+**Remaining conversions (saved copies only).** Artificial Analysis kimi-k2-thinking, Wayback 8 Nov 2025 (index v3.0,
+66.98, run cost; the cost method sentence of later captures is absent). PlanBench-V's 8 sub-scores and FinishStrong's
+12 per-set columns (all rows; headline pending: sub-scores of runs whose overall is held). benchmarklist: the three
+vals.ai Cost vs score tables (High, with cost) on their held setups, and the 51 'Benchmark map' values on setups of
+their own (pending: origin not mapped). arXiv 2611.02278 (Tables 1–3) and 2608.30327 (Table 2 reference columns,
+Table 6 rot0), copies moved to /work/.salvo14/mig/s5/ev/integ2/. Not converted: arXiv 2608.15693 (no copy); the 10
+Artificial Analysis pages without their record (each saved copy is the site's empty shell: no model data); METR's
+GPT-5.1-Codex-Max horizon (written '2h42m': a duration conversion the digit check does not admit, and no suite version
+written); DataLLM Lab F131 / F222 unchanged (decided earlier).
+
+**Result** (S/s5/integ2/AVANT-APRES.txt, against 8f07c01; two paths agree): fit-quality rows 17,867 → 17,957,
+fit-cost 9,425 → 9,467; rows kept by lqm 16,806 → 16,896 (quality), 9,044 → 9,086 (cost); couples with a kept row
+339 → 340 (gpt-5.6-luna-pro max) and 276 → 277 (deepseek-v3.2 think). Claude: Opus 4.7 xhigh, Opus 4.8 and Opus 5 low to max
++1 quality each (OckBench); Sonnet 5.5 high / low / medium / xhigh +1 / +1 (ARC « Provider Adapter »);
+Haiku 5.5 max +1 / +1 (ARC).
+
+## Salvo s5 « manques » (4–5 Nov 2026): 15 lots found, converted, checked, integrated
+
+**Method.** No fit, no web, no agent at the integration. The search (4 Nov, Sonnet agents, one per lot: m1–m6 the
+couples short of sources, n1–n9 the couples with fewer than 5 rows on an axis; instructions S/s5/CONSIGNE.md of the
+session's scratchpad) saved every page it read in /work/.salvo14/mig/s5/ev/<lot>/ with its sha256; Haiku agents
+converted the finds (S/s5/CONV.md); each finder then checked its lot's conversion (S/s5/conv/<lot>/VERIF.md). The
+integration (scripts S/s5/integ/py/, rerun from the merged conversions by run_all.sh) applied the checks, completed
+every source with all its rows and models, converted the new versions of known boards, and wrote the registry. Every
+quote was checked once, at the writing (`validate.py --check-files` on the new files: 0 error).
+
+**Written.** 93 sources (88 converted by the lots, rebuilt or corrected; 5 new: the 4 Nov snapshots of Epoch's hub,
+ARC Prize, Artificial Analysis's model pages, Context Arena, the 28 Oct run of HolmesGPT), 87 measures files (about
+10,300 measures; the cells of the Epoch and ARC tables written as facts by data/convert/cells.py). Registry: 36
+publishers, 233 setups (metric from the value facts; headline `only-metric` with the value's quote, `designated` from
+Epoch's benchmark_metadata.csv, or a pending decision — see below). No price written: every entry of
+S/s5/conv/n1/prices-proposes.json is already in prices.json with the same classes and dates (its « preuve » items),
+and its « prolongations » end on 4 Nov, after `as_of` (29 Oct), which is not raised.
+
+**Completions** (recenser, pas filtrer). ReactBench: 684 rows (v1.0–v1.2, overall and the write / fix suites, the
+`hasEstimatedUsage` costs as source estimates). Android Bench: both tables (2.0 with level and agent, 1.0). Dubesor's
+benchtable: its 347 models (TOTAL, $/bench of the 20/80 block, `Thinking` as thinking on, local quantized builds as
+`quantized-build`). arXiv 2604.26954: Tables 4–7 (5 models, κ, tokens, cost, March 2026 prices). OckBench: the 56 rows
+of the top-200 CSV (one source; the lots' four copies are the same file). LiveBench table_2026_01_08: both Wayback
+captures (79 and 111 models × 23 tasks; the model ids read as the maker's id they start with plus their written
+suffix). Moritz (gpt-5.2, gpt-5.2-pre-feb, kimi-k2.5), PRISMA (27 rows, route from the Provider column, levels from the
+Notes), HolmesGPT (11 models; and the 28 Oct run), LoopArena (3 settings), FELAB (7 models, cost-only), hsiaoa (9
+rows × 4 conditions), Qwen3.7-Plus blog rows, lmcouncil (18 cards × the 5 rows shown), Nipun Batra (flash/high,
+spiral_order, puzzle tokens), the forum posts, Qubrid (Z.ai's table), arXiv 2609.29933 Table 10, RVG IoU@0.3, RCA
+(cost into its row's spend, one setup per tools configuration, tokens where the row has 8 columns), pinyin (run cost,
+calls, empty answers, local run start and end), DeepSeek's arXiv report (TB 2.1 at b 25 / 100).
+
+**New versions.** `src-epoch.ai-benchmark-data-2026-11-04` (snapshot_of 10-21): every row of the 22 internal tables,
+the ECI and the 6 external tables the earlier snapshots convert (2,454 measures; 57 external tables not converted, as
+before). `src-arcprize-leaderboard-2026-11-04` (v1, v2 generatedAt 28 Oct, v3 2 Nov; every row; the board's prose facts
+carried from 18 Oct). `src-artificialanalysis-model-pages-2026-11-04` (41 of the 51 pages saved by m1, n1, n2, n4, n8;
+the page's own record: Intelligence Index v5.0.1 with cost and output tokens per task where present, each evaluation
+field with its cost per task; 10 pages hold no record of their slug — redirects — listed in the report). A same board's
+rows count once by the rule already in place: one publisher and setup, the later snapshot supersedes within its
+campaign.
+
+**Copies.** aiagentstore (Hex DataBench, OckBench), benchmarklist (ObviousBench, ARC Prize, AutomationBench),
+Qubrid (Artificial Analysis, Z.ai's card), lmcouncil (each board it shows), and DeepSeek's arXiv posting of its V4.1
+report: a `restated-from` fact naming the board and its id here, the measures on the original's setup where one
+exists (lqm counts identical values once), DeepSeek's paper under publisher deepseek and the report's setups. Where the
+copy's figure is not the original's — aiagentstore's « Overall » (Sonnet 4.6 70.4 / 75.5 / 75.3 against LiveBench's
+task mean 70.19 / 75.68 / 75.59) — it has its own setup, headline pending. DataLearner names no origin: own setups,
+pending.
+
+**Context Arena.** Withdrawn on 27 Oct (2a459ae: « contextarena withdrawn (its legacy metric is our own mean; the
+board's AUC needs setups) — its rows stay legacy »). The new copies hold the board's own numbers (the 8-needle
+leaderboard's `overall_score`, 184 rows; the five Qwen summaries' AUC @128k, AUC @1M, average): taken back with those
+only, no bin re-averaged, as `src-contextarena-ai-needles8-2026-11-04`; headlines pending (the copies do not show the
+column the board ranks by).
+
+**Checks not applied.** DataLLM Lab F131 / F222 (tokens-in 588 for Gemini 3.5 Flash and 2.5 Pro): not changed. They are
+cells of the evidence JSON (benchmark-evidence-2026-10-03.json), read mechanically on 4 Nov, not of the article the
+check read; the JSON gives each model its own tokIn, consistent per tokenizer (every Google model 588, every OpenAI
+604). The other checks of the 15 VERIF.md were applied (lists in the integration report).
+
+**Headlines pending (out:not-headline until the maintainer decides).** LiveBench's 23 task setups (one run weighed 23
+times, or a global average not in the file), ReactBench's write / fix suites, OckBench (ranks by OckScore = accuracy −
+10·log(tokens/10000 + 1); accuracy reported apart), Context Arena, aiagentstore « Overall », DataLearner, lmcouncil
+(copies), hsiaoa (a stance, not a score), RVG (mIoU and IoU@0.3), Epoch's two SpireClimb tables without a metadata row,
+the forum figures.
+
+**Result** (S/s5/integ/AVANT-APRES.txt, sealed build, against c5f4f42): fit-quality rows 17,748 → 17,867, fit-cost
+9,411 → 9,425; rows kept by lqm 16,699 → 16,806 (quality), 9,030 → 9,044 (cost); couples in the fit tables 339 → 339
+(quality), 276 → 277 (cost); couples with a row kept 338 → 339 (deepseek-v4.1-flash-1017 nothink) and 274 → 276
+(kimi-k2.5 nothink and think). Claude: sonnet-5.5 +3 quality / +3 cost on each level (ARC 4 Nov), opus-4.7 low +1,
+haiku-5.5 max −1 (an ARC-AGI-3 value replaced by the new snapshot's). Most new rows stay out: model names the registry
+does not know (ReactBench, Dubesor, LiveBench ids, Epoch's new models), levels not written, pending headlines. Tests
+190 passed; the build attempts no access outside the repository (sealed.py).
+
+## The reseller's cache and one call per question (4 Nov 2026)
+
+**Method.** No fit, no agent; web only for the board's repository (gh) and nonelinear.com. The maintainer's three
+decisions of 4 Nov 2026 on rule `cost-class-cannot-apply`: (1) the doubt « the reseller's own cache » is lifted when
+the platform bills the maker's cache — nonelinear.com's cache class the same multiple of the maker's list as its input
+and output (× 7), checked for each model at the run's date; (2) the rule applies only to a source that states, in its
+own words (protocol, evaluation code, README), that each question is one call with no conversation read back — not a
+multi-turn agent, whose input grows and is cached; the input per call the split gives (about 300 tokens, one exam
+question) is an indication, not a proof; (3) the long-context tier left out below its threshold: accepted. A method
+change: before main, the maintainer's yes.
+
+**Search for (2).** jeinlee1991/chinese-llm-benchmark at main and at d44b57e: README, CHANGELOG, 每周最新模型.md,
+LMArena+AA.md, the 高考 data README, the nine tables' leaderboard pages (a chart and the table only), the tree (no
+evaluation code, eval/评测数据.xlsx), GitHub code search; nonelinear.com's badcase page (one prompt and the models'
+responses per item: an indication). No text says one call per question. The README says the reverse for the total and
+通用能力: they average « agent与工具调用 » (« 计算TAU和BFCL-V3的平均分 », BFCL-V3 « 首创多轮、多步函数调用场景 ») and coding
+(Terminal-Bench, « 用于评估智能体… »). No fact written; the rule does not apply to this source.
+
+**Result** (S/clb3/AVANT-APRES.txt): fit-cost 9,420 → 9,411: the 9 gpt-5.4 `high` costs entered at ec6dae3 by
+the tier left out leave (0 entered); cost couples 276, Claude cost couples 55, unchanged; fit-quality unchanged. The 27
+costs of the reseller doubt stay out, now for (2). (1) is coded and tested; read with (2) switched off, it would let
+in gpt-6-luna 6, gpt-6-sol 6 and gpt-6.1-sol 7 (their cache-read 7 × OpenAI's like input and output) and refuse
+sonnet-5.5 8 (the platform's cache price before the maker's change of 7 Oct is not captured).
+
+## The « × 7 » checked in time, and the classes that cannot apply (4 Nov 2026, later)
+
+**Method.** No fit, no agent; web only for the board's repository (gh) and the makers' prompt-caching pages
+(Anthropic, OpenAI, xAI) and nonelinear.com. The maintainer's two points on the total-tokens split (4 Nov 2026): « il
+faut vérifier » the « × 7 » that A carries back to each release; « fais au mieux » for a split when a cache class
+makes it ambiguous. The second is a method change: before main, the maintainer's yes.
+
+**The « × 7 » in time.** The commerce tables (`leaderboard/commerce1-4.md`, « 输出价格 ») at every commit of each file,
+20 Jan – 27 Oct 2026 (114 versions): 259 output prices written as `platform-price` facts dated by their commit, for the
+17 models. The five models the split priced: 89 commit prices, every one 7 × the maker's USD output price in force at
+its date (opus-5 175.0 from 28 Jul, gpt-5.4-mini 31.5 and -nano 8.75 from 18 Mar, grok-4.6 and 4.7 42.0 from 17 Aug /
+26 Sep): their 45 costs stay. The build reads such a capture as partial: a check on the span A or I it falls in,
+never a price alone (data/BUILD.md).
+
+**The classes that cannot apply** (rule `cost-class-cannot-apply`). A long-context tier cannot apply below its
+threshold; the cache cannot apply below the maker's documented minimum cacheable length — Anthropic 512 tokens for
+Opus 5 / Sonnet 5.5 (« Shorter prompts cannot be cached, even if marked with `cache_control` »), OpenAI 1,024 for
+GPT-5.6 and later (« varies by request settings » before: not established), xAI automatic with no minimum (not
+excluded); prices.json `cache_minimums`. The input per call comes from the split itself, at the top of the rounding.
+nonelinear resells the maker's API and nothing it writes excludes a cache of its own, so a split that needs the cache
+left out stays out, counted apart.
+
+**Result** (S/clb2/AVANT-APRES.txt): +9 costs (gpt-5.4 `high`, its tier left out at ≤ 240 input tokens per call), 0
+lost; cost couples 276, Claude cost couples 55, unchanged. 27 costs kept apart as the reseller doubt (gpt-6-luna,
+gpt-6-sol, gpt-6.1-sol, sonnet-5.5: each would be the source's figure × 1/7). Fit-quality unchanged.
+
+## The total-tokens split: chinese-llm-benchmark's costs at the maker's current price (4 Nov 2026, last)
+
+**Method.** No fit, no agent; web only for the board's GitHub repository (gh) and nonelinear.com / Wayback. The
+maintainer's idea (4 Nov 2026): chinese-llm-benchmark gives each model's cost per 1,000 questions (« 花费/千次（元） »)
+and its total tokens per question (« 平均消耗token »), at the prices of its own platform nonelinear.com (decision F:
+out as such). With the platform's input and output prices at the run's date, cost = t_in × p_in + t_out × p_out and
+t_in + t_out = T give the split, and the cost at the maker's current price follows, on the maker's list (rule
+`cost-total-tokens-split`, data/BUILD.md). A method change: before main, the maintainer's yes.
+
+**Search.** The repository (commits API, README, CHANGELOG, 每周最新模型.md, the commerce tables, docs/, eval/) has no input
+price: the commerce tables give « 输出价格 » only and the README links the catalogue
+(« 查看所有模型及价格 »). Wayback holds two captures of the catalogue's JSON (`/models`): 3 Jun 2025 and 15 Jul 2026
+(CDX over the domain: 980 URLs, no other price data); our fetch of 4 Nov 2026 is the second dated list. 95 prices
+written for the 17 fit models whose costs reach the cost step (inputs, outputs, cache reads, long-context tiers,
+cache-write multiples, two discounts), each with its exact quote, its capture and its date.
+
+**Result** (S/clb/AVANT-APRES.txt): +45 costs in the fit (opus-5, gpt-5.4-mini, gpt-5.4-nano, grok-4.6, grok-4.7, `high`,
+9 tables each; all kept by lqm.load), 0 lost; cost couples 276 unchanged, Claude cost couples 55, opus-5 high 148 → 157
+rows. The platform charges 7 × the maker's USD list on every class (and the maker's CNY list for Moonshot), so each
+accepted cost is the source's figure × 1/7, exact whatever the run's mix of cache and tiers; the split's role is the
+check that the tokens and the cost agree (inside [0, T]). The derived input per question repeats across models of one
+tokenizer (law: gpt-5.4 164, -mini 163, -nano 165 tokens), a check the prices and tokens pass. 90 refused, each for a
+named reason (a discount shown, a price date past the last capture, captures that differ, a maker's change before
+the first capture, cache-write classes not shared, splits outside [0, T], Alibaba's list not established).
+
+## Prices written by the sources, API openings, prices in another currency (4 Nov 2026, later still)
+
+**Method.** No web, no agent, no fit. The maintainer's decisions 1–10 of 4 Nov 2026 applied from the saved files
+(prix3 q1–q4 of the session's scratchpad; every proof checked at the writing: file, sha256, exact quote), and the
+price-ratio method (a method change: the before / after below, for the maintainer's yes before main).
+
+**Written.** Findings: 236 bullshitbench `run-end` facts (latest `finished_at_utc` per row), a proofbench capture of
+20 Aug 2026 with its zip's sha256 on 34 measures, livebench G2's URL, 5 arXiv URLs. Registry: step-3.7-flash USD and
+CNY, kimi-k2-instruct USD (q2), 4 Alibaba entries back to their unlabelled 2025 captures, A from the release for
+o3-pro, gpt-5.1-codex, gpt-5.1-codex-mini, step-3.7-flash ×2, kimi-k2-instruct and three Qwen 2507 models; GLM-5.3's
+`api_opens` (15 Aug USD, 17 Aug CNY) with its first prices from those days; `maker_currencies` for Anthropic, Google,
+OpenAI, xAI (USD only). Not written: deepseek-v4.1-flash's hour on 10 Sep (the announcement dates the price, not the
+model), qwen3.8-27b's API opening (China site only), three A cases left open (qwen3-max-0123, kimi-k2.7-code CNY,
+reka-edge).
+
+**Effect** (against 0796bfd). Quality rows 17,742 → 17,748 (+6 bullshitbench rows newly dated), couples 339. Cost rows
+9,114 → 9,366 (+252, none lost): costs with no currency re-priced on the maker's single USD list 145 (Haiku 5.5 system
+card, Epoch's archive, GPT-6 Astra launch …), the source's written price equal to a registered one 102 (vals.ai: GPT-5.6
+Luna / Terra, DeepSeek V4 Pro 0813, Gemini 3.6 Flash — the 47 costs lost on 4 Nov back), GLM-5.3 through Z.ai's API after
+its opening 5, gpt-5.1-codex / -mini from their release 2. Cost couples 274 → 276; Claude cost couples 55. The 138 costs
+in a currency their maker does not publish (121 with quality in: chinese-llm-benchmark, llm2014, SuperCLUE, Tencent's in
+USD) stay out: no source states it pays the maker's prices times one factor.
+
+## The findings self-sufficient, the build a filter (4 Nov 2026, later)
+
+**Principle (the maintainer, 4 Nov 2026).** « Les fichiers findings recensent tout. Ils doivent garder une liste des
+URL qui ont permis leur construction, et c'est tout. Le build est censé n'être qu'un filtre simple. »
+
+**Method.** No web, no agent, no fit. data/convert/cells.py read the saved data files one last time (sha256 checked
+against each source's map: 0 mismatch, 0 unreachable) and wrote every table cell the measures cite as a fact: 169,207
+facts in 253 sources (+ 55 in the ObviousBench example), each with the cell's value, a quote (« row key: … | column:
+… ») and its cell reference; the measures now cite them. The build no longer reads any saved copy: no cell, no
+sha256, no quote in its file, no legacy row in its CSV, no date proof (a proof that fails no longer removes a date),
+no `value_seen_in` agreement, no registry evidence; `--no-check-files` and `--registry-files-checked` are gone from
+build.py. Those checks stay in `validate.py --check-files`, the writing agent's tool.
+
+**Effect.** None: fit-quality.csv, fit-cost.csv, data.csv, group-map.json and group-setups.json byte-identical to
+0956b5a's build; the status report identical once each new fact id is read as the cell it stands for (validation:
+7,096 warnings, 0 errors, unchanged). The build run under an audit hook refusing every file access outside the
+repository (data/tests/sealed.py) gives the same outputs and attempted none.
+
+## Prices found on the web, the maintainer's price and date decisions (4 Nov 2026)
+
+**Method.** The 186 (model, currency) pairs whose costs were out for want of a price went to agents (28 lots): the
+maker's API price, in the currency, over the period, with an exact quote of a saved file and its sha256. 97 found, 18
+in doubt, 114 nothing found. Written offline (prix2/py of the session's scratchpad), each proof checked again (file,
+sha256, exact quote; 22 quotes checked in the text derived from the raw file, saved beside it; 19 quotes cited
+fragment by fragment): 65 new entries, 18 registered entries extended, 5 confirmed, 11 not written (B 2, E 4, G 2,
+H 2, one first captured after `as_of`), the doubts and « nothing found » not written but two Kimi K2 ids (decision H).
+
+**Decisions (the maintainer, 4 Nov 2026):** A. the first capture's price from the release (37 applied, 42 not: a
+launch promotion, a later capture without the price, an unlabelled region, an archive not searched); B. no price after
+a retirement whose alias serves another model; C. Pro mode at the base model's rate (three entries from 9 Jul, with the base model's long-context tier);
+D. a permanent discount is the standard price (MiniMax M3); E. no Beijing / Mainland China price for a source without
+a region, Alibaba's Singapore table international (4 entries refused, 4 trimmed to their labelled captures); F. no
+yuan conversion (chinese-llm-benchmark: its platform's own prices; llm2014: OpenRouter / Zenmux relays; SuperCLUE: no
+US model): 134 costs of 17 pairs stay out; G. a free price is never a price; H. no neighbouring identity unless
+models.json names it; I. two captures of the same price cover the gap (9 merges, 1 not: qwen2.5-7b); J. an inclusive
+end covers its second or minute (a bug: one second between 15:59:59Z and 16:00:00Z was covered by no price).
+Dates: 1–5 confirm what was written; 6. proofbench cites the CSV extracted from its zip (35 measures), superclue 2511
+a capture identical to our workbook (165); 7. yc-bench's 52-model data.json of 2 Oct (43 measures), codereviewbench's
+commit per file (16); bullshitbench per row not written.
+
+**Effect** (against a8266a2): quality unchanged (17,742 rows, 339 couples, Claude 56; lqm kept −3 republished).
+Fit-cost 9,039 → 9,114 (+122 −47), couples 268 → 274, Claude 55 (fable-5 high +1). Gained: A 69, the new prices 35
+(gpt-5.3-codex 15, the first CNY prices 20), J 6, dates 2, C 1 (gpt-5.6-terra-pro), indirect 8; lost 47 (a newly covered price date with two
+registered vectors replaces the source's stated prices: deepseek-v4-pro-0813 21, gemini-3.6-flash 21,
+deepseek-v4-flash-0731 5). Missing prices: 156 pairs, 1,061 cost measures (526 with quality in).
+
+## Dating step 2: the undated sources dated on the web (3 Nov 2026, later)
+
+**Method.** 205 undated sources were given to agents (41 batches, 3 reruns) who searched the web for a date bounding
+their runs — the source's own run date, its publication, a « last updated » label or the modification date of
+content identical to ours, the commit that added the values, the first Wayback capture showing them — each with an
+exact quote of a saved file and its sha256. Result: 173 dated, 15 in doubt, 17 nothing found. Every date was then
+written offline from the saved files only, its proof checked again (file, sha256, exact quote), and only where it
+tightens the measure's current bound. A Wayback capture bounds only the measures whose row it shows.
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. A time written without its time zone is a local time: the upper bound is the day after, the lower bound the day
+   before (lhtb « 2026-08-03T23:01:31 » → 4 Aug); applied to every date, those already written too (289 values).
+2. codereviewbench is bounded by its commit of 12 Oct; the document of 2 Oct reporting a run of 3 Oct is ignored.
+3. LiteLLM is in the chain of every OpenHands source (its SDK calls the providers through the LiteLLM library):
+   routes.json `passes_through`, strict.
+
+**Counts.** 131 sources dated: 253 commit captures, 42 Wayback captures, 25 publications or labels, 215 facts
+(164 run-end, 45 run-start, 6 run-date); 46 dated results not written (28 no tighter, 11 already written per
+measure, 4 commit dates never saved, 2 binary proofs, toolathlon held: rows dated before their model's release).
+
+**Effect** (against 9a0f2d9): fit-quality 17,696 → 17,742 rows (+53 −7; kimi-k2.5 +25, DeepSeek V4 Flash Vision
++11), couples 337 → 339; fit-cost 9,050 → 9,039 (−11, arcprize's gemini-3.5 / 3.7-flash price date now ends on
+13 Oct, uncovered by a registered price), couples 268. Claude: one sonnet-5 nothink quality row more, nothing else.
+Missing prices: 186 (model, currency) pairs, 1,397 cost measures.
+
+## Bands toward the current price, doubtful dates as upper bounds, OpenHands through LiteLLM (3 Nov 2026, late night)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. A date the source writes that does not say it is the run date (scoring file, report completion, results document,
+   generated scoreboard) is an upper bound only (`run-end`), when it can only be on or after the run; in doubt,
+   nothing. 30 facts on 112 measures (luminair, llm-quant, fable-mode, lhtb, ale, discoverphysics, effortmining,
+   kaybenleroll, miaai); codereviewbench left (its matrix date precedes a run it reports).
+2. Price bands are computed toward the current price, for every model (`cost-current-price-only`): the band's
+   reference is the base price, never the last price seen. GPT-5.6 Sol under its 4 / 20 promotion, base 5 / 30:
+   raw × [1.25, 1.5].
+3. OpenHands goes through LiteLLM (ids `litellm_proxy/…`): a LiteLLM route fact copied from each id on its 130
+   measures; LiteLLM documents nothing, strict.
+4. A changelog bounds « updated on » only when it says it records added models or results: cognition kept,
+   posttrainbench's « Changelog Updated Oct 6 » removed.
+
+**Effect** (`--fit-models catalog`, against f3ab153): fit-quality 17,696 rows unchanged, kept 16,718 → 16,665 (−53
+republished, matched now that the costs are back: sonnet-5.5 20, gpt-5.6-sol 16, luna 10, terra 5, fable-5 1, opus-5.5
+1). Fit-cost 8,307 → 9,050 (+743, decision 2: gpt-5.6-sol 358, luna 166, terra 112, sonnet-5.5 101, gemini-3.6-flash
+6), kept 7,875 → 8,512; couples 337 / 268 unchanged. Decisions 1, 3, 4 move no fit row. Claude: sonnet-5.5 cost rows
+197 → 298. Step-2 list 215 → 208 sources; missing prices that take costs out: 186 (model, currency) pairs, 1,386 cost
+measures (700 with quality in).
+
+## Contradictions before the route, costs at the current price, board labels as bounds (3 Nov 2026, night)
+
+**Decisions (the maintainer, 3 Nov 2026)** on the points left open by the route pass and by the undated-sources pass:
+1. A contradiction the source writes is detected on what the facts read, before the route (`contradiction-before-route`):
+   Artificial Analysis opus-4.7 / sonnet-5, facts nothink and high, out (18 fit rows).
+2. Thinking off asked for a model with none at its maker (kimi-k3) through OpenRouter: out, no nearest level (7 rows).
+3. qwen3.8-max minimal (listed by OpenRouter, not the maker's): stays out; a test freezes it.
+4. Opus 4.5 under Claude Code: fixed budget (MAX_THINKING_TOKENS), default not saved, a budget is out of the fit; the
+   quotes are noted in routes.json, nothing else.
+5. Thinking on without a level under a listing: accepted if the listing names at least one level (no measure today).
+6. komodor M7 keeps Claude Code (README line 4); LiteLLM added to every config's route from the METHOD (Claude Code →
+   LiteLLM → Bedrock / host); `litellm` registered with nothing on what it passes on: strict (the 7 rows were out already).
+7. Every cost of the fit is at the current price (`cost-current-price-only`): an unrepriced cost goes out; a price band
+   stays only when its reference is the base price. 743 cost rows out (gpt-5.6-sol 296, luna 166, terra 112,
+   sonnet-5.5 101, gemini-3.6-flash 6); 109 band rows kept (sonnet-5.5, grok-4.5).
+8. Dates, offline: board « last updated » labels written as `published` (an upper bound, as vals.ai's « Updated »): 11
+   of 17 — not designarena ×2 (the Security page's date), bird-bench (a news item), and three labels older than a model
+   the board shows (stagehand, wildclawbench, pinchbench: stale). Modification dates as `published`: 8 sources. Printed
+   run dates as run-date facts: scorch-bench (9 measures) and roboco (30); the rest already had them, or are in doubt
+   (scoring dates, report completion, generation stamps: left, with a proposal). Dates of another page: left empty.
+
+**Effect** (`--fit-models catalog`, against b0fcfd1): fit-quality 17,716 → 17,696 (kept 16,723 → 16,718): −25 (decisions
+1, 2), +5 (scorch-bench 2 dated by its run date; 3 AA sonnet-5 rows no longer superseded); couples 337 unchanged.
+Fit-cost 9,072 → 8,307 (kept 8,568 → 7,875): −765 (decision 7: 743; dates: 15, price dates now uncovered; decision 2:
+7); cost couples 269 → 268 (gpt-5.2-codex xhigh). Claude: opus-4.7 high 52 → 43, sonnet-5 high 140 → 134 (quality);
+sonnet-5.5 cost rows 298 → 197. Step-2 list (sources still without a date or a bound on every measure): 261 → 215.
+
+## OpenRouter's listing for thinking off, its captures copied, Claude Code's own defaults (3 Nov 2026, evening)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. OpenRouter's listing decides thinking off / on as well (rule `router-listed-thinking`): nothink only where
+   /api/v1/models lists « none »; otherwise thinking off follows the route's rule (nearest supported, thinking off the
+   lowest step, a tie ambiguous); a route not named leaves the line out when the candidates disagree. Most models list
+   « none » only from 15 Oct 2026; gpt-5.5 from 27 Jun (its first listing), so its nothink lines do not move.
+2. Registry pass: `supported_efforts` copied mechanically from the 196 saved, dated /api/v1/models captures into the
+   openrouter entry (one record per listed value and run of identical lists, first to last capture; « none » →
+   nothink; clipped to the model's configuration dates). The early ends seen (DeepSeek V4 previews, codex models,
+   gemini-3.5 / 3.7-flash) are the models' shutdowns in models.json. 446 → 515 listing records, 37 model keys.
+3. Claude Code without an entry for a model: its own saved docs only. Opus 4.5: thinking on by default from 2.0.67
+   (11 Dec 2025), no budget documented → no configuration, nothing recorded; Sonnet 4.5, Haiku 4.5: nothing. Out.
+4. Claude Code with another route stated: 112 measures checked on their quotes; the route is established for the run
+   (komodor, Bedrock, OpenRouter, LM Studio, llama-server, AI Gateway). Fixed: arxiv-2607.02436 M13/M14, whose harness
+   cited the sentence on the Claude runs (now their own table row). In doubt, unchanged: komodor M7 (Sonnet 5 baseline).
+5. Harnesses cited only in setup / other / spend: 22 of 69 measures get a harness fact copying a quote about their
+   run (arxiv-2610.12569 11, arxiv-2610.04432 7, vals multi-agent 4); 47 give nothing (mentions in passing, a model
+   name, a harness already in the slot).
+
+**Effect** (`--fit-models catalog`, against 1fd65f4; attribution by a build with decision 1 off): fit-quality rows
+17,781 → 17,630 (lqm.load kept 16,775 → 16,632): 25 in, 176 out, 24 with another configuration. Decision 1: +25
+(sonnet-5 high 9, opus-4.7 high 9 — Artificial Analysis rows whose facts gave nothink and high, the contradiction no
+longer seen once nothink is not established; kimi-k3 low 7), −174 nothink rows (qwen3.8-27b 31, opus-4.8 20,
+deepseek-v4.1-flash 20, glm-5.2 18, sonnet-5 17, haiku-5.5 16 …), 24 nothink → low (haiku-5.5 4, deepseek 12,
+qwen3.8-27b 7) or high (glm-5.2 1). Decision 2: −2 (qwen3.8-max low: OpenRouter lists minimal). Decisions 3–5: no fit
+row moves. Fit-cost rows 9,123 → 9,071 (kept 8,610 → 8,562): +7 −59, 7 changed, all decision 1. Couples gone: quality
+deepseek-v4-flash-0731, qwen3.8-27b, sonnet-5 nothink; cost also deepseek-v4-pro-0813, deepseek-v4.1-flash, glm-5.2
+nothink. Still out against the build of before 2 Nov: 1,475 quality and 574 cost measures (1fd65f4: 1,317 and 517),
+1,032 / 365 of them a route not named with the maker's API and OpenRouter disagreeing.
+
+## OpenRouter's own level list, its defaults, Claude Code, harnesses beside a route (3 Nov 2026, later)
+
+**Decisions (the maintainer, 3 Nov 2026):**
+1. Opus 4.6 and Sonnet 4.6 pass their effort through OpenRouter as sent, as Claude 4.7+: OpenRouter's doc converts only
+   « for models that only support reasoning.max_tokens », and /models lists their levels. Their six budget mappings
+   are removed (minimal → low from 8 Sep 2026, as 4.7+).
+2. Opus 4.5 keeps the conversion (/models exposes no effort selection for it). 3. Gemini 2.5 keeps it.
+4. Where OpenRouter's /models lists a model's levels at the run date (`supported_efforts`), its list decides; a level
+   it does not list follows its level mapping (nearest supported, a tie ambiguous). The maker's levels (`accepts_maker`)
+   count only where it lists none (rule `router-listed-levels`). Only level records quoting `supported_efforts` are the
+   listing; a run over which the listing changes is read piece by piece and kept only if all pieces agree; thinking
+   off / on keep the maker's. The listed levels the old budget mapping had kept out of the Claude entries were added
+   from the saved catalogue captures.
+5. OpenRouter's defaults are bridged over gaps between captures as the maker's (`default-bridged-gap`, same
+   conditions, plus a route id starting or ending inside the span). A default unlike the maker's (Opus 5.5 high at
+   OpenRouter, medium at Anthropic) stays.
+6. Claude Code goes directly to Anthropic: routes.json `calls_route` (Claude Code → `maker-api`, rule
+   `harness-calls-route`); no evidence saved in the registry says so, the maintainer's decision.
+7. Point D: a harness cited in the harness slot of a measure whose route was stated joins the chain (964 measures of
+   23 sources; 38 measures of 4 citations not applied, in doubt; harnesses cited only in setup / other / spend slots
+   — 69 measures of 9 sources — not read).
+
+Not changed: closed harnesses (`closed-harness-label`) and repricing at the maker's tariff.
+
+**Effect** (`--fit-models catalog`, against d46a626): fit-quality rows 18,032 → 17,781 (lqm.load kept 17,020 →
+16,775); fit-cost rows 9,336 → 9,123 (kept 8,811 → 8,610). Quality: 77 measures in (Sonnet 4.6 61: high 32, medium
+16, low 9, max 4 — the couple sonnet-4.6 max is back; glm-5.2 high 12, deepseek-v4.1-flash low 1; Claude Code 2;
+bridged default 1),
+328 out (point D 180 — the harness documents nothing for the model and level; listed levels 147: glm-5.2 max 99, kimi-k3
+low / high / max 41, DeepSeek V4 previews max 7). Cost: 22 in, 235 out (point D 122, listed levels 73, Claude Code 25 and
+group effects 15: Claude Code measures now on the maker-api cost part, single couples there). Still out against the
+build of before 2 Nov: 1,317 quality and 517 cost measures (d46a626: 1,093 and 367), mostly route unknown with OpenRouter
+giving no established level or default (809 quality), and harnesses documenting nothing (Claude Code 92, OpenHands 84,
+Terminus-2 21, Inspect 19, Pi 15 quality). qiita-suwanobu: Opus 4.6 and Sonnet 4.6 now at Claude Code's default
+(high); Sonnet 4.5, Haiku 4.5, Opus 4.5 out (Claude Code documents no default for them).
+
+## OpenRouter passes the maker's levels (3 Nov 2026)
+
+**Decision (the maintainer, 3 Nov):** « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les
+transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » routes.json gives OpenRouter a
+route-wide `accepts_maker` record (26 Feb 2025 – 29 Oct 2026; rule `router-maker-levels`): for a model it serves at the
+run date, the maker API's levels at that date are accepted beside the levels `/api/v1/models` lists. A model `mapping`
+is read first; a level the mapping converts over part of the run only is not established (doubt).
+
+**The budget conversion, model by model.** OpenRouter's effort → `budget_tokens` formula ("Reasoning Max Tokens for
+Anthropic Models") had been written for every Claude model, Opus 5.5 included, whose catalogue entry lists max…low.
+Anthropic's extended-thinking page: « Claude 4.7 and later models do not support it and reject requests that use it,
+returning a 400 error. » OpenRouter: « For models that only support reasoning.max_tokens , the effort level will be set
+based on the percentages above. », « Claude receives both fields unchanged », « Anthropic’s xhigh and max levels stay
+reasoning efforts ». Removed for Opus 4.7, 4.8, 5, 5.5, Sonnet 5, 5.5, Fable 5, 5.1, Haiku 5.5 (minimal → low recorded
+from 8 Sep 2026: « Claude accepts low , medium , high , xhigh , and max ( minimal is sent as low , none is
+rejected). »). Kept for the budget-only Sonnet 3.7, Opus 4, 4.1, Sonnet 4, 4.5, Haiku 4.5, and (undecided: effort and
+budget at the maker) Opus 4.5, Opus 4.6, Sonnet 4.6; Gemini 2.5 (same question) unchanged.
+
+**Effect** (`--fit-models catalog`): fit-quality rows 10,322 → 18,032 (before 2 Nov: 18,717), lqm.load kept 9,879 →
+17,020 (17,714); fit-cost rows 5,543 → 9,336 (9,496), kept 5,252 → 8,811 (8,966). Still out against the build of
+before 2 Nov: 1,093 quality and 367 cost measures, mostly OpenRouter defaults (catalogue gaps, or a default unlike the
+maker's: Opus 5.5 high vs medium) and the undecided Sonnet 4.6. Couple gone: sonnet-4.6 max (quality).
+
+## Route not named = unknown (2 Nov 2026)
+
+**Decision (the maintainer, 2 Nov):** « En aucun cas on suppose l'API si on n'a pas l'info. » A route is written "API"
+only when the source says so, "unknown" otherwise. It replaces the presumption `route-presumed-maker-api` (26 Oct,
+commit f958e43): every unknown route now takes the strict path (all candidate routes that served the model at the run
+date, the maker's API included, must agree; rule `route-unknown-candidates`); a harness named applies first.
+
+**Harnesses and routes already cited, put in the `route` slots** (no source reopened; extracted citations only):
+2,127 measures of 160 sources — 1,950 from a harness-slot fact naming one route (its `term` set on 130 facts),
+196 from a model-api-id whose prefix names the route (testcabinet: "the id the harness was given (openrouter/…)"),
+183 from a sentence about the run (124 new facts quoting it: Claude Code in the Haiku 5.5 card, bito.ai, Qwen blog,
+tokensave; Terminus 2 / Mini-SWE-agent in vals.ai rows; OpenRouter in arXiv 2601.13206 and LeanZero; Vertex AI…).
+Not applied (doubt): mentions of two harnesses ("Claude Code and mini-SWE-agent"), the Coder agent of arXiv
+2610.06824, "internal version of the Antigravity harness", vals.ai's board prefixes (the converter's note: not a route
+statement), model names containing Codex/Terminus, price sources ("prices from OpenRouter"), judges. routes.json:
+spelling `claude -p` for Claude Code (findings: tilth F7, qiita-phyblas F6) and 25 versioned harness cells.
+
+**Effect** (`--fit-models catalog`): fit-quality rows 18,717 → 10,322, lqm.load kept 17,714 → 9,879; fit-cost rows
+9,496 → 5,543, kept 8,966 → 5,252. Almost every exit is "candidate routes disagree: maker-api → <level>; openrouter →
+not established": OpenRouter's registry entry, for most models, has no accepted levels covering the run
+(nearest-supported without accepted levels) or converts Anthropic levels to a budget. 32 quality and 31 cost couples
+leave the fit table; no Claude couple except sonnet-4.6 max (quality). qiita-suwanobu now runs through Claude Code
+(its default high on the API candidate, a budget on OpenRouter): out, no longer nothink.
+
 ## The global fit (19–21 Oct 2026)
 
 **Method change** (v2026.10.21). The fit now takes every couple of eight model makers measured in the data —

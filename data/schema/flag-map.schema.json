@@ -1,0 +1,99 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "flag-map.schema.json",
+ "title": "Legacy flag map (migration only)",
+ "description": "data/registry/flag-map.json (DATA-PIPELINE §8): how today's raw-data.csv rows become legacy facts. Versioned; tested on every row. This schema covers the cost methods per source (so rows whose flags name no method are mapped source by source, with evidence) and effort values; flag → fact rules for the other prefixes are added as they are written.",
+ "type": "object",
+ "properties": {
+  "version": {
+   "type": "string",
+   "description": "Map version.",
+   "minLength": 1
+  },
+  "date": {
+   "$ref": "common.schema.json#/$defs/date"
+  },
+  "cost_method_by_source": {
+   "type": "object",
+   "description": "Legacy source spelling (raw-data.csv `source`) → its cost method. applies = unmapped: only rows whose flags match no vocab cost_method pattern; all: every cost row of the source (the source's own documentation overrides our flags).",
+   "additionalProperties": {
+    "type": "object",
+    "description": "A per-source cost method.",
+    "properties": {
+     "method": {
+      "$ref": "vocab.json#/$defs/cost_method"
+     },
+     "basis": {
+      "$ref": "vocab.json#/$defs/cost_basis"
+     },
+     "applies": {
+      "type": "string",
+      "description": "unmapped | all.",
+      "enum": [
+       "unmapped",
+       "all"
+      ]
+     },
+     "groups": {
+      "type": "array",
+      "description": "Restrict to these raw-data.csv groups (default: all groups of the source).",
+      "items": {
+       "type": "string",
+       "description": "Group."
+      }
+     },
+     "evidence": {
+      "$ref": "common.schema.json#/$defs/evidence_list"
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "method",
+     "basis",
+     "applies",
+     "evidence"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "effort_values": {
+   "type": "object",
+   "description": "Legacy effort value → what it becomes (vocab legacy_effort).",
+   "additionalProperties": {
+    "type": "object",
+    "description": "One legacy effort value.",
+    "properties": {
+     "to": {
+      "type": "string",
+      "description": "Configuration id, setup attribute, or 're-read'.",
+      "minLength": 1
+     },
+     "level": {
+      "$ref": "vocab.json#/$defs/level"
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "to"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "version",
+  "date",
+  "cost_method_by_source"
+ ],
+ "unevaluatedProperties": false
+}

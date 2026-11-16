@@ -1,0 +1,304 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "benchmarks.schema.json",
+ "title": "Benchmarks registry",
+ "description": "data/registry/benchmarks.json: families ⊃ setups, headline metrics, composites (DATA-PIPELINE §4).",
+ "type": "object",
+ "properties": {
+  "families": {
+   "type": "object",
+   "description": "Family id → family.",
+   "additionalProperties": {
+    "type": "object",
+    "description": "A benchmark family (today's families.json).",
+    "properties": {
+     "label": {
+      "type": "string",
+      "description": "Label.",
+      "minLength": 1
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "label"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "setups": {
+   "type": "object",
+   "description": "Setup id → setup.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/setup_id"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "A setup = benchmark × subset × harness (without version) × tools regime × judge panel × metric.",
+    "properties": {
+     "family": {
+      "type": "string",
+      "description": "Family id (benchmarks.json families).",
+      "minLength": 1
+     },
+     "label": {
+      "type": "string",
+      "description": "Display label."
+     },
+     "benchmark": {
+      "type": "string",
+      "description": "Benchmark name.",
+      "minLength": 1
+     },
+     "subset": {
+      "description": "Subset / split, or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "harness": {
+      "description": "Harness without its version (patch releases are one configuration), or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "tools_regime": {
+      "description": "Tools regime, or null.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "judge_panel": {
+      "description": "Judge panel, or null when not judged.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "metric": {
+      "$ref": "vocab.json#/$defs/metric",
+      "description": "The metric this setup's values are on (vocab metric; a score fact's term must equal it)."
+     },
+     "headline": {
+      "type": "object",
+      "description": "The setup's headline metric.",
+      "properties": {
+       "metric": {
+        "$ref": "vocab.json#/$defs/metric",
+        "description": "The headline metric of the benchmark, as a metric term: step 5 compares it with the setup's metric. When publishers of one setup designate different headlines, the benchmark's own designation holds and a disagreement goes to a headline decision."
+       },
+       "basis": {
+        "$ref": "vocab.json#/$defs/headline_basis"
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list"
+       },
+       "decision": {
+        "description": "A headline decision of decisions.json (kind headline, same setup and metric) when basis = decision; null while the decision is pending (the tree then gives out:not-headline).",
+        "anyOf": [
+         {
+          "type": "string",
+          "description": "Decision id.",
+          "pattern": "^D[0-9]+$"
+         },
+         {
+          "type": "null"
+         }
+        ]
+       },
+       "level": {
+        "description": "Certainty level of the headline designation (23 Oct 2026): `written` when the source designates or ranks by it (with evidence); `not-established:assumed` when it is only the metric held (the only metric in today's rows, or the most common one) until the source is converted.",
+        "enum": [
+         "written",
+         "not-established:assumed"
+        ]
+       }
+      },
+      "required": [
+       "metric",
+       "basis"
+      ],
+      "unevaluatedProperties": false
+     },
+     "bounds": {
+      "description": "[lower, upper] of the metric, or null when unbounded.",
+      "anyOf": [
+       {
+        "type": "array",
+        "description": "Bounds.",
+        "items": {
+         "type": [
+          "number",
+          "null"
+         ]
+        },
+        "minItems": 2,
+        "maxItems": 2
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "direction": {
+      "$ref": "vocab.json#/$defs/direction"
+     },
+     "task_type": {
+      "$ref": "vocab.json#/$defs/task_type"
+     },
+     "complexity": {
+      "$ref": "vocab.json#/$defs/complexity"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/benchmark_kind"
+     },
+     "composite": {
+      "description": "Composite definition, or null.",
+      "anyOf": [
+       {
+        "type": "object",
+        "description": "Composite definition (DATA-PIPELINE §4, §5.2.8).",
+        "properties": {
+         "components": {
+          "type": "array",
+          "description": "Components: a setup id, or {name, setup} where setup is the registered setup or null for a component the registry does not hold (its weight is keyed by its name; it is never present, so a residual always covers it).",
+          "items": {
+           "anyOf": [
+            {
+             "$ref": "common.schema.json#/$defs/setup_id"
+            },
+            {
+             "type": "object",
+             "description": "A named component.",
+             "properties": {
+              "name": {
+               "type": "string",
+               "description": "The component's name (the weight key).",
+               "minLength": 1
+              },
+              "setup": {
+               "description": "Its setup id, or null when not registered.",
+               "anyOf": [
+                {
+                 "$ref": "common.schema.json#/$defs/setup_id"
+                },
+                {
+                 "type": "null"
+                }
+               ]
+              }
+             },
+             "required": [
+              "name",
+              "setup"
+             ],
+             "unevaluatedProperties": false
+            }
+           ]
+          },
+          "minItems": 1
+         },
+         "formula": {
+          "type": "object",
+          "description": "The composite's formula.",
+          "properties": {
+           "weights": {
+            "type": "object",
+            "description": "Component name (the setup id for a plain component) → weight; {} when the weights are not in hand.",
+            "additionalProperties": {
+             "type": "number"
+            }
+           },
+           "normalisation": {
+            "type": "string",
+            "description": "How components are normalised before weighting."
+           },
+           "text": {
+            "type": "string",
+            "description": "The formula as the publisher documents it."
+           }
+          },
+          "required": [
+           "weights"
+          ],
+          "unevaluatedProperties": false
+         },
+         "linear": {
+          "description": "Linear in its components (a residual can be computed): true, false, or \"unknown\" (weights or formula not in hand: no residual, treated as non-linear).",
+          "anyOf": [
+           {
+            "type": "boolean"
+           },
+           {
+            "const": "unknown"
+           }
+          ]
+         },
+         "validated_on": {
+          "type": "string",
+          "description": "Complete couples on which the formula reproduces the composite."
+         },
+         "evidence": {
+          "$ref": "common.schema.json#/$defs/evidence_list"
+         }
+        },
+        "required": [
+         "components",
+         "formula",
+         "linear",
+         "evidence"
+        ],
+        "unevaluatedProperties": false
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "legacy_groups": {
+      "type": "array",
+      "description": "Today's raw-data.csv group names this setup continues (catalog maps keep working).",
+      "items": {
+       "type": "string",
+       "description": "Group name."
+      }
+     },
+     "run_set": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Setups sharing a run_set measure the same runs (metrics, sub-scores, slices or aggregations of one execution). Measures of one source, one model, one configuration and one campaign whose setups share a run_set are one run; its k quality measures enter the fit with weight 1/k each (rule same-run-weight; the maintainer, 10 Nov 2026). A setup without run_set: each measure is a run of its own."
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     }
+    },
+    "required": [
+     "family",
+     "benchmark",
+     "metric",
+     "headline",
+     "direction",
+     "task_type",
+     "complexity",
+     "kind"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "families",
+  "setups"
+ ],
+ "unevaluatedProperties": false
+}

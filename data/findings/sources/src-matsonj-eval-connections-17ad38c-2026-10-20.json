@@ -1,0 +1,3418 @@
+{
+ "urls": [
+  "https://github.com/matsonj/eval-connections"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "17ad38c48c77279b09ba7a87c8de88c618e11e9e",
+   "captured": "2026-10-20T15:02:07Z",
+   "url": "https://github.com/matsonj/eval-connections/blob/17ad38c48c77279b09ba7a87c8de88c618e11e9e/docs/results.md",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "note": "docs/results.md, adapter, mappings, workflow and scripts of the repo clone saved by salvo hn (qwen3.8-flash-r2) at head 17ad38c (commit date 2026-10-20T15:02:07Z)"
+  }
+ ],
+ "commit": "17ad38c48c77279b09ba7a87c8de88c618e11e9e",
+ "sha256": {
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md": "3340326da552d71e7e99486d8bcbcab215da19acd0fa4f3f637f631e3b0903b3",
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py": "514bd6ec5b07d0ef0dac27e6e3172cec9b5635fdf6d4e78b384f7042836bd567",
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml": "6a6a3f04b0725c1eaaa9ad2d0fd10744cdaa6cd0f108c9ac4aed77a5cbba0fc0",
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/workflow_run-evaluation.yml": "2c739ca0f4f15673234c9ff45828eb9d189cdcd51bf35d0055c112cf25019964",
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/scripts_create_results_mviz.py": "1475f6e27d3e994abb2f5e8de2e5ea44f7ea2cbb127255a11d2e3432efe932c3",
+  "/work/.salvo14/mig/convert-matsonj-eval-connections/src/README.md": "8b28a5831364e637837da7bd936dc2e7c9c558d5c23f5475542f76f18089397c"
+ },
+ "harvested_at": "2026-10-21T15:46:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (agent C2-e)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "id": "src-matsonj-eval-connections-17ad38c-2026-10-20",
+ "publisher": "matsonj/eval-connections",
+ "facts": [
+  {
+   "says": "route",
+   "value": "through a unified OpenRouter integration",
+   "term": "openrouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/README.md",
+   "where": "README.md line 7 (overview)",
+   "quote": "through a unified OpenRouter integration",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md table, column cost_per_game (e.g. \"$0.034\")",
+   "quote": "\"cost_per_game\": \"$0.034\"",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "unit",
+   "value": "20 games each",
+   "term": "per-20-games",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 8: the intro of the box score; the cost column is the run's total (round(eval_cost, 2) in create_results_mviz.py)",
+   "quote": "20 games each",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "\"include\": True  # Request cost and usage information",
+   "term": "router-billed",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 230: the request asks OpenRouter for the cost it billed; create_results_mviz.py line 59: eval_cost = total_cost + total_upstream_cost",
+   "quote": "\"include\": True  # Request cost and usage information",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "\"total_upstream_cost\"",
+   "term": "router-invoice",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/scripts_create_results_mviz.py",
+   "where": "create_results_mviz.py lines 59-61: combined eval cost = OpenRouter total_cost + upstream cost",
+   "quote": "\"total_upstream_cost\"",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "aggregation",
+   "value": "Latest run per model",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/scripts_create_results_mviz.py",
+   "where": "create_results_mviz.py line 63: the board keeps the latest 20-puzzle run of each model",
+   "quote": "Latest run per model",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-6-astra",
+   "value": "openai/gpt-6-astra",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 84: column Model of the one-shot box score",
+   "quote": ">openai/gpt-6-astra</a>",
+   "id": "F7"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-6-astra",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt6-astra` is under `models.thinking` in inputs/model_mappings.yml line 30; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F8"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-6-astra",
+   "value": "gpt6-astra: \"openai/gpt-6-astra\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 30, section models.thinking",
+   "quote": "gpt6-astra: \"openai/gpt-6-astra\"",
+   "id": "F9"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-6-astra",
+   "value": "2026-09-04",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 84+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-04\"",
+   "id": "F10"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-6-astra",
+   "value": "94",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 84+2: column PTS",
+   "quote": "\"pts\": 94,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F11"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-6-astra",
+   "value": "0.67",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-6-astra",
+   "quote": "\"cost\": 0.67,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F12"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-4-argon",
+   "value": "google/gemini-4-argon",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 98: column Model of the one-shot box score",
+   "quote": ">google/gemini-4-argon</a>",
+   "id": "F13"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-4-argon",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-4-argon` is under `models.thinking` in inputs/model_mappings.yml line 53; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F14"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-4-argon",
+   "value": "gemini-4-argon: \"google/gemini-4-argon\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 53, section models.thinking",
+   "quote": "gemini-4-argon: \"google/gemini-4-argon\"",
+   "id": "F15"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-4-argon",
+   "value": "2026-10-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 98+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-10-13\"",
+   "id": "F16"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-4-argon",
+   "value": "92",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 98+2: column PTS",
+   "quote": "\"pts\": 92,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F17"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-4-argon",
+   "value": "0.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-4-argon",
+   "quote": "\"cost\": 0.11,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F18"
+  },
+  {
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.6",
+   "value": "x-ai/grok-4.6",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 112: column Model of the one-shot box score",
+   "quote": ">x-ai/grok-4.6</a>",
+   "id": "F19"
+  },
+  {
+   "says": "effort-setting",
+   "about": "x-ai/grok-4.6",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `grok-4.6` is under `models.thinking` in inputs/model_mappings.yml line 40; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F20"
+  },
+  {
+   "says": "note",
+   "about": "x-ai/grok-4.6",
+   "value": "grok-4.6: \"x-ai/grok-4.6\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 40, section models.thinking",
+   "quote": "grok-4.6: \"x-ai/grok-4.6\"",
+   "id": "F21"
+  },
+  {
+   "says": "run-date",
+   "about": "x-ai/grok-4.6",
+   "value": "2026-08-12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 112+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-12\"",
+   "id": "F22"
+  },
+  {
+   "says": "score",
+   "about": "x-ai/grok-4.6",
+   "value": "91",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 112+2: column PTS",
+   "quote": "\"pts\": 91,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F23"
+  },
+  {
+   "says": "cost",
+   "about": "x-ai/grok-4.6",
+   "value": "0.31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of x-ai/grok-4.6",
+   "quote": "\"cost\": 0.31,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F24"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-6-sol",
+   "value": "openai/gpt-6-sol",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 140: column Model of the one-shot box score",
+   "quote": ">openai/gpt-6-sol</a>",
+   "id": "F25"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-6-sol",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt6-sol` is under `models.thinking` in inputs/model_mappings.yml line 31; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F26"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-6-sol",
+   "value": "gpt6-sol: \"openai/gpt-6-sol\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 31, section models.thinking",
+   "quote": "gpt6-sol: \"openai/gpt-6-sol\"",
+   "id": "F27"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-6-sol",
+   "value": "2026-09-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 140+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-23\"",
+   "id": "F28"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-6-sol",
+   "value": "89",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 140+2: column PTS",
+   "quote": "\"pts\": 89,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F29"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-6-sol",
+   "value": "0.17",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-6-sol",
+   "quote": "\"cost\": 0.17,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F30"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.8-flash",
+   "value": "google/gemini-3.8-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 154: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.8-flash</a>",
+   "id": "F31"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.8-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.8-flash` is under `models.thinking` in inputs/model_mappings.yml line 52; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F32"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.8-flash",
+   "value": "gemini-3.8-flash: \"google/gemini-3.8-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 52, section models.thinking",
+   "quote": "gemini-3.8-flash: \"google/gemini-3.8-flash\"",
+   "id": "F33"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.8-flash",
+   "value": "2026-09-02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 154+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-02\"",
+   "id": "F34"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.8-flash",
+   "value": "88",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 154+2: column PTS",
+   "quote": "\"pts\": 88,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F35"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.8-flash",
+   "value": "0.15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.8-flash",
+   "quote": "\"cost\": 0.15,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F36"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "anthropic/claude-opus-5.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 168: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-opus-5.5</a>",
+   "id": "F37"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `opus-5.5` is under `models.thinking` in inputs/model_mappings.yml line 137; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F38"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "opus-5.5: \"anthropic/claude-opus-5.5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 137, section models.thinking",
+   "quote": "opus-5.5: \"anthropic/claude-opus-5.5\"",
+   "id": "F39"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "2026-09-25",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 168+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-25\"",
+   "id": "F40"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "86",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 168+2: column PTS",
+   "quote": "\"pts\": 86,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F41"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "0.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-opus-5.5",
+   "quote": "\"cost\": 0.36,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F42"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "- opus-5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 250: `no_thinking_block:` (the CLI names that always run with the <thinking> section removed from the prompt)",
+   "quote": "  - opus-5.5",
+   "id": "F43"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "google/gemini-3.1-pro-preview",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 182: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.1-pro-preview</a>",
+   "id": "F44"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.1` is under `models.thinking` in inputs/model_mappings.yml line 46; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F45"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "gemini-3.1: \"google/gemini-3.1-pro-preview\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 46, section models.thinking",
+   "quote": "gemini-3.1: \"google/gemini-3.1-pro-preview\"",
+   "id": "F46"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 182+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F47"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "86",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 182+2: column PTS",
+   "quote": "\"pts\": 86,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F48"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "0.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.1-pro-preview",
+   "quote": "\"cost\": 0.42,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F49"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-terra",
+   "value": "openai/gpt-5.6-terra",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 196: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-terra</a>",
+   "id": "F50"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-terra",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-terra` is under `models.thinking` in inputs/model_mappings.yml line 25; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F51"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-terra",
+   "value": "gpt5.6-terra: \"openai/gpt-5.6-terra\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 25, section models.thinking",
+   "quote": "gpt5.6-terra: \"openai/gpt-5.6-terra\"",
+   "id": "F52"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-terra",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 196+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F53"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-terra",
+   "value": "86",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 196+2: column PTS",
+   "quote": "\"pts\": 86,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F54"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-terra",
+   "value": "0.47",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-terra",
+   "quote": "\"cost\": 0.47,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F55"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-fable-5",
+   "value": "anthropic/claude-fable-5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 210: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-fable-5</a>",
+   "id": "F56"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-fable-5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `fable-5` is under `models.thinking` in inputs/model_mappings.yml line 72; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F57"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-fable-5",
+   "value": "fable-5: \"anthropic/claude-fable-5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 72, section models.thinking",
+   "quote": "fable-5: \"anthropic/claude-fable-5\"",
+   "id": "F58"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-fable-5",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 210+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F59"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-fable-5",
+   "value": "85",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 210+2: column PTS",
+   "quote": "\"pts\": 85,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F60"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-fable-5",
+   "value": "1.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-fable-5",
+   "quote": "\"cost\": 1.08,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F61"
+  },
+  {
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.7",
+   "value": "x-ai/grok-4.7",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 224: column Model of the one-shot box score",
+   "quote": ">x-ai/grok-4.7</a>",
+   "id": "F62"
+  },
+  {
+   "says": "effort-setting",
+   "about": "x-ai/grok-4.7",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `grok-4.7` is under `models.thinking` in inputs/model_mappings.yml line 41; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F63"
+  },
+  {
+   "says": "note",
+   "about": "x-ai/grok-4.7",
+   "value": "grok-4.7: \"x-ai/grok-4.7\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 41, section models.thinking",
+   "quote": "grok-4.7: \"x-ai/grok-4.7\"",
+   "id": "F64"
+  },
+  {
+   "says": "run-date",
+   "about": "x-ai/grok-4.7",
+   "value": "2026-09-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 224+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-23\"",
+   "id": "F65"
+  },
+  {
+   "says": "score",
+   "about": "x-ai/grok-4.7",
+   "value": "85",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 224+2: column PTS",
+   "quote": "\"pts\": 85,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F66"
+  },
+  {
+   "says": "cost",
+   "about": "x-ai/grok-4.7",
+   "value": "1.03",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of x-ai/grok-4.7",
+   "quote": "\"cost\": 1.03,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F67"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3-flash-preview",
+   "value": "google/gemini-3-flash-preview",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 238: column Model of the one-shot box score",
+   "quote": ">google/gemini-3-flash-preview</a>",
+   "id": "F68"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3-flash-preview",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3-flash` is under `models.thinking` in inputs/model_mappings.yml line 45; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F69"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3-flash-preview",
+   "value": "gemini-3-flash: \"google/gemini-3-flash-preview\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 45, section models.thinking",
+   "quote": "gemini-3-flash: \"google/gemini-3-flash-preview\"",
+   "id": "F70"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3-flash-preview",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 238+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F71"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3-flash-preview",
+   "value": "84",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 238+2: column PTS",
+   "quote": "\"pts\": 84,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F72"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3-flash-preview",
+   "value": "0.13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3-flash-preview",
+   "quote": "\"cost\": 0.13,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F73"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "openai/gpt-5.6-sol-pro",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 266: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-sol-pro</a>",
+   "id": "F74"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-sol-pro` is under `models.thinking` in inputs/model_mappings.yml line 27; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F75"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "gpt5.6-sol-pro: \"openai/gpt-5.6-sol-pro\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 27, section models.thinking",
+   "quote": "gpt5.6-sol-pro: \"openai/gpt-5.6-sol-pro\"",
+   "id": "F76"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 266+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F77"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "84",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 266+2: column PTS",
+   "quote": "\"pts\": 84,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F78"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-sol-pro",
+   "value": "2.68",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-sol-pro",
+   "quote": "\"cost\": 2.68,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F79"
+  },
+  {
+   "says": "model-api-id",
+   "about": "moonshotai/kimi-k3",
+   "value": "moonshotai/kimi-k3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 280: column Model of the one-shot box score",
+   "quote": ">moonshotai/kimi-k3</a>",
+   "id": "F80"
+  },
+  {
+   "says": "effort-setting",
+   "about": "moonshotai/kimi-k3",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `kimi-k3` is under `models.thinking` in inputs/model_mappings.yml line 121; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F81"
+  },
+  {
+   "says": "note",
+   "about": "moonshotai/kimi-k3",
+   "value": "kimi-k3: \"moonshotai/kimi-k3\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 121, section models.thinking",
+   "quote": "kimi-k3: \"moonshotai/kimi-k3\"",
+   "id": "F82"
+  },
+  {
+   "says": "run-date",
+   "about": "moonshotai/kimi-k3",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 280+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F83"
+  },
+  {
+   "says": "score",
+   "about": "moonshotai/kimi-k3",
+   "value": "84",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 280+2: column PTS",
+   "quote": "\"pts\": 84,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F84"
+  },
+  {
+   "says": "cost",
+   "about": "moonshotai/kimi-k3",
+   "value": "0.55",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of moonshotai/kimi-k3",
+   "quote": "\"cost\": 0.55,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F85"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-sol",
+   "value": "openai/gpt-5.6-sol",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 308: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-sol</a>",
+   "id": "F86"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-sol",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-sol` is under `models.thinking` in inputs/model_mappings.yml line 24; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F87"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-sol",
+   "value": "gpt5.6-sol: \"openai/gpt-5.6-sol\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 24, section models.thinking",
+   "quote": "gpt5.6-sol: \"openai/gpt-5.6-sol\"",
+   "id": "F88"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-sol",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 308+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F89"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-sol",
+   "value": "83",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 308+2: column PTS",
+   "quote": "\"pts\": 83,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F90"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-sol",
+   "value": "0.63",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-sol",
+   "quote": "\"cost\": 0.63,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F91"
+  },
+  {
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "deepseek/deepseek-v4.1-flash-1017",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 322: column Model of the one-shot box score",
+   "quote": ">deepseek/deepseek-v4.1-flash-1017</a>",
+   "id": "F92"
+  },
+  {
+   "says": "effort-setting",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `deepseek-v4.1-flash-1017` is under `models.thinking` in inputs/model_mappings.yml line 84; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F93"
+  },
+  {
+   "says": "note",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "deepseek-v4.1-flash-1017: \"deepseek/deepseek-v4.1-flash-1017\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 84, section models.thinking",
+   "quote": "deepseek-v4.1-flash-1017: \"deepseek/deepseek-v4.1-flash-1017\"",
+   "id": "F94"
+  },
+  {
+   "says": "run-date",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "2026-10-20",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 322+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-10-20\"",
+   "id": "F95"
+  },
+  {
+   "says": "score",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "83",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 322+2: column PTS",
+   "quote": "\"pts\": 83,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F96"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek/deepseek-v4.1-flash-1017",
+   "value": "0.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of deepseek/deepseek-v4.1-flash-1017",
+   "quote": "\"cost\": 0.11,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F97"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "anthropic/claude-fable-5.1",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 336: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-fable-5.1</a>",
+   "id": "F98"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `fable-5.1` is under `models.thinking` in inputs/model_mappings.yml line 73; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F99"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "fable-5.1: \"anthropic/claude-fable-5.1\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 73, section models.thinking",
+   "quote": "fable-5.1: \"anthropic/claude-fable-5.1\"",
+   "id": "F100"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "2026-09-01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 336+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-01\"",
+   "id": "F101"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "82",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 336+2: column PTS",
+   "quote": "\"pts\": 82,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F102"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "1.32",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-fable-5.1",
+   "quote": "\"cost\": 1.32,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F103"
+  },
+  {
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.20",
+   "value": "x-ai/grok-4.20",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 350: column Model of the one-shot box score",
+   "quote": ">x-ai/grok-4.20</a>",
+   "id": "F104"
+  },
+  {
+   "says": "effort-setting",
+   "about": "x-ai/grok-4.20",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `grok-4.20` is under `models.thinking` in inputs/model_mappings.yml line 37; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F105"
+  },
+  {
+   "says": "note",
+   "about": "x-ai/grok-4.20",
+   "value": "grok-4.20: \"x-ai/grok-4.20\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 37, section models.thinking",
+   "quote": "grok-4.20: \"x-ai/grok-4.20\"",
+   "id": "F106"
+  },
+  {
+   "says": "run-date",
+   "about": "x-ai/grok-4.20",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 350+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F107"
+  },
+  {
+   "says": "score",
+   "about": "x-ai/grok-4.20",
+   "value": "82",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 350+2: column PTS",
+   "quote": "\"pts\": 82,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F108"
+  },
+  {
+   "says": "cost",
+   "about": "x-ai/grok-4.20",
+   "value": "0.37",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of x-ai/grok-4.20",
+   "quote": "\"cost\": 0.37,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F109"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.7-flash",
+   "value": "google/gemini-3.7-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 364: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.7-flash</a>",
+   "id": "F110"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.7-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.7-flash` is under `models.thinking` in inputs/model_mappings.yml line 51; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F111"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.7-flash",
+   "value": "gemini-3.7-flash: \"google/gemini-3.7-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 51, section models.thinking",
+   "quote": "gemini-3.7-flash: \"google/gemini-3.7-flash\"",
+   "id": "F112"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.7-flash",
+   "value": "2026-08-13",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 364+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-13\"",
+   "id": "F113"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.7-flash",
+   "value": "80",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 364+2: column PTS",
+   "quote": "\"pts\": 80,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F114"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.7-flash",
+   "value": "0.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.7-flash",
+   "quote": "\"cost\": 0.1,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F115"
+  },
+  {
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "deepseek/deepseek-v4-pro-0813",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 392: column Model of the one-shot box score",
+   "quote": ">deepseek/deepseek-v4-pro-0813</a>",
+   "id": "F116"
+  },
+  {
+   "says": "effort-setting",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `deepseek-v4-pro-0813` is under `models.thinking` in inputs/model_mappings.yml line 82; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F117"
+  },
+  {
+   "says": "note",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "deepseek-v4-pro-0813: \"deepseek/deepseek-v4-pro-0813\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 82, section models.thinking",
+   "quote": "deepseek-v4-pro-0813: \"deepseek/deepseek-v4-pro-0813\"",
+   "id": "F118"
+  },
+  {
+   "says": "run-date",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "2026-08-12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 392+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-12\"",
+   "id": "F119"
+  },
+  {
+   "says": "score",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "80",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 392+2: column PTS",
+   "quote": "\"pts\": 80,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F120"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek/deepseek-v4-pro-0813",
+   "value": "0.28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of deepseek/deepseek-v4-pro-0813",
+   "quote": "\"cost\": 0.28,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F121"
+  },
+  {
+   "says": "model-api-id",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "z-ai/glm-5.3-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 406: column Model of the one-shot box score",
+   "quote": ">z-ai/glm-5.3-flash</a>",
+   "id": "F122"
+  },
+  {
+   "says": "effort-setting",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `glm-5.3-flash` is under `models.thinking` in inputs/model_mappings.yml line 128; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F123"
+  },
+  {
+   "says": "note",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "glm-5.3-flash: \"z-ai/glm-5.3-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 128, section models.thinking",
+   "quote": "glm-5.3-flash: \"z-ai/glm-5.3-flash\"",
+   "id": "F124"
+  },
+  {
+   "says": "run-date",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "2026-08-28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 406+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-28\"",
+   "id": "F125"
+  },
+  {
+   "says": "score",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "78",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 406+2: column PTS",
+   "quote": "\"pts\": 78,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F126"
+  },
+  {
+   "says": "cost",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "0.02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of z-ai/glm-5.3-flash",
+   "quote": "\"cost\": 0.02,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F127"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "openai/gpt-5.6-terra-pro",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 434: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-terra-pro</a>",
+   "id": "F128"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-terra-pro` is under `models.thinking` in inputs/model_mappings.yml line 28; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F129"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "gpt5.6-terra-pro: \"openai/gpt-5.6-terra-pro\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 28, section models.thinking",
+   "quote": "gpt5.6-terra-pro: \"openai/gpt-5.6-terra-pro\"",
+   "id": "F130"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 434+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F131"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "77",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 434+2: column PTS",
+   "quote": "\"pts\": 77,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F132"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-terra-pro",
+   "value": "1.98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-terra-pro",
+   "quote": "\"cost\": 1.98,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F133"
+  },
+  {
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "deepseek/deepseek-v4-flash-0731",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 448: column Model of the one-shot box score",
+   "quote": ">deepseek/deepseek-v4-flash-0731</a>",
+   "id": "F134"
+  },
+  {
+   "says": "effort-setting",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `deepseek-v4-flash-0731` is under `models.thinking` in inputs/model_mappings.yml line 81; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F135"
+  },
+  {
+   "says": "note",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "deepseek-v4-flash-0731: \"deepseek/deepseek-v4-flash-0731\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 81, section models.thinking",
+   "quote": "deepseek-v4-flash-0731: \"deepseek/deepseek-v4-flash-0731\"",
+   "id": "F136"
+  },
+  {
+   "says": "run-date",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "2026-07-31",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 448+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-31\"",
+   "id": "F137"
+  },
+  {
+   "says": "score",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "77",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 448+2: column PTS",
+   "quote": "\"pts\": 77,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F138"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek/deepseek-v4-flash-0731",
+   "value": "0.11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of deepseek/deepseek-v4-flash-0731",
+   "quote": "\"cost\": 0.11,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F139"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "anthropic/claude-sonnet-5.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 462: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-sonnet-5.5</a>",
+   "id": "F140"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `sonnet-5.5` is under `models.thinking` in inputs/model_mappings.yml line 71; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F141"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "sonnet-5.5: \"anthropic/claude-sonnet-5.5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 71, section models.thinking",
+   "quote": "sonnet-5.5: \"anthropic/claude-sonnet-5.5\"",
+   "id": "F142"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "2026-10-06",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 462+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-10-06\"",
+   "id": "F143"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "76",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 462+2: column PTS",
+   "quote": "\"pts\": 76,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F144"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "0.18",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-sonnet-5.5",
+   "quote": "\"cost\": 0.18,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F145"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "- sonnet-5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 250: `no_thinking_block:` (the CLI names that always run with the <thinking> section removed from the prompt)",
+   "quote": "  - sonnet-5.5",
+   "id": "F146"
+  },
+  {
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.5",
+   "value": "x-ai/grok-4.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 476: column Model of the one-shot box score",
+   "quote": ">x-ai/grok-4.5</a>",
+   "id": "F147"
+  },
+  {
+   "says": "effort-setting",
+   "about": "x-ai/grok-4.5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `grok-4.5` is under `models.thinking` in inputs/model_mappings.yml line 39; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F148"
+  },
+  {
+   "says": "note",
+   "about": "x-ai/grok-4.5",
+   "value": "grok-4.5: \"x-ai/grok-4.5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 39, section models.thinking",
+   "quote": "grok-4.5: \"x-ai/grok-4.5\"",
+   "id": "F149"
+  },
+  {
+   "says": "run-date",
+   "about": "x-ai/grok-4.5",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 476+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F150"
+  },
+  {
+   "says": "score",
+   "about": "x-ai/grok-4.5",
+   "value": "76",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 476+2: column PTS",
+   "quote": "\"pts\": 76,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F151"
+  },
+  {
+   "says": "cost",
+   "about": "x-ai/grok-4.5",
+   "value": "0.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of x-ai/grok-4.5",
+   "quote": "\"cost\": 0.44,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F152"
+  },
+  {
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-flash",
+   "value": "qwen/qwen3.8-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 490: column Model of the one-shot box score",
+   "quote": ">qwen/qwen3.8-flash</a>",
+   "id": "F153"
+  },
+  {
+   "says": "effort-setting",
+   "about": "qwen/qwen3.8-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `qwen3.8-flash` is under `models.thinking` in inputs/model_mappings.yml line 94; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F154"
+  },
+  {
+   "says": "note",
+   "about": "qwen/qwen3.8-flash",
+   "value": "qwen3.8-flash: \"qwen/qwen3.8-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 94, section models.thinking",
+   "quote": "qwen3.8-flash: \"qwen/qwen3.8-flash\"",
+   "id": "F155"
+  },
+  {
+   "says": "run-date",
+   "about": "qwen/qwen3.8-flash",
+   "value": "2026-09-01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 490+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-01\"",
+   "id": "F156"
+  },
+  {
+   "says": "score",
+   "about": "qwen/qwen3.8-flash",
+   "value": "75",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 490+2: column PTS",
+   "quote": "\"pts\": 75,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F157"
+  },
+  {
+   "says": "cost",
+   "about": "qwen/qwen3.8-flash",
+   "value": "0.56",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of qwen/qwen3.8-flash",
+   "quote": "\"cost\": 0.56,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F158"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5",
+   "value": "anthropic/claude-opus-5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 504: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-opus-5</a>",
+   "id": "F159"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-opus-5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `opus-5` is under `models.thinking` in inputs/model_mappings.yml line 136; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F160"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-opus-5",
+   "value": "opus-5: \"anthropic/claude-opus-5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 136, section models.thinking",
+   "quote": "opus-5: \"anthropic/claude-opus-5\"",
+   "id": "F161"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-opus-5",
+   "value": "2026-07-24",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 504+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-24\"",
+   "id": "F162"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-opus-5",
+   "value": "74",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 504+2: column PTS",
+   "quote": "\"pts\": 74,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F163"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-opus-5",
+   "value": "0.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-opus-5",
+   "quote": "\"cost\": 0.4,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F164"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-opus-5",
+   "value": "- opus-5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 250: `no_thinking_block:` (the CLI names that always run with the <thinking> section removed from the prompt)",
+   "quote": "  - opus-5",
+   "id": "F165"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-luna",
+   "value": "openai/gpt-5.6-luna",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 518: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-luna</a>",
+   "id": "F166"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-luna",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-luna` is under `models.thinking` in inputs/model_mappings.yml line 26; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F167"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-luna",
+   "value": "gpt5.6-luna: \"openai/gpt-5.6-luna\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 26, section models.thinking",
+   "quote": "gpt5.6-luna: \"openai/gpt-5.6-luna\"",
+   "id": "F168"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-luna",
+   "value": "2026-07-30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 518+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-30\"",
+   "id": "F169"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-luna",
+   "value": "74",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 518+2: column PTS",
+   "quote": "\"pts\": 74,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F170"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-luna",
+   "value": "0.02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-luna",
+   "quote": "\"cost\": 0.02,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F171"
+  },
+  {
+   "says": "model-api-id",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "z-ai/glm-5v-turbo",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 546: column Model of the one-shot box score",
+   "quote": ">z-ai/glm-5v-turbo</a>",
+   "id": "F172"
+  },
+  {
+   "says": "effort-setting",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `glm-5v-turbo` is under `models.thinking` in inputs/model_mappings.yml line 131; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F173"
+  },
+  {
+   "says": "note",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "glm-5v-turbo: \"z-ai/glm-5v-turbo\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 131, section models.thinking",
+   "quote": "glm-5v-turbo: \"z-ai/glm-5v-turbo\"",
+   "id": "F174"
+  },
+  {
+   "says": "run-date",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 546+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F175"
+  },
+  {
+   "says": "score",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "74",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 546+2: column PTS",
+   "quote": "\"pts\": 74,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F176"
+  },
+  {
+   "says": "cost",
+   "about": "z-ai/glm-5v-turbo",
+   "value": "0.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of z-ai/glm-5v-turbo",
+   "quote": "\"cost\": 0.44,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F177"
+  },
+  {
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "deepseek/deepseek-v4.1-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 574: column Model of the one-shot box score",
+   "quote": ">deepseek/deepseek-v4.1-flash</a>",
+   "id": "F178"
+  },
+  {
+   "says": "effort-setting",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `deepseek-v4.1-flash` is under `models.thinking` in inputs/model_mappings.yml line 83; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F179"
+  },
+  {
+   "says": "note",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "deepseek-v4.1-flash: \"deepseek/deepseek-v4.1-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 83, section models.thinking",
+   "quote": "deepseek-v4.1-flash: \"deepseek/deepseek-v4.1-flash\"",
+   "id": "F180"
+  },
+  {
+   "says": "run-date",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "2026-09-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 574+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-23\"",
+   "id": "F181"
+  },
+  {
+   "says": "score",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "73",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 574+2: column PTS",
+   "quote": "\"pts\": 73,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F182"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "0.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of deepseek/deepseek-v4.1-flash",
+   "quote": "\"cost\": 0.2,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F183"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "openai/gpt-5.6-luna-pro",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 602: column Model of the one-shot box score",
+   "quote": ">openai/gpt-5.6-luna-pro</a>",
+   "id": "F184"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt5.6-luna-pro` is under `models.thinking` in inputs/model_mappings.yml line 29; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F185"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "gpt5.6-luna-pro: \"openai/gpt-5.6-luna-pro\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 29, section models.thinking",
+   "quote": "gpt5.6-luna-pro: \"openai/gpt-5.6-luna-pro\"",
+   "id": "F186"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "2026-07-30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 602+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-30\"",
+   "id": "F187"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "72",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 602+2: column PTS",
+   "quote": "\"pts\": 72,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F188"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-5.6-luna-pro",
+   "value": "0.07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-5.6-luna-pro",
+   "quote": "\"cost\": 0.07,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F189"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "anthropic/claude-sonnet-5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 616: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-sonnet-5</a>",
+   "id": "F190"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `sonnet-5` is under `models.thinking` in inputs/model_mappings.yml line 70; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F191"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "sonnet-5: \"anthropic/claude-sonnet-5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 70, section models.thinking",
+   "quote": "sonnet-5: \"anthropic/claude-sonnet-5\"",
+   "id": "F192"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 616+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F193"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "71",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 616+2: column PTS",
+   "quote": "\"pts\": 71,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F194"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "0.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-sonnet-5",
+   "quote": "\"cost\": 0.3,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F195"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.6-flash",
+   "value": "google/gemini-3.6-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 644: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.6-flash</a>",
+   "id": "F196"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.6-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.6-flash` is under `models.thinking` in inputs/model_mappings.yml line 50; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F197"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.6-flash",
+   "value": "gemini-3.6-flash: \"google/gemini-3.6-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 50, section models.thinking",
+   "quote": "gemini-3.6-flash: \"google/gemini-3.6-flash\"",
+   "id": "F198"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.6-flash",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 644+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F199"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.6-flash",
+   "value": "69",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 644+2: column PTS",
+   "quote": "\"pts\": 69,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F200"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.6-flash",
+   "value": "0.36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.6-flash",
+   "quote": "\"cost\": 0.36,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F201"
+  },
+  {
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "deepseek/deepseek-v4-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 686: column Model of the one-shot box score",
+   "quote": ">deepseek/deepseek-v4-flash</a>",
+   "id": "F202"
+  },
+  {
+   "says": "effort-setting",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `deepseek-v4-flash` is under `models.thinking` in inputs/model_mappings.yml line 80; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F203"
+  },
+  {
+   "says": "note",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "deepseek-v4-flash: \"deepseek/deepseek-v4-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 80, section models.thinking",
+   "quote": "deepseek-v4-flash: \"deepseek/deepseek-v4-flash\"",
+   "id": "F204"
+  },
+  {
+   "says": "run-date",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 686+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F205"
+  },
+  {
+   "says": "score",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "68",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 686+2: column PTS",
+   "quote": "\"pts\": 68,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F206"
+  },
+  {
+   "says": "cost",
+   "about": "deepseek/deepseek-v4-flash",
+   "value": "0.08",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of deepseek/deepseek-v4-flash",
+   "quote": "\"cost\": 0.08,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F207"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "google/gemini-3.5-flash-lite",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 700: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.5-flash-lite</a>",
+   "id": "F208"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.5-flash-lite` is under `models.thinking` in inputs/model_mappings.yml line 49; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F209"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "gemini-3.5-flash-lite: \"google/gemini-3.5-flash-lite\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 49, section models.thinking",
+   "quote": "gemini-3.5-flash-lite: \"google/gemini-3.5-flash-lite\"",
+   "id": "F210"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 700+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F211"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "67",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 700+2: column PTS",
+   "quote": "\"pts\": 67,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F212"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "0.12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.5-flash-lite",
+   "quote": "\"cost\": 0.12,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F213"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "anthropic/claude-haiku-5.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 714: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-haiku-5.5</a>",
+   "id": "F214"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `haiku-5.5` is under `models.thinking` in inputs/model_mappings.yml line 67; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F215"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "haiku-5.5: \"anthropic/claude-haiku-5.5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 67, section models.thinking",
+   "quote": "haiku-5.5: \"anthropic/claude-haiku-5.5\"",
+   "id": "F216"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "2026-10-07",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 714+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-10-07\"",
+   "id": "F217"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "67",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 714+2: column PTS",
+   "quote": "\"pts\": 67,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F218"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "0.02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-haiku-5.5",
+   "quote": "\"cost\": 0.02,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F219"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "- haiku-5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 250: `no_thinking_block:` (the CLI names that always run with the <thinking> section removed from the prompt)",
+   "quote": "  - haiku-5.5",
+   "id": "F220"
+  },
+  {
+   "says": "model-api-id",
+   "about": "google/gemini-3.5-flash",
+   "value": "google/gemini-3.5-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 728: column Model of the one-shot box score",
+   "quote": ">google/gemini-3.5-flash</a>",
+   "id": "F221"
+  },
+  {
+   "says": "effort-setting",
+   "about": "google/gemini-3.5-flash",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gemini-3.5-flash` is under `models.thinking` in inputs/model_mappings.yml line 48; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F222"
+  },
+  {
+   "says": "note",
+   "about": "google/gemini-3.5-flash",
+   "value": "gemini-3.5-flash: \"google/gemini-3.5-flash\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 48, section models.thinking",
+   "quote": "gemini-3.5-flash: \"google/gemini-3.5-flash\"",
+   "id": "F223"
+  },
+  {
+   "says": "run-date",
+   "about": "google/gemini-3.5-flash",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 728+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F224"
+  },
+  {
+   "says": "score",
+   "about": "google/gemini-3.5-flash",
+   "value": "67",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 728+2: column PTS",
+   "quote": "\"pts\": 67,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F225"
+  },
+  {
+   "says": "cost",
+   "about": "google/gemini-3.5-flash",
+   "value": "0.42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of google/gemini-3.5-flash",
+   "quote": "\"cost\": 0.42,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F226"
+  },
+  {
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-max",
+   "value": "qwen/qwen3.8-max",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 756: column Model of the one-shot box score",
+   "quote": ">qwen/qwen3.8-max</a>",
+   "id": "F227"
+  },
+  {
+   "says": "effort-setting",
+   "about": "qwen/qwen3.8-max",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `qwen3.8-max` is under `models.thinking` in inputs/model_mappings.yml line 91; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F228"
+  },
+  {
+   "says": "note",
+   "about": "qwen/qwen3.8-max",
+   "value": "qwen3.8-max: \"qwen/qwen3.8-max\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 91, section models.thinking",
+   "quote": "qwen3.8-max: \"qwen/qwen3.8-max\"",
+   "id": "F229"
+  },
+  {
+   "says": "run-date",
+   "about": "qwen/qwen3.8-max",
+   "value": "2026-08-12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 756+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-12\"",
+   "id": "F230"
+  },
+  {
+   "says": "score",
+   "about": "qwen/qwen3.8-max",
+   "value": "67",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 756+2: column PTS",
+   "quote": "\"pts\": 67,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F231"
+  },
+  {
+   "says": "cost",
+   "about": "qwen/qwen3.8-max",
+   "value": "1.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of qwen/qwen3.8-max",
+   "quote": "\"cost\": 1.27,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F232"
+  },
+  {
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "qwen/qwen3.8-2.4t-a95b",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 770: column Model of the one-shot box score",
+   "quote": ">qwen/qwen3.8-2.4t-a95b</a>",
+   "id": "F233"
+  },
+  {
+   "says": "effort-setting",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `qwen3.8-2.4t-a95b` is under `models.thinking` in inputs/model_mappings.yml line 92; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F234"
+  },
+  {
+   "says": "note",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "qwen3.8-2.4t-a95b: \"qwen/qwen3.8-2.4t-a95b\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 92, section models.thinking",
+   "quote": "qwen3.8-2.4t-a95b: \"qwen/qwen3.8-2.4t-a95b\"",
+   "id": "F235"
+  },
+  {
+   "says": "run-date",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "2026-08-12",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 770+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-12\"",
+   "id": "F236"
+  },
+  {
+   "says": "score",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "66",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 770+2: column PTS",
+   "quote": "\"pts\": 66,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F237"
+  },
+  {
+   "says": "cost",
+   "about": "qwen/qwen3.8-2.4t-a95b",
+   "value": "1.61",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of qwen/qwen3.8-2.4t-a95b",
+   "quote": "\"cost\": 1.61,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F238"
+  },
+  {
+   "says": "model-api-id",
+   "about": "openai/gpt-6-luna",
+   "value": "openai/gpt-6-luna",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 812: column Model of the one-shot box score",
+   "quote": ">openai/gpt-6-luna</a>",
+   "id": "F239"
+  },
+  {
+   "says": "effort-setting",
+   "about": "openai/gpt-6-luna",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `gpt6-luna` is under `models.thinking` in inputs/model_mappings.yml line 33; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F240"
+  },
+  {
+   "says": "note",
+   "about": "openai/gpt-6-luna",
+   "value": "gpt6-luna: \"openai/gpt-6-luna\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 33, section models.thinking",
+   "quote": "gpt6-luna: \"openai/gpt-6-luna\"",
+   "id": "F241"
+  },
+  {
+   "says": "run-date",
+   "about": "openai/gpt-6-luna",
+   "value": "2026-09-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 812+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-23\"",
+   "id": "F242"
+  },
+  {
+   "says": "score",
+   "about": "openai/gpt-6-luna",
+   "value": "61",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 812+2: column PTS",
+   "quote": "\"pts\": 61,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F243"
+  },
+  {
+   "says": "cost",
+   "about": "openai/gpt-6-luna",
+   "value": "0.01",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of openai/gpt-6-luna",
+   "quote": "\"cost\": 0.01,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F244"
+  },
+  {
+   "says": "model-api-id",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "anthropic/claude-haiku-4.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 854: column Model of the one-shot box score",
+   "quote": ">anthropic/claude-haiku-4.5</a>",
+   "id": "F245"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `haiku-4.5` is under `models.thinking` in inputs/model_mappings.yml line 66; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F246"
+  },
+  {
+   "says": "note",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "haiku-4.5: \"anthropic/claude-haiku-4.5\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 66, section models.thinking",
+   "quote": "haiku-4.5: \"anthropic/claude-haiku-4.5\"",
+   "id": "F247"
+  },
+  {
+   "says": "run-date",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "2026-07-22",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 854+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-22\"",
+   "id": "F248"
+  },
+  {
+   "says": "score",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "60",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 854+2: column PTS",
+   "quote": "\"pts\": 60,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F249"
+  },
+  {
+   "says": "cost",
+   "about": "anthropic/claude-haiku-4.5",
+   "value": "0.39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of anthropic/claude-haiku-4.5",
+   "quote": "\"cost\": 0.39,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F250"
+  },
+  {
+   "says": "model-api-id",
+   "about": "z-ai/glm-5.3",
+   "value": "z-ai/glm-5.3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 868: column Model of the one-shot box score",
+   "quote": ">z-ai/glm-5.3</a>",
+   "id": "F251"
+  },
+  {
+   "says": "effort-setting",
+   "about": "z-ai/glm-5.3",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `glm-5.3` is under `models.thinking` in inputs/model_mappings.yml line 129; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F252"
+  },
+  {
+   "says": "note",
+   "about": "z-ai/glm-5.3",
+   "value": "glm-5.3: \"z-ai/glm-5.3\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 129, section models.thinking",
+   "quote": "glm-5.3: \"z-ai/glm-5.3\"",
+   "id": "F253"
+  },
+  {
+   "says": "run-date",
+   "about": "z-ai/glm-5.3",
+   "value": "2026-08-28",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 868+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-08-28\"",
+   "id": "F254"
+  },
+  {
+   "says": "score",
+   "about": "z-ai/glm-5.3",
+   "value": "57",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 868+2: column PTS",
+   "quote": "\"pts\": 57,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F255"
+  },
+  {
+   "says": "cost",
+   "about": "z-ai/glm-5.3",
+   "value": "1.41",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of z-ai/glm-5.3",
+   "quote": "\"cost\": 1.41,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F256"
+  },
+  {
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-27b",
+   "value": "qwen/qwen3.8-27b",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 910: column Model of the one-shot box score",
+   "quote": ">qwen/qwen3.8-27b</a>",
+   "id": "F257"
+  },
+  {
+   "says": "effort-setting",
+   "about": "qwen/qwen3.8-27b",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `qwen3.8-27b` is under `models.thinking` in inputs/model_mappings.yml line 93; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F258"
+  },
+  {
+   "says": "note",
+   "about": "qwen/qwen3.8-27b",
+   "value": "qwen3.8-27b: \"qwen/qwen3.8-27b\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 93, section models.thinking",
+   "quote": "qwen3.8-27b: \"qwen/qwen3.8-27b\"",
+   "id": "F259"
+  },
+  {
+   "says": "run-date",
+   "about": "qwen/qwen3.8-27b",
+   "value": "2026-09-02",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 910+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-09-02\"",
+   "id": "F260"
+  },
+  {
+   "says": "score",
+   "about": "qwen/qwen3.8-27b",
+   "value": "54",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 910+2: column PTS",
+   "quote": "\"pts\": 54,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F261"
+  },
+  {
+   "says": "cost",
+   "about": "qwen/qwen3.8-27b",
+   "value": "0.76",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of qwen/qwen3.8-27b",
+   "quote": "\"cost\": 0.76,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F262"
+  },
+  {
+   "says": "model-api-id",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "qwen/qwen3-max-thinking",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 952: column Model of the one-shot box score",
+   "quote": ">qwen/qwen3-max-thinking</a>",
+   "id": "F263"
+  },
+  {
+   "says": "effort-setting",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "minimal",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/adapter_openrouter_adapter.py",
+   "where": "openrouter_adapter.py line 264 (branch `if is_thinking_model:` line 261); the model's CLI name `qwen3-max-thinking` is under `models.thinking` in inputs/model_mappings.yml line 132; the workflow (run-evaluation.yml line 63) calls `connections_eval run --model … --mode … --canonical --threads 8` with no --reasoning-effort",
+   "quote": "payload[\"reasoning\"] = {\"effort\": reasoning_effort or \"minimal\"}",
+   "id": "F264"
+  },
+  {
+   "says": "note",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "qwen3-max-thinking: \"qwen/qwen3-max-thinking\"",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/inputs_model_mappings.yml",
+   "where": "inputs/model_mappings.yml line 132, section models.thinking",
+   "quote": "qwen3-max-thinking: \"qwen/qwen3-max-thinking\"",
+   "id": "F265"
+  },
+  {
+   "says": "run-date",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "2026-07-23",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 952+1: column Date (= start_timestamp of the latest run, create_results_mviz.py line 138)",
+   "quote": "\"date\": \"2026-07-23\"",
+   "id": "F266"
+  },
+  {
+   "says": "score",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "35",
+   "term": "pts-of-100",
+   "scale": "raw",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md line 952+2: column PTS",
+   "quote": "\"pts\": 35,",
+   "precision": {
+    "model": "exact"
+   },
+   "id": "F267"
+  },
+  {
+   "says": "cost",
+   "about": "qwen/qwen3-max-thinking",
+   "value": "2.49",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-matsonj-eval-connections/src/docs_results.md",
+   "where": "docs/results.md: column COST of the row of qwen/qwen3-max-thinking",
+   "quote": "\"cost\": 2.49,",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F268"
+  }
+ ]
+}

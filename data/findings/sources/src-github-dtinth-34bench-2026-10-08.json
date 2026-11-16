@@ -1,0 +1,936 @@
+{
+ "id": "src-github-dtinth-34bench-2026-10-08",
+ "publisher": "dtinth/34bench",
+ "urls": [
+  "https://github.com/dtinth/34bench"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "ddb91d6e856bb1b8d406b0054190dab199fbd7c3",
+   "url": "https://github.com/dtinth/34bench/commit/ddb91d6e856bb1b8d406b0054190dab199fbd7c3",
+   "captured": "2026-10-08T03:16:50Z",
+   "note": "commit ddb91d6e (committer date 2026-10-08T10:16:50+07:00): results.svg is the rendered results table (an HTML table inside the SVG foreignObject)"
+  }
+ ],
+ "commit": "ddb91d6e856bb1b8d406b0054190dab199fbd7c3",
+ "sha256": {
+  "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg": "4e6e77abb28f93ad651057b9ed6760b684013c22b9133798635ca01c05bad1e4",
+  "/work/.salvo14/mig/convert-dtinth-34bench/evidence/README.md": "67740690a68ec4179ad1591a828f2de12bfa8a0302e3b9989b9483ba1c87c2f5"
+ },
+ "harvested_at": "2026-10-08T03:16:50Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-dtinth-34bench (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from results.svg and README.md of the repo at commit ddb91d6e (clone saved by salvo s23/b2; results.svg byte-identical to the copy saved by g/g8)",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "default reasoning effort",
+   "level": "written",
+   "form": "prose",
+   "where": "README, Method: each model runs with its default reasoning effort",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/README.md",
+   "quote": "Each model runs with its default reasoning effort."
+  },
+  {
+   "id": "F2",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "code",
+   "where": "README, Commands: `deno task run --model ... # OpenRouter` (OCR services have their own commands)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/README.md",
+   "quote": "deno task run --model google/gemini-3.8-flash --runs 3                # OpenRouter",
+   "term": "openrouter"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "Each configuration has 5 runs",
+   "level": "written",
+   "form": "prose",
+   "where": "README, Method",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/README.md",
+   "quote": "Each configuration has 5 runs"
+  },
+  {
+   "id": "F4",
+   "says": "model-api-id",
+   "about": "google/gemini-3.8-flash",
+   "value": "google/gemini-3.8-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 2, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">google/gemini-3.8-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F5",
+   "says": "score",
+   "about": "google/gemini-3.8-flash",
+   "value": "84.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 2, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">84.9%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F6",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "anthropic/claude-opus-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 4, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">anthropic/claude-opus-5.5</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "anthropic/claude-opus-5.5",
+   "value": "80.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 4, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">80.2%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "says": "model-api-id",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "anthropic/claude-fable-5.1",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 5, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">anthropic/claude-fable-5.1</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "anthropic/claude-fable-5.1",
+   "value": "80.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 5, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">80.0%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-api-id",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "google/gemini-3.1-pro-preview",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 6, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">google/gemini-3.1-pro-preview</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "google/gemini-3.1-pro-preview",
+   "value": "78.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 6, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">78.4%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "model-api-id",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "anthropic/claude-sonnet-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 7, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">anthropic/claude-sonnet-5.5</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "anthropic/claude-sonnet-5.5",
+   "value": "76.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 7, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">76.8%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-api-id",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "google/gemini-3.5-flash-lite",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 10, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">google/gemini-3.5-flash-lite</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "google/gemini-3.5-flash-lite",
+   "value": "73.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 10, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">73.1%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-api-id",
+   "about": "meta/muse-spark-1.3-contributor",
+   "value": "meta/muse-spark-1.3-contributor",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 11, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">meta/muse-spark-1.3-contributor</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "meta/muse-spark-1.3-contributor",
+   "value": "70.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 11, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">70.9%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "model-api-id",
+   "about": "google/gemini-3.1-flash-lite",
+   "value": "google/gemini-3.1-flash-lite",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 12, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">google/gemini-3.1-flash-lite</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "google/gemini-3.1-flash-lite",
+   "value": "70.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 12, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">70.5%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-api-id",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "anthropic/claude-sonnet-5",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 14, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">anthropic/claude-sonnet-5</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "anthropic/claude-sonnet-5",
+   "value": "70.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 14, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median good\">70.1%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "model-api-id",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "anthropic/claude-haiku-5.5",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 15, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">anthropic/claude-haiku-5.5</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "anthropic/claude-haiku-5.5",
+   "value": "69.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 15, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">69.2%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-api-id",
+   "about": "meta/muse-spark-1.3",
+   "value": "meta/muse-spark-1.3",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 16, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">meta/muse-spark-1.3</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "meta/muse-spark-1.3",
+   "value": "69.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 16, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">69.0%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-astra",
+   "value": "openai/gpt-6-astra",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 17, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">openai/gpt-6-astra</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "openai/gpt-6-astra",
+   "value": "63.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 17, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">63.1%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-max-0902",
+   "value": "qwen/qwen3.8-max-0902",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 18, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">qwen/qwen3.8-max-0902</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "qwen/qwen3.8-max-0902",
+   "value": "62.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 18, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">62.7%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "model-api-id",
+   "about": "x-ai/grok-4.7",
+   "value": "x-ai/grok-4.7",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 19, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">x-ai/grok-4.7</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "x-ai/grok-4.7",
+   "value": "60.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 19, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">60.9%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-flash",
+   "value": "qwen/qwen3.8-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 20, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">qwen/qwen3.8-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "qwen/qwen3.8-flash",
+   "value": "55.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 20, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">55.8%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-api-id",
+   "about": "bytedance-seed/seed-2-1-turbo",
+   "value": "bytedance-seed/seed-2-1-turbo",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 22, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">bytedance-seed/seed-2-1-turbo</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "bytedance-seed/seed-2-1-turbo",
+   "value": "49.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 22, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">49.9%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-omni-flash",
+   "value": "qwen/qwen3.8-omni-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 23, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">qwen/qwen3.8-omni-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "qwen/qwen3.8-omni-flash",
+   "value": "46.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 23, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">46.2%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-api-id",
+   "about": "openai/gpt-6.1-sol",
+   "value": "openai/gpt-6.1-sol",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 26, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">openai/gpt-6.1-sol</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "openai/gpt-6.1-sol",
+   "value": "39.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 26, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median okay\">39.7%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-api-id",
+   "about": "qwen/qwen3.8-27b",
+   "value": "qwen/qwen3.8-27b",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 30, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">qwen/qwen3.8-27b</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "qwen/qwen3.8-27b",
+   "value": "33.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 30, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">33.0%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "model-api-id",
+   "about": "moonshotai/kimi-k3",
+   "value": "moonshotai/kimi-k3",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 32, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">moonshotai/kimi-k3</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "moonshotai/kimi-k3",
+   "value": "18.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 32, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">18.1%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-api-id",
+   "about": "minimax/minimax-m3",
+   "value": "minimax/minimax-m3",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 33, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">minimax/minimax-m3</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "minimax/minimax-m3",
+   "value": "16.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 33, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">16.7%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "model-api-id",
+   "about": "xiaomi/mimo-v2.6-pro",
+   "value": "xiaomi/mimo-v2.6-pro",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 34, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">xiaomi/mimo-v2.6-pro</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "xiaomi/mimo-v2.6-pro",
+   "value": "13.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 34, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">13.8%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "model-api-id",
+   "about": "xiaomi/mimo-v2.6-flash",
+   "value": "xiaomi/mimo-v2.6-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 35, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">xiaomi/mimo-v2.6-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "xiaomi/mimo-v2.6-flash",
+   "value": "10.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 35, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">10.8%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-sol",
+   "value": "openai/gpt-6-sol",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 36, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">openai/gpt-6-sol</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "openai/gpt-6-sol",
+   "value": "8.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 36, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">8.8%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "deepseek/deepseek-v4.1-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 37, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">deepseek/deepseek-v4.1-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "deepseek/deepseek-v4.1-flash",
+   "value": "7.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 37, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">7.7%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F54",
+   "says": "model-api-id",
+   "about": "thinkingmachines/inkling",
+   "value": "thinkingmachines/inkling",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 38, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">thinkingmachines/inkling</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "thinkingmachines/inkling",
+   "value": "7.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 38, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">7.5%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F56",
+   "says": "model-api-id",
+   "about": "cohere/command-a-plus",
+   "value": "cohere/command-a-plus",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 39, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">cohere/command-a-plus</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "cohere/command-a-plus",
+   "value": "4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 39, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">4.1%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F58",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-luna",
+   "value": "openai/gpt-6-luna",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 40, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">openai/gpt-6-luna</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "openai/gpt-6-luna",
+   "value": "0.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 40, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">0.2%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F60",
+   "says": "model-api-id",
+   "about": "mistralai/mistral-medium-3-5",
+   "value": "mistralai/mistral-medium-3-5",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 41, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">mistralai/mistral-medium-3-5</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "mistralai/mistral-medium-3-5",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 41, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">0.0%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F62",
+   "says": "model-api-id",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "z-ai/glm-5.3-flash",
+   "level": "written",
+   "form": "code",
+   "where": "results.svg table, row 42, column Model",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<div class=\"model\">z-ai/glm-5.3-flash</div>",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F63",
+   "says": "score",
+   "about": "z-ai/glm-5.3-flash",
+   "value": "0.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results.svg table, row 42, column Accuracy (median run)",
+   "file": "/work/.salvo14/mig/convert-dtinth-34bench/evidence/results.svg",
+   "quote": "<td class=\"num cer median poor\">0.0%</td>",
+   "term": "median-accuracy%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}

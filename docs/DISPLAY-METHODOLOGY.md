@@ -21,7 +21,8 @@ so that readers without JavaScript see the same conclusions.
 - **Monte Carlo stability.** Each value's Monte Carlo error is carried with it; the build reports any value whose
   error exceeds half of its last displayed digit (§ 3; the cheapest couple's error included in every cost multiple).
 - **Build refusals.** The page is not built from a fit that no longer matches its inputs (fingerprint) or that missed
-  the convergence criteria. Effort-ladder inversions (a higher rung costing or scoring less) are printed, not corrected.
+  the convergence criteria. Effort-ladder inversions (a higher rung costing or scoring less) are printed, not corrected; the rungs are *thinking off*,
+  then *minimal* … *max*, and *thinking on* is compared with *thinking off* only.
 
 ## 2. The expected panel score
 
@@ -46,18 +47,20 @@ slightly from the curve at its θ; the page uses the curve, so that a couple's l
 
 ## 4. Older models
 
-The page shows the latest model of each family and the one before it; older ones — Opus 4.8, Opus 4.7, Sonnet 4.6 —
-are hidden by default, and an *Older models* switch shows them (Opus 4.8 joined them on 1 Oct 2026, two generations
-behind Opus 5.5). Hidden models leave the charts, the matrices, the frontier, the tiers and the crown: every
+The page shows the latest model of each family and the one before it; older ones — Fable 5, Opus 4.8, Opus 4.7,
+Sonnet 4.6 — are hidden by default, and an *Older models* switch shows them (Opus 4.8 joined them on 1 Oct 2026, two
+generations behind Opus 5.5; Fable 5 on 12 Nov 2026, two generations behind Fable 5.2). Hidden models leave the charts, the matrices, the frontier, the tiers and the crown: every
 recommendation is computed over the models on screen, and the cheapest couple is the cheapest one on screen. The price
 trend never includes them (§ 8).
 
 ## 5. The matrix
 
-One row per model, one column per effort; each cell is the cost multiple with its interval, coloured on a heat scale
+One row per model, one column per configuration: *low* … *max* always, and *thinking off*, *minimal* (before *low*)
+and *thinking on* (after *max*) when a model shown has them; each cell is the cost multiple with its interval, coloured on a heat scale
 (log cost, from the cheapest to the dearest couple). Rows are ordered by the expected score of the model at its highest
-published effort. A model without effort levels (Haiku 4.5, *solo*) fills a single merged cell; an unpublished couple
-is shown as a dash.
+published effort. A model without a setting (*solo*) fills a single merged cell across all the columns; an unpublished couple
+is shown as a dash. A model the catalogue flags as size-sensitive (`flag_task_size` in `data/catalog/models.json`: a verbose model,
+whose cost swings widely between short and long agentic tasks) carries a *size-sensitive* tag.
 
 A second matrix gives every couple's **value index** (§ 9) with its 16–84 % range (r ± √(h_x² + λ²·h_θ²)), same rows.
 Its colours follow the data: green above 100, red below, each side scaled to the most extreme index shown (log scale).
@@ -68,7 +71,8 @@ Its colours follow the data: green above 100, red below, each side scaled to the
 - **Quality axis**: θ, linear above the weakest tier target θ*₁ (§ 10). Below it — couples short of today's level —
   θ is compressed three times: y = θ*₁ + (θ − θ*₁) ⁄ 3. Older and weaker models sit together at the bottom instead of
   stretching the axis; the top is not compressed. Gridlines at round expected scores (§ 3).
-- One line per model through its effort ladder. Optional **ovals** draw each couple's 16–84 % interval, with separate
+- One line per model through its effort ladder, in the order *thinking off*, *minimal*, *low* … *max*, *thinking on*
+  (a point is labelled *no think*, *minimal*, *low* …). Optional **ovals** draw each couple's 16–84 % interval, with separate
   radii on each side; the axes always span the ovals, so turning them on does not rescale the chart.
 - Optional **tier bands** shade the quality range each tier owns: from its target up to the next one; the outer bands
   extend half a gap beyond the first and last targets.
@@ -83,7 +87,7 @@ day, since it let a couple strictly beaten by another be picked.
 
 ## 8. Price trend
 
-What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.1, Opus 5.5,
+What a given quality costs today, fitted on every couple of the **latest model of each family** (Fable 5.2, Opus 5.5,
 Sonnet 5.5, Haiku 5.5), dominated ones included — the going rate of the models on sale, not their frontier:
 
     ln cost = a + λ·θ
@@ -183,7 +187,7 @@ moves only when its content (text, figures, data) changes.
 ## 15. The head-to-head page
 
 `claude-models-head-to-head.html`, written by `site/duels.py` from the same grids: every pair of the latest model of
-each family (Fable 5.1, Opus 5.5, Sonnet 5.5, Haiku 5.5), and each of them against its predecessor. Costs are
+each family (Fable 5.2, Opus 5.5, Sonnet 5.5, Haiku 5.5), and each of them against its predecessor. Costs are
 multiples of the cheapest couple shown on the main page (older models of § 4 left out), scores the expected panel
 score of § 2.
 

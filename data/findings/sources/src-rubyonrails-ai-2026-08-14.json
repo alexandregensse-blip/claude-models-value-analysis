@@ -1,0 +1,463 @@
+{
+ "id": "src-rubyonrails-ai-2026-08-14",
+ "publisher": "rubyonrails",
+ "urls": [
+  "https://rubyonrails.org/ai"
+ ],
+ "wayback": [
+  "https://web.archive.org/web/20260814014647/https://rubyonrails.org/ai"
+ ],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260814014647/https://rubyonrails.org/ai",
+   "captured": "2026-08-14T01:46:47Z",
+   "note": "page evidence/rails-ai-20260814.html (Wayback capture)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html": "bade02c85397a8f079459e21b0032bd38bd18ca16e37b3239eeba287989be698",
+  "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv": "1ef0747d62ddc24c27ece6d9780637c62491dbcf2df5d3e4bc960701ad78a64a"
+ },
+ "harvested_at": "2026-08-14T01:46:47Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-rubyonrails (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved /ai page capture",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "from": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "tool": "python re: the <tr data-model> rows of the benchmark tables of the page (benchmark = data-benchmark, model name and effort labels of the first cell, the data-sort-column cells accuracy / speed / tokens / cost / api-recall as printed), one CSV row per table row; the 14 Aug capture has the atomic-task table only"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page",
+   "format": "csv",
+   "row_key": "id",
+   "columns": {
+    "model": "model-name",
+    "effort": "effort-label",
+    "accuracy": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "percent"
+    },
+    "speed": "note",
+    "tokens": {
+     "says": "tokens-total",
+     "precision": {
+      "model": "printed",
+      "step": 1
+     }
+    },
+    "cost": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "api_recall": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost column, values printed with $",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "$1.9",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "about": null,
+   "value": "means per run",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"tokens and cost are means per run\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "tokens and cost are means per run",
+   "term": "per-run"
+  },
+  {
+   "id": "F3",
+   "says": "aggregation",
+   "about": null,
+   "value": "ran every evaluation three times",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph under the Stage 1 table (63 runs per model)",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "ran every evaluation three times"
+  },
+  {
+   "id": "F4",
+   "says": "run-date",
+   "about": null,
+   "value": "August 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "ran every evaluation three times in August 2026"
+  },
+  {
+   "id": "F5",
+   "says": "no-effort-sent",
+   "about": "atomic/kimi-k3",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F6",
+   "says": "no-effort-sent",
+   "about": "atomic/sol",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F7",
+   "says": "no-effort-sent",
+   "about": "atomic/luna",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F8",
+   "says": "no-effort-sent",
+   "about": "atomic/glm-5-2",
+   "value": "the provider's default settings",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology: \"using the provider's default settings\"",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814.html",
+   "quote": "using the provider's default settings"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "atomic/kimi-k3",
+   "value": "90.5%",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/kimi-k3 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/atomic/kimi-k3/accuracy",
+   "quote": "id: atomic/kimi-k3 | accuracy: 90.5%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "atomic/kimi-k3",
+   "value": "KIMI-K3",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/kimi-k3 / column model",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/atomic/kimi-k3/model",
+   "quote": "id: atomic/kimi-k3 | model: KIMI-K3",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F11",
+   "says": "tokens-total",
+   "about": "atomic/kimi-k3",
+   "value": "51000",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/kimi-k3 / column tokens",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "tokens",
+   "cell": "T1/atomic/kimi-k3/tokens",
+   "quote": "id: atomic/kimi-k3 | tokens: 51000",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "atomic/kimi-k3",
+   "value": "$1.09",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/kimi-k3 / column cost",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/atomic/kimi-k3/cost",
+   "quote": "id: atomic/kimi-k3 | cost: $1.09",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "atomic/sol",
+   "value": "84.1%",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/sol / column accuracy",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/atomic/sol/accuracy",
+   "quote": "id: atomic/sol | accuracy: 84.1%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "atomic/sol",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/sol / column model",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/atomic/sol/model",
+   "quote": "id: atomic/sol | model: GPT-5.6 Sol",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "tokens-total",
+   "about": "atomic/sol",
+   "value": "28000",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/sol / column tokens",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "tokens",
+   "cell": "T1/atomic/sol/tokens",
+   "quote": "id: atomic/sol | tokens: 28000",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "cost",
+   "about": "atomic/sol",
+   "value": "$0.52",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/sol / column cost",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/atomic/sol/cost",
+   "quote": "id: atomic/sol | cost: $0.52",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "atomic/luna",
+   "value": "73.0%",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/luna / column accuracy",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/atomic/luna/accuracy",
+   "quote": "id: atomic/luna | accuracy: 73.0%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "atomic/luna",
+   "value": "LUNA",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/luna / column model",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/atomic/luna/model",
+   "quote": "id: atomic/luna | model: LUNA",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "tokens-total",
+   "about": "atomic/luna",
+   "value": "21000",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/luna / column tokens",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "tokens",
+   "cell": "T1/atomic/luna/tokens",
+   "quote": "id: atomic/luna | tokens: 21000",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F20",
+   "says": "cost",
+   "about": "atomic/luna",
+   "value": "$0.014",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/luna / column cost",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/atomic/luna/cost",
+   "quote": "id: atomic/luna | cost: $0.014",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "atomic/glm-5-2",
+   "value": "66.7%",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/glm-5-2 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/atomic/glm-5-2/accuracy",
+   "quote": "id: atomic/glm-5-2 | accuracy: 66.7%",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "atomic/glm-5-2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/glm-5-2 / column model",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/atomic/glm-5-2/model",
+   "quote": "id: atomic/glm-5-2 | model: GLM-5.2",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "tokens-total",
+   "about": "atomic/glm-5-2",
+   "value": "33000",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/glm-5-2 / column tokens",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "tokens",
+   "cell": "T1/atomic/glm-5-2/tokens",
+   "quote": "id: atomic/glm-5-2 | tokens: 33000",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": "atomic/glm-5-2",
+   "value": "$0.239",
+   "level": "written",
+   "form": "data-file",
+   "where": "rails-ai-20260814-table.csv: one row per table row of the page / row atomic/glm-5-2 / column cost",
+   "file": "/work/.salvo14/mig/convert-rubyonrails/evidence/rails-ai-20260814-table.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/atomic/glm-5-2/cost",
+   "quote": "id: atomic/glm-5-2 | cost: $0.239",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ]
+}

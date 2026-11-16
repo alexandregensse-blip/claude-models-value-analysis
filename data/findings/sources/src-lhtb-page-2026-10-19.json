@@ -1,0 +1,1196 @@
+{
+ "id": "src-lhtb-page-2026-10-19",
+ "publisher": "lhtb",
+ "urls": [
+  "https://zli12321.github.io/LHTB/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zli12321.github.io/LHTB/",
+   "captured": "2026-10-19T15:46:47Z",
+   "note": "page (evidence/lhtb-page.html) and script saved by salvo gs/s8 (file mtimes 19 Oct 2026 15:46-15:47 UTC; lhtb.fetched: 2026-10-19)"
+  },
+  {
+   "id": "W1",
+   "kind": "wayback",
+   "url": "http://web.archive.org/web/20260812211039id_/https://zli12321.github.io/LHTB/script.js?v=52",
+   "captured": "2026-08-12T21:10:39Z",
+   "note": "dating step 2 (agents on the web, 3 Nov 2026), b10: Not a commit: the site source is not on the branches of zli12321/LHTB (API rate limited, scripts not found on any branch), so Wayback is the earliest proof. Upper bound; the page text of 2026-08-10 (wb-page-20260810.html) shows 0.505 for Grok 4.5, which could push the bound back to 08-10 for the headline value only. Saved copy of the capture: /work/.salvo14/mig/dates2/ev/src-lhtb-page-2026-10-19/wb-script-20260812.js (sha256 c4658aabe1b9ce8d5cbd61153d6eca37f2246768616b445dc37172804023cc46).",
+   "evidence": [
+    {
+     "url": "http://web.archive.org/web/20260812211039id_/https://zli12321.github.io/LHTB/script.js?v=52",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/dates2/ev/src-lhtb-page-2026-10-19/wb-script-20260812.js",
+     "sha256": "c4658aabe1b9ce8d5cbd61153d6eca37f2246768616b445dc37172804023cc46",
+     "where": "a value the capture shows (the agent: const LB = [...] of the Wayback copy of script.js?v=52 (gzip decoded; raw in wb-script-20260812.raw). The 21 entries (name, mean, solved, cost) are identical to the saved lhtb-LB.csv. Copy of 2026-09-14 (v=53) is byte-identical to the saved script (sha 8b9c2766...). Wayback copy of the page of 2026-)",
+     "quote": "{ name: \"Grok 4.5\",           vendor: \"xAI\",       logo: \"grok-color\",     mean: 0.505, solved: 13, cost: 11.19 }"
+    }
+   ]
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-script.js": "8b9c27664cc6298fa234c607ca27c953ec91b2eb9d116b8530cfaaa6722fa39e",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html": "897fdedd6dfcff911585ad4cbb5afa5bd1b4cf53f1ed86d246414317e6f4c3d1",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv": "2afcfec137f72adf0dce290bb9c9df2953188281848101732e966fb869633ab3",
+  "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt": "6e14286f569ce42b816584f64e3515458b123b82614e3036d94b9e20dd96723c"
+ },
+ "harvested_at": "2026-10-19T15:46:47Z",
+ "salvo": "salvo14/mig/convert-lhtb (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the page and script saved on 19 Oct by salvo gs/s8",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "from": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-script.js",
+   "tool": "python re: the entries of `const LB = [...]` of the page script (name, vendor, mean, solved, cost), one CSV row each, values copied as written"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "from": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "tool": "htmltxt.py (convert-arxiv-2610.13075): visible text of the page, one line per block"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model",
+   "format": "csv",
+   "row_key": "name",
+   "columns": {
+    "name": "model-name",
+    "mean": {
+     "says": "score",
+     "term": "mean-reward%",
+     "scale": "fraction"
+    },
+    "solved": "note",
+    "cost": "cost",
+    "vendor": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Terminus-2",
+   "level": "written",
+   "form": "prose",
+   "where": "Part 04 Evaluation Setup, spec \"Harness\": \"Terminus-2, identical for all\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "Terminus-2, identical for all",
+   "term": "terminus-2"
+  },
+  {
+   "id": "F2",
+   "says": "cost-method",
+   "about": null,
+   "value": "Costs are computed from per-token prices at each provider's list rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out <details> block of the page source): last sentence",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "Costs are computed from per-token prices at each provider's list rates",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F3",
+   "says": "cost-basis",
+   "about": null,
+   "value": "per-token prices at each provider's list rates",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block): same sentence",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "per-token prices at each provider's list rates",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "where": "In one minute: \"MiniMax M3 scores 0.39 at ~$6 per task\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "~$6 per task",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "per task",
+   "level": "written",
+   "form": "prose",
+   "where": "In one minute: \"~$6 per task\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F6",
+   "says": "aggregation",
+   "about": null,
+   "value": "One attempt",
+   "level": "written",
+   "form": "prose",
+   "where": "Part 04 Evaluation Setup, spec \"Budget\": \"90 min per task. One attempt.\"",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.txt",
+   "quote": "One attempt"
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "required reruns after an API-budget outage; all 46 tasks ultimately completed",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "Kimi K2.7 Code</b> required reruns after an API-budget outage; all 46 tasks ultimately completed"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "failed three tasks by exceeding its context window; these are genuine model limitations and score 0",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "failed three tasks by exceeding its context window; these are genuine model limitations and score 0"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "carries two infrastructure-failed tasks (Docker build errors, unrelated to the model) scored as 0",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology notes (commented-out block)",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-page.html",
+   "quote": "carries two infrastructure-failed tasks (Docker build errors, unrelated to the model) scored as 0"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Grok 4.5",
+   "value": "0.505",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.5 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Grok 4.5/mean",
+   "quote": "name: Grok 4.5 | mean: 0.505",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "Grok 4.5",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.5 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Grok 4.5/name",
+   "quote": "name: Grok 4.5 | name: Grok 4.5",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "Grok 4.5",
+   "value": "11.19",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.5 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Grok 4.5/cost",
+   "quote": "name: Grok 4.5 | cost: 11.19",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Claude Sonnet 5",
+   "value": "0.497",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 5 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Claude Sonnet 5/mean",
+   "quote": "name: Claude Sonnet 5 | mean: 0.497",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "Claude Sonnet 5",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 5 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Claude Sonnet 5/name",
+   "quote": "name: Claude Sonnet 5 | name: Claude Sonnet 5",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": "Claude Sonnet 5",
+   "value": "60.37",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 5 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Claude Sonnet 5/cost",
+   "quote": "name: Claude Sonnet 5 | cost: 60.37",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Claude Opus 4.8",
+   "value": "0.492",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Opus 4.8 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Claude Opus 4.8/mean",
+   "quote": "name: Claude Opus 4.8 | mean: 0.492",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "Claude Opus 4.8",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Opus 4.8 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Claude Opus 4.8/name",
+   "quote": "name: Claude Opus 4.8 | name: Claude Opus 4.8",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "Claude Opus 4.8",
+   "value": "39.11",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Opus 4.8 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Claude Opus 4.8/cost",
+   "quote": "name: Claude Opus 4.8 | cost: 39.11",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "Claude Fable 5",
+   "value": "0.487",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Fable 5 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Claude Fable 5/mean",
+   "quote": "name: Claude Fable 5 | mean: 0.487",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "Claude Fable 5",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Fable 5 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Claude Fable 5/name",
+   "quote": "name: Claude Fable 5 | name: Claude Fable 5",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F21",
+   "says": "cost",
+   "about": "Claude Fable 5",
+   "value": "73.11",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Fable 5 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Claude Fable 5/cost",
+   "quote": "name: Claude Fable 5 | cost: 73.11",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "GPT-5.6-sol",
+   "value": "0.451",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.6-sol / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GPT-5.6-sol/mean",
+   "quote": "name: GPT-5.6-sol | mean: 0.451",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "GPT-5.6-sol",
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.6-sol / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GPT-5.6-sol/name",
+   "quote": "name: GPT-5.6-sol | name: GPT-5.6-sol",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": "GPT-5.6-sol",
+   "value": "21.14",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.6-sol / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GPT-5.6-sol/cost",
+   "quote": "name: GPT-5.6-sol | cost: 21.14",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "0.445",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.5 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GPT-5.5/mean",
+   "quote": "name: GPT-5.5 | mean: 0.445",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.5 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GPT-5.5/name",
+   "quote": "name: GPT-5.5 | name: GPT-5.5",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F27",
+   "says": "cost",
+   "about": "GPT-5.5",
+   "value": "21.46",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.5 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GPT-5.5/cost",
+   "quote": "name: GPT-5.5 | cost: 21.46",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "Claude Sonnet 4.6",
+   "value": "0.373",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 4.6 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Claude Sonnet 4.6/mean",
+   "quote": "name: Claude Sonnet 4.6 | mean: 0.373",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "Claude Sonnet 4.6",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 4.6 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Claude Sonnet 4.6/name",
+   "quote": "name: Claude Sonnet 4.6 | name: Claude Sonnet 4.6",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": "Claude Sonnet 4.6",
+   "value": "38.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Claude Sonnet 4.6 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Claude Sonnet 4.6/cost",
+   "quote": "name: Claude Sonnet 4.6 | cost: 38.00",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "Kimi K2.7 Code",
+   "value": "0.367",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.7 Code / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Kimi K2.7 Code/mean",
+   "quote": "name: Kimi K2.7 Code | mean: 0.367",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "Kimi K2.7 Code",
+   "value": "Kimi K2.7 Code",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.7 Code / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Kimi K2.7 Code/name",
+   "quote": "name: Kimi K2.7 Code | name: Kimi K2.7 Code",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F33",
+   "says": "cost",
+   "about": "Kimi K2.7 Code",
+   "value": "8.31",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.7 Code / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Kimi K2.7 Code/cost",
+   "quote": "name: Kimi K2.7 Code | cost: 8.31",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "GLM 5.2",
+   "value": "0.316",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.2 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GLM 5.2/mean",
+   "quote": "name: GLM 5.2 | mean: 0.316",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "GLM 5.2",
+   "value": "GLM 5.2",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.2 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GLM 5.2/name",
+   "quote": "name: GLM 5.2 | name: GLM 5.2",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "GLM 5.2",
+   "value": "11.93",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.2 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GLM 5.2/cost",
+   "quote": "name: GLM 5.2 | cost: 11.93",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "Qwen3.6 Plus",
+   "value": "0.313",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.6 Plus / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Qwen3.6 Plus/mean",
+   "quote": "name: Qwen3.6 Plus | mean: 0.313",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "Qwen3.6 Plus",
+   "value": "Qwen3.6 Plus",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.6 Plus / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Qwen3.6 Plus/name",
+   "quote": "name: Qwen3.6 Plus | name: Qwen3.6 Plus",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": "Qwen3.6 Plus",
+   "value": "4.47",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.6 Plus / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Qwen3.6 Plus/cost",
+   "quote": "name: Qwen3.6 Plus | cost: 4.47",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "DeepSeek V4 Pro",
+   "value": "0.307",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row DeepSeek V4 Pro / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/DeepSeek V4 Pro/mean",
+   "quote": "name: DeepSeek V4 Pro | mean: 0.307",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "DeepSeek V4 Pro",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row DeepSeek V4 Pro / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/DeepSeek V4 Pro/name",
+   "quote": "name: DeepSeek V4 Pro | name: DeepSeek V4 Pro",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F42",
+   "says": "cost",
+   "about": "DeepSeek V4 Pro",
+   "value": "6.32",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row DeepSeek V4 Pro / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/DeepSeek V4 Pro/cost",
+   "quote": "name: DeepSeek V4 Pro | cost: 6.32",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "Qwen3.7 Max",
+   "value": "0.296",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.7 Max / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Qwen3.7 Max/mean",
+   "quote": "name: Qwen3.7 Max | mean: 0.296",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "Qwen3.7 Max",
+   "value": "Qwen3.7 Max",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.7 Max / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Qwen3.7 Max/name",
+   "quote": "name: Qwen3.7 Max | name: Qwen3.7 Max",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F45",
+   "says": "cost",
+   "about": "Qwen3.7 Max",
+   "value": "7.78",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Qwen3.7 Max / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Qwen3.7 Max/cost",
+   "quote": "name: Qwen3.7 Max | cost: 7.78",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Gemini 3.1 Pro",
+   "value": "0.279",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Gemini 3.1 Pro / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Gemini 3.1 Pro/mean",
+   "quote": "name: Gemini 3.1 Pro | mean: 0.279",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "Gemini 3.1 Pro",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Gemini 3.1 Pro / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Gemini 3.1 Pro/name",
+   "quote": "name: Gemini 3.1 Pro | name: Gemini 3.1 Pro",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F48",
+   "says": "cost",
+   "about": "Gemini 3.1 Pro",
+   "value": "7.61",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Gemini 3.1 Pro / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Gemini 3.1 Pro/cost",
+   "quote": "name: Gemini 3.1 Pro | cost: 7.61",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "0.272",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.4 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GPT-5.4/mean",
+   "quote": "name: GPT-5.4 | mean: 0.272",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "GPT-5.4",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.4 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GPT-5.4/name",
+   "quote": "name: GPT-5.4 | name: GPT-5.4",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": "GPT-5.4",
+   "value": "27.57",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.4 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GPT-5.4/cost",
+   "quote": "name: GPT-5.4 | cost: 27.57",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "GLM 5.1",
+   "value": "0.267",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.1 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GLM 5.1/mean",
+   "quote": "name: GLM 5.1 | mean: 0.267",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F53",
+   "says": "model-name",
+   "about": "GLM 5.1",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.1 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GLM 5.1/name",
+   "quote": "name: GLM 5.1 | name: GLM 5.1",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": "GLM 5.1",
+   "value": "5.13",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GLM 5.1 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GLM 5.1/cost",
+   "quote": "name: GLM 5.1 | cost: 5.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "0.255",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.6 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Kimi K2.6/mean",
+   "quote": "name: Kimi K2.6 | mean: 0.255",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "Kimi K2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.6 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Kimi K2.6/name",
+   "quote": "name: Kimi K2.6 | name: Kimi K2.6",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": "Kimi K2.6",
+   "value": "9.94",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Kimi K2.6 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Kimi K2.6/cost",
+   "quote": "name: Kimi K2.6 | cost: 9.94",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "GPT-5.3 Codex",
+   "value": "0.215",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.3 Codex / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/GPT-5.3 Codex/mean",
+   "quote": "name: GPT-5.3 Codex | mean: 0.215",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F59",
+   "says": "model-name",
+   "about": "GPT-5.3 Codex",
+   "value": "GPT-5.3 Codex",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.3 Codex / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/GPT-5.3 Codex/name",
+   "quote": "name: GPT-5.3 Codex | name: GPT-5.3 Codex",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F60",
+   "says": "cost",
+   "about": "GPT-5.3 Codex",
+   "value": "8.20",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row GPT-5.3 Codex / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/GPT-5.3 Codex/cost",
+   "quote": "name: GPT-5.3 Codex | cost: 8.20",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "Grok 4.20",
+   "value": "0.102",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.20 / column mean",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "mean",
+   "cell": "T1/Grok 4.20/mean",
+   "quote": "name: Grok 4.20 | mean: 0.102",
+   "term": "mean-reward%",
+   "scale": "fraction",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F62",
+   "says": "model-name",
+   "about": "Grok 4.20",
+   "value": "Grok 4.20",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.20 / column name",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "name",
+   "cell": "T1/Grok 4.20/name",
+   "quote": "name: Grok 4.20 | name: Grok 4.20",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F63",
+   "says": "cost",
+   "about": "Grok 4.20",
+   "value": "20.63",
+   "level": "written",
+   "form": "data-file",
+   "where": "const LB of lhtb-script.js (the leaderboard array of the page): one row per model / row Grok 4.20 / column cost",
+   "file": "/work/.salvo14/mig/convert-lhtb/evidence/lhtb-LB.csv",
+   "table": "T1",
+   "column": "cost",
+   "cell": "T1/Grok 4.20/cost",
+   "quote": "name: Grok 4.20 | cost: 20.63",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ]
+}

@@ -10,14 +10,14 @@ Open [`index.html`](index.html) in a browser — fully self-contained (no server
 
 **Publishing a fork:** in `site/config.py`, set `SITE_URL` to the fork's address (every absolute URL, the sitemap, `robots.txt`, `llms.txt` and the domain shown in the share image derive from it) and `REPO_URL` to its repository; set `BING_SITE_VERIFICATION` and `INDEXNOW_KEY` to `""` (they prove this site's ownership to Bing and IndexNow; an empty value leaves out the tag and the key file) or to your own values. Delete `b3573dbc1da690e66e9ef05b081b7abe.txt`, run `python3 site/build.py`, and redraw the share image with the new domain (`site/assets/og_image.py`, needs Pillow: `uv run --no-project --with pillow python site/assets/og_image.py`). The author credit and the GitHub links in `gen/body.html` point to this repository (attribution, CC BY 4.0). Then e.g. GitHub Pages: *Settings → Pages → Source: Deploy from a branch → `main` / root*.
 
-Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5.5, Sonnet 5, Sonnet 4.6, Haiku 5.5, Haiku 4.5**. No reference couple since 30 Sep 2026: cost is a multiple of the cheapest couple, quality the expected score on the benchmark panel (the page was relative to Opus 5 @high up to tag `v2026.09.29b`, to Opus 4.8 @medium up to `v2026.09.23`; the git tags reproduce each earlier scale). Opus 4.8, Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
+Models covered: **Fable 5.2, Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonnet 5.5, Sonnet 5, Sonnet 4.6, Haiku 5.5, Haiku 4.5**. No reference couple since 30 Sep 2026: cost is a multiple of the cheapest couple, quality the expected score on the benchmark panel (the page was relative to Opus 5 @high up to tag `v2026.09.29b`, to Opus 4.8 @medium up to `v2026.09.23`; the git tags reproduce each earlier scale). Fable 5, Opus 4.8, Opus 4.7 and Sonnet 4.6 stay in the data but are hidden on the page by default (an *Older models* switch brings them back).
 
 ---
 
 ## What the report shows
 
-1. **Consolidated landscape** — one curve per model, one point per effort, cost (a multiple of the cheapest couple) × quality (the latent scale, labelled in expected panel score). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price trend** over every couple (what a given quality typically costs), and says how many times cheaper or dearer than the trend each couple is. A **tier picker** (with live target/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick (the couple furthest below the trend).
-2. **Normalized matrix** — cost per model × effort as a multiple of the cheapest couple, sorted by expected score, each cell with its interval.
+1. **Consolidated landscape** — one curve per model, one point per configuration (an effort level from *minimal* to *max*, thinking off, thinking on), cost (a multiple of the cheapest couple) × quality (the latent scale, labelled in expected panel score). Optional *tier bands* shade the four usage tiers on this chart and on the Pareto view. Optional ovals draw each couple's 16–84 % interval. A Pareto view isolates the non-dominated couples, fits a **price trend** over every couple (what a given quality typically costs), and says how many times cheaper or dearer than the trend each couple is. A **tier picker** (with live target/σ sliders) turns the frontier into a decision: the best-value (model, effort) for four task-complexity levels, plus a crowned overall pick (the couple furthest below the trend).
+2. **Normalized matrix** — cost per model × configuration (effort level, thinking off) as a multiple of the cheapest couple, sorted by expected score, each cell with its interval.
 3. **Sources** — every source that measured ≥2 couples on the same task, with its verified configuration and the couples it links (names are clickable).
 4. **Method** — how the numbers and their intervals are built; the full methodology is in [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md).
 
@@ -26,23 +26,33 @@ Models covered: **Fable 5.1, Fable 5, Opus 5.5, Opus 5, Opus 4.8, Opus 4.7, Sonn
 Scores from different benchmarks do not share a scale, and raw dollars from different tasks are not comparable, so
 the report fuses the measurements with a **latent-quality model** (`model/lqm.py`). In short:
 
-1. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
-   one scale; a group that mixes them is split. An index is left out for a couple whose index components are in the data.
-2. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
-   or an unknown composite — read from the metric's label, never from the benchmark's identity. Every value carries
+1. **Every number traced to its source.** Each source is a set of facts — the value, the exact quote or table cell,
+   the URL and capture date — read by agents line by line; registries of models, routes, benchmarks, publishers and
+   dated prices let one build (`data/build.py`, a fixed decision tree) decide each measurement's model, configuration
+   and price. Every run is dated; a route the source does not name is never presumed to be the maker's API; every cost
+   is put on the current price, or left out; at the least doubt a measurement stays out of the fit.
+2. **Same task, same configuration.** Couples are compared only within a group: one source, one task, one harness,
+   one scale, one version of a board; a group that mixes them is split. An index keeps, for a couple whose index
+   components are in the data, only what its missing components add, or is left out.
+3. **Each metric on its natural scale.** Logit for a bounded score, log for money, points and cost, as is for an Elo
+   or an unknown composite — read from the metric's label, never from the benchmark's identity; a score where lower
+   is better (the benchmark's registry says so) is turned in its unit first. Every value carries
    its reading precision: the rounding of a printed number, the resolution and own error of a digitised chart.
-3. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
-   matter); every `(model, effort)` couple has one latent quality and one latent cost, atomic — no model × effort
-   separability is assumed. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
-   or one kind of task from tilting the result, with sizes estimated per model maker; a maker's own charts about its
-   own models carry an estimated home effect, left out of every read-out. Student-t noise with estimated tails;
+4. **One model for all groups.** Every group has its own offset, gain and noise (so a metric's unit and zero never
+   matter); every `(model, effort)` couple (the effort is the configuration: a level, `nothink` for thinking off, `think` for the on position of an on/off model, `solo` for a model without a setting) has one latent quality and one latent cost, atomic — no model × effort
+   separability is assumed and no order between a model's configurations. Publisher × couple, publisher × model and couple × task-type effects keep one publisher
+   or one kind of task from tilting the result, with sizes estimated for each model maker on its own (not tied across
+   makers, `model/lqm_ext4.stan`); a maker's own charts about its own models carry an estimated home effect, left out
+   of every read-out. Student-t noise with estimated tails;
    early-access runs down-weighted by an estimated factor. No couple is a reference inside the fit. The fit takes every
    maker's couples measured in the data (OpenAI, Google, xAI, DeepSeek, Qwen, GLM, Kimi beside Claude): they link more
-   groups; the page shows the Claude couples. Fitted in Stan.
-4. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
-   publisher's weight saturates at its own systematic effect. One execution counts once: a run reprinted, drawn on
-   two charts or scored with two metrics is recognised by its values (score and cost agreeing within their precisions).
-5. **Output**: quality = the latent quality θ, shown as the expected score averaged over the benchmark panel; cost =
+   groups; the page shows the Claude couples. Fitted in Stan, sampled by nutpie on both axes.
+5. **Weights follow from the data**: a group's information grows with its discrimination² × (couples − 2), and a
+   publisher's weight saturates at its own systematic effect; one source's k quality measurements of one run weigh
+   1/k each. One execution counts once: a run reprinted, drawn on two charts or scored with two metrics is recognised
+   by its values (score and cost agreeing within their precisions); versions of one board that re-grade the same runs
+   count them once, and two cost groups still sharing identical costs stop the fit.
+6. **Output**: quality = the latent quality θ, shown as the expected score averaged over the benchmark panel; cost =
    cost on a task of typical size, shown as a multiple of the cheapest couple. No couple is a reference; each couple
    carries its own 16–84 % interval. A couple measured by a single publisher is not shown.
 
@@ -55,13 +65,14 @@ Four parts, each with its own scope; they talk only through the files named in t
 
 | Part | Scope | Contents | Hands over |
 |---|---|---|---|
-| **data** — collection | what was measured and how to read it | `raw-data.csv` (at the root, because it is served), `data/catalog/` (models, benchmark families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it) — see [`data/README.md`](data/README.md) | the data file and the catalogue |
-| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext2.stan` (the model; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
+| **data** — collection | what was measured and how to read it | `data/findings/` (sources and measures), `data/registry/` (models, routes, benchmarks, publishers, prices, rules), `data/build.py` (the decision tree; its products in `data/build/`: one fit table per axis, the group map, the public data file `data.csv`), `data/catalog/` (model order, families, publishers, composite indices, unit aliases, sources-table labels), `data/catalog.py` (reads it); `raw-data.csv` at the root is the frozen legacy input of 21 Oct (data/legacy.py, the acceptance test) — see [`data/README.md`](data/README.md), [`data/BUILD.md`](data/BUILD.md) | `data/build/` and the catalogue |
+| **model** — estimation | from the measurements to one quality and one cost per couple | `model/lqm.py` (data preparation), `model/lqm_ext4.stan` (the model since 2 Nov 2026, each maker's biases its own; `lqm_ext2.stan`/`lqm_ext3.stan` with the makers' terms tied, until then; `lqm.stan` without the makers' terms, until v2026.10.20), `model/fit.py` (runs it), `model/validation/` (checks), `model/requirements-fit.txt` — see [`model/README.md`](model/README.md) | `model/fit-cache.json`, its only product |
 | **site** — presentation | from the fit's results to the page | `site/build.py` and its modules (`config`, `grids`, `sources`, `seo`, `render`), `site/{app.js, body.html, style.css, prerender.js}`, `site/assets/` (favicon, share image) — see [`site/README.md`](site/README.md) | the served files at the root |
 | **docs** | the method and the research log | [`docs/METHODOLOGY.md`](docs/METHODOLOGY.md), [`docs/DISPLAY-METHODOLOGY.md`](docs/DISPLAY-METHODOLOGY.md), [`docs/PASSES.md`](docs/PASSES.md) | — |
 
 Served files, generated at the root by the site: `index.html`, `claude-models-head-to-head.html` (every pair of models compared, effort by effort), `robots.txt`, `sitemap.xml`, `llms.txt`,
-`favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file, and the data file `raw-data.csv`. Licences:
+`favicon.svg`, `favicon.png`, `og-image.png`, the IndexNow key file; `raw-data.csv` is still served (the legacy file of 21 Oct), the
+page links the build's `data/build/data.csv` on GitHub. Licences:
 `LICENSE` (MIT, code), `LICENSE-DATA` (CC BY 4.0, data and report text).
 
 ## Versions
@@ -92,6 +103,7 @@ Each snapshot is tagged by its design date, so a past state of the analysis can 
 | `v2026.10.15` | 15 Oct 2026 | twenty-third source pass (six agents, two rounds each), on sources published since 8 Oct: Surge AI's boards, the Conceptual Reasoning Index, Design Arena, Vending-Bench 2, LiveBench 2, seven new Artificial Analysis evaluations, Vals AI's Vibe Code Bench, ARC-AGI-3, 35 arXiv papers and some fifty posts, repositories and videos; 25 board snapshots replaced. Haiku 5.5 now rests on 100 sources: its effort ladder comes out flatter than Anthropic's launch charts drew it (low ⁄ medium cost 0.50 → 0.74), so high becomes the crown, 3.5× below the trend. **Fit**: a group of equal values is detected on their spread (one group had been scaled by 1e-16 and stalled the sampler; the published data are unaffected). Picks: grunt work Haiku 5.5 low, everyday tasks Haiku 5.5 high, advanced reasoning Opus 5.5 xHigh, cutting-edge thinking Opus 5.5 max — 6512 measurements, 370 sources, 1063 benchmarks |
 | `v2026.10.18` | 18 Oct 2026 | twenty-fourth source pass (four agents, two rounds each), on sources published since 15 Oct: AI Coding Daily's leaderboard, SlopCodeBench's October campaign, the official tau2-bench board, seven arXiv papers, the Conceptual Reasoning Index's full effort ladders of the three 5.5 models, retort's Haiku 5.5 runs in thirteen languages, GM-Bench 2.1, IdentityBench v3, six YouTube effort ladders and some twenty repositories and posts; 11 board snapshots replaced. Crown Haiku 5.5 high, 3.3× below the trend; grunt work goes to Haiku 5.5 medium, a tie with low that tips by 0.006; the frontier loses Opus 5.5 medium. Picks: grunt work Haiku 5.5 medium, everyday tasks Haiku 5.5 high, advanced reasoning Opus 5.5 xHigh, cutting-edge thinking Opus 5.5 max — 6762 measurements, 396 sources, 1136 benchmarks |
 | `v2026.10.21` | 21 Oct 2026 | **Method**: the fit becomes global — every couple of eight model makers measured in the data (18,253 rows of other makers' couples checked, a salvo of 1,390 rows on the least-sourced models, model keys audited, builds dated against the makers' redirects, rows whose model, build or effort is in doubt kept out of the computation); the model estimates the effects' sizes per maker and a home effect per maker (`lqm_ext2.stan`; same prediction of held-out rows as before, PSIS-LOO); nutpie samples both axes and continues its chains in one process until the criteria are met. The page shows the Claude couples, from 574 sources · 1,927 benchmarks · 8,509 measurements. Crown Haiku 5.5 high, 2.8× below the price trend (3.4× before); grunt work Haiku 5.5 low (medium before), cutting-edge thinking Opus 5.5 xHigh (max before); everyday and advanced reasoning unchanged. Details in `PASSES.md`. |
+| `v2026.11.12` | 12 Nov 2026 | **Data**: the findings chain — every source a set of self-contained measures (value, exact quote, URL), read by agents line by line, with registries of models, routes, benchmarks, publishers and prices; the build's decision tree writes the fit tables (a route never presumed to be the maker's API, every run dated, costs at the current price; doubt keeps a row out). One run's k quality measurements weigh 1/k; one board's versions count once; identical costs in two groups are checked before the fit. **Model**: `lqm_ext4.stan` (nutpie, both axes converged: cost R̂ 1.0083, quality R̂ 1.0066, no divergence). The page shows the Claude couples, from 332 sources · 1,545 benchmarks · 7,100 measurements (sources now counted by publisher; rows whose effort is not established out). Crown Haiku 5.5 high, 2.7× below the price trend (2.8× before); everyday tasks Haiku 5.5 medium (high before), cutting-edge thinking Opus 5.5 max (xHigh before); grunt work and advanced reasoning unchanged. |
 
 The notes behind each version — every source pass, what it admitted, rejected or corrected, and each method
 change — are in [`docs/PASSES.md`](docs/PASSES.md).
@@ -106,18 +118,32 @@ No dependencies beyond the Python 3 standard library and Node.js (any recent ver
 
 ### Refit
 
-Needed only when the data, `model/lqm.py`, `model/lqm_ext2.stan` or `data/catalog/` change (the build says so). It needs a
-C++17 compiler and `make`, then:
+Needed only when the fit's inputs change: the build's tables (`data/build/`), `model/lqm.py`, `model/lqm_ext4.stan`,
+`data/build_lqm.py` or `data/catalog/` (the site build says so). The data first: the build turns the findings and the
+registry into one table per axis (Python standard library, about 11 minutes and 4 GB; it reads only the repository's
+files, never a saved copy: the findings write every value, 4 Nov 2026):
+
+```bash
+python3 data/build.py --fit-models catalog   # → data/build/: fit-quality.csv, fit-cost.csv, group-map.json,
+                                             #   group-setups.json, data.csv (committed); status-report.json (not)
+```
+
+The fit reads `data/build/fit-quality.csv` for quality and `fit-cost.csv` for cost, the catalogue's group-keyed maps
+(composites, families) resolved through `group-map.json` and `group-setups.json` (`data/build_lqm.py`, `fit_maps`).
+It needs a C++17 compiler and `make`, then:
 
 ```bash
 uv venv .stan/venv && uv pip install --python .stan/venv/bin/python -r model/requirements-fit.txt
 .stan/venv/bin/python -c "import cmdstanpy; cmdstanpy.install_cmdstan(dir='.stan', version='2.40.0')"
 .stan/venv/bin/python -c "import bridgestan.download as d; d.get_bridgestan_src()" && mv ~/.bridgestan/bridgestan-2.9.0 .stan/
+.stan/venv/bin/python model/fit.py --dry          # the inputs: fingerprint, groups and rows per axis; no sampling
+.stan/venv/bin/python model/precheck.py           # the data checks and the memory estimate (--smoke: a short fit of each axis, 2 chains × (50 + 150))
 .stan/venv/bin/python model/fit.py      # → model/fit-cache.json, then python3 site/build.py
 ```
 
-The quality axis is sampled with nutpie, the cost axis with CmdStan started from the previous fit's last draws
-(`.stan/inits-cost.json`, written by each fit); about a quarter of an hour per axis on four cores.
+Both axes are sampled with nutpie (6 chains × (500 + 1,800)), each fit with a seed of its own; a chain left in a far
+region — looked at every 250 iterations, warm-up included — restarts alone on CmdStan from a good chain's last draw
+(30 Oct 2026; `model/README.md`).
 
 ## Limitations
 
@@ -127,7 +153,7 @@ The quality axis is sampled with nutpie, the cost axis with CmdStan started from
 - **Which couples a source measures is not random.** The fusion absorbs the level and the type of the tasks each source chose, not a selection on another axis.
 - **Public-data ceiling.** Independent measurements of cost *and* quality on the same task are scarce; an internal run on a representative workload remains the intended final validation.
 
-Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Prices reflect published rates at time of writing.
+Data are public third-party benchmarks; this repo is an independent analysis, not affiliated with or endorsed by Anthropic. Costs are put on each model's current published price (`data/registry/prices.json`).
 
 ## Licence and citation
 

@@ -1,0 +1,812 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "source.schema.json",
+ "title": "Source snapshot",
+ "description": "One source snapshot (data/findings/sources/<id>.json): its words, as facts with proofs (DATA-PIPELINE §2). Written by salvo agents; facts only, no key, effort, campaign or status.",
+ "type": "object",
+ "properties": {
+  "id": {
+   "$ref": "common.schema.json#/$defs/source_id"
+  },
+  "publisher": {
+   "$ref": "common.schema.json#/$defs/publisher_id",
+   "description": "publishers.json id."
+  },
+  "urls": {
+   "type": "array",
+   "description": "Live URLs of the source.",
+   "items": {
+    "type": "string",
+    "description": "URL."
+   },
+   "minItems": 1
+  },
+  "wayback": {
+   "type": "array",
+   "description": "Wayback captures (their timestamps date the captures).",
+   "items": {
+    "type": "string",
+    "description": "Wayback capture URL."
+   }
+  },
+  "commit": {
+   "description": "Repository commit of the snapshot, or null.",
+   "anyOf": [
+    {
+     "type": "string",
+     "description": "Hex commit id.",
+     "pattern": "^[0-9a-f]{7,40}$"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "sha256": {
+   "type": "object",
+   "description": "Saved file → its SHA-256 (the saved copies stay outside git).",
+   "additionalProperties": {
+    "$ref": "common.schema.json#/$defs/sha256"
+   }
+  },
+  "harvested_at": {
+   "$ref": "common.schema.json#/$defs/datetime",
+   "description": "When the agent harvested it (UTC)."
+  },
+  "published": {
+   "description": "Publication date of the source, or null if not stated.",
+   "anyOf": [
+    {
+     "type": "object",
+     "description": "The source's publication date (default run upper bound, DATA-PIPELINE §5.1).",
+     "properties": {
+      "value": {
+       "description": "The date: a date, a datetime with its offset, or a time written without its time zone ('2026-08-03T23:01:31': local time, zone unknown; the build reads it as lying between the start of the day before and the end of the day after, the maintainer, 3 Nov 2026).",
+       "anyOf": [
+        {
+         "$ref": "common.schema.json#/$defs/date_or_datetime"
+        },
+        {
+         "type": "string",
+         "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]+)?)?$",
+         "format": "date-or-date-time"
+        }
+       ]
+      },
+      "where": {
+       "type": "string",
+       "description": "Locator of the date.",
+       "minLength": 1
+      },
+      "quote": {
+       "type": "string",
+       "description": "Exact text of the date."
+      },
+      "file": {
+       "type": "string",
+       "description": "Saved copy."
+      },
+      "evidence": {
+       "description": "The proof of the date in the evidence format (url, captured, file, sha256, where, quote), for dates written from dating step 2 (3 Nov 2026): the agent writing the date checks it (validate.py --check-files: each file's sha256 and quote); the build never re-reads it and keeps the date (the maintainer, 4 Nov 2026).",
+       "$ref": "common.schema.json#/$defs/evidence_list"
+      }
+     },
+     "required": [
+      "value",
+      "where"
+     ],
+     "unevaluatedProperties": false
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "salvo": {
+   "type": "string",
+   "description": "Salvo name.",
+   "minLength": 1
+  },
+  "agent": {
+   "type": "string",
+   "description": "Agent (or person) who wrote the file.",
+   "minLength": 1
+  },
+  "snapshot_of": {
+   "description": "Earlier source id of the same board, or null.",
+   "anyOf": [
+    {
+     "$ref": "common.schema.json#/$defs/source_id"
+    },
+    {
+     "type": "null"
+    }
+   ]
+  },
+  "captures": {
+   "type": "array",
+   "description": "Captures of the source (Wayback, commits, our fetches): measures name those carrying their value (value_seen_in); the earliest gives the run's default upper bound.",
+   "items": {
+    "type": "object",
+    "description": "One capture of the source.",
+    "properties": {
+     "id": {
+      "$ref": "common.schema.json#/$defs/capture_id"
+     },
+     "kind": {
+      "$ref": "vocab.json#/$defs/capture_kind"
+     },
+     "url": {
+      "type": "string",
+      "description": "Capture URL (Wayback URL with its timestamp, commit URL)."
+     },
+     "commit": {
+      "type": "string",
+      "description": "Commit id (kind commit).",
+      "pattern": "^[0-9a-f]{7,40}$"
+     },
+     "captured": {
+      "$ref": "common.schema.json#/$defs/date_or_datetime",
+      "description": "When the capture was made (Wayback timestamp, commit date, our fetch time)."
+     },
+     "file": {
+      "type": "string",
+      "description": "Saved copy of this capture (a key of the sha256 map)."
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     },
+     "evidence": {
+      "description": "The proof of the capture's date when the capture's own file does not carry it (a commit's date in the saved commit list; a Wayback capture: a value its page shows), in the evidence format (url, captured, file, sha256, where, quote). The agent writing it checks it (validate.py --check-files: each file's sha256 and quote; dating step 2, 3 Nov 2026); the build never re-reads it and keeps the capture's date (the maintainer, 4 Nov 2026).",
+      "$ref": "common.schema.json#/$defs/evidence_list"
+     }
+    },
+    "required": [
+     "id",
+     "kind",
+     "captured"
+    ],
+    "unevaluatedProperties": false,
+    "anyOf": [
+     {
+      "required": [
+       "url"
+      ]
+     },
+     {
+      "required": [
+       "commit"
+      ]
+     },
+     {
+      "required": [
+       "file"
+      ]
+     }
+    ]
+   }
+  },
+  "extractions": {
+   "type": "array",
+   "description": "Text extractions of binary saved copies (PDF): quotes of facts in a PDF point at the extraction, where the validator finds them (NFKC-normalised).",
+   "items": {
+    "type": "object",
+    "description": "A text extraction.",
+    "properties": {
+     "file": {
+      "type": "string",
+      "description": "The text extraction (a key of the sha256 map)."
+     },
+     "from": {
+      "type": "string",
+      "description": "The saved binary it was extracted from (a key of the sha256 map), e.g. a PDF."
+     },
+     "tool": {
+      "type": "string",
+      "description": "Tool and version (pypdf 5.x...)."
+     }
+    },
+    "required": [
+     "file",
+     "from",
+     "tool"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "facts": {
+   "type": "array",
+   "description": "The facts.",
+   "items": {
+    "type": "object",
+    "description": "One fact: what the source says, with its proof.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Fact id, unique in the source (F1, F2...).",
+      "pattern": "^F[0-9]+$"
+     },
+     "says": {
+      "description": "Fact type (vocab fact_type); for a table cell whose column states several types (an Inspect model string is both a route and an API id), the list of them.",
+      "anyOf": [
+       {
+        "$ref": "vocab.json#/$defs/fact_type"
+       },
+       {
+        "type": "array",
+        "description": "Fact types.",
+        "items": {
+         "$ref": "vocab.json#/$defs/fact_type"
+        },
+        "minItems": 2
+       }
+      ]
+     },
+     "about": {
+      "description": "The source's entry name, verbatim (row label, model string as printed; for a chart point, the series' legend label, the marker going in `where`); null for a source-wide fact. Within a measure, the value and the per-entry facts (spend, usage, judge, anomalies) are about an entry a model fact names.",
+      "type": [
+       "string",
+       "null"
+      ]
+     },
+     "value": {
+      "type": "string",
+      "description": "The value, verbatim as the source writes it (numbers as printed, with their % or $).",
+      "minLength": 1
+     },
+     "term": {
+      "type": "string",
+      "description": "For fact types with a closed vocabulary (vocab closed_term_fact_types: score → metric, unit, currency, cost-basis, cost-method): the vocabulary term this verbatim value stands for; for a thinking-budget: its token count (digits); for a route: the routes.json id when registered. Re-derived by the verifier."
+     },
+     "level": {
+      "$ref": "vocab.json#/$defs/level",
+      "description": "Certainty of the fact as written by the agent (DATA-PIPELINE §1)."
+     },
+     "form": {
+      "$ref": "vocab.json#/$defs/fact_form",
+      "description": "Where the fact sits; prose, table-cell, label, code and image-text need a quote."
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved copy holding it: a key of the source's sha256 map (required when the source has several saved files)."
+     },
+     "where": {
+      "type": "string",
+      "description": "Locator in that file: page, line, JSON path, CSV row/column, chart marker px.",
+      "minLength": 1
+     },
+     "table": {
+      "type": "string",
+      "description": "For a data-file fact standing for a table cell: the table id.",
+      "pattern": "^T[0-9]+$"
+     },
+     "column": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a table cell written as a fact: its column, as the table's `columns` names it."
+     },
+     "cell": {
+      "type": "string",
+      "pattern": "^T[0-9]+/.+/[^/]+$",
+      "description": "For a table cell written as a fact (data/convert/cells.py, 4 Nov 2026): the cell reference T<n>/<row key>/<column> it stands for. Its value is the cell as the saved file writes it, its quote the cell and what identifies its row and column, copied from the file; the build reads the value written here and never the file (the maintainer, 4 Nov 2026). A run's id is its row key, as for a cell."
+     },
+     "capture": {
+      "$ref": "common.schema.json#/$defs/capture_id",
+      "description": "For a platform-price fact (required): the capture (captures[].id) whose page shows the price; its `captured` dates the price (the maintainer, 4 Nov 2026, rule cost-total-tokens-split). For a same-runs-as fact with `held`: the capture of an older snapshot of the original board that shows the copied value (the maintainer, 9 Nov 2026: a copy of an older snapshot, out:copy-older-snapshot)."
+     },
+     "held": {
+      "type": "string",
+      "pattern": "^src-[^#]+(#M[0-9]+)?$",
+      "description": "For a same-runs-as fact on a measure that also cites a restated-from fact (a copy): the measure we hold with the same runs (<source id>#<measure id>), or the source when the copy is of an older snapshot of a board we hold newer (with `capture`). Read by the agent row by row (same model, effort, metric and value), never matched by a script (the maintainer, 9 Nov 2026). The build sets the copy out:copy (out:copy-older-snapshot with capture) when the held source is in the build."
+     },
+     "chart": {
+      "type": "string",
+      "description": "For a chart fact: the chart id.",
+      "pattern": "^C[0-9]+$"
+     },
+     "quote": {
+      "type": "string",
+      "description": "Exact text; required for prose, table cells, labels, code and image text, and it must contain the value (or, when the fact has `written`, that text).",
+      "minLength": 1
+     },
+     "written": {
+      "type": "string",
+      "minLength": 1,
+      "description": "The value exactly as the source writes it ('12,5 %', '51¢', '最大值', 'Reasoning:disabled'), when `value` is the agent's normalized reading (12.5, 0.51, max, nothink): the quote must contain it; a number's digits must agree with it (29 Oct, the maintainer: the agents read the values, the code does not learn each notation)."
+     },
+     "translation": {
+      "type": "string",
+      "description": "English translation of the quote, if needed."
+     },
+     "precision": {
+      "type": "object",
+      "description": "Precision model of the value (an attribute, never a level).",
+      "properties": {
+       "model": {
+        "$ref": "vocab.json#/$defs/precision_model"
+       },
+       "step": {
+        "type": "number",
+        "description": "Printed: one unit of the last digit, in the value's unit.",
+        "minimum": 0
+       },
+       "sd": {
+        "type": "number",
+        "description": "Chart-pixel: reading sd in the value's unit (or computed from reading_px and the chart calibration).",
+        "minimum": 0
+       },
+       "reading_px": {
+        "type": "number",
+        "description": "Chart-pixel: reading error in pixels.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "model"
+      ],
+      "unevaluatedProperties": false
+     },
+     "scale": {
+      "$ref": "vocab.json#/$defs/score_scale",
+      "description": "For score facts (required): how the value is written (fraction, percent, raw). Never inferred from the value."
+     },
+     "namespace": {
+      "description": "For model-api-id facts (required): whose naming the id is written in — a routes.json id (maker-api: the maker's own ids; openrouter: OpenRouter slugs), or `prefix` when the value's head up to the first '/' names the route (Inspect / LiteLLM provider prefixes). Not the route the call took. See models.schema.json for the resolution rule.",
+      "anyOf": [
+       {
+        "$ref": "common.schema.json#/$defs/route_id"
+       },
+       {
+        "const": "prefix"
+       }
+      ]
+     },
+     "run": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a run-score fact (required) and a failure / partial fact about one run: the run's id within the measure (a failure naming no run leaves the mean not recomputable)."
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note for the verifier; never read by the tree."
+     },
+     "rule": {
+      "type": "string",
+      "description": "For a computed fact: the rule deriving it (cell-difference: inputs[0] − inputs[1] − …; cell-sum: their sum; metric-mean: their mean (an entry's same-scale metrics, no headline designated); chart-effort-order: an effort-order fact 'k/n', inputs[0] the fact stating the chart's points are effort levels; complement-of-percent: 100 − inputs[0], a printed rate whose complement the setup holds).",
+      "enum": [
+       "cell-difference",
+       "cell-sum",
+       "metric-mean",
+       "chart-effort-order",
+       "complement-of-percent"
+      ]
+     },
+     "inputs": {
+      "type": "array",
+      "description": "For a computed fact: the facts or cells it is derived from, in the rule's order.",
+      "items": {
+       "$ref": "common.schema.json#/$defs/fact_ref"
+      },
+      "minItems": 1
+     },
+     "pattern": {
+      "type": "string",
+      "minLength": 1,
+      "description": "For a run-date-convention fact: a regex with a named group `date` (YYYYMMDD) matched against the measure's row key or run-id."
+     }
+    },
+    "required": [
+     "id",
+     "says",
+     "about",
+     "value",
+     "level",
+     "form",
+     "where"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "tables": {
+   "type": "array",
+   "description": "Data-file tables standing for their cells.",
+   "items": {
+    "type": "object",
+    "description": "A data-file table standing for its cells (DATA-PIPELINE §2): proven by the file's sha256 and this locator.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Table id (T1...). Its cells are cited as T<n>/<row key>/<column>.",
+      "pattern": "^T[0-9]+$"
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved data file (a key of the sha256 map)."
+     },
+     "where": {
+      "type": "string",
+      "description": "Where the table is in the file. format json: a JSON path ($, .key, ['key'], [n], [*]) to the list of row objects (or to an object of row objects, row_key '$key' = their keys); a column is a key of the row object or a dotted path in it. csv: free text.",
+      "minLength": 1
+     },
+     "format": {
+      "type": "string",
+      "description": "csv | json | yaml | html | other.",
+      "enum": [
+       "csv",
+       "json",
+       "yaml",
+       "html",
+       "other"
+      ]
+     },
+     "row_key": {
+      "type": "string",
+      "description": "The column whose value names a row (the `about` of its cells).",
+      "minLength": 1
+     },
+     "columns": {
+      "type": "object",
+      "description": "Column name → the fact type of its cells (only the columns used need be listed).",
+      "additionalProperties": {
+       "description": "A table column: the fact type its cells state (string), or an object with the type(s) and, for closed-vocabulary types, the term all its cells stand for. A score column needs term (metric) and scale; a model-api-id column needs namespace.",
+       "anyOf": [
+        {
+         "$ref": "vocab.json#/$defs/fact_type"
+        },
+        {
+         "type": "object",
+         "description": "A typed column.",
+         "properties": {
+          "says": {
+           "description": "The fact type of its cells, or several when one cell states several facts (an Inspect model string 'openrouter/qwen/qwen3.6-27b' is both a route and an API id).",
+           "anyOf": [
+            {
+             "$ref": "vocab.json#/$defs/fact_type"
+            },
+            {
+             "type": "array",
+             "description": "Fact types.",
+             "items": {
+              "$ref": "vocab.json#/$defs/fact_type"
+             },
+             "minItems": 2
+            }
+           ]
+          },
+          "term": {
+           "type": "string",
+           "description": "Vocabulary term of the column's cells."
+          },
+          "scale": {
+           "$ref": "vocab.json#/$defs/score_scale"
+          },
+          "namespace": {
+           "description": "As a fact's namespace.",
+           "anyOf": [
+            {
+             "$ref": "common.schema.json#/$defs/route_id"
+            },
+            {
+             "const": "prefix"
+            }
+           ]
+          },
+          "note": {
+           "type": "string",
+           "description": "Free note."
+          },
+          "precision": {
+           "type": "object",
+           "description": "Precision model of this column's cells (overrides the table's).",
+           "properties": {
+            "model": {
+             "$ref": "vocab.json#/$defs/precision_model"
+            },
+            "step": {
+             "type": "number",
+             "minimum": 0
+            },
+            "sd": {
+             "type": "number",
+             "minimum": 0
+            },
+            "reading_px": {
+             "type": "number",
+             "minimum": 0
+            }
+           },
+           "required": [
+            "model"
+           ],
+           "unevaluatedProperties": false
+          }
+         },
+         "required": [
+          "says"
+         ],
+         "unevaluatedProperties": false
+        }
+       ]
+      }
+     },
+     "level": {
+      "$ref": "vocab.json#/$defs/level",
+      "description": "Level of its cells (default written)."
+     },
+     "precision": {
+      "type": "object",
+      "description": "Precision model of the value (an attribute, never a level).",
+      "properties": {
+       "model": {
+        "$ref": "vocab.json#/$defs/precision_model"
+       },
+       "step": {
+        "type": "number",
+        "description": "Printed: one unit of the last digit, in the value's unit.",
+        "minimum": 0
+       },
+       "sd": {
+        "type": "number",
+        "description": "Chart-pixel: reading sd in the value's unit (or computed from reading_px and the chart calibration).",
+        "minimum": 0
+       },
+       "reading_px": {
+        "type": "number",
+        "description": "Chart-pixel: reading error in pixels.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "model"
+      ],
+      "unevaluatedProperties": false
+     }
+    },
+    "required": [
+     "id",
+     "file",
+     "where",
+     "row_key",
+     "columns"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "charts": {
+   "type": "array",
+   "description": "Digitised charts.",
+   "items": {
+    "type": "object",
+    "description": "A digitised chart: the calibration its read facts depend on.",
+    "properties": {
+     "id": {
+      "type": "string",
+      "description": "Chart id (C1...).",
+      "pattern": "^C[0-9]+$"
+     },
+     "file": {
+      "type": "string",
+      "description": "The saved document or image (a key of the sha256 map)."
+     },
+     "page": {
+      "type": "integer",
+      "description": "Page in the document.",
+      "minimum": 1
+     },
+     "image": {
+      "type": "string",
+      "description": "Extracted image (path), if any."
+     },
+     "where": {
+      "type": "string",
+      "description": "Figure locator (number, caption).",
+      "minLength": 1
+     },
+     "kind": {
+      "type": "string",
+      "description": "raster (pixels: points are read) | vector (paths: points are written, exact).",
+      "enum": [
+       "raster",
+       "vector"
+      ]
+     },
+     "x": {
+      "type": "object",
+      "description": "One calibrated axis.",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "description": "What the axis carries (score, cost...)."
+       },
+       "scale": {
+        "type": "string",
+        "description": "linear | log.",
+        "enum": [
+         "linear",
+         "log"
+        ]
+       },
+       "ticks": {
+        "type": "array",
+        "description": "Ticks used for the calibration.",
+        "items": {
+         "type": "object",
+         "description": "One axis tick.",
+         "properties": {
+          "px": {
+           "type": "number",
+           "description": "Pixel coordinate."
+          },
+          "value": {
+           "type": "number",
+           "description": "Axis value."
+          },
+          "label": {
+           "type": "string",
+           "description": "Tick label as printed."
+          }
+         },
+         "required": [
+          "px",
+          "value"
+         ],
+         "unevaluatedProperties": false
+        },
+        "minItems": 2
+       },
+       "units_per_px": {
+        "type": "number",
+        "description": "Fitted units (or log10 decades) per pixel."
+       },
+       "fit_residual_px": {
+        "type": "number",
+        "description": "Residual of the tick fit, px.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "scale",
+       "ticks"
+      ],
+      "unevaluatedProperties": false
+     },
+     "y": {
+      "type": "object",
+      "description": "One calibrated axis.",
+      "properties": {
+       "quantity": {
+        "type": "string",
+        "description": "What the axis carries (score, cost...)."
+       },
+       "scale": {
+        "type": "string",
+        "description": "linear | log.",
+        "enum": [
+         "linear",
+         "log"
+        ]
+       },
+       "ticks": {
+        "type": "array",
+        "description": "Ticks used for the calibration.",
+        "items": {
+         "type": "object",
+         "description": "One axis tick.",
+         "properties": {
+          "px": {
+           "type": "number",
+           "description": "Pixel coordinate."
+          },
+          "value": {
+           "type": "number",
+           "description": "Axis value."
+          },
+          "label": {
+           "type": "string",
+           "description": "Tick label as printed."
+          }
+         },
+         "required": [
+          "px",
+          "value"
+         ],
+         "unevaluatedProperties": false
+        },
+        "minItems": 2
+       },
+       "units_per_px": {
+        "type": "number",
+        "description": "Fitted units (or log10 decades) per pixel."
+       },
+       "fit_residual_px": {
+        "type": "number",
+        "description": "Residual of the tick fit, px.",
+        "minimum": 0
+       }
+      },
+      "required": [
+       "scale",
+       "ticks"
+      ],
+      "unevaluatedProperties": false
+     },
+     "marker_px": {
+      "type": "number",
+      "description": "Marker diameter, px.",
+      "minimum": 0
+     },
+     "reading_px": {
+      "type": "number",
+      "description": "Reading error of a point, px (from an independent re-reading).",
+      "minimum": 0
+     },
+     "checks": {
+      "type": "string",
+      "description": "How the reading was checked (re-reading, printed cross-checks)."
+     },
+     "digitised_by": {
+      "type": "string",
+      "description": "Tool / agent that read it."
+     }
+    },
+    "required": [
+     "id",
+     "file",
+     "where",
+     "kind",
+     "x",
+     "y"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "legacy": {
+   "type": "object",
+   "description": "Migration: the CSV these legacy-row facts are records of (today's raw-data.csv).",
+   "properties": {
+    "file": {
+     "type": "string",
+     "description": "The saved CSV (a key of the sha256 map)."
+    },
+    "columns": {
+     "type": "array",
+     "description": "Its header.",
+     "items": {
+      "type": "string"
+     },
+     "minItems": 1
+    },
+    "source": {
+     "type": "string",
+     "description": "The raw-data.csv `source` value of every row of this file."
+    }
+   },
+   "required": [
+    "file",
+    "columns",
+    "source"
+   ],
+   "unevaluatedProperties": false
+  },
+  "decimal_mark": {
+   "enum": [
+    ".",
+    ","
+   ],
+   "description": "The source's decimal mark when it is a comma ('12,5'): the build reads its numbers so ('1.234,5' → 1234.5) while quotes keep the printed value (27 Oct)."
+  }
+ },
+ "required": [
+  "id",
+  "publisher",
+  "urls",
+  "sha256",
+  "harvested_at",
+  "salvo",
+  "agent",
+  "snapshot_of",
+  "facts"
+ ],
+ "unevaluatedProperties": false
+}

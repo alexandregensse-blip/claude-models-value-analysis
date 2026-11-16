@@ -1,0 +1,823 @@
+{
+ "id": "src-ianlpaterson-2026-03-10",
+ "publisher": "ianlpaterson",
+ "urls": [
+  "https://ianlpaterson.com/blog/llm-benchmark-2026-38-actual-tasks-15-models-for-2-29/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20260310181447/https://ianlpaterson.com/blog/llm-benchmark-2026-38-actual-tasks-15-models-for-2-29/",
+   "captured": "2026-03-10T18:14:47Z",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "note": "Wayback capture 20260310181447 (listed in the saved CDX answer ianlp-cdx.json, line for this URL); the saved copy is salvo g/g8 src/ianlp-bench.html (page dateModified 2026-03-10T07:47:51-08:00)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html": "60ccc994fa95686139bbe82eee809a220faa38a67ef8be87835ddc4fc24817de",
+  "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-cdx.json": "db8bc25c2d0738d3980e72ad53486dba29deda78c28dd046bef527098eeff029",
+  "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv": "2ed56f482c0afe2139cd966db9cdcbe7d1f01be91771b1a8173a09c400dcb114"
+ },
+ "harvested_at": "2026-10-19T08:31:00Z",
+ "published": {
+  "value": "2026-03-08",
+  "where": "page metadata (datePublished 2026-03-08T16:42:28-08:00; dateModified 2026-03-10)",
+  "quote": "March 8, 2026",
+  "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "from": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "tool": "the '2026 Benchmark Results' table of the saved page -> CSV by parse_tables.py (html.parser; cells verbatim, first column Rank)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "'2026 Benchmark Results' table (15 models)",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Rank": "note",
+    "Model": "model-name",
+    "Quality": "note",
+    "Pass Rate": "note",
+    "Cost": "note",
+    "Median Time": "note",
+    "Total Time": "note"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "no-effort-sent",
+   "value": "No model received special reasoning configuration, thinking budgets, or elevated inference modes",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Methodology, scoring paragraph (second paragraph under 'Scoring is deterministic')",
+   "quote": "No model received special reasoning configuration, thinking budgets, or elevated inference modes."
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "All 15 models were called through the same OpenRouter API",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Methodology",
+   "quote": "All 15 models were called through the same OpenRouter API with identical parameters: a system prompt, a user prompt, and max_tokens=8192.",
+   "note": "contradicts the table labels (GPT-5.2-codex 'Codex CLI', Qwen 'local') and the 'Why Your LLM Benchmark Infrastructure Matters' paragraph (five adapters in the original, seven models rerouted through OpenRouter in v2); used as a route fact only for the rows with no label of their own"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "route",
+   "value": "All models run through OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "text under the '2026 Benchmark Results' table",
+   "quote": "All models run through OpenRouter for apples-to-apples comparison.",
+   "term": "openrouter"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "thinking-on",
+   "value": "They produce reasoning traces by default on every API call",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Methodology, paragraph on MiniMax M2.5, Kimi K2.5 and DeepSeek R1 ('architecturally thinking models')",
+   "quote": "They produce reasoning traces by default on every API call."
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Key Findings 1 (Sonnet): '$0.20 total cost'; the table's Cost column is in $",
+   "quote": "$0.20 total cost",
+   "term": "USD"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "unit",
+   "value": "total cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Key Findings 1 (Sonnet): '$0.20 total cost' for the 38-test run",
+   "quote": "$0.20 total cost",
+   "term": "per-run",
+   "note": "the Cost column is the cost of one run of the 38 tasks (570 calls cost $2.29 over 15 models)"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "note",
+   "value": "covers the API cost",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "'What I'm Actually Going to Use' / Codex CLI paragraph",
+   "quote": "The Pro subscription covers the API cost, so every Codex call is effectively free.",
+   "note": "the $0.16 of GPT-5.2-codex is therefore not a charged spend; its cost is not cited"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "headline-metric",
+   "value": "Quality",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "'2026 Benchmark Results' table header: Rank, Model, Quality, ...",
+   "quote": "Rank Model Quality Pass Rate Cost Median Time Total Time",
+   "note": "the table's Rank column follows the Quality column (ties 1,1; 3,4 ...); no metric is called primary in words"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "aggregation",
+   "value": "38 prompts per model",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/ianlp-bench.html",
+   "where": "Methodology, 'How the Benchmark Actually Ran'",
+   "quote": "The runner fires 38 prompts per model in parallel threads"
+  },
+  {
+   "id": "F10",
+   "about": "Claude Sonnet 4.6",
+   "says": "score",
+   "value": "100.0%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Sonnet 4.6, column Quality",
+   "quote": "100.0%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F11",
+   "about": "Claude Sonnet 4.6",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Sonnet 4.6, column Model",
+   "quote": "Claude Sonnet 4.6"
+  },
+  {
+   "id": "F12",
+   "about": "Claude Sonnet 4.6",
+   "says": "cost",
+   "value": "$0.20",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Sonnet 4.6, column Cost",
+   "quote": "$0.20",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Claude Opus 4.6",
+   "says": "score",
+   "value": "100.0%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Opus 4.6, column Quality",
+   "quote": "100.0%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Claude Opus 4.6",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Opus 4.6, column Model",
+   "quote": "Claude Opus 4.6"
+  },
+  {
+   "id": "F15",
+   "about": "Claude Opus 4.6",
+   "says": "cost",
+   "value": "$0.69",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Opus 4.6, column Cost",
+   "quote": "$0.69",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F16",
+   "about": "Kimi K2.5",
+   "says": "score",
+   "value": "98.6%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Kimi K2.5, column Quality",
+   "quote": "98.6%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F17",
+   "about": "Kimi K2.5",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Kimi K2.5, column Model",
+   "quote": "Kimi K2.5"
+  },
+  {
+   "id": "F18",
+   "about": "Kimi K2.5",
+   "says": "cost",
+   "value": "$0.13",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Kimi K2.5, column Cost",
+   "quote": "$0.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F19",
+   "about": "MiniMax M2.5",
+   "says": "score",
+   "value": "98.6%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row MiniMax M2.5, column Quality",
+   "quote": "98.6%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "MiniMax M2.5",
+   "says": "model-name",
+   "value": "MiniMax M2.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row MiniMax M2.5, column Model",
+   "quote": "MiniMax M2.5"
+  },
+  {
+   "id": "F21",
+   "about": "MiniMax M2.5",
+   "says": "cost",
+   "value": "$0.07",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row MiniMax M2.5, column Cost",
+   "quote": "$0.07",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F22",
+   "about": "Gemini 2.5 Pro",
+   "says": "score",
+   "value": "98.3%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Pro, column Quality",
+   "quote": "98.3%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F23",
+   "about": "Gemini 2.5 Pro",
+   "says": "model-name",
+   "value": "Gemini 2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Pro, column Model",
+   "quote": "Gemini 2.5 Pro"
+  },
+  {
+   "id": "F24",
+   "about": "Gemini 2.5 Pro",
+   "says": "cost",
+   "value": "$0.71",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Pro, column Cost",
+   "quote": "$0.71",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "about": "GPT-5.2-codex (Codex CLI)",
+   "says": "score",
+   "value": "98.3%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2-codex (Codex CLI), column Quality",
+   "quote": "98.3%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "about": "GPT-5.2-codex (Codex CLI)",
+   "says": "model-name",
+   "value": "GPT-5.2-codex",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2-codex (Codex CLI), column Model (name before the parenthesis)",
+   "quote": "GPT-5.2-codex (Codex CLI)"
+  },
+  {
+   "id": "F27",
+   "about": "GPT-5.2-codex (Codex CLI)",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2-codex (Codex CLI), column Model (label in parentheses)",
+   "quote": "GPT-5.2-codex (Codex CLI)"
+  },
+  {
+   "id": "F28",
+   "about": "GPT-oss-20b",
+   "says": "score",
+   "value": "98.3%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-oss-20b, column Quality",
+   "quote": "98.3%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F29",
+   "about": "GPT-oss-20b",
+   "says": "model-name",
+   "value": "GPT-oss-20b",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-oss-20b, column Model",
+   "quote": "GPT-oss-20b"
+  },
+  {
+   "id": "F30",
+   "about": "GPT-oss-20b",
+   "says": "cost",
+   "value": "$0.00",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-oss-20b, column Cost",
+   "quote": "$0.00",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "about": "GPT-5.2",
+   "says": "score",
+   "value": "98.0%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2, column Quality",
+   "quote": "98.0%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "about": "GPT-5.2",
+   "says": "model-name",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2, column Model",
+   "quote": "GPT-5.2"
+  },
+  {
+   "id": "F33",
+   "about": "GPT-5.2",
+   "says": "cost",
+   "value": "$0.15",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5.2, column Cost",
+   "quote": "$0.15",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Gemini 2.5 Flash",
+   "says": "score",
+   "value": "97.1%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Flash, column Quality",
+   "quote": "97.1%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F35",
+   "about": "Gemini 2.5 Flash",
+   "says": "model-name",
+   "value": "Gemini 2.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Flash, column Model",
+   "quote": "Gemini 2.5 Flash"
+  },
+  {
+   "id": "F36",
+   "about": "Gemini 2.5 Flash",
+   "says": "cost",
+   "value": "$0.003",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemini 2.5 Flash, column Cost",
+   "quote": "$0.003",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "about": "DeepSeek R1",
+   "says": "score",
+   "value": "96.8%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek R1, column Quality",
+   "quote": "96.8%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "about": "DeepSeek R1",
+   "says": "model-name",
+   "value": "DeepSeek R1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek R1, column Model",
+   "quote": "DeepSeek R1"
+  },
+  {
+   "id": "F39",
+   "about": "DeepSeek R1",
+   "says": "cost",
+   "value": "$0.12",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek R1, column Cost",
+   "quote": "$0.12",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "about": "Claude Haiku 4.5",
+   "says": "score",
+   "value": "95.9%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Haiku 4.5, column Quality",
+   "quote": "95.9%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "about": "Claude Haiku 4.5",
+   "says": "model-name",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Haiku 4.5, column Model",
+   "quote": "Claude Haiku 4.5"
+  },
+  {
+   "id": "F42",
+   "about": "Claude Haiku 4.5",
+   "says": "cost",
+   "value": "$0.04",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Claude Haiku 4.5, column Cost",
+   "quote": "$0.04",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "about": "GPT-5-Nano",
+   "says": "score",
+   "value": "94.8%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5-Nano, column Quality",
+   "quote": "94.8%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "about": "GPT-5-Nano",
+   "says": "model-name",
+   "value": "GPT-5-Nano",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5-Nano, column Model",
+   "quote": "GPT-5-Nano"
+  },
+  {
+   "id": "F45",
+   "about": "GPT-5-Nano",
+   "says": "cost",
+   "value": "$0.03",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row GPT-5-Nano, column Cost",
+   "quote": "$0.03",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "about": "DeepSeek V3 (Chat)",
+   "says": "score",
+   "value": "88.7%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek V3 (Chat), column Quality",
+   "quote": "88.7%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F47",
+   "about": "DeepSeek V3 (Chat)",
+   "says": "model-name",
+   "value": "DeepSeek V3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek V3 (Chat), column Model (name before the parenthesis)",
+   "quote": "DeepSeek V3 (Chat)"
+  },
+  {
+   "id": "F48",
+   "about": "DeepSeek V3 (Chat)",
+   "says": "cost",
+   "value": "$0.008",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row DeepSeek V3 (Chat), column Cost",
+   "quote": "$0.008",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F49",
+   "about": "Qwen 3.5 35B (local)",
+   "says": "score",
+   "value": "85.8%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Qwen 3.5 35B (local), column Quality",
+   "quote": "85.8%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "about": "Qwen 3.5 35B (local)",
+   "says": "model-name",
+   "value": "Qwen 3.5 35B",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Qwen 3.5 35B (local), column Model (name before the parenthesis)",
+   "quote": "Qwen 3.5 35B (local)"
+  },
+  {
+   "id": "F51",
+   "about": "Gemma 3 12B (local)",
+   "says": "score",
+   "value": "80.6%",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemma 3 12B (local), column Quality",
+   "quote": "80.6%",
+   "term": "quality",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "about": "Gemma 3 12B (local)",
+   "says": "model-name",
+   "value": "Gemma 3 12B",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-ianlpaterson/evidence/results.csv",
+   "where": "row Gemma 3 12B (local), column Model (name before the parenthesis)",
+   "quote": "Gemma 3 12B (local)"
+  }
+ ]
+}

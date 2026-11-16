@@ -1,0 +1,668 @@
+{
+ "id": "src-habr-author-1096066-2026-10-19",
+ "publisher": "habr-author",
+ "urls": [
+  "https://habr.com/ru/articles/1096066/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://habr.com/ru/articles/1096066/",
+   "captured": "2026-10-21T00:00:00Z",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "note": "article 1096066 saved by salvo hn news-blogs (header: published 2026-10-19T07:31:06+00:00, fetched 2026-10-21)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md": "5ef41161d7404b1ba8fe5adb61ed5260c028b81200a0602ecb4e8bd22b0e0d35"
+ },
+ "harvested_at": "2026-10-21T00:00:00Z",
+ "published": {
+  "value": "2026-10-19",
+  "where": "first line of the saved file (the fetcher's header comment: \"published 2026-10-19T07:31:06+00:00\")",
+  "quote": "published 2026-10-19T07:31:06+00:00",
+  "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md"
+ },
+ "salvo": "salvo14/mig/convert-habr-author (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved markdown of the article (salvo hn news-blogs, fetched 21 Oct)",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "сторонний OpenAI-совместимый API",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: one third-party OpenAI-compatible API (not named)",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "Все запросы шли через один сторонний OpenAI-совместимый API; названия — идентификаторы моделей из запросов, на официальных API вендоров я ничего не перепроверял."
+  },
+  {
+   "id": "F2",
+   "says": "aggregation",
+   "about": null,
+   "value": "по три прогона на каждую комбинацию",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology: 30 tasks x 3 runs = 90 units per model and variant",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "три модели, по три прогона на каждую комбинацию"
+  },
+  {
+   "id": "F3",
+   "says": "cap",
+   "about": null,
+   "value": "где обрыв считается провалом",
+   "level": "written",
+   "form": "prose",
+   "where": "results: glm-5.3-flash column \"прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "число полных и прошедших ответов от всех 90 единиц, где обрыв считается провалом"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "Остальные 72, все у glm-5.3-flash, упёрлись в лимит вывода 32 000 токенов",
+   "level": "written",
+   "form": "prose",
+   "where": "methodology",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "Остальные 72, все у glm-5.3-flash, упёрлись в лимит вывода 32 000 токенов"
+  },
+  {
+   "id": "F5",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "90/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"База\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| База | 90/90 | 86/90 | 67/69 | 79/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F6",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F7",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "86/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"База\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| База | 90/90 | 86/90 | 67/69 | 79/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F8",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F9",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "79/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"База\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| База | 90/90 | 86/90 | 67/69 | 79/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "87/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Роль\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Роль | 87/90 | 89/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F12",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "89/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Роль\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Роль | 87/90 | 89/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F14",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "78/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Роль\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Роль | 87/90 | 89/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "90/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Шаг за шагом\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Шаг за шагом | 90/90 | 85/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F18",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "85/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Шаг за шагом\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Шаг за шагом | 90/90 | 85/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F20",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "78/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Шаг за шагом\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Шаг за шагом | 90/90 | 85/90 | 68/69 | 78/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F22",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "86/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Давление\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Давление | 86/90 | 88/90 | 67/69 | 74/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "88/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Давление\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Давление | 86/90 | 88/90 | 67/69 | 74/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F26",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "74/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Давление\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Давление | 86/90 | 88/90 | 67/69 | 74/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "89/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Сначала тесты\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Сначала тесты | 89/90 | 87/90 | 68/69 | 68/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F30",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "87/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Сначала тесты\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Сначала тесты | 89/90 | 87/90 | 68/69 | 68/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "68/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Сначала тесты\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Сначала тесты | 89/90 | 87/90 | 68/69 | 68/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "87/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Только код\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Только код | 87/90 | 88/90 | 66/69 | 85/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "88/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Только код\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Только код | 87/90 | 88/90 | 66/69 | 85/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "85/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"Только код\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Только код | 87/90 | 88/90 | 66/69 | 85/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "gpt-6.1-sol",
+   "value": "90/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"«Ты уверен?»\", column \"gpt-6.1-sol\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| «Ты уверен?» | 90/90 | 88/90 | 69/69 | 84/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F42",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "claude-haiku-5-5",
+   "value": "88/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"«Ты уверен?»\", column \"claude-haiku-5-5\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| «Ты уверен?» | 90/90 | 88/90 | 69/69 | 84/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-api-id",
+   "about": "claude-haiku-5-5",
+   "value": "claude-haiku-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "84/90",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table, row \"«Ты уверен?»\", column \"glm-5.3-flash, прошло из 90\"",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| «Ты уверен?» | 90/90 | 88/90 | 69/69 | 84/90 |",
+   "term": "pass rate % of 90 runs",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F46",
+   "says": "model-api-id",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "results table header",
+   "file": "/work/.salvo14/mig/convert-habr-author/evidence/1096066.md",
+   "quote": "| Вариант | gpt-6.1-sol | claude-haiku-5-5 | glm-5.3-flash, общее подмножество (69) | glm-5.3-flash, прошло из 90 |",
+   "namespace": "prefix"
+  }
+ ]
+}

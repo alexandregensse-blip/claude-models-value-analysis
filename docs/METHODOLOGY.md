@@ -7,11 +7,16 @@ the examples in parentheses only illustrate it.
 
 ## 1. Vocabulary
 
-- **Couple** — a model at one effort level (*Opus 5 @high*). A model's couples, from its lowest to its highest
-  effort, form its **effort ladder**. A model without an effort setting is a single couple labelled *solo*.
+- **Couple** — a model in one **configuration** (*Opus 5 @high*): an effort level (*minimal*, *low*, *medium*, *high*,
+  *xhigh*, *max*), thinking off (*nothink*), thinking on for a model that only has the on/off switch (*think*), or *solo*
+  for a model without any setting. A model's couples form its **effort ladder**, read from thinking off, then its levels
+  from the lowest to the highest; *think* and *solo* stand apart from the levels. The fit gives each couple its own latent
+  quality and cost and puts no order between them: the ladder is how the page reads them, not a constraint (§5).
 - **Row** — one published measurement of one couple: a cost, a score, or both.
 - **Group** — the rows one source measured on the same task under the same configuration (a leaderboard column, a
-  system-card chart, a paper's table). Only within a group are two couples directly comparable.
+  system-card chart, a paper's table). In the build a group is one benchmark setup × one publisher × one campaign (a
+  version of a board), and on the cost axis also one cost subset (§2, today's prices). Only within a group are two
+  couples directly comparable.
 - **Publisher** — whoever produced the numbers. Outlets of one organisation that publish its own measurements (its
   system cards, blog charts and documentation) are one publisher; the list is kept in a table.
 - **Benchmark family** — the groups that run the same benchmark: same task set, same version, same grading,
@@ -24,19 +29,49 @@ the examples in parentheses only illustrate it.
 
 ### What is recorded
 
-One line per measurement: the group, the source, the model, the effort, the task type and complexity, the harness,
-the cost unit (per task, per attempt, per run), the cost in dollars, the input and output tokens, the score and its
-metric, the cache-read share, a free-text **confound** field, the reference (URL, page, file), and the **reading
-precision** of the cost and of the score (§4).
+Since 29 Oct 2026 the fit reads the tables of the **findings chain** (`data/build.py`; `docs/DATA-PIPELINE.md`,
+`data/BUILD.md`). Each source is recorded as **facts**: what it says, as it says it — a value as written, its
+certainty level (written, read off a chart, an estimate of the source's own, not established), its locator, and the
+exact quote it is read from (the table cell and what identifies its row and column, for a data file), with the URL
+and the capture date of the page. Agents write the facts only, reading every value line by line; a measure file says
+which facts form one measurement and on which benchmark setup. A measurement whose facts lack their proof is out
+(`out:no-proof`). What is defined rather than read lives in **registries** (`data/registry/`): the models (the names
+each was served under, its configurations, documented defaults and conversions, each dated), the routes (makers'
+APIs, resellers, routers, hosts, harnesses: what each passes on, dated), the benchmarks (families, setups, versions,
+headline metric, direction, composites), the publishers (and the maker each speaks for), the dated prices, and the
+rules, each dated with who decided it; the maintainer's per-measurement decisions are in one file (`data/decisions.json`),
+evaluated first. The build computes, by a fixed decision tree, each measurement's model, configuration, run date,
+campaign and price, and its status on each axis with its reason; the public data file (`data/build/data.csv`) holds
+every measurement with both statuses. A few rows of the earlier one-line data file (`raw-data.csv`, frozen on
+21 Oct 2026) still pass through unchanged (10 on each axis on 12 Nov 2026).
+
+The fit tables keep one line per measurement: the group, the source, the model, the effort, the task type and
+complexity, the harness, the cost unit (per task, per attempt, per run), the cost in dollars, the input and output
+tokens, the score and its metric, the cache-read share, the flags (**confound** field), the reference (URL, page,
+file), the run (§5, k_r) and the **reading precision** of the cost and of the score (§4).
 
 ### Admission
 
 - **The same task, the same configuration.** A row belongs to a group only with the other couples its source
   measured on the same task, harness and settings. Raw dollars or scores are never compared across groups.
 - **The effort is read, not assumed.** The effort level comes from the source's own configuration (a flag, a payload
-  field, a documented default). A run whose effort cannot be established is recorded as *default*; a run with
-  thinking disabled as *nothink*; a cost computed from list prices blended over a token mix as *priceblend*. These
-  stay in the data file but outside the computation: they are not a rung of an effort ladder.
+  field, a documented default). A run with thinking disabled is the configuration *nothink*, a run with thinking on of
+  a model that has only that switch is *think*, a run of a model with no setting is *solo*: each is a couple of its
+  own, in the computation, when the model's registry lists it. The configuration requested is followed along the
+  route the run took — harness, then router, reseller or host, then the maker — each step as the registry documents it
+  at the run date. A route the source does not name (no route at all, only a harness, or one the registry cannot
+  resolve) is unknown and never presumed to be the maker's API (the maintainer, 2 Nov 2026): every route that served
+  the model at the run date, the maker's API included, is evaluated, and the configuration is accepted only if all give
+  the same; a harness that hands every call to one route (Claude Code → the maker's API) closes the chain. A run whose
+  effort cannot be established is recorded as *default*, and a cost computed from list prices blended over a token mix
+  as *priceblend*; these stay in the data file but outside the computation. A configuration the fit does not take (*between-tools*, a mode of one model that is
+  recorded but not fitted) stays in the data file too.
+- **Every run is dated.** A measurement's run interval comes from the dates its source states (a run date, a start, an
+  end); otherwise its lower bound is the model's release and its upper bound the earliest of the source's publication,
+  the first capture showing the value and the commit. A date that does not say it is the run date bounds the run from
+  above only; a time without its time zone is widened by a day on each side. The model a name served and the configuration
+  a route or a default gave are read over that interval — an interval that straddles a change leaves the field
+  ambiguous, and the measurement out —, and so are the prices that may have applied (below).
 - **Primary sources only.** A number is taken from the publisher's own table, payload, chart or repository. A
   secondary quotation of a number already recorded is not a new measurement.
 - **Measured spend over list price.** The cost is what the run actually spent, including cache reads and writes,
@@ -53,6 +88,13 @@ precision** of the cost and of the score (§4).
   of run — long agent sessions that re-read their context every turn, one-shot `claude -p` calls, plain API calls —
   and the spread of that ratio across those sources is added to the row's reading error (§4), so an estimated cost
   weighs less than a measured one (`data/precision/repricing.json`; flag `cache-cut-2026-10-07` with the old value).
+  Every cost of the fit is at the current price (the maintainer, 3 Nov 2026): a cost none of these brings to it, whose
+  prices over its price date are all registered and share the current price's classes and long-context tiers, is put there by a **price
+  band** — between its value times the smallest and the largest per-class ratio of the current to the old price (a run
+  mostly of input tokens, mostly of output) — at the band's middle, the band's width added to its reading error
+  (uniform, width / √12); a cost no band reaches is left out (`out:cost-not-comparable`). Within one setup, costs of
+  different bases (billed, estimated from tokens at list prices…), methods, units, currencies or routes are never put
+  in one group: each part is its own cost subset.
 - **Charts are digitised and checked** against any number the same document prints in its text, and flagged; the
   resolution of every digitised chart is measured (§4).
 - **Early access.** A run its source dates before the model's public release is flagged (§5: its noise is inflated
@@ -69,9 +111,13 @@ precision** of the cost and of the score (§4).
   source or its maker — an alias that served several models, a default effort not documented for the run's date, a
   mode its source does not document — stays in the data file with its flag, outside the computation, as *default*
   above.
-- **Flag, do not drop.** Doubts (cost basis undocumented, a fallback model served part of the run, an effort inferred
-  from order, a digitised value) are written in the confound field. A source is excluded only when it breaks a rule
-  above.
+- **Doubt keeps a row out, and the row stays recorded.** Every field the decision tree reads (model, configuration,
+  run date, value, setup, price) carries a certainty level; a measurement enters an axis only when each is written by
+  the source, read off its chart, or computed from such facts by a registered rule. An estimate of the source's own, an
+  assumption (an effort inferred from a marker's order alone), a contradiction or an ambiguity keeps it out, with its
+  reason, in the data file. Lesser doubts, resolved by a standing rule (a cost method assumed to be one per table, a closed harness's label
+  taken as the level it sends), are written as flags. A source
+  is excluded only when it breaks a rule above.
 
 ## 3. From rows to groups
 
@@ -82,8 +128,11 @@ precision** of the cost and of the score (§4).
 - **Composites count once.** An index, an average or a total over several benchmarks repeats the measurements of
   its components. The components of each composite are listed from its publisher's documentation (for instance the
   ten benchmarks of the Artificial Analysis Intelligence Index v4.3, or the published formula of the Vals Index). For
-  a couple measured on at least one component, the composite row is left out; a couple measured only on the
-  composite keeps it, and a composite none of whose components is in the data is kept whole.
+  a couple measured on at least one component, the composite row is left out; a linear composite (a published weighted
+  mean) then keeps, for that couple, only its residual for the missing components — (composite − Σ present weight ×
+  component) / Σ missing weight, a measurement of its own; a couple measured only on the composite keeps it, and a
+  composite none of whose components is in the data is kept whole. Components a table gives without a declared
+  composite enter with its final score as one run (§5, k_r).
 - **One execution counts once.** A run printed twice — a system card reprinting the previous card's series, the
   same run drawn on two charts, a leaderboard copying a vendor's table — is one measurement. Two rows are the same
   execution when their values agree within what separates two copies of one number: both reading precisions (§4),
@@ -96,6 +145,15 @@ precision** of the cost and of the score (§4).
   one (a miscopy); when only one axis can tell, on all of them and three at least. The execution's rows are kept
   once, on both axes, in the larger group. A few coincidences among many shared values, or two runs that both reach
   100 %, are not a republication.
+- **Versions of one board.** A board re-scored within one version replaces the earlier value (a new campaign keeps
+  both). Two versions of one board in one source are the same runs re-graded when at least two shared couples have
+  identical costs (the closeness test above, on the costs as written) and a score differs (the maintainer, 11 Nov
+  2026): couple by couple, a couple whose cost is identical is one run — its cost counts once, in the latest version,
+  and its scores in the versions are one run's measurements, each 1/k (§5, k_r); a couple whose cost differs was re-run
+  and stays apart. Before the fit, `model/precheck.py` stops it when two cost groups still share identical costs (to
+  one part in 10⁹) on three couples or more — copies that no rule above recognised, whose common effect would absorb
+  their residuals and freeze the cost axis (fit of 10 Nov 2026, R̂ 6.8) — until the copy is resolved or the
+  coincidence proven from the sources and declared.
 - **Groups without information.** A group with a single couple says nothing about a difference, nor does a group
   whose couples all sit at the same bound (every couple at 100 %). Both stay in the data and the counts, not in the
   fit. A tie away from the bounds (two couples at 79.3 %) is information — the couples are equal — and is kept.
@@ -103,15 +161,15 @@ precision** of the cost and of the score (§4).
 
 ## 4. Scales
 
-Each metric is put on a scale where a benchmark can be linear in quality. The rule reads the metric's label, never
-the benchmark's identity:
+Each metric is put on a scale where a benchmark can be linear in quality. The rule reads the metric's label and the
+setup's direction, never the benchmark's identity:
 
 | Metric | Transformation |
 |---|---|
 | bounded score: a percentage, a score out of *N* (or "*k* of *N*"), an F1, a 0–4 grade, a composite published on 0–100 | empirical logit of the proportion: logit(q), q = (p·n + ½)/(n + 1), n the group's number of scoring steps |
 | positive unbounded quantity with a true zero (money earned, points) | log |
 | interval or unknown scale (an Elo rating, a correlation, a composite without a stated range) | none |
-| lower is better (a rank) | sign flipped first |
+| lower is better: the setup's direction in the registry (an attack success rate, an error, a Brier score, a rank; a legacy row: its metric label) | turned first in its unit, so that higher is better: B − y on a bounded scale [0, B] before the logit (an attack success rate of 30 % reads 70 %), −log y on a log scale, −y otherwise; a setup without a known direction is left out (the maintainer, 10 Nov 2026) |
 | a label contradicted by its values (scores beyond the stated bound, like a "score out of 10" reaching 100) | treated as an unknown scale, and reported by the build |
 | cost | log |
 
@@ -153,7 +211,7 @@ shows the Claude couples only.
 For every row *r* (group *b*, couple *c* of model *m* by maker *k*, publisher *s*, task type *t*), with *f* the
 transformation of §4:
 
-    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t} + δ_k · H_r) + ε_r ,   ε_r ~ Student-t_ν(0, κ_r · h_r² · σ_b² + d_r²)
+    f(y_r) = o_b + a_b · (θ_c + u_{s,c} + w_{s,m} + v_{c,t} + δ_k · H_r) + ε_r ,   ε_r ~ Student-t_ν(0, k_r · (κ_r · h_r² · σ_b² + d_r²))
 
 | Term | Meaning | Prior |
 |---|---|---|
@@ -163,25 +221,32 @@ transformation of §4:
 | σ_b | the group's noise: how far its measurements scatter beyond their reading error | log σ_b ~ N(μ_σ, s_σ²), pooled |
 | h_r | the noise shape of a bounded score (§4); 1 on other scales | fixed by the data |
 | d_r | the value's reading precision (§4), on the model's scale | known |
+| k_r | the number of rows the fit keeps from the same run: one source's k quality measurements of one execution (metrics, sub-scores, slices; the setups of one run_set, same model, configuration and campaign) each count 1/k, the run as one row (rule same-run-weight, the maintainer, 10 Nov 2026; 1 for a row alone in its run) | known |
 | u_{s,c} | the publisher's systematic effect on this couple | N(0, τ_c²), τ_c ~ N⁺(0, s_{τ,k}²) pooled over the maker's couples |
 | w_{s,m} | the publisher's systematic effect on this model, shared by all its effort levels and by its line (its builds, previews and modes) | N(0, ψ_k²) |
 | v_{c,t} | the couple's deviation on a task type; composite indices (*mixed*) carry none | N(0, ω_k²) |
-| s_{τ,k}, ψ_k, ω_k | each maker's scales of the three effects | log s_k = log s_0 + η · z_k, z_k ~ N(0, 1) summing to zero over the makers with data |
-| δ_k, H_r | the maker's **home effect**: the shift of the rows a maker published about its own models (H_r = 1; 0 otherwise), excluded from every read-out | δ_k = δ_0 + τ_δ · z_k, z_k summing to zero; δ_0 ~ N(0, 10²) |
+| s_{τ,k}, ψ_k, ω_k | each maker's scales of the three effects, each maker's own | half-Student-t(3, 0, 2.5), independent across the makers with data |
+| δ_k, H_r | the maker's **home effect**: the shift of the rows a maker published about its own models (H_r = 1; 0 otherwise), excluded from every read-out | N(0, 10²), independent across makers |
 | κ_r | the variance multiplier of an early-access run (1 for other runs) | log κ ~ N(0, 1), estimated |
 | ν | the Student-t's degrees of freedom: how heavy the tails of the noise are | Gamma(2, 0.1), estimated |
 
-Every standard deviation (s_g below, the common scales s_0 of s_τ, ψ and ω, their spreads η across makers, τ_δ, s_σ)
-has a weakly informative half-Student-t(3, 0, 2.5) prior; μ_σ is flat.
+Every standard deviation (s_g below, each maker's s_τ, ψ and ω, s_σ) has a weakly informative half-Student-t(3, 0, 2.5)
+prior; μ_σ is flat.
 
 **Makers.** One maker's couples can be more or less consistent across publishers, task types and benchmarks than
 another's, and a maker's own charts can place its models apart from what others measure. Both are estimated rather
-than assumed: each maker's scales are drawn around common ones, and with η → 0 the model is the same for all makers
-(the model until v2026.10.20, `model/lqm.stan`); with τ_δ → 0 the home effect is one shift shared by all makers. On the
-data of 19–20 Oct 2026 the makers' scales differ (η of the three scales 0.60, 0.32, 0.69, every 90 % interval away
-from 0), and every home effect's interval includes 0 (Anthropic +0.40, 90 % interval −0.36 to +1.42 on θ). The two
-models predict held-out rows equally well (PSIS-LOO, § Checks); the encompassing one was chosen by a rule fixed
-before the comparison: it is published unless it fails to converge or predicts clearly worse.
+than assumed, each maker's on its own: its three scales and its home effect have their own priors, independent of
+the other makers' (the maintainer's decision of 2 Nov 2026: each maker's biases are its own, and nothing gives a
+reason to tie them). From v2026.10.21 to 2 Nov 2026 (`model/lqm_ext2.stan`, `model/lqm_ext3.stan`) they were tied:
+each maker's log scale drawn around a common one, log s_k = log s_0 + η · ζ_k with ζ summing to zero over the makers
+and η ~ half-Student-t(3, 0, 2.5) (with η → 0 the model was the same for all makers, the model until v2026.10.20,
+`model/lqm.stan`), and the home effects around a common one, δ_k = δ_0 + τ_δ · ζ_k. That tie made a funnel: in the
+fit of 30 Oct 2026 the spreads η ranged over orders of magnitude (η_τ from 0.002 to 1.3) and the fit diverged past the
+allowed share on both axes. On the data of 19–20 Oct 2026, under the tied model, the makers' scales differed (η of the
+three scales 0.60, 0.32, 0.69, every 90 % interval away from 0), and every home effect's interval included 0
+(Anthropic +0.40, 90 % interval −0.36 to +1.42 on θ). The models with and without the makers' terms predicted
+held-out rows equally well (PSIS-LOO, § Checks); the encompassing one was chosen by a rule fixed before the
+comparison: it is published unless it fails to converge or predicts clearly worse.
 
 **No reference couple.** The θ sum to zero: the origin is the average couple, not a chosen one. The page does not
 divide by a reference couple either: it shows cost as a multiple of the cheapest couple and quality as an expected
@@ -213,7 +278,8 @@ score can be used without knowing which benchmark produced it.
 
 ### Weighting
 
-No weight is chosen per source or per benchmark; each contribution follows from the model. The fixed constants are
+No weight is chosen per source or per benchmark; each contribution follows from the model. The one weight set by
+rule is k_r: one source's k quality measurements of one run each weigh 1/k (rule same-run-weight, §5 Model). The fixed constants are
 the 100-step limit of §4 and the prior constants above; the tails of the noise and the down-weighting of early-access
 runs are estimated.
 
@@ -231,8 +297,10 @@ runs are estimated.
 
 ### Estimation
 
-The model is written in Stan (`model/lqm_ext2.stan`; `model/lqm.stan` is the model without the makers' terms, used
-until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
+The model is written in Stan (`model/lqm_ext4.stan` since 2 Nov 2026: each maker's scales and home effect its own,
+in the coordinates described under *Makers' scales* below; `model/lqm_ext3.stan`, 30 Oct – 2 Nov 2026, the same
+coordinates with the makers' terms tied; `model/lqm_ext2.stan`, the model published since v2026.10.21, tied, in its
+original coordinates; `model/lqm.stan` is the model without the makers' terms, used until v2026.10.20); the data preparation of §2–§4 is in `model/lqm.py`. It is sampled with
 the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; Betancourt 2017).
 
 - **Writing.** How a model is written changes how fast the sampler explores it, not what it estimates. Each group's
@@ -241,23 +309,93 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
   leave the log density and its gradient unchanged.
+- **Makers' scales: magnitude and direction** (the maintainer's decision of 30 Oct 2026, kept in `lqm_ext4.stan`; the
+  same model, only the sampling geometry changes). Each maker's effects of one family were written as its scale times standard-normal
+  effects, e = s_k · z_k. The data see only the products, so a maker's scale and all its effects moved together
+  along a curved ridge (the scale up, every one of its effects' z down); on the cost axis of 29–30 Oct a maker with
+  few data (Qwen) had a scale ψ at about 0.45 or about 1.0, which the chains took hundreds of draws to cross, and the
+  worst R̂ were on η_τ, τ, ψ. Now, for every maker and every family, whatever the number n_k of its effects (no
+  threshold): z_k = r_k · u_k, with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on the sphere. The sampler moves in the
+  realised magnitude A_k = s_k · r_k (on its log scale), which the data inform, in the direction u_k (a free vector
+  y_k ~ N(0, I) divided by its length, the length an auxiliary that nothing depends on) and in r_k, which carries its
+  χ(n_k) density and which the likelihood does not see; s_k = A_k / r_k is recovered. Since 2 Nov 2026
+  (`lqm_ext4.stan`) each s_k has its own half-Student-t(3, 0, 2.5) prior: the change of variables adds, per maker and
+  family, log s_k (s_k → log s_k) and the χ(n_k) density of r_k ((n_k − 1) log r_k − r_k²/2; log r_k by Stan), every
+  other term unchanged; a maker without effects of a family keeps its prior there (it enters only the read-outs that
+  integrate an unknown effect over its distribution). Under `lqm_ext3.stan` the log scales were the coordinates over
+  the makers and the common scale s_0 (their geometric mean) and the offsets ζ_k (summing to zero) were recovered from
+  them, η staying a parameter, with the terms log s_0 and −(F − 1) log η.
+  For the publisher × model (ψ) and couple × task-type (ω) effects the block is the
+  maker's effects; for the publisher × couple effects, u = s_τ,k · τ̃_c · z with τ_c = s_τ,k · τ̃_c, the block is
+  every z of the maker's couples, τ̃_c ~ N⁺(0, 1) kept as it was (its ridge with s_τ,k is already straight on the
+  log scale, and splitting z couple by couple would turn the couples with a single publisher, 68 on cost, into a
+  sign). With one effect (n_k = 1) the direction is a sign, changed only where y_k crosses zero; every maker has at
+  least 14 effects of each family on the data of 30 Oct. Checked by evaluating both programs on the data of both
+  axes at random points: their log densities differ by exactly the Jacobian and auxiliary terms (to 10⁻⁹), and the
+  recovered scales, offsets and effects satisfy the old definitions. `lqm_ext4.stan` was checked the same way against
+  `lqm_ext3.stan` (the log densities differ by exactly the two models' priors on the makers' terms, to 10⁻⁹ on both
+  axes) and by quadrature over (log A_k, log r_k): the density it implies for s_k is the half-Student-t(3, 0, 2.5) to
+  10⁻⁴ (the grid's truncation), whatever n_k. The formulas, term by term, are in the headers of `model/lqm_ext3.stan`
+  and `model/lqm_ext4.stan`.
 - **Samplers.** nutpie (Seyboldt et al.) on both axes, whose adaptation of the mass matrix needs fewer steps here:
-  4 chains × (1,000 warm-up + 3,000 draws), target acceptance 0.9. While the criteria are not met, the same chains
-  continue within the sampling process, checked every 1,000 draws on the draws up to the check, up to 9,000 more; the
-  run stops at the first check that meets them and keeps exactly the draws up to it. Before 21 Oct 2026 the quality
-  axis drew new batches of independent chains instead (up to four), and the cost axis was sampled with CmdStan from
-  the previous fit's last draws. On the cost axis of the data of 20–21 Oct, CmdStan reached its step limit on almost
-  every draw (about 1,000 leapfrog steps, 5 divergent transitions, not converged in 2 h); nutpie took about 530 steps
-  per draw, with no divergence, and drew twice the effective draws per second on the slowest parameter. A second
-  batch of random starts left two of its four chains in a remote region (the Student-t's ν at its bound, the effects'
-  scales 10 to 25 times their value elsewhere, no data in particular to blame): continuing the chains that have
-  converged avoids drawing new starts. A chain left in another region (R̂ above 1.05) restarts its axis on CmdStan
-  from the previous fit's last draws, 4 × (500 warm-up + 4,500 draws), continued by slices of 1,500 draws up to 4,500
-  more. A run continues only while at most 0.03 % of its draws diverged. Every limit is counted in draws, not in
-  seconds, and a check reads only the draws up to it, so that a loaded machine does not change the fit.
+  6 chains × (500 warm-up + 1,800 draws), target acceptance 0.9 (0.95 for a few hours on 2 Nov 2026, against
+  lqm_ext3's divergences, before their cause was removed in lqm_ext4; warm-up 500 since 30 Oct 2026, 600 from 29 Oct;
+  4 × (1,000 + 3,000) before). In the two runs whose warm-up was kept (cost, 29 Oct and 30 Oct), the good chains' step
+  size settled at 0.013–0.016 by iteration 50 and their trajectories at 1,023 leapfrog steps (tree depth 10) from
+  iteration 50 on, the share of iterations that hit the depth limit falling from about 70 % to 30–50 % as the metric
+  improved; what these do not show is the metric's quality, which shows in the draws' effective sample size per draw.
+  While the criteria are not met, the same chains continue within the sampling process, checked every 900 draws on the
+  draws up to the check, up to 16,200 more; the run stops at the first check that meets them and keeps exactly the
+  draws up to it. Before 21 Oct 2026 the quality axis drew new batches of independent chains instead (up to four), and
+  the cost axis was sampled with CmdStan from the previous fit's last draws. On the cost axis of the data of 20–21 Oct,
+  CmdStan reached its step limit on almost every draw (about 1,000 leapfrog steps, 5 divergent transitions, not
+  converged in 2 h); nutpie took about 530 steps per draw, with no divergence, and drew twice the effective draws per
+  second on the slowest parameter. A second batch of random starts left two of its four chains in a remote region
+  (the Student-t's ν at its bound, the effects' scales 10 to 25 times their value elsewhere, no data in particular to
+  blame): continuing the chains that have converged avoids drawing new starts.
+- **A chain in a far region** (the maintainer's rules of 30 Oct 2026). nutpie cannot be given starting points, and a
+  random start can leave a chain far from the others. Each chain's median log-density over its last 200 draws (in
+  warm-up, its last 100 iterations) is compared with the median of the other chains' medians: a chain more than
+  max(300, 5 × their spread) below is in a far region (the spread is 1.4826 × the median absolute deviation of the other chains'
+  medians, which a second far chain does not widen). Within one region a draw's log-density varies by about √(d/2), d
+  the number of unconstrained parameters (about 55 on the cost axis, 74 on quality); 300 is four to five such
+  deviations. The far chain's draws are dropped and it alone restarts, on CmdStan without warm-up, from the last draw
+  of a good chain with that chain's adapted step size and metric, up to the length of the others; the good chains'
+  draws are kept, and all then continue together. This happens once per run: a chain far again stops the run,
+  unconverged. Without a far chain, an R̂ above 1.05 (slow mixing) continues the chains like any unconverged run.
+  The chains are looked at whatever R̂, every 250 iterations (warm-up and draws counted together: warm-up iteration
+  250, then draws 250, 500, 750, …), at the end of warm-up and at every check of the criteria (1,800 draws, 2,700, …),
+  on nutpie as on CmdStan's continuations (rule of 30 Oct 2026; until then only at the checks of the criteria, and only
+  when R̂ exceeded 1.05). On 30 Oct (cost axis) one chain sat at −4,600 against +1,800 to +2,000 for the others from
+  warm-up iteration 150 on, at the step limit on every iteration: it would have run an hour before the check at 1,800
+  draws; the criterion flags it alone from iteration 67 on, and flags good chains too in the first iterations, which
+  the first check, at 400, is past. Within warm-up a far chain is reported but not yet restarted: nutpie runs the
+  chains in one process and can neither stop one nor start one from a given point with a given step size and metric,
+  CmdStan's warm-up would re-estimate the metric by its own windows (from one chain's 75 iterations in 6,128 dimensions
+  over the last 100 iterations of warm-up), and stopping nutpie then would cut the good chains' adaptation too. A chain
+  still far at the end of warm-up (on its last 100 iterations) is restarted there, from a good chain's first draw with
+  its final step size and metric, and the run then draws its planned 1,800 draws on CmdStan. A check needs at least
+  100 draws (or warm-up iterations) of each chain's own; before, it gives no verdict. In the fit of 30 Oct 14:57 the
+  check made right after such a restart read one draw per chain, on which the good chains spread over 1,714–2,069: it
+  flagged the good chain at 1,714 (337 below the others' 2,051) and stopped the run at one draw. A restarted chain's
+  draws are all its own (CmdStan's lp__, on the same scale as nutpie's log-density: 2,068.8422 against 2,068.84219 at
+  one point). A run that ends unconverged records why, and an R̂ that too few draws leave undefined is reported as
+  such (null, ESS 0), never as a number.
+  Until 30 Oct an R̂ above 1.05 threw every draw away and sampled the axis again on CmdStan from the previous fit's
+  last draws — a cold start in practice, once the data's dimensions had changed. On 29–30 Oct the cost axis reached
+  R̂ 1.081 at 1,800 draws with its six chains in one region (median log-densities 1,892–1,916; one maker's scale
+  mixing slowly between two modes), was restarted, and ended at R̂ 1.19, bulk ESS 22 and 41 divergent transitions.
+  Checked on the far chains seen (29 Oct: −2,900 against +2,050; −27,300 and +450 against +1,880; quality 29–30 Oct:
+  −69,800 against −5,100: all flagged) and on the runs in one region (none flagged).
+- A run continues only while at most 0.03 % of its draws diverged (a far chain's divergent draws go with it). Every
+  limit is counted in draws, not in seconds, and a check reads only the draws up to it, so that a loaded machine does
+  not change the fit.
 - **Stored draws.** Each axis' draws are written to disk as they are drawn (`.stan/runs`, outside git) and kept until
-  that axis' sampling inputs change — the Stan program, the axis' data, the seed, the sampler settings and the code
-  that samples. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
+  that axis' sampling inputs change — the Stan program, the axis' data, the sampler settings and the code that
+  samples. Each fit draws its own random seed (the maintainer's rule of 30 Oct 2026; a fixed seed before), printed,
+  kept in the run's manifest and written per axis in `model/fit-cache.json`: a run resumed or summarised again from its
+  stored draws keeps the seed it was started with, and the seed is not one of the inputs whose change makes an axis
+  stale, so that a new launch does not refit a converged axis. A fit stopped part-way, by the machine's memory limit or a restart, resumes from them: each chain
   continues from its last stored draw with its adapted step size and metric, on CmdStan, as a continuation does. An
   axis whose sampling inputs are unchanged is summarised again from its stored draws without sampling; an axis whose
   data and model are unchanged is not refitted. The draws are read from disk block by block, so that summarising
@@ -266,17 +404,20 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   (`model/fit-cache.json`, with a fingerprint of the data, the model and its settings); building the page does not need
   Stan. The fitting environment is pinned in `model/requirements-fit.txt`.
 
-Before a fit, `model/precheck.py` stops a run whose data carry a score beyond its label's bound, reports groups that
-look like the same runs under two metrics and fractions above 1, and runs a three-minute fit of the quality axis that
-must reach R̂ ≤ 1.5 before the full fit starts (a chain trapped in a remote region shows there already).
+Before a fit, `model/precheck.py` stops a run whose data carry a score beyond its label's bound, two cost groups that
+share identical costs (§3, versions of one board), or a memory need too close to the machine's limit; it reports groups
+that look like the same runs under two metrics, fractions above 1, one couple twice in a group with discordant values,
+and couples whose cost groups hold almost no other model; and it runs a short fit of each axis, quality then cost (2
+chains of 50 warm-up and 150 draws), that must reach R̂ ≤ 2.0 on both before the full fit starts: it only checks
+that the fit sets off in roughly the right direction (a chain trapped in a remote region shows there already).
 
 A fit is published only if, on every parameter and read-out, the rank-normalised split R̂ is at most 1.01, the bulk
 and tail effective sample sizes are at least 400 (Vehtari et al. 2021), and no transition diverged; the build
 refuses one that misses any of them. The Monte Carlo error of every displayed value is stored with
 it, and the build reports any value whose error exceeds half of its last displayed digit: such a figure could change
-by one unit in a refit with another seed. In the current fit: the cost of Fable 5.1, Fable 5 and Opus 5.5 at max
-(about ±0.5 on multiples of 190–300 shown to the unit, against intervals of about ±9 %) and the quality of Opus 4.8
-*solo* (±0.06 point, against an interval of about ±4.6 points); they are shown as they are.
+by one unit in a refit with another seed. In the fit of 12 Nov 2026: the cost of Fable 5.2, Fable 5.1, Fable 5 and
+Opus 5.5 at max (±0.5 to ±1.0 on multiples of 250–380 shown to the unit, against intervals of ±6 % to ±25 %) and the
+quality of Opus 4.7 with thinking off (±0.09 point, against an interval of 62–80 %); they are shown as they are.
 
 ### Fixed values
 
@@ -293,7 +434,7 @@ Every constant the procedure sets by hand, in one place. None is tuned to the da
 | §5 publication | measured by ≥ 2 publishers | one publisher's figures cannot be cross-checked |
 | §5 intervals | 16–84 % (± 1 standard deviation for a normal law) | the usual width for comparing many points on one chart |
 | §5 convergence | R̂ ≤ 1.01, ESS ≥ 400, no divergence | Vehtari et al. 2021 |
-| §5 sampling | 4 chains × (1,000 + 3,000), checked every 1,000 draws up to 12,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 restarts on CmdStan | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
+| §5 sampling | 6 chains × (500 + 1,800), checked every 900 draws up to 18,000; continued only with ≤ 0.03 % divergent draws; R̂ > 1.05 continues the chains, and a chain whose median log-density (last 200 draws; in warm-up its last 100 iterations) is more than max(300, 5 × the others' spread) below the others' restarts alone from a good chain's last draw, looked at every 250 iterations, at the end of warm-up and at every check, whatever R̂ (30 Oct 2026); a seed drawn per fit and recorded | limits in draws, not seconds; a few divergent draws among thousands do not condemn a run |
 | §5 writing | gain centred from 20 rows | a sampling choice: the model is the same either way |
 
 ### Software and references
@@ -366,7 +507,8 @@ Scripts in `model/validation/` reproduce each check. Figures of the fit of 29 Se
   3.4 % at the median (both axes); for the worst pairs, neighbouring rungs of one model, √(q_i + q_j) reaches 2.2
   times that spread on costs and 2.0 times on qualities: their difference is known more precisely than two separate
   intervals suggest.
-- **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported. The
+- **Effort ladders.** At build time, any couple scoring or costing less than the rung below it is reported: the rungs
+  are *nothink*, then *minimal*, *low* … *max*; *think* is compared with *nothink* only, *solo* has no rung. The
   report is printed, not corrected: an inversion inside the interval is left as the data give it.
 
 ## 6. Display
@@ -388,8 +530,9 @@ value of each couple, the four tiers and the crown, the sources table — is des
   under an unrelated group, or one that changed every value beyond a rounding, would count twice.
   Composites are matched to their components from their publisher's documentation; an undocumented composite would
   count its components twice.
-- Costs are what each source measured at the prices of its day; a price change a source did not report is not
-  corrected, and the data file has no measurement date to apply one systematically.
+- Costs are put on the current price from the prices registered over each run's dates; a price the registry does not
+  hold (a discount a source did not report, a private rate) is not corrected, and a run dated only by wide bounds is
+  re-priced over the whole interval, or left out.
 - The other makers' couples are fitted by the same rules, from the groups collected for this report; their figures are
   not published here. A maker's home effect is one shift for all its models and both of its publications' kinds.
 - The cost of the largest models rests heavily on their vendor's system cards; removing that publisher moves some

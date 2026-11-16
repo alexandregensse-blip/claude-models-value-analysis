@@ -1,0 +1,1698 @@
+{
+ "id": "src-zenodo-23048151-2026-09-30",
+ "publisher": "zenodo-23048151",
+ "urls": [
+  "https://zenodo.org/records/23048151",
+  "https://doi.org/10.5281/zenodo.23048151"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenodo.org/records/23048151",
+   "captured": "2026-10-27T09:30:28Z",
+   "note": "PDF clerkbench-allcock-2026_zenodo23048151.pdf and record JSON saved by salvo s18/a1 (1 Oct 2026); static Zenodo record"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.pdf": "fd0ec2076f9811f682d37a57367d14bdcdaec5021d33e452032ae8a203abad58",
+  "/work/.salvo14/mig/convert-zenodo-23048151/evidence/zenodo-record-23048151.json": "a4190a7afc45615138b399ca1f90c86d956df14db1f40120234067a15ca6c5cf",
+  "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt": "a895c05a2c64d2ea5fcd17a3370131cb0f224ca63e3df43241e25c6e5a970175",
+  "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv": "85e5f5bcd893856f501332dfbdbd585895d8615948ae483f5602d768edc5d308",
+  "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv": "09be9d05e7bdb035b06135020b57f34e5bbbcb220a5880825eaa17fdad4677cc"
+ },
+ "harvested_at": "2026-10-27T09:30:28Z",
+ "published": {
+  "value": "2026-09-30",
+  "where": "Zenodo record JSON: metadata.publication_date",
+  "quote": "\"publication_date\": \"2026-09-30\"",
+  "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/zenodo-record-23048151.json"
+ },
+ "salvo": "salvo14/mig/convert-zenodo-23048151 (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the Zenodo PDF and its text extraction saved by salvo s18/a1 (1 Oct) and the Zenodo record JSON",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "from": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.pdf",
+   "tool": "text extraction saved by salvo s18/a1 (clerkbench.txt): page text, one table cell per line. Quotes matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "from": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "tool": "convert.py: Table 6 (appendix A.3: the L=100 cell of each family, \"attempts correct / attempts scored\") and Table 2 ($/attempt column) from the text extraction, one CSV row per configuration, copied verbatim except that the parenthesised pass@1 fraction after each count is dropped (\"35/36 (0.97)\" -> \"35/36\"); the cost cell is empty where Table 2 does not rank the configuration"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration",
+   "format": "csv",
+   "row_key": "config",
+   "columns": {
+    "banded_L100": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts"
+    },
+    "ledger_L100": {
+     "says": "score",
+     "term": "pass%",
+     "scale": "counts"
+    },
+    "cost_per_attempt_L100": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    }
+   },
+   "level": "written",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures)",
+   "format": "csv",
+   "row_key": "config",
+   "columns": {
+    "ClerkBench-CH6": {
+     "says": "score",
+     "term": "ClerkBench-CH6",
+     "scale": "raw"
+    },
+    "ClerkBench-CH6-4fam": "note",
+    "Capability horizon": "note",
+    "$/attempt": "note",
+    "$/success": "note"
+   },
+   "level": "written",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "tools-regime",
+   "about": null,
+   "value": "tested without tools",
+   "level": "written",
+   "form": "prose",
+   "where": "Abstract",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "Models are tested without tools"
+  },
+  {
+   "id": "F2",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, column $/attempt",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "$/attempt",
+   "term": "USD"
+  },
+  {
+   "id": "F3",
+   "says": "unit",
+   "about": null,
+   "value": "$/attempt",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2, column $/attempt",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "$/attempt",
+   "term": "per-attempt"
+  },
+  {
+   "id": "F4",
+   "says": "cost-method",
+   "about": null,
+   "value": "mean list-price cost of an assessable L=100 attempt, failures included",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 2 caption",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "mean list-price cost of an assessable L=100 attempt, failures included",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F5",
+   "says": "cost-basis",
+   "about": null,
+   "value": "mean list-price cost",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 2 caption",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "mean list-price cost",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "smaller denominators = assessable attempts surviving budget-cap exclusion",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 6 caption",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "smaller denominators = assessable attempts surviving budget-cap exclusion"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "anthropic/claude-opus-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5.5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F8",
+   "says": "effort-label",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5.5 / high"
+  },
+  {
+   "id": "F9",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "anthropic/claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5 / high"
+  },
+  {
+   "id": "F11",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "anthropic/claude-opus-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5.5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F12",
+   "says": "effort-label",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5.5 / high"
+  },
+  {
+   "id": "F13",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "anthropic/claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "anthropic/claude-opus-5 / high"
+  },
+  {
+   "id": "F15",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-luna / high",
+   "value": "openai/gpt-6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-luna / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "openai/gpt-6-luna / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-luna / high"
+  },
+  {
+   "id": "F17",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-luna / high",
+   "value": "openai/gpt-6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-luna / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F18",
+   "says": "effort-label",
+   "about": "openai/gpt-6-luna / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-luna / high"
+  },
+  {
+   "id": "F19",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-sol / high",
+   "value": "openai/gpt-6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-sol / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": "openai/gpt-6-sol / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-sol / high"
+  },
+  {
+   "id": "F21",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-sol / high",
+   "value": "openai/gpt-6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-sol / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F22",
+   "says": "effort-label",
+   "about": "openai/gpt-6-sol / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-sol / high"
+  },
+  {
+   "id": "F23",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "openai/gpt-5.6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-luna / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F24",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-luna / high"
+  },
+  {
+   "id": "F25",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "openai/gpt-5.6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-luna / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F26",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-luna / high"
+  },
+  {
+   "id": "F27",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "openai/gpt-5.6-terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-terra / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-terra / high"
+  },
+  {
+   "id": "F29",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "openai/gpt-5.6-terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-terra / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F30",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-terra / high"
+  },
+  {
+   "id": "F31",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.5 / high",
+   "value": "openai/gpt-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F32",
+   "says": "effort-label",
+   "about": "openai/gpt-5.5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.5 / high"
+  },
+  {
+   "id": "F33",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.5 / high",
+   "value": "openai/gpt-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.5 / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F34",
+   "says": "effort-label",
+   "about": "openai/gpt-5.5 / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.5 / high"
+  },
+  {
+   "id": "F35",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "openai/gpt-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-sol / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F36",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-sol / high"
+  },
+  {
+   "id": "F37",
+   "says": "model-api-id",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "openai/gpt-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-sol / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F38",
+   "says": "effort-label",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-5.6-sol / high"
+  },
+  {
+   "id": "F39",
+   "says": "model-api-id",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "google/gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / medium",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F40",
+   "says": "effort-label",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / medium"
+  },
+  {
+   "id": "F41",
+   "says": "model-api-id",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "google/gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / medium",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F42",
+   "says": "effort-label",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / medium"
+  },
+  {
+   "id": "F43",
+   "says": "model-api-id",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "google/gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F44",
+   "says": "effort-label",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / high"
+  },
+  {
+   "id": "F45",
+   "says": "model-api-id",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "google/gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F46",
+   "says": "effort-label",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "google/gemini-3.7-flash / high"
+  },
+  {
+   "id": "F47",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "deepseek/deepseek-v4-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-flash / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F48",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-flash / default"
+  },
+  {
+   "id": "F49",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "deepseek/deepseek-v4-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-flash / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F50",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-flash / default"
+  },
+  {
+   "id": "F51",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "deepseek/deepseek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-pro / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F52",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-pro / default"
+  },
+  {
+   "id": "F53",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "deepseek/deepseek-v4-pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-pro / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F54",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-v4-pro / default"
+  },
+  {
+   "id": "F55",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "deepseek/deepseek-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-flash / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F56",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-flash / default"
+  },
+  {
+   "id": "F57",
+   "says": "model-api-id",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "deepseek/deepseek-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-flash / default",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F58",
+   "says": "effort-label",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "default",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "deepseek/deepseek-flash / default"
+  },
+  {
+   "id": "F59",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-astra / high",
+   "value": "openai/gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-astra / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F60",
+   "says": "effort-label",
+   "about": "openai/gpt-6-astra / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-astra / high"
+  },
+  {
+   "id": "F61",
+   "says": "model-api-id",
+   "about": "openai/gpt-6-astra / high",
+   "value": "openai/gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-astra / high",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F62",
+   "says": "effort-label",
+   "about": "openai/gpt-6-astra / high",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 2 / Table 6, column Config (provider/model / effort)",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-zenodo23048151.txt",
+   "quote": "openai/gpt-6-astra / high"
+  },
+  {
+   "id": "F63",
+   "says": "score",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "18/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5.5 / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/anthropic/claude-opus-5.5 / high/banded_L100",
+   "quote": "config: anthropic/claude-opus-5.5 / high | banded_L100: 18/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F64",
+   "says": "cost",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "$0.18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5.5 / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/anthropic/claude-opus-5.5 / high/cost_per_attempt_L100",
+   "quote": "config: anthropic/claude-opus-5.5 / high | cost_per_attempt_L100: $0.18",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "33/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5 / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/anthropic/claude-opus-5 / high/banded_L100",
+   "quote": "config: anthropic/claude-opus-5 / high | banded_L100: 33/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "$0.28",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5 / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/anthropic/claude-opus-5 / high/cost_per_attempt_L100",
+   "quote": "config: anthropic/claude-opus-5 / high | cost_per_attempt_L100: $0.28",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "anthropic/claude-opus-5.5 / high",
+   "value": "17/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5.5 / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/anthropic/claude-opus-5.5 / high/ledger_L100",
+   "quote": "config: anthropic/claude-opus-5.5 / high | ledger_L100: 17/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F68",
+   "says": "score",
+   "about": "anthropic/claude-opus-5 / high",
+   "value": "33/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row anthropic/claude-opus-5 / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/anthropic/claude-opus-5 / high/ledger_L100",
+   "quote": "config: anthropic/claude-opus-5 / high | ledger_L100: 33/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "openai/gpt-6-luna / high",
+   "value": "0/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-luna / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-6-luna / high/banded_L100",
+   "quote": "config: openai/gpt-6-luna / high | banded_L100: 0/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F70",
+   "says": "cost",
+   "about": "openai/gpt-6-luna / high",
+   "value": "$0.01",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-luna / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-6-luna / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-6-luna / high | cost_per_attempt_L100: $0.01",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "openai/gpt-6-luna / high",
+   "value": "2/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-luna / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-6-luna / high/ledger_L100",
+   "quote": "config: openai/gpt-6-luna / high | ledger_L100: 2/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F72",
+   "says": "score",
+   "about": "openai/gpt-6-sol / high",
+   "value": "32/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-sol / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-6-sol / high/banded_L100",
+   "quote": "config: openai/gpt-6-sol / high | banded_L100: 32/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F73",
+   "says": "cost",
+   "about": "openai/gpt-6-sol / high",
+   "value": "$0.06",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-sol / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-6-sol / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-6-sol / high | cost_per_attempt_L100: $0.06",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F74",
+   "says": "score",
+   "about": "openai/gpt-6-sol / high",
+   "value": "13/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-sol / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-6-sol / high/ledger_L100",
+   "quote": "config: openai/gpt-6-sol / high | ledger_L100: 13/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "1/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-luna / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-5.6-luna / high/banded_L100",
+   "quote": "config: openai/gpt-5.6-luna / high | banded_L100: 1/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F76",
+   "says": "cost",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "$0.02",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-luna / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-5.6-luna / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-5.6-luna / high | cost_per_attempt_L100: $0.02",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "openai/gpt-5.6-luna / high",
+   "value": "6/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-luna / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-5.6-luna / high/ledger_L100",
+   "quote": "config: openai/gpt-5.6-luna / high | ledger_L100: 6/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F78",
+   "says": "score",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "5/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-terra / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-5.6-terra / high/banded_L100",
+   "quote": "config: openai/gpt-5.6-terra / high | banded_L100: 5/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F79",
+   "says": "cost",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "$0.10",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-terra / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-5.6-terra / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-5.6-terra / high | cost_per_attempt_L100: $0.10",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "score",
+   "about": "openai/gpt-5.6-terra / high",
+   "value": "8/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-terra / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-5.6-terra / high/ledger_L100",
+   "quote": "config: openai/gpt-5.6-terra / high | ledger_L100: 8/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F81",
+   "says": "score",
+   "about": "openai/gpt-5.5 / high",
+   "value": "35/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.5 / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-5.5 / high/banded_L100",
+   "quote": "config: openai/gpt-5.5 / high | banded_L100: 35/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F82",
+   "says": "cost",
+   "about": "openai/gpt-5.5 / high",
+   "value": "$0.37",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.5 / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-5.5 / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-5.5 / high | cost_per_attempt_L100: $0.37",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F83",
+   "says": "score",
+   "about": "openai/gpt-5.5 / high",
+   "value": "34/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.5 / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-5.5 / high/ledger_L100",
+   "quote": "config: openai/gpt-5.5 / high | ledger_L100: 34/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F84",
+   "says": "score",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "36/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-sol / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-5.6-sol / high/banded_L100",
+   "quote": "config: openai/gpt-5.6-sol / high | banded_L100: 36/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F85",
+   "says": "cost",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "$0.27",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-sol / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-5.6-sol / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-5.6-sol / high | cost_per_attempt_L100: $0.27",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "says": "score",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "22/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-5.6-sol / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-5.6-sol / high/ledger_L100",
+   "quote": "config: openai/gpt-5.6-sol / high | ledger_L100: 22/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F87",
+   "says": "score",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "27/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row google/gemini-3.7-flash / medium / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/google/gemini-3.7-flash / medium/banded_L100",
+   "quote": "config: google/gemini-3.7-flash / medium | banded_L100: 27/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F88",
+   "says": "cost",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "$0.07",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row google/gemini-3.7-flash / medium / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/google/gemini-3.7-flash / medium/cost_per_attempt_L100",
+   "quote": "config: google/gemini-3.7-flash / medium | cost_per_attempt_L100: $0.07",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "29/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row google/gemini-3.7-flash / medium / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/google/gemini-3.7-flash / medium/ledger_L100",
+   "quote": "config: google/gemini-3.7-flash / medium | ledger_L100: 29/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "15/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row google/gemini-3.7-flash / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/google/gemini-3.7-flash / high/banded_L100",
+   "quote": "config: google/gemini-3.7-flash / high | banded_L100: 15/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F91",
+   "says": "score",
+   "about": "google/gemini-3.7-flash / high",
+   "value": "17/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row google/gemini-3.7-flash / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/google/gemini-3.7-flash / high/ledger_L100",
+   "quote": "config: google/gemini-3.7-flash / high | ledger_L100: 17/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F92",
+   "says": "score",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "31/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-flash / default / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/deepseek/deepseek-v4-flash / default/banded_L100",
+   "quote": "config: deepseek/deepseek-v4-flash / default | banded_L100: 31/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F93",
+   "says": "cost",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "$0.06",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-flash / default / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/deepseek/deepseek-v4-flash / default/cost_per_attempt_L100",
+   "quote": "config: deepseek/deepseek-v4-flash / default | cost_per_attempt_L100: $0.06",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "deepseek/deepseek-v4-flash / default",
+   "value": "34/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-flash / default / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/deepseek/deepseek-v4-flash / default/ledger_L100",
+   "quote": "config: deepseek/deepseek-v4-flash / default | ledger_L100: 34/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "31/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-pro / default / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/deepseek/deepseek-v4-pro / default/banded_L100",
+   "quote": "config: deepseek/deepseek-v4-pro / default | banded_L100: 31/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F96",
+   "says": "cost",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "$0.13",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-pro / default / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/deepseek/deepseek-v4-pro / default/cost_per_attempt_L100",
+   "quote": "config: deepseek/deepseek-v4-pro / default | cost_per_attempt_L100: $0.13",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F97",
+   "says": "score",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "30/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-v4-pro / default / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/deepseek/deepseek-v4-pro / default/ledger_L100",
+   "quote": "config: deepseek/deepseek-v4-pro / default | ledger_L100: 30/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F98",
+   "says": "score",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "33/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-flash / default / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/deepseek/deepseek-flash / default/banded_L100",
+   "quote": "config: deepseek/deepseek-flash / default | banded_L100: 33/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F99",
+   "says": "cost",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "$0.03",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-flash / default / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/deepseek/deepseek-flash / default/cost_per_attempt_L100",
+   "quote": "config: deepseek/deepseek-flash / default | cost_per_attempt_L100: $0.03",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "35/36",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row deepseek/deepseek-flash / default / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/deepseek/deepseek-flash / default/ledger_L100",
+   "quote": "config: deepseek/deepseek-flash / default | ledger_L100: 35/36",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F101",
+   "says": "score",
+   "about": "openai/gpt-6-astra / high",
+   "value": "18/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-astra / high / column banded_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "banded_L100",
+   "cell": "T1/openai/gpt-6-astra / high/banded_L100",
+   "quote": "config: openai/gpt-6-astra / high | banded_L100: 18/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F102",
+   "says": "cost",
+   "about": "openai/gpt-6-astra / high",
+   "value": "$0.31",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-astra / high / column cost_per_attempt_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "cost_per_attempt_L100",
+   "cell": "T1/openai/gpt-6-astra / high/cost_per_attempt_L100",
+   "quote": "config: openai/gpt-6-astra / high | cost_per_attempt_L100: $0.31",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F103",
+   "says": "score",
+   "about": "openai/gpt-6-astra / high",
+   "value": "18/18",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table6-L100-table2-cost.csv: one row per configuration / row openai/gpt-6-astra / high / column ledger_L100",
+   "file": "/work/.salvo14/mig/convert-zenodo-23048151/evidence/clerkbench-table6-L100-table2-cost.csv",
+   "table": "T1",
+   "column": "ledger_L100",
+   "cell": "T1/openai/gpt-6-astra / high/ledger_L100",
+   "quote": "config: openai/gpt-6-astra / high | ledger_L100: 18/18",
+   "term": "pass%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F104",
+   "says": "score",
+   "about": "openai/gpt-5.5 / high",
+   "value": "147",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row openai/gpt-5.5 / high / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/openai/gpt-5.5 / high/ClerkBench-CH6",
+   "quote": "config: openai/gpt-5.5 / high | ClerkBench-CH6: 147",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F105",
+   "says": "score",
+   "about": "deepseek/deepseek-flash / default",
+   "value": "138",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row deepseek/deepseek-flash / default / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/deepseek/deepseek-flash / default/ClerkBench-CH6",
+   "quote": "config: deepseek/deepseek-flash / default | ClerkBench-CH6: 138",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F106",
+   "says": "score",
+   "about": "openai/gpt-5.6-sol / high",
+   "value": "94",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row openai/gpt-5.6-sol / high / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/openai/gpt-5.6-sol / high/ClerkBench-CH6",
+   "quote": "config: openai/gpt-5.6-sol / high | ClerkBench-CH6: 94",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F107",
+   "says": "score",
+   "about": "google/gemini-3.7-flash / medium",
+   "value": "92",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row google/gemini-3.7-flash / medium / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/google/gemini-3.7-flash / medium/ClerkBench-CH6",
+   "quote": "config: google/gemini-3.7-flash / medium | ClerkBench-CH6: 92",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F108",
+   "says": "score",
+   "about": "deepseek/deepseek-v4-pro / default",
+   "value": "81",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row deepseek/deepseek-v4-pro / default / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/deepseek/deepseek-v4-pro / default/ClerkBench-CH6",
+   "quote": "config: deepseek/deepseek-v4-pro / default | ClerkBench-CH6: 81",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F109",
+   "says": "score",
+   "about": "openai/gpt-6-sol / high",
+   "value": "79",
+   "level": "written",
+   "form": "data-file",
+   "where": "clerkbench-table2-board.csv: Table 2 (founding-family board), one row per configuration, as printed (censored values as printed; only point values are measures) / row openai/gpt-6-sol / high / column ClerkBench-CH6",
+   "file": "/work/.salvo14/mig/head-zenodo-23048151/evidence/clerkbench-table2-board.csv",
+   "table": "T2",
+   "column": "ClerkBench-CH6",
+   "cell": "T2/openai/gpt-6-sol / high/ClerkBench-CH6",
+   "quote": "config: openai/gpt-6-sol / high | ClerkBench-CH6: 79",
+   "term": "ClerkBench-CH6",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ]
+}

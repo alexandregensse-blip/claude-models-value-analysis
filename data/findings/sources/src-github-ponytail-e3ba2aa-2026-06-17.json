@@ -1,0 +1,682 @@
+{
+ "id": "src-github-ponytail-e3ba2aa-2026-06-17",
+ "publisher": "github-ponytail",
+ "urls": [
+  "https://github.com/DietrichGebert/ponytail/blob/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/benchmarks/results/2026-06-17-cost-verification.md",
+  "https://raw.githubusercontent.com/DietrichGebert/ponytail/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/benchmarks/results/2026-06-17-cost-verification.md"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://raw.githubusercontent.com/DietrichGebert/ponytail/e3ba2aa6f1e6f0bc4d69eb09c9f0d0a93af56156/benchmarks/results/2026-06-17-cost-verification.md",
+   "captured": "2026-10-19T07:46:51Z",
+   "note": "results file at commit e3ba2aa saved by salvo g4 (mtime 19 Oct 2026); the two promptfoo configs saved with it by g4/r2 (same repo, tree sha e3ba2aa)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md": "bb32d42e5879bd0eace8169136814fe1fed0cbfb517698e6c845cb22229b0c21",
+  "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml": "fc292f68c5727f306f5ba1ce74b161631e416ce71b66a67d9241a59556c3e00d",
+  "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml": "e3bcfbf34eb148d81bfd3c985d88ea7e7f71c9989b74b9588c8136488ed18f72"
+ },
+ "harvested_at": "2026-10-19T07:46:51Z",
+ "published": {
+  "value": "2026-06-17",
+  "where": "document title",
+  "quote": "Cost verification: reproducing the \"47-77% cheaper\" claim (2026-06-17)",
+  "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results, Claude table heading",
+   "quote": "### Claude (pooled, 30 reps, USD for 5 tasks)",
+   "term": "USD"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "unit",
+   "value": "USD for 5 tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results, Claude table heading",
+   "quote": "### Claude (pooled, 30 reps, USD for 5 tasks)",
+   "term": "per-5tasks"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "Per task we take the median cost across reps, then sum the five task-medians",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Method",
+   "quote": "Per task we take the median cost across reps, then sum the five task-medians"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "run-date",
+   "value": "2026-06-17",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "document title",
+   "quote": "Cost verification: reproducing the \"47-77% cheaper\" claim (2026-06-17)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "metric-definition",
+   "value": "correctness",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table header",
+   "quote": "| model | baseline | ponytail | ponytail vs baseline | latency | correctness |"
+  },
+  {
+   "id": "F6",
+   "about": "haiku-4.5",
+   "says": "model-api-id",
+   "value": "claude-haiku-4-5-20251001",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, providers (Claude)",
+   "quote": "- id: anthropic:messages:claude-haiku-4-5-20251001",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F7",
+   "about": "haiku-4.5",
+   "says": "route",
+   "value": "anthropic",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, provider id prefix anthropic:messages:",
+   "quote": "anthropic:messages:claude-haiku-4-5-20251001",
+   "term": "maker-api"
+  },
+  {
+   "id": "F8",
+   "about": "haiku-4.5",
+   "says": "no-effort-sent",
+   "value": "config: { max_tokens: 8192, temperature: 1 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml: provider config of all three Claude models (max_tokens and temperature only; no thinking or effort parameter)",
+   "quote": "config: { max_tokens: 8192, temperature: 1 }"
+  },
+  {
+   "id": "F9",
+   "about": "haiku-4.5",
+   "says": "cost",
+   "value": "0.0299",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Haiku",
+   "quote": "| Haiku | 0.0299 | 0.0139 | 0.0110 | **63.1% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F10",
+   "about": "haiku-4.5",
+   "says": "cost",
+   "value": "0.0139",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Haiku",
+   "quote": "| Haiku | 0.0299 | 0.0139 | 0.0110 | **63.1% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F11",
+   "about": "haiku-4.5",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "TL;DR / Claude table note",
+   "quote": "ponytail correctness 100% on all three",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "haiku-4.5",
+   "says": "cost",
+   "value": "0.0110",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Haiku",
+   "quote": "| Haiku | 0.0299 | 0.0139 | 0.0110 | **63.1% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F13",
+   "about": "sonnet-4.6",
+   "says": "model-api-id",
+   "value": "claude-sonnet-4-6",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, providers (Claude)",
+   "quote": "- id: anthropic:messages:claude-sonnet-4-6",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F14",
+   "about": "sonnet-4.6",
+   "says": "route",
+   "value": "anthropic",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, provider id prefix anthropic:messages:",
+   "quote": "anthropic:messages:claude-sonnet-4-6",
+   "term": "maker-api"
+  },
+  {
+   "id": "F15",
+   "about": "sonnet-4.6",
+   "says": "no-effort-sent",
+   "value": "config: { max_tokens: 8192, temperature: 1 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml: provider config of all three Claude models (max_tokens and temperature only; no thinking or effort parameter)",
+   "quote": "config: { max_tokens: 8192, temperature: 1 }"
+  },
+  {
+   "id": "F16",
+   "about": "sonnet-4.6",
+   "says": "score",
+   "value": "76",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "TL;DR",
+   "quote": "The no-skill baseline drops to 76% on Claude Sonnet",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F17",
+   "about": "sonnet-4.6",
+   "says": "cost",
+   "value": "0.1367",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Sonnet",
+   "quote": "| Sonnet | 0.1367 | 0.0458 | 0.0348 | **74.5% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F18",
+   "about": "sonnet-4.6",
+   "says": "cost",
+   "value": "0.0458",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Sonnet",
+   "quote": "| Sonnet | 0.1367 | 0.0458 | 0.0348 | **74.5% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F19",
+   "about": "sonnet-4.6",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "TL;DR / Claude table note",
+   "quote": "ponytail correctness 100% on all three",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "sonnet-4.6",
+   "says": "cost",
+   "value": "0.0348",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Sonnet",
+   "quote": "| Sonnet | 0.1367 | 0.0458 | 0.0348 | **74.5% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F21",
+   "about": "opus-4.8",
+   "says": "model-api-id",
+   "value": "claude-opus-4-8",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, providers (Claude)",
+   "quote": "- id: anthropic:messages:claude-opus-4-8",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F22",
+   "about": "opus-4.8",
+   "says": "route",
+   "value": "anthropic",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml, provider id prefix anthropic:messages:",
+   "quote": "anthropic:messages:claude-opus-4-8",
+   "term": "maker-api"
+  },
+  {
+   "id": "F23",
+   "about": "opus-4.8",
+   "says": "no-effort-sent",
+   "value": "config: { max_tokens: 8192, temperature: 1 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.yaml",
+   "where": "promptfooconfig.yaml: provider config of all three Claude models (max_tokens and temperature only; no thinking or effort parameter)",
+   "quote": "config: { max_tokens: 8192, temperature: 1 }"
+  },
+  {
+   "id": "F24",
+   "about": "opus-4.8",
+   "says": "cost",
+   "value": "0.1368",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Opus",
+   "quote": "| Opus | 0.1368 | 0.0724 | 0.0789 | **42.3% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F25",
+   "about": "opus-4.8",
+   "says": "cost",
+   "value": "0.0724",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Opus",
+   "quote": "| Opus | 0.1368 | 0.0724 | 0.0789 | **42.3% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F26",
+   "about": "opus-4.8",
+   "says": "score",
+   "value": "100",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "TL;DR / Claude table note",
+   "quote": "ponytail correctness 100% on all three",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F27",
+   "about": "opus-4.8",
+   "says": "cost",
+   "value": "0.0789",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row Opus",
+   "quote": "| Opus | 0.1368 | 0.0724 | 0.0789 | **42.3% cheaper** |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F28",
+   "about": "gpt-4.1-mini",
+   "says": "model-api-id",
+   "value": "gpt-4.1-mini",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, providers",
+   "quote": "- id: openai:gpt-4.1-mini",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F29",
+   "about": "gpt-4.1-mini",
+   "says": "route",
+   "value": "openai",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, provider id prefix openai:",
+   "quote": "- id: openai:gpt-4.1-mini",
+   "term": "maker-api"
+  },
+  {
+   "id": "F30",
+   "about": "gpt-4.1-mini",
+   "says": "no-effort-sent",
+   "value": "config: { max_tokens: 8192, temperature: 1 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml: provider config of gpt-4.1-mini (token cap only, temperature; no reasoning parameter)",
+   "quote": "config: { max_tokens: 8192, temperature: 1 }"
+  },
+  {
+   "id": "F31",
+   "about": "gpt-4.1-mini",
+   "says": "model-name",
+   "value": "gpt-4.1-mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results, OpenAI table, model column",
+   "quote": "| gpt-4.1-mini | 0.0026 | 0.0015 | **39.6% cheaper** | 2.5x faster | 100% |"
+  },
+  {
+   "id": "F32",
+   "about": "gpt-4.1-mini",
+   "says": "cost",
+   "value": "0.0026",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-4.1-mini",
+   "quote": "| gpt-4.1-mini | 0.0026 | 0.0015 | **39.6% cheaper** | 2.5x faster | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F33",
+   "about": "gpt-4.1-mini",
+   "says": "score",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "OpenAI table, correctness column",
+   "quote": "| gpt-4.1-mini | 0.0026 | 0.0015 | **39.6% cheaper** | 2.5x faster | 100% |",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "gpt-4.1-mini",
+   "says": "cost",
+   "value": "0.0015",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-4.1-mini",
+   "quote": "| gpt-4.1-mini | 0.0026 | 0.0015 | **39.6% cheaper** | 2.5x faster | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F35",
+   "about": "gpt-5.4-mini",
+   "says": "model-api-id",
+   "value": "gpt-5.4-mini",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, providers",
+   "quote": "- id: openai:gpt-5.4-mini",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F36",
+   "about": "gpt-5.4-mini",
+   "says": "route",
+   "value": "openai",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, provider id prefix openai:",
+   "quote": "- id: openai:gpt-5.4-mini",
+   "term": "maker-api"
+  },
+  {
+   "id": "F37",
+   "about": "gpt-5.4-mini",
+   "says": "no-effort-sent",
+   "value": "config: { max_completion_tokens: 8192 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml: provider config of gpt-5.4-mini (token cap only; no reasoning parameter)",
+   "quote": "config: { max_completion_tokens: 8192 }"
+  },
+  {
+   "id": "F38",
+   "about": "gpt-5.4-mini",
+   "says": "model-name",
+   "value": "gpt-5.4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results, OpenAI table, model column",
+   "quote": "| gpt-5.4-mini | 0.0060 | 0.0075 | **26.2% more expensive** | 1.5x faster | 100% |"
+  },
+  {
+   "id": "F39",
+   "about": "gpt-5.4-mini",
+   "says": "cost",
+   "value": "0.0060",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-5.4-mini",
+   "quote": "| gpt-5.4-mini | 0.0060 | 0.0075 | **26.2% more expensive** | 1.5x faster | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F40",
+   "about": "gpt-5.4-mini",
+   "says": "score",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "OpenAI table, correctness column",
+   "quote": "| gpt-5.4-mini | 0.0060 | 0.0075 | **26.2% more expensive** | 1.5x faster | 100% |",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F41",
+   "about": "gpt-5.4-mini",
+   "says": "cost",
+   "value": "0.0075",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-5.4-mini",
+   "quote": "| gpt-5.4-mini | 0.0060 | 0.0075 | **26.2% more expensive** | 1.5x faster | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F42",
+   "about": "gpt-5.5",
+   "says": "model-api-id",
+   "value": "gpt-5.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, providers",
+   "quote": "- id: openai:gpt-5.5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F43",
+   "about": "gpt-5.5",
+   "says": "route",
+   "value": "openai",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml, provider id prefix openai:",
+   "quote": "- id: openai:gpt-5.5",
+   "term": "maker-api"
+  },
+  {
+   "id": "F44",
+   "about": "gpt-5.5",
+   "says": "no-effort-sent",
+   "value": "config: { max_completion_tokens: 8192 }",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/promptfooconfig.gpt-newest.yaml",
+   "where": "promptfooconfig.gpt-newest.yaml: provider config of gpt-5.5 (token cap only; no reasoning parameter)",
+   "quote": "config: { max_completion_tokens: 8192 }"
+  },
+  {
+   "id": "F45",
+   "about": "gpt-5.5",
+   "says": "model-name",
+   "value": "gpt-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results, OpenAI table, model column",
+   "quote": "| gpt-5.5 | 0.0714 | 0.0990 | **38.7% more expensive** | 0.9x (slower) | 100% |"
+  },
+  {
+   "id": "F46",
+   "about": "gpt-5.5",
+   "says": "cost",
+   "value": "0.0714",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-5.5",
+   "quote": "| gpt-5.5 | 0.0714 | 0.0990 | **38.7% more expensive** | 0.9x (slower) | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F47",
+   "about": "gpt-5.5",
+   "says": "score",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "OpenAI table, correctness column",
+   "quote": "| gpt-5.5 | 0.0714 | 0.0990 | **38.7% more expensive** | 0.9x (slower) | 100% |",
+   "term": "correct%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "about": "gpt-5.5",
+   "says": "cost",
+   "value": "0.0990",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-ponytail/evidence/2026-06-17-cost-verification.md",
+   "where": "Results table, row gpt-5.5",
+   "quote": "| gpt-5.5 | 0.0714 | 0.0990 | **38.7% more expensive** | 0.9x (slower) | 100% |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  }
+ ]
+}

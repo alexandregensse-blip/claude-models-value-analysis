@@ -1,0 +1,549 @@
+{
+ "id": "src-dinobase-report-4ac17e783d-2026-04-01",
+ "publisher": "dinobase",
+ "urls": [
+  "https://github.com/kappa90/dinobase/blob/main/benchmarks/results/REPORT.md"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "799d628048",
+   "captured": "2026-03-28T10:02:31Z",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-799d628048.md",
+   "url": "https://github.com/kappa90/dinobase/blob/799d628048/benchmarks/results/REPORT.md",
+   "note": "first version of REPORT.md (same scores; adds token and cost columns)"
+  },
+  {
+   "id": "G2",
+   "kind": "commit",
+   "commit": "4ac17e783d",
+   "captured": "2026-04-01T15:32:20Z",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "url": "https://github.com/kappa90/dinobase/blob/4ac17e783d/benchmarks/results/REPORT.md",
+   "note": "REPORT.md at 4ac17e783d (still HEAD of main on 27 Oct 2026)"
+  }
+ ],
+ "commit": "4ac17e783d",
+ "sha256": {
+  "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md": "4711fd94240d852b98ca03eb028944fd870226a263adf5e565d759a51f63a67f",
+  "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-799d628048.md": "49a848d74042013244cff05fc9fe45d201aa3ef47e3bd15ddd290324f742856e"
+ },
+ "harvested_at": "2026-10-27T11:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "route",
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Methodology section (the earlier commit 799d628048 states: 'All models via OpenRouter')",
+   "quote": "- **Total benchmark cost**: $29.44 via OpenRouter",
+   "term": "openrouter"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "judge",
+   "value": "LLM-as-judge (Claude Haiku 4.5) for remainder",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Methodology section: ~40% of the questions are judged by Claude Haiku 4.5 (the rest deterministic)",
+   "quote": "LLM-as-judge (Claude Haiku 4.5) for remainder"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "aggregation",
+   "value": "15 RevOps questions",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "header: one run per model and approach on the 15 questions",
+   "quote": "**11 models** · **15 RevOps questions** · HubSpot CRM + Stripe billing"
+  },
+  {
+   "id": "F4",
+   "about": "Claude Opus 4.6",
+   "says": "model-name",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Opus 4.6",
+   "quote": "| Claude Opus 4.6 | **100%** (15/15) | 33% (5/15) | +67pp | 24s | 235s | $0.081 | $1.646 |"
+  },
+  {
+   "id": "F5",
+   "about": "Claude Opus 4.6",
+   "says": "score",
+   "value": "15/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Opus 4.6, column SQL Accuracy ('**100%** (15/15)')",
+   "quote": "| Claude Opus 4.6 | **100%** (15/15) | 33% (5/15) | +67pp | 24s | 235s | $0.081 | $1.646 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F6",
+   "about": "Claude Opus 4.6",
+   "says": "score",
+   "value": "5/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Opus 4.6, column MCP Accuracy ('33% (5/15)')",
+   "quote": "| Claude Opus 4.6 | **100%** (15/15) | 33% (5/15) | +67pp | 24s | 235s | $0.081 | $1.646 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F7",
+   "about": "Claude Sonnet 4.6",
+   "says": "model-name",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Sonnet 4.6",
+   "quote": "| Claude Sonnet 4.6 | **100%** (15/15) | 53% (8/15) | +47pp | 19s | 32s | $0.046 | $0.661 |"
+  },
+  {
+   "id": "F8",
+   "about": "Claude Sonnet 4.6",
+   "says": "score",
+   "value": "15/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Sonnet 4.6, column SQL Accuracy ('**100%** (15/15)')",
+   "quote": "| Claude Sonnet 4.6 | **100%** (15/15) | 53% (8/15) | +47pp | 19s | 32s | $0.046 | $0.661 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F9",
+   "about": "Claude Sonnet 4.6",
+   "says": "score",
+   "value": "8/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Sonnet 4.6, column MCP Accuracy ('53% (8/15)')",
+   "quote": "| Claude Sonnet 4.6 | **100%** (15/15) | 53% (8/15) | +47pp | 19s | 32s | $0.046 | $0.661 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F10",
+   "about": "Claude Haiku 4.5",
+   "says": "model-name",
+   "value": "Claude Haiku 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Haiku 4.5",
+   "quote": "| Claude Haiku 4.5 | **93%** (14/15) | 33% (5/15) | +60pp | 10s | 10s | $0.020 | $0.149 |"
+  },
+  {
+   "id": "F11",
+   "about": "Claude Haiku 4.5",
+   "says": "score",
+   "value": "14/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Haiku 4.5, column SQL Accuracy ('**93%** (14/15)')",
+   "quote": "| Claude Haiku 4.5 | **93%** (14/15) | 33% (5/15) | +60pp | 10s | 10s | $0.020 | $0.149 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F12",
+   "about": "Claude Haiku 4.5",
+   "says": "score",
+   "value": "5/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Claude Haiku 4.5, column MCP Accuracy ('33% (5/15)')",
+   "quote": "| Claude Haiku 4.5 | **93%** (14/15) | 33% (5/15) | +60pp | 10s | 10s | $0.020 | $0.149 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F13",
+   "about": "DeepSeek V3.2",
+   "says": "model-name",
+   "value": "DeepSeek V3.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row DeepSeek V3.2",
+   "quote": "| DeepSeek V3.2 | **93%** (14/15) | 20% (3/15) | +73pp | 135s | 256s | $0.012 | $0.141 |"
+  },
+  {
+   "id": "F14",
+   "about": "DeepSeek V3.2",
+   "says": "score",
+   "value": "14/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row DeepSeek V3.2, column SQL Accuracy ('**93%** (14/15)')",
+   "quote": "| DeepSeek V3.2 | **93%** (14/15) | 20% (3/15) | +73pp | 135s | 256s | $0.012 | $0.141 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F15",
+   "about": "DeepSeek V3.2",
+   "says": "score",
+   "value": "3/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row DeepSeek V3.2, column MCP Accuracy ('20% (3/15)')",
+   "quote": "| DeepSeek V3.2 | **93%** (14/15) | 20% (3/15) | +73pp | 135s | 256s | $0.012 | $0.141 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F16",
+   "about": "GLM-5 Turbo",
+   "says": "model-name",
+   "value": "GLM-5 Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GLM-5 Turbo",
+   "quote": "| GLM-5 Turbo | **93%** (14/15) | 20% (3/15) | +73pp | 12s | 56s | $0.012 | $0.824 |"
+  },
+  {
+   "id": "F17",
+   "about": "GLM-5 Turbo",
+   "says": "score",
+   "value": "14/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GLM-5 Turbo, column SQL Accuracy ('**93%** (14/15)')",
+   "quote": "| GLM-5 Turbo | **93%** (14/15) | 20% (3/15) | +73pp | 12s | 56s | $0.012 | $0.824 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F18",
+   "about": "GLM-5 Turbo",
+   "says": "score",
+   "value": "3/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GLM-5 Turbo, column MCP Accuracy ('20% (3/15)')",
+   "quote": "| GLM-5 Turbo | **93%** (14/15) | 20% (3/15) | +73pp | 12s | 56s | $0.012 | $0.824 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F19",
+   "about": "MiniMax M2.7",
+   "says": "model-name",
+   "value": "MiniMax M2.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row MiniMax M2.7",
+   "quote": "| MiniMax M2.7 | **93%** (14/15) | 27% (4/15) | +67pp | 24s | 98s | $0.005 | $0.131 |"
+  },
+  {
+   "id": "F20",
+   "about": "MiniMax M2.7",
+   "says": "score",
+   "value": "14/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row MiniMax M2.7, column SQL Accuracy ('**93%** (14/15)')",
+   "quote": "| MiniMax M2.7 | **93%** (14/15) | 27% (4/15) | +67pp | 24s | 98s | $0.005 | $0.131 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F21",
+   "about": "MiniMax M2.7",
+   "says": "score",
+   "value": "4/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row MiniMax M2.7, column MCP Accuracy ('27% (4/15)')",
+   "quote": "| MiniMax M2.7 | **93%** (14/15) | 27% (4/15) | +67pp | 24s | 98s | $0.005 | $0.131 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F22",
+   "about": "Gemini 3 Flash",
+   "says": "model-name",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3 Flash",
+   "quote": "| Gemini 3 Flash | **87%** (13/15) | 33% (5/15) | +53pp | 8s | 9s | $0.005 | $0.039 |"
+  },
+  {
+   "id": "F23",
+   "about": "Gemini 3 Flash",
+   "says": "score",
+   "value": "13/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3 Flash, column SQL Accuracy ('**87%** (13/15)')",
+   "quote": "| Gemini 3 Flash | **87%** (13/15) | 33% (5/15) | +53pp | 8s | 9s | $0.005 | $0.039 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F24",
+   "about": "Gemini 3 Flash",
+   "says": "score",
+   "value": "5/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3 Flash, column MCP Accuracy ('33% (5/15)')",
+   "quote": "| Gemini 3 Flash | **87%** (13/15) | 33% (5/15) | +53pp | 8s | 9s | $0.005 | $0.039 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F25",
+   "about": "Gemini 3.1 Pro",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3.1 Pro",
+   "quote": "| Gemini 3.1 Pro | **87%** (13/15) | 40% (6/15) | +47pp | 42s | 86s | $0.059 | $0.822 |"
+  },
+  {
+   "id": "F26",
+   "about": "Gemini 3.1 Pro",
+   "says": "score",
+   "value": "13/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3.1 Pro, column SQL Accuracy ('**87%** (13/15)')",
+   "quote": "| Gemini 3.1 Pro | **87%** (13/15) | 40% (6/15) | +47pp | 42s | 86s | $0.059 | $0.822 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Gemini 3.1 Pro",
+   "says": "score",
+   "value": "6/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Gemini 3.1 Pro, column MCP Accuracy ('40% (6/15)')",
+   "quote": "| Gemini 3.1 Pro | **87%** (13/15) | 40% (6/15) | +47pp | 42s | 86s | $0.059 | $0.822 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F28",
+   "about": "GPT 5.4",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GPT 5.4",
+   "quote": "| GPT 5.4 | **87%** (13/15) | 40% (6/15) | +47pp | 11s | 9s | $0.036 | $0.278 |"
+  },
+  {
+   "id": "F29",
+   "about": "GPT 5.4",
+   "says": "score",
+   "value": "13/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GPT 5.4, column SQL Accuracy ('**87%** (13/15)')",
+   "quote": "| GPT 5.4 | **87%** (13/15) | 40% (6/15) | +47pp | 11s | 9s | $0.036 | $0.278 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F30",
+   "about": "GPT 5.4",
+   "says": "score",
+   "value": "6/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row GPT 5.4, column MCP Accuracy ('40% (6/15)')",
+   "quote": "| GPT 5.4 | **87%** (13/15) | 40% (6/15) | +47pp | 11s | 9s | $0.036 | $0.278 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F31",
+   "about": "Qwen 3.5 27B",
+   "says": "model-name",
+   "value": "Qwen 3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Qwen 3.5 27B",
+   "quote": "| Qwen 3.5 27B | **87%** (13/15) | 33% (5/15) | +53pp | 15s | 198s | $0.004 | $0.056 |"
+  },
+  {
+   "id": "F32",
+   "about": "Qwen 3.5 27B",
+   "says": "score",
+   "value": "13/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Qwen 3.5 27B, column SQL Accuracy ('**87%** (13/15)')",
+   "quote": "| Qwen 3.5 27B | **87%** (13/15) | 33% (5/15) | +53pp | 15s | 198s | $0.004 | $0.056 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F33",
+   "about": "Qwen 3.5 27B",
+   "says": "score",
+   "value": "5/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Qwen 3.5 27B, column MCP Accuracy ('33% (5/15)')",
+   "quote": "| Qwen 3.5 27B | **87%** (13/15) | 33% (5/15) | +53pp | 15s | 198s | $0.004 | $0.056 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F34",
+   "about": "Kimi K2.5",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Kimi K2.5",
+   "quote": "| Kimi K2.5 | **80%** (12/15) | 47% (7/15) | +33pp | 71s | 175s | $0.013 | $0.084 |"
+  },
+  {
+   "id": "F35",
+   "about": "Kimi K2.5",
+   "says": "score",
+   "value": "12/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Kimi K2.5, column SQL Accuracy ('**80%** (12/15)')",
+   "quote": "| Kimi K2.5 | **80%** (12/15) | 47% (7/15) | +33pp | 71s | 175s | $0.013 | $0.084 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F36",
+   "about": "Kimi K2.5",
+   "says": "score",
+   "value": "7/15",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-dinobase/evidence/REPORT-4ac17e783d.md",
+   "where": "Per-Model Results, row Kimi K2.5, column MCP Accuracy ('47% (7/15)')",
+   "quote": "| Kimi K2.5 | **80%** (12/15) | 47% (7/15) | +33pp | 71s | 175s | $0.013 | $0.084 |",
+   "term": "accuracy%",
+   "scale": "counts",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ]
+}

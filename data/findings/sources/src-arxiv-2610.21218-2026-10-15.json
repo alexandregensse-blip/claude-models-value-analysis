@@ -1,0 +1,340 @@
+{
+ "id": "src-arxiv-2610.21218-2026-10-15",
+ "publisher": "arxiv-2610.21218",
+ "urls": [
+  "https://arxiv.org/abs/2610.21218"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2610.21218",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "note": "saved 9 Nov 2026 by the research agent (salvo s6); sha256 of the copy as in the research file"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html": "efeaab239e97206a41d11d9861b3109cd4daa17e5eca7600c6be651b4dfdd14c"
+ },
+ "harvested_at": "2026-11-09T12:00:00Z",
+ "published": {
+  "value": "2026-10-15",
+  "where": "arXiv stamp on the saved copy",
+  "quote": "arXiv:2610.21218v1 [cs.AI] 15 Oct 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-google-2",
+ "agent": "convertisseur k-google-2 (Sonnet 5.5), lecture ligne par ligne",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "OpenRouter",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "3.1 Experimental Configuration",
+   "quote": "Per-case cost is calculated via the USD charge that OpenRouter reports for the episode’s API calls.",
+   "term": "openrouter",
+   "note": "models are called through OpenRouter (the Foundation Model lever is \"any OpenRouter model identifier\"); a router, not an API of the maker"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "browser-use",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "2.1 The Onboarding Loop (Harness lever)",
+   "quote": "For our experiments, the harness refers to the browser-use harness [ 10 ]",
+   "note": "stock baselines = model + the prompt of Nie et al. + the unmodified browser-use harness"
+  },
+  {
+   "id": "F3",
+   "says": "judge",
+   "about": null,
+   "value": "gpt-oss-120B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "3.1 Experimental Configuration",
+   "quote": "We use OpenAI’s gpt-oss-120B as the foundation model for the judge that determines correctness of responses.",
+   "note": "judge at temperature 0.0 for the correctness of halting reasons"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": null,
+   "value": "late July and early August",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "3.1 Experimental Configuration",
+   "quote": "All Onboarding runs were performed in late July and early August, and model identifiers refer to OpenRouter’s catalog at that time.",
+   "note": "run period late July / early August 2026 (before 15 Oct 2026: HORS FENETRE); model identifiers as of the OpenRouter catalog at that time (GA or preview not stated for Gemini 3.1 Flash-Lite: doubt on the registry key)"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "Every run starts from a large baseline: Gemini 3.5 Flash with the prompt from Nie et al. [ 11 ] and an unmodified harness ($0.94 per case).",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "3.1 Experimental Configuration",
+   "quote": "Every run starts from a large baseline: Gemini 3.5 Flash with the prompt from Nie et al. [ 11 ] and an unmodified harness ($0.94 per case).",
+   "note": "text rounds the stock cost to $0.94 per case (Table 3: 0.934)"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "Validation results ( Section 2.2 ) of the Onboarded candidates at β = $ 0.04 \\beta=\\$0.04 and the stock baselines.",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 caption",
+   "quote": "Table 3: Validation results ( Section 2.2 ) of the Onboarded candidates at β = $ 0.04 \\beta=\\$0.04 and the stock baselines.",
+   "note": "Table 3: validation on the 200-case set; S = score (mean success rate over valid and deficient classes, equally weighted), MFA = mean form-field accuracy over valid cases (unsubmitted valid cases count 0), CH = percentage of deficient cases correctly halted; near-perfect submissions have exactly 36 of 37 fields correct"
+  },
+  {
+   "id": "F7",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 header",
+   "quote": "Candidate S S MFA CH Perfect subs. (/39) Near-perfect subs. (/39) $​/case",
+   "term": "USD",
+   "note": "column header $/case"
+  },
+  {
+   "id": "F8",
+   "says": "unit",
+   "about": null,
+   "value": "/case",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 header",
+   "quote": "Candidate S S MFA CH Perfect subs. (/39) Near-perfect subs. (/39) $​/case",
+   "term": "per-episode",
+   "note": "cost per case (one episode per case; the vocabulary term is per-episode), as reported by OpenRouter for the episode's API calls"
+  },
+  {
+   "id": "F9",
+   "says": "cost-basis",
+   "about": null,
+   "value": "USD charge that OpenRouter reports",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "3.1 Experimental Configuration",
+   "quote": "Per-case cost is calculated via the USD charge that OpenRouter reports for the episode’s API calls.",
+   "term": "router-billed",
+   "note": "cost per case = the USD charge that OpenRouter reports for the episode's API calls"
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "about": "Gemini 3.5 Flash",
+   "value": "Gemini 3.5 Flash submits only 6 of 180 cases and wrongly withholds 38 of the 39 valid ones",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Discussion",
+   "quote": "Gemini 3.5 Flash submits only 6 of 180 cases and wrongly withholds 38 of the 39 valid ones",
+   "note": "ADDED from the copy: behaviour of the stock Gemini 3.5 Flash (submits 6 of 180 cases, wrongly withholds 38 of the 39 valid ones); also \"evaluating a model like Gemini 3.5 Flash on the 200-case set takes around $190\""
+  },
+  {
+   "id": "F11",
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock)",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "Gemini 3.5 Flash",
+   "value": "0.934",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column $/case",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "0.319",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column S",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "term": "success score (S)",
+   "scale": "fraction"
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "0.024",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column MFA",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "term": "MFA",
+   "scale": "fraction"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "0.638",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column CH",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "term": "CH",
+   "scale": "fraction"
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column Perfect submissions",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "term": "perfect submissions (of 39)",
+   "scale": "raw"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.5 Flash (stock), column Near-perfect submissions",
+   "quote": "Gemini 3.5 Flash (stock) 0.319 0.024 0.638 0 0 0.934",
+   "term": "near-perfect submissions (of 39)",
+   "scale": "raw"
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "Gemini 3.1 Flash-Lite",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock)",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041"
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0.041",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column $/case",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column S",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "term": "success score (S)",
+   "scale": "fraction"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0.393",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column MFA",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "term": "MFA",
+   "scale": "fraction"
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0.000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column CH",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "term": "CH",
+   "scale": "fraction"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column Perfect submissions",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "term": "perfect submissions (of 39)",
+   "scale": "raw"
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "Gemini 3.1 Flash-Lite",
+   "value": "0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-google/arxiv_2610.21218.html",
+   "where": "Table 3 (validation results of the Onboarded candidates at beta = $0.04 and the stock baselines), row Gemini 3.1 Flash-Lite (stock), column Near-perfect submissions",
+   "quote": "Gemini 3.1 Flash-Lite (stock) 0.000 0.393 0.000 0 0 0.041",
+   "term": "near-perfect submissions (of 39)",
+   "scale": "raw"
+  }
+ ]
+}

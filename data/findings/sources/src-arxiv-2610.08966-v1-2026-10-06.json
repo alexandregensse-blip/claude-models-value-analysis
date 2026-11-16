@@ -1,0 +1,2076 @@
+{
+ "id": "src-arxiv-2610.08966-v1-2026-10-06",
+ "publisher": "arxiv-2610.08966",
+ "urls": [
+  "https://arxiv.org/abs/2610.08966",
+  "https://arxiv.org/html/2610.08966v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2610.08966v1",
+   "captured": "2026-10-27",
+   "note": "arXiv HTML v1 (stamp 'arXiv:2610.08966v1 [cs.AI] 06 Oct 2026') re-fetched on 27 Oct 2026 (the earlier text copy of salvo s23/b3 has the same tables, one cell per line)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.html": "c1e84d5f0654488cbba5040a2118881c41ade277f3da32a540a42d08403e14ba",
+  "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt": "c809b7af0c8d3218b9f64216883ad99a23147295fb424b912984ea1a22020c47"
+ },
+ "harvested_at": "2026-10-27T10:30:00Z",
+ "published": {
+  "value": "2026-10-06",
+  "where": "arXiv stamp",
+  "quote": "arXiv:2610.08966v1 [cs.AI] 06 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the arXiv HTML, one block per line, every table row on one line with cells joined by ' | ', MathML annotations dropped"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "aggregation",
+   "value": "Ai=3 for every model in Table 1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Appendix C.4 Metrics: pass@1 averages three attempts per task for the Table 1 models",
+   "quote": "Ai=3 for every model in Table 1, except where a provider error left fewer usable attempts"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "Reasoning effort is run at the highest level each deployment honours when possible. The effort listed is the one used for the main table.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Appendix C.1 Model configurations (above Table 5)",
+   "quote": "Reasoning effort is run at the highest level each deployment honours when possible. The effort listed is the one used for the main table."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "Temperature and top-p are never set",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Appendix C.1",
+   "quote": "Temperature and top-p are never set: we omit both from the request so that each provider’s own default applies."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "judge",
+   "value": "Claude-Opus-5 (the primary judge)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.4, Effects of different judge models",
+   "quote": "Claude-Opus-5 (the primary judge)"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "unit",
+   "value": "mean thinking and answer tokens per task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1 caption",
+   "quote": "think-tok / ans-tok are mean thinking and answer tokens per task",
+   "term": "per-task"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "reasoning-included-in-out",
+   "value": "think-tok / ans-tok are mean thinking and answer tokens per task",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1 caption: thinking and answer tokens are two separate counts",
+   "quote": "think-tok / ans-tok are mean thinking and answer tokens per task",
+   "term": "false"
+  },
+  {
+   "id": "F7",
+   "about": "GPT-6-astra",
+   "says": "score",
+   "value": "53.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-astra (max), column pass@1",
+   "quote": "OpenAI | GPT-6-astra (max) | 53.6 ± 4.1 | 55.6 | 51.1 | 58.2 | 53.6 | 46.1 | 55.6 | 2,896 | 40",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "about": "GPT-6-astra",
+   "says": "model-name",
+   "value": "GPT-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-astra, column Model",
+   "quote": "OpenAI | GPT-6-astra | openai/gpt-6-astra | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F9",
+   "about": "GPT-6-astra",
+   "says": "model-api-id",
+   "value": "openai/gpt-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-astra, column Endpoint (the identifier sent to the proxy)",
+   "quote": "OpenAI | GPT-6-astra | openai/gpt-6-astra | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F10",
+   "about": "GPT-6-astra",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-astra, column Effort (and the label '(max)' of Table 1)",
+   "quote": "OpenAI | GPT-6-astra | openai/gpt-6-astra | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F11",
+   "about": "GPT-6-astra",
+   "says": "tokens-reasoning",
+   "value": "2,896",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-astra (max), column think-tok",
+   "quote": "OpenAI | GPT-6-astra (max) | 53.6 ± 4.1 | 55.6 | 51.1 | 58.2 | 53.6 | 46.1 | 55.6 | 2,896 | 40",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "GPT-6-astra",
+   "says": "tokens-out",
+   "value": "40",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-astra (max), column ans-tok",
+   "quote": "OpenAI | GPT-6-astra (max) | 53.6 ± 4.1 | 55.6 | 51.1 | 58.2 | 53.6 | 46.1 | 55.6 | 2,896 | 40",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F13",
+   "about": "GPT-6.1-sol",
+   "says": "score",
+   "value": "46.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6.1-sol (max), column pass@1",
+   "quote": "GPT-6.1-sol (max) | 46.6 ¯ ± 3.8 | 45.5 | 47.9 ¯ | 55.2 ¯ | 45.8 ¯ | 36.4 | 47.4 | 2,298 | 36",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "GPT-6.1-sol",
+   "says": "model-name",
+   "value": "GPT-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6.1-sol, column Model",
+   "quote": "GPT-6.1-sol | openai/gpt-6.1-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F15",
+   "about": "GPT-6.1-sol",
+   "says": "model-api-id",
+   "value": "openai/gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6.1-sol, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-6.1-sol | openai/gpt-6.1-sol | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F16",
+   "about": "GPT-6.1-sol",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6.1-sol, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-6.1-sol | openai/gpt-6.1-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F17",
+   "about": "GPT-6.1-sol",
+   "says": "tokens-reasoning",
+   "value": "2,298",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6.1-sol (max), column think-tok",
+   "quote": "GPT-6.1-sol (max) | 46.6 ¯ ± 3.8 | 45.5 | 47.9 ¯ | 55.2 ¯ | 45.8 ¯ | 36.4 | 47.4 | 2,298 | 36",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F18",
+   "about": "GPT-6.1-sol",
+   "says": "tokens-out",
+   "value": "36",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6.1-sol (max), column ans-tok",
+   "quote": "GPT-6.1-sol (max) | 46.6 ¯ ± 3.8 | 45.5 | 47.9 ¯ | 55.2 ¯ | 45.8 ¯ | 36.4 | 47.4 | 2,298 | 36",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F19",
+   "about": "GPT-6-sol",
+   "says": "score",
+   "value": "31.2",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-sol (max), column pass@1",
+   "quote": "GPT-6-sol (max) | 31.2 ± 3.4 | 31.8 | 30.5 | 38.1 | 28.6 | 22.4 | 36.3 | 3,298 | 30",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "GPT-6-sol",
+   "says": "model-name",
+   "value": "GPT-6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-sol, column Model",
+   "quote": "GPT-6-sol | openai/gpt-6-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F21",
+   "about": "GPT-6-sol",
+   "says": "model-api-id",
+   "value": "openai/gpt-6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-sol, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-6-sol | openai/gpt-6-sol | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F22",
+   "about": "GPT-6-sol",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-sol, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-6-sol | openai/gpt-6-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F23",
+   "about": "GPT-6-sol",
+   "says": "tokens-reasoning",
+   "value": "3,298",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-sol (max), column think-tok",
+   "quote": "GPT-6-sol (max) | 31.2 ± 3.4 | 31.8 | 30.5 | 38.1 | 28.6 | 22.4 | 36.3 | 3,298 | 30",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F24",
+   "about": "GPT-6-sol",
+   "says": "tokens-out",
+   "value": "30",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-sol (max), column ans-tok",
+   "quote": "GPT-6-sol (max) | 31.2 ± 3.4 | 31.8 | 30.5 | 38.1 | 28.6 | 22.4 | 36.3 | 3,298 | 30",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F25",
+   "about": "GPT-5.6-sol",
+   "says": "score",
+   "value": "30.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-sol (max), column pass@1",
+   "quote": "GPT-5.6-sol (max) | 30.0 ± 3.3 | 28.5 | 31.9 | 38.6 | 26.3 | 27.3 | 28.1 | 3,630 | 39",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "about": "GPT-5.6-sol",
+   "says": "model-name",
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-sol, column Model",
+   "quote": "GPT-5.6-sol | openai/gpt-5.6-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F27",
+   "about": "GPT-5.6-sol",
+   "says": "model-api-id",
+   "value": "openai/gpt-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-sol, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-5.6-sol | openai/gpt-5.6-sol | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F28",
+   "about": "GPT-5.6-sol",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-sol, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-5.6-sol | openai/gpt-5.6-sol | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F29",
+   "about": "GPT-5.6-sol",
+   "says": "tokens-reasoning",
+   "value": "3,630",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-sol (max), column think-tok",
+   "quote": "GPT-5.6-sol (max) | 30.0 ± 3.3 | 28.5 | 31.9 | 38.6 | 26.3 | 27.3 | 28.1 | 3,630 | 39",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F30",
+   "about": "GPT-5.6-sol",
+   "says": "tokens-out",
+   "value": "39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-sol (max), column ans-tok",
+   "quote": "GPT-5.6-sol (max) | 30.0 ± 3.3 | 28.5 | 31.9 | 38.6 | 26.3 | 27.3 | 28.1 | 3,630 | 39",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F31",
+   "about": "GPT-5.6-terra",
+   "says": "score",
+   "value": "22.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-terra (max), column pass@1",
+   "quote": "GPT-5.6-terra (max) | 22.7 ± 3.2 | 24.1 | 20.9 | 28.4 | 21.0 | 19.1 | 21.9 | 5,794 | 45",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "about": "GPT-5.6-terra",
+   "says": "model-name",
+   "value": "GPT-5.6-terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-terra, column Model",
+   "quote": "GPT-5.6-terra | openai/gpt-5.6-terra | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F33",
+   "about": "GPT-5.6-terra",
+   "says": "model-api-id",
+   "value": "openai/gpt-5.6-terra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-terra, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-5.6-terra | openai/gpt-5.6-terra | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F34",
+   "about": "GPT-5.6-terra",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-terra, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-5.6-terra | openai/gpt-5.6-terra | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F35",
+   "about": "GPT-5.6-terra",
+   "says": "tokens-reasoning",
+   "value": "5,794",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-terra (max), column think-tok",
+   "quote": "GPT-5.6-terra (max) | 22.7 ± 3.2 | 24.1 | 20.9 | 28.4 | 21.0 | 19.1 | 21.9 | 5,794 | 45",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F36",
+   "about": "GPT-5.6-terra",
+   "says": "tokens-out",
+   "value": "45",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-terra (max), column ans-tok",
+   "quote": "GPT-5.6-terra (max) | 22.7 ± 3.2 | 24.1 | 20.9 | 28.4 | 21.0 | 19.1 | 21.9 | 5,794 | 45",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F37",
+   "about": "GPT-5.6-luna",
+   "says": "score",
+   "value": "21.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-luna (max), column pass@1",
+   "quote": "GPT-5.6-luna (max) | 21.6 ± 3.2 | 23.5 | 19.4 | 26.9 | 24.6 | 13.3 | 18.6 | 5,146 | 42",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "about": "GPT-5.6-luna",
+   "says": "model-name",
+   "value": "GPT-5.6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-luna, column Model",
+   "quote": "GPT-5.6-luna | openai/gpt-5.6-luna | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F39",
+   "about": "GPT-5.6-luna",
+   "says": "model-api-id",
+   "value": "openai/gpt-5.6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-luna, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-5.6-luna | openai/gpt-5.6-luna | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F40",
+   "about": "GPT-5.6-luna",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-5.6-luna, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-5.6-luna | openai/gpt-5.6-luna | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F41",
+   "about": "GPT-5.6-luna",
+   "says": "tokens-reasoning",
+   "value": "5,146",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-luna (max), column think-tok",
+   "quote": "GPT-5.6-luna (max) | 21.6 ± 3.2 | 23.5 | 19.4 | 26.9 | 24.6 | 13.3 | 18.6 | 5,146 | 42",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F42",
+   "about": "GPT-5.6-luna",
+   "says": "tokens-out",
+   "value": "42",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-5.6-luna (max), column ans-tok",
+   "quote": "GPT-5.6-luna (max) | 21.6 ± 3.2 | 23.5 | 19.4 | 26.9 | 24.6 | 13.3 | 18.6 | 5,146 | 42",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F43",
+   "about": "GPT-6-luna",
+   "says": "score",
+   "value": "21.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-luna (max), column pass@1",
+   "quote": "GPT-6-luna (max) | 21.0 ± 3.0 | 23.3 | 18.2 | 26.9 | 24.1 | 9.4 | 20.6 | 3,993 | 39",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "about": "GPT-6-luna",
+   "says": "model-name",
+   "value": "GPT-6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-luna, column Model",
+   "quote": "GPT-6-luna | openai/gpt-6-luna | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F45",
+   "about": "GPT-6-luna",
+   "says": "model-api-id",
+   "value": "openai/gpt-6-luna",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-luna, column Endpoint (the identifier sent to the proxy)",
+   "quote": "GPT-6-luna | openai/gpt-6-luna | Responses | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F46",
+   "about": "GPT-6-luna",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GPT-6-luna, column Effort (and the label '(max)' of Table 1)",
+   "quote": "GPT-6-luna | openai/gpt-6-luna | Responses | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F47",
+   "about": "GPT-6-luna",
+   "says": "tokens-reasoning",
+   "value": "3,993",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-luna (max), column think-tok",
+   "quote": "GPT-6-luna (max) | 21.0 ± 3.0 | 23.3 | 18.2 | 26.9 | 24.1 | 9.4 | 20.6 | 3,993 | 39",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F48",
+   "about": "GPT-6-luna",
+   "says": "tokens-out",
+   "value": "39",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GPT-6-luna (max), column ans-tok",
+   "quote": "GPT-6-luna (max) | 21.0 ± 3.0 | 23.3 | 18.2 | 26.9 | 24.1 | 9.4 | 20.6 | 3,993 | 39",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F49",
+   "about": "Claude-Opus-5.5",
+   "says": "score",
+   "value": "44.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5.5 (xhigh), column pass@1",
+   "quote": "Anthropic | Claude-Opus-5.5 (xhigh) | 44.6 ± 3.8 | 51.3 ¯ | 36.5 | 44.0 | 44.9 | 34.8 | 55.6 | 1,496 | 294",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "about": "Claude-Opus-5.5",
+   "says": "model-name",
+   "value": "Claude-Opus-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5.5, column Model",
+   "quote": "Anthropic | Claude-Opus-5.5 | anthropic/claude-opus-5-5 | Messages | xhigh | 128,000 | no | 500"
+  },
+  {
+   "id": "F51",
+   "about": "Claude-Opus-5.5",
+   "says": "model-api-id",
+   "value": "anthropic/claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5.5, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Anthropic | Claude-Opus-5.5 | anthropic/claude-opus-5-5 | Messages | xhigh | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F52",
+   "about": "Claude-Opus-5.5",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5.5, column Effort (and the label '(xhigh)' of Table 1)",
+   "quote": "Anthropic | Claude-Opus-5.5 | anthropic/claude-opus-5-5 | Messages | xhigh | 128,000 | no | 500"
+  },
+  {
+   "id": "F53",
+   "about": "Claude-Opus-5.5",
+   "says": "tokens-reasoning",
+   "value": "1,496",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5.5 (xhigh), column think-tok",
+   "quote": "Anthropic | Claude-Opus-5.5 (xhigh) | 44.6 ± 3.8 | 51.3 ¯ | 36.5 | 44.0 | 44.9 | 34.8 | 55.6 | 1,496 | 294",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F54",
+   "about": "Claude-Opus-5.5",
+   "says": "tokens-out",
+   "value": "294",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5.5 (xhigh), column ans-tok",
+   "quote": "Anthropic | Claude-Opus-5.5 (xhigh) | 44.6 ± 3.8 | 51.3 ¯ | 36.5 | 44.0 | 44.9 | 34.8 | 55.6 | 1,496 | 294",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F55",
+   "about": "Claude-Fable-5.1",
+   "says": "score",
+   "value": "40.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5.1 (xhigh), column pass@1",
+   "quote": "Claude-Fable-5.1 (xhigh) | 40.8 ± 3.6 | 44.7 | 36.0 | 43.3 | 41.1 | 34.2 | 44.1 | 3,478 | 360",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F56",
+   "about": "Claude-Fable-5.1",
+   "says": "model-name",
+   "value": "Claude-Fable-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5.1, column Model",
+   "quote": "Claude-Fable-5.1 | anthropic/claude-fable-5-1 | Messages | xhigh | 128,000 | no | 500"
+  },
+  {
+   "id": "F57",
+   "about": "Claude-Fable-5.1",
+   "says": "model-api-id",
+   "value": "anthropic/claude-fable-5-1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5.1, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Claude-Fable-5.1 | anthropic/claude-fable-5-1 | Messages | xhigh | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F58",
+   "about": "Claude-Fable-5.1",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5.1, column Effort (and the label '(xhigh)' of Table 1)",
+   "quote": "Claude-Fable-5.1 | anthropic/claude-fable-5-1 | Messages | xhigh | 128,000 | no | 500"
+  },
+  {
+   "id": "F59",
+   "about": "Claude-Fable-5.1",
+   "says": "tokens-reasoning",
+   "value": "3,478",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5.1 (xhigh), column think-tok",
+   "quote": "Claude-Fable-5.1 (xhigh) | 40.8 ± 3.6 | 44.7 | 36.0 | 43.3 | 41.1 | 34.2 | 44.1 | 3,478 | 360",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F60",
+   "about": "Claude-Fable-5.1",
+   "says": "tokens-out",
+   "value": "360",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5.1 (xhigh), column ans-tok",
+   "quote": "Claude-Fable-5.1 (xhigh) | 40.8 ± 3.6 | 44.7 | 36.0 | 43.3 | 41.1 | 34.2 | 44.1 | 3,478 | 360",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F61",
+   "about": "Claude-Fable-5",
+   "says": "score",
+   "value": "34.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5 (max), column pass@1",
+   "quote": "Claude-Fable-5 (max) | 34.5 ± 3.7 | 37.2 | 31.3 | 38.1 | 37.1 | 30.0 | 30.4 | 3,880 | 463",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F62",
+   "about": "Claude-Fable-5",
+   "says": "model-name",
+   "value": "Claude-Fable-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5, column Model",
+   "quote": "Claude-Fable-5 | anthropic/claude-fable-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F63",
+   "about": "Claude-Fable-5",
+   "says": "model-api-id",
+   "value": "anthropic/claude-fable-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Claude-Fable-5 | anthropic/claude-fable-5 | Messages | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F64",
+   "about": "Claude-Fable-5",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Fable-5, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Claude-Fable-5 | anthropic/claude-fable-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F65",
+   "about": "Claude-Fable-5",
+   "says": "tokens-reasoning",
+   "value": "3,880",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5 (max), column think-tok",
+   "quote": "Claude-Fable-5 (max) | 34.5 ± 3.7 | 37.2 | 31.3 | 38.1 | 37.1 | 30.0 | 30.4 | 3,880 | 463",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F66",
+   "about": "Claude-Fable-5",
+   "says": "tokens-out",
+   "value": "463",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Fable-5 (max), column ans-tok",
+   "quote": "Claude-Fable-5 (max) | 34.5 ± 3.7 | 37.2 | 31.3 | 38.1 | 37.1 | 30.0 | 30.4 | 3,880 | 463",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F67",
+   "about": "Claude-Opus-5",
+   "says": "score",
+   "value": "30.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5 (max), column pass@1",
+   "quote": "Claude-Opus-5 (max) | 30.5 ± 3.5 | 32.5 | 27.9 | 31.3 | 35.0 | 22.4 | 30.1 | 2,888 | 445",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F68",
+   "about": "Claude-Opus-5",
+   "says": "model-name",
+   "value": "Claude-Opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5, column Model",
+   "quote": "Claude-Opus-5 | anthropic/claude-opus-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F69",
+   "about": "Claude-Opus-5",
+   "says": "model-api-id",
+   "value": "anthropic/claude-opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Claude-Opus-5 | anthropic/claude-opus-5 | Messages | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F70",
+   "about": "Claude-Opus-5",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-5, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Claude-Opus-5 | anthropic/claude-opus-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F71",
+   "about": "Claude-Opus-5",
+   "says": "tokens-reasoning",
+   "value": "2,888",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5 (max), column think-tok",
+   "quote": "Claude-Opus-5 (max) | 30.5 ± 3.5 | 32.5 | 27.9 | 31.3 | 35.0 | 22.4 | 30.1 | 2,888 | 445",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F72",
+   "about": "Claude-Opus-5",
+   "says": "tokens-out",
+   "value": "445",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-5 (max), column ans-tok",
+   "quote": "Claude-Opus-5 (max) | 30.5 ± 3.5 | 32.5 | 27.9 | 31.3 | 35.0 | 22.4 | 30.1 | 2,888 | 445",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F73",
+   "about": "Claude-Sonnet-5",
+   "says": "score",
+   "value": "24.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Sonnet-5 (max), column pass@1",
+   "quote": "Claude-Sonnet-5 (max) | 24.8 ± 3.2 | 29.5 | 18.9 | 29.1 | 27.5 | 14.2 | 25.8 | 3,209 | 408",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "about": "Claude-Sonnet-5",
+   "says": "model-name",
+   "value": "Claude-Sonnet-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Sonnet-5, column Model",
+   "quote": "Claude-Sonnet-5 | anthropic/claude-sonnet-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F75",
+   "about": "Claude-Sonnet-5",
+   "says": "model-api-id",
+   "value": "anthropic/claude-sonnet-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Sonnet-5, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Claude-Sonnet-5 | anthropic/claude-sonnet-5 | Messages | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F76",
+   "about": "Claude-Sonnet-5",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Sonnet-5, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Claude-Sonnet-5 | anthropic/claude-sonnet-5 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F77",
+   "about": "Claude-Sonnet-5",
+   "says": "tokens-reasoning",
+   "value": "3,209",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Sonnet-5 (max), column think-tok",
+   "quote": "Claude-Sonnet-5 (max) | 24.8 ± 3.2 | 29.5 | 18.9 | 29.1 | 27.5 | 14.2 | 25.8 | 3,209 | 408",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F78",
+   "about": "Claude-Sonnet-5",
+   "says": "tokens-out",
+   "value": "408",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Sonnet-5 (max), column ans-tok",
+   "quote": "Claude-Sonnet-5 (max) | 24.8 ± 3.2 | 29.5 | 18.9 | 29.1 | 27.5 | 14.2 | 25.8 | 3,209 | 408",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F79",
+   "about": "Claude-Opus-4.8",
+   "says": "score",
+   "value": "23.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-4.8 (max), column pass@1",
+   "quote": "Claude-Opus-4.8 (max) | 23.5 ± 3.2 | 27.2 | 18.9 | 27.1 | 26.5 | 14.2 | 23.5 | 2,416 | 408",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F80",
+   "about": "Claude-Opus-4.8",
+   "says": "model-name",
+   "value": "Claude-Opus-4.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-4.8, column Model",
+   "quote": "Claude-Opus-4.8 | anthropic/claude-opus-4-8 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F81",
+   "about": "Claude-Opus-4.8",
+   "says": "model-api-id",
+   "value": "anthropic/claude-opus-4-8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-4.8, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Claude-Opus-4.8 | anthropic/claude-opus-4-8 | Messages | max | 128,000 | no | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F82",
+   "about": "Claude-Opus-4.8",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Claude-Opus-4.8, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Claude-Opus-4.8 | anthropic/claude-opus-4-8 | Messages | max | 128,000 | no | 500"
+  },
+  {
+   "id": "F83",
+   "about": "Claude-Opus-4.8",
+   "says": "tokens-reasoning",
+   "value": "2,416",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-4.8 (max), column think-tok",
+   "quote": "Claude-Opus-4.8 (max) | 23.5 ± 3.2 | 27.2 | 18.9 | 27.1 | 26.5 | 14.2 | 23.5 | 2,416 | 408",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F84",
+   "about": "Claude-Opus-4.8",
+   "says": "tokens-out",
+   "value": "408",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Claude-Opus-4.8 (max), column ans-tok",
+   "quote": "Claude-Opus-4.8 (max) | 23.5 ± 3.2 | 27.2 | 18.9 | 27.1 | 26.5 | 14.2 | 23.5 | 2,416 | 408",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F85",
+   "about": "Gemini-3.8-flash",
+   "says": "score",
+   "value": "41.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.8-flash (high), column pass@1",
+   "quote": "Google | Gemini-3.8-flash (high) | 41.6 ± 3.7 | 47.2 | 34.8 | 43.3 | 37.5 | 40.0 ¯ | 48.4 ¯ | 10,407 | 158",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F86",
+   "about": "Gemini-3.8-flash",
+   "says": "model-name",
+   "value": "Gemini-3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.8-flash, column Model",
+   "quote": "Google | Gemini-3.8-flash | gemini/gemini-3.8-flash | Chat | high | 65,536 | yes | 500"
+  },
+  {
+   "id": "F87",
+   "about": "Gemini-3.8-flash",
+   "says": "model-api-id",
+   "value": "gemini/gemini-3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.8-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Google | Gemini-3.8-flash | gemini/gemini-3.8-flash | Chat | high | 65,536 | yes | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F88",
+   "about": "Gemini-3.8-flash",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.8-flash, column Effort (and the label '(high)' of Table 1)",
+   "quote": "Google | Gemini-3.8-flash | gemini/gemini-3.8-flash | Chat | high | 65,536 | yes | 500"
+  },
+  {
+   "id": "F89",
+   "about": "Gemini-3.8-flash",
+   "says": "tokens-reasoning",
+   "value": "10,407",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.8-flash (high), column think-tok",
+   "quote": "Google | Gemini-3.8-flash (high) | 41.6 ± 3.7 | 47.2 | 34.8 | 43.3 | 37.5 | 40.0 ¯ | 48.4 ¯ | 10,407 | 158",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F90",
+   "about": "Gemini-3.8-flash",
+   "says": "tokens-out",
+   "value": "158",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.8-flash (high), column ans-tok",
+   "quote": "Google | Gemini-3.8-flash (high) | 41.6 ± 3.7 | 47.2 | 34.8 | 43.3 | 37.5 | 40.0 ¯ | 48.4 ¯ | 10,407 | 158",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F91",
+   "about": "Gemini-3.7-flash",
+   "says": "score",
+   "value": "39.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.7-flash (high), column pass@1",
+   "quote": "Gemini-3.7-flash (high) | 39.8 ± 3.7 | 45.4 | 33.0 | 40.5 | 40.9 | 35.8 | 41.5 | 1,858 | 118",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F92",
+   "about": "Gemini-3.7-flash",
+   "says": "model-name",
+   "value": "Gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.7-flash, column Model",
+   "quote": "Gemini-3.7-flash | gemini/gemini-3.7-flash | Chat | high | 65,536 | yes | 500"
+  },
+  {
+   "id": "F93",
+   "about": "Gemini-3.7-flash",
+   "says": "model-api-id",
+   "value": "gemini/gemini-3.7-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.7-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Gemini-3.7-flash | gemini/gemini-3.7-flash | Chat | high | 65,536 | yes | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F94",
+   "about": "Gemini-3.7-flash",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.7-flash, column Effort (and the label '(high)' of Table 1)",
+   "quote": "Gemini-3.7-flash | gemini/gemini-3.7-flash | Chat | high | 65,536 | yes | 500"
+  },
+  {
+   "id": "F95",
+   "about": "Gemini-3.7-flash",
+   "says": "tokens-reasoning",
+   "value": "1,858",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.7-flash (high), column think-tok",
+   "quote": "Gemini-3.7-flash (high) | 39.8 ± 3.7 | 45.4 | 33.0 | 40.5 | 40.9 | 35.8 | 41.5 | 1,858 | 118",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F96",
+   "about": "Gemini-3.7-flash",
+   "says": "tokens-out",
+   "value": "118",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.7-flash (high), column ans-tok",
+   "quote": "Gemini-3.7-flash (high) | 39.8 ± 3.7 | 45.4 | 33.0 | 40.5 | 40.9 | 35.8 | 41.5 | 1,858 | 118",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F97",
+   "about": "Gemini-3.5-flash",
+   "says": "score",
+   "value": "32.6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.5-flash (high), column pass@1",
+   "quote": "Gemini-3.5-flash (high) | 32.6 ± 3.4 | 35.1 | 29.6 | 35.6 | 31.6 | 31.8 | 31.4 | 2,456 | 184",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F98",
+   "about": "Gemini-3.5-flash",
+   "says": "model-name",
+   "value": "Gemini-3.5-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.5-flash, column Model",
+   "quote": "Gemini-3.5-flash | gemini/gemini-3.5-flash | Chat | high | 16,384 | yes | 500"
+  },
+  {
+   "id": "F99",
+   "about": "Gemini-3.5-flash",
+   "says": "model-api-id",
+   "value": "gemini/gemini-3.5-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.5-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Gemini-3.5-flash | gemini/gemini-3.5-flash | Chat | high | 16,384 | yes | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F100",
+   "about": "Gemini-3.5-flash",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.5-flash, column Effort (and the label '(high)' of Table 1)",
+   "quote": "Gemini-3.5-flash | gemini/gemini-3.5-flash | Chat | high | 16,384 | yes | 500"
+  },
+  {
+   "id": "F101",
+   "about": "Gemini-3.5-flash",
+   "says": "tokens-reasoning",
+   "value": "2,456",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.5-flash (high), column think-tok",
+   "quote": "Gemini-3.5-flash (high) | 32.6 ± 3.4 | 35.1 | 29.6 | 35.6 | 31.6 | 31.8 | 31.4 | 2,456 | 184",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F102",
+   "about": "Gemini-3.5-flash",
+   "says": "tokens-out",
+   "value": "184",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.5-flash (high), column ans-tok",
+   "quote": "Gemini-3.5-flash (high) | 32.6 ± 3.4 | 35.1 | 29.6 | 35.6 | 31.6 | 31.8 | 31.4 | 2,456 | 184",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F103",
+   "about": "Gemini-3.6-flash",
+   "says": "score",
+   "value": "31.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.6-flash (high), column pass@1",
+   "quote": "Gemini-3.6-flash (high) | 31.9 ± 3.4 | 32.5 | 31.2 | 37.1 | 29.7 | 32.4 | 28.4 | 3,166 | 178",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F104",
+   "about": "Gemini-3.6-flash",
+   "says": "model-name",
+   "value": "Gemini-3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.6-flash, column Model",
+   "quote": "Gemini-3.6-flash | gemini/gemini-3.6-flash | Chat | high | 16,384 | yes | 500"
+  },
+  {
+   "id": "F105",
+   "about": "Gemini-3.6-flash",
+   "says": "model-api-id",
+   "value": "gemini/gemini-3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.6-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Gemini-3.6-flash | gemini/gemini-3.6-flash | Chat | high | 16,384 | yes | 500",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F106",
+   "about": "Gemini-3.6-flash",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Gemini-3.6-flash, column Effort (and the label '(high)' of Table 1)",
+   "quote": "Gemini-3.6-flash | gemini/gemini-3.6-flash | Chat | high | 16,384 | yes | 500"
+  },
+  {
+   "id": "F107",
+   "about": "Gemini-3.6-flash",
+   "says": "tokens-reasoning",
+   "value": "3,166",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.6-flash (high), column think-tok",
+   "quote": "Gemini-3.6-flash (high) | 31.9 ± 3.4 | 32.5 | 31.2 | 37.1 | 29.7 | 32.4 | 28.4 | 3,166 | 178",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F108",
+   "about": "Gemini-3.6-flash",
+   "says": "tokens-out",
+   "value": "178",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Gemini-3.6-flash (high), column ans-tok",
+   "quote": "Gemini-3.6-flash (high) | 31.9 ± 3.4 | 32.5 | 31.2 | 37.1 | 29.7 | 32.4 | 28.4 | 3,166 | 178",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F109",
+   "about": "Qwen3.8-Max",
+   "says": "score",
+   "value": "33.0",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-Max (max), column pass@1",
+   "quote": "Qwen | Qwen3.8-Max (max) | 33.0 ± 3.6 | 38.3 | 26.2 | 38.1 | 35.2 | 21.0 | 34.7 | 7,423 | 217",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F110",
+   "about": "Qwen3.8-Max",
+   "says": "model-name",
+   "value": "Qwen3.8-Max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-Max, column Model",
+   "quote": "Qwen | Qwen3.8-Max | dashscope/qwen3.8-max | Chat | max | 16,384 | no | 250"
+  },
+  {
+   "id": "F111",
+   "about": "Qwen3.8-Max",
+   "says": "model-api-id",
+   "value": "dashscope/qwen3.8-max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-Max, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Qwen | Qwen3.8-Max | dashscope/qwen3.8-max | Chat | max | 16,384 | no | 250",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F112",
+   "about": "Qwen3.8-Max",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-Max, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Qwen | Qwen3.8-Max | dashscope/qwen3.8-max | Chat | max | 16,384 | no | 250"
+  },
+  {
+   "id": "F113",
+   "about": "Qwen3.8-Max",
+   "says": "tokens-reasoning",
+   "value": "7,423",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-Max (max), column think-tok",
+   "quote": "Qwen | Qwen3.8-Max (max) | 33.0 ± 3.6 | 38.3 | 26.2 | 38.1 | 35.2 | 21.0 | 34.7 | 7,423 | 217",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F114",
+   "about": "Qwen3.8-Max",
+   "says": "tokens-out",
+   "value": "217",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-Max (max), column ans-tok",
+   "quote": "Qwen | Qwen3.8-Max (max) | 33.0 ± 3.6 | 38.3 | 26.2 | 38.1 | 35.2 | 21.0 | 34.7 | 7,423 | 217",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F115",
+   "about": "Qwen3.8-flash",
+   "says": "score",
+   "value": "30.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-flash (max), column pass@1",
+   "quote": "Qwen3.8-flash (max) | 30.9 ± 3.3 | 37.2 | 22.9 | 37.9 | 29.2 | 18.6 | 37.1 | 7,260 | 200",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F116",
+   "about": "Qwen3.8-flash",
+   "says": "model-name",
+   "value": "Qwen3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-flash, column Model",
+   "quote": "Qwen3.8-flash | dashscope/qwen3.8-flash | Chat | max | — | — | —"
+  },
+  {
+   "id": "F117",
+   "about": "Qwen3.8-flash",
+   "says": "model-api-id",
+   "value": "dashscope/qwen3.8-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Qwen3.8-flash | dashscope/qwen3.8-flash | Chat | max | — | — | —",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F118",
+   "about": "Qwen3.8-flash",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Qwen3.8-flash, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Qwen3.8-flash | dashscope/qwen3.8-flash | Chat | max | — | — | —"
+  },
+  {
+   "id": "F119",
+   "about": "Qwen3.8-flash",
+   "says": "tokens-reasoning",
+   "value": "7,260",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-flash (max), column think-tok",
+   "quote": "Qwen3.8-flash (max) | 30.9 ± 3.3 | 37.2 | 22.9 | 37.9 | 29.2 | 18.6 | 37.1 | 7,260 | 200",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F120",
+   "about": "Qwen3.8-flash",
+   "says": "tokens-out",
+   "value": "200",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Qwen3.8-flash (max), column ans-tok",
+   "quote": "Qwen3.8-flash (max) | 30.9 ± 3.3 | 37.2 | 22.9 | 37.9 | 29.2 | 18.6 | 37.1 | 7,260 | 200",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F121",
+   "about": "GLM-5.3-flash",
+   "says": "score",
+   "value": "26.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GLM-5.3-flash (max), column pass@1",
+   "quote": "Zhipu | GLM-5.3-flash (max) | 26.8 ± 3.0 | 30.2 | 22.6 | 31.3 | 26.3 | 18.2 | 31.0 | 4,484 | 247",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F122",
+   "about": "GLM-5.3-flash",
+   "says": "model-name",
+   "value": "GLM-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GLM-5.3-flash, column Model",
+   "quote": "Zhipu | GLM-5.3-flash | fireworks_ai/glm-5p3-flash | Chat | max | 128,000 | no | 60"
+  },
+  {
+   "id": "F123",
+   "about": "GLM-5.3-flash",
+   "says": "model-api-id",
+   "value": "fireworks_ai/glm-5p3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GLM-5.3-flash, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Zhipu | GLM-5.3-flash | fireworks_ai/glm-5p3-flash | Chat | max | 128,000 | no | 60",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F124",
+   "about": "GLM-5.3-flash",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row GLM-5.3-flash, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Zhipu | GLM-5.3-flash | fireworks_ai/glm-5p3-flash | Chat | max | 128,000 | no | 60"
+  },
+  {
+   "id": "F125",
+   "about": "GLM-5.3-flash",
+   "says": "tokens-reasoning",
+   "value": "4,484",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GLM-5.3-flash (max), column think-tok",
+   "quote": "Zhipu | GLM-5.3-flash (max) | 26.8 ± 3.0 | 30.2 | 22.6 | 31.3 | 26.3 | 18.2 | 31.0 | 4,484 | 247",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F126",
+   "about": "GLM-5.3-flash",
+   "says": "tokens-out",
+   "value": "247",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row GLM-5.3-flash (max), column ans-tok",
+   "quote": "Zhipu | GLM-5.3-flash (max) | 26.8 ± 3.0 | 30.2 | 22.6 | 31.3 | 26.3 | 18.2 | 31.0 | 4,484 | 247",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F127",
+   "about": "Kimi-K3",
+   "says": "score",
+   "value": "25.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Kimi-K3 (max), column pass@1",
+   "quote": "Moonshot | Kimi-K3 (max) | 25.5 ± 3.1 | 29.1 | 21.2 | 33.1 | 27.4 | 15.5 | 23.2 | 4,949 | 98",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F128",
+   "about": "Kimi-K3",
+   "says": "model-name",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Kimi-K3, column Model",
+   "quote": "Moonshot | Kimi-K3 | bedrock/us.moonshotai.kimi-k3 | Chat | max | 128,000 | no | 100"
+  },
+  {
+   "id": "F129",
+   "about": "Kimi-K3",
+   "says": "model-api-id",
+   "value": "bedrock/us.moonshotai.kimi-k3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Kimi-K3, column Endpoint (the identifier sent to the proxy)",
+   "quote": "Moonshot | Kimi-K3 | bedrock/us.moonshotai.kimi-k3 | Chat | max | 128,000 | no | 100",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F130",
+   "about": "Kimi-K3",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 5, row Kimi-K3, column Effort (and the label '(max)' of Table 1)",
+   "quote": "Moonshot | Kimi-K3 | bedrock/us.moonshotai.kimi-k3 | Chat | max | 128,000 | no | 100"
+  },
+  {
+   "id": "F131",
+   "about": "Kimi-K3",
+   "says": "tokens-reasoning",
+   "value": "4,949",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Kimi-K3 (max), column think-tok",
+   "quote": "Moonshot | Kimi-K3 (max) | 25.5 ± 3.1 | 29.1 | 21.2 | 33.1 | 27.4 | 15.5 | 23.2 | 4,949 | 98",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F132",
+   "about": "Kimi-K3",
+   "says": "tokens-out",
+   "value": "98",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 1, row Kimi-K3 (max), column ans-tok",
+   "quote": "Moonshot | Kimi-K3 (max) | 25.5 ± 3.1 | 29.1 | 21.2 | 33.1 | 27.4 | 15.5 | 23.2 | 4,949 | 98",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F133",
+   "about": "Claude Code|Claude-Opus-5",
+   "says": "score",
+   "value": "51.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Opus-5, column agent (overall pass@1)",
+   "quote": "Claude Code | Claude-Opus-5 | 30.8 | 51.3 | + 20.5 | + 24.3 | + 15.8 | + 26.3 | + 15.1 | + 18.2 | + 25.6 | 43,764 | 72",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F134",
+   "about": "Claude Code|Claude-Opus-5",
+   "says": "model-name",
+   "value": "Claude-Opus-5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Opus-5, column Base model",
+   "quote": "Claude Code | Claude-Opus-5 | 30.8 | 51.3 | + 20.5 | + 24.3 | + 15.8 | + 26.3 | + 15.1 | + 18.2 | + 25.6 | 43,764 | 72"
+  },
+  {
+   "id": "F135",
+   "about": "Claude Code|Claude-Opus-5",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3 text; Table 2 row group Claude Code / Claude-Opus-5",
+   "quote": "vendor-provided agentic harnesses, including Claude Code and Codex across 388 tasks",
+   "term": "claude-code"
+  },
+  {
+   "id": "F136",
+   "about": "Claude Code|Claude-Opus-5",
+   "says": "tokens-reasoning",
+   "value": "43,764",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Opus-5, column think-tok (mean thinking tokens per task inside the harness)",
+   "quote": "Claude Code | Claude-Opus-5 | 30.8 | 51.3 | + 20.5 | + 24.3 | + 15.8 | + 26.3 | + 15.1 | + 18.2 | + 25.6 | 43,764 | 72",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F137",
+   "about": null,
+   "says": "note",
+   "value": "388 tasks (a subset of HSS)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3",
+   "quote": "across 388 tasks (a subset of HSS)"
+  },
+  {
+   "id": "F138",
+   "about": "Claude Code|Claude-Fable-5.1",
+   "says": "score",
+   "value": "57.7",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Fable-5.1, column agent (overall pass@1)",
+   "quote": "Claude-Fable-5.1 | 41.2 | 57.7 | + 16.5 | + 15.4 | + 17.9 | + 16.8 | + 14.9 | + 22.1 | + 13.2 | 42,237 | 57",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F139",
+   "about": "Claude Code|Claude-Fable-5.1",
+   "says": "model-name",
+   "value": "Claude-Fable-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Fable-5.1, column Base model",
+   "quote": "Claude-Fable-5.1 | 41.2 | 57.7 | + 16.5 | + 15.4 | + 17.9 | + 16.8 | + 14.9 | + 22.1 | + 13.2 | 42,237 | 57"
+  },
+  {
+   "id": "F140",
+   "about": "Claude Code|Claude-Fable-5.1",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3 text; Table 2 row group Claude Code / Claude-Fable-5.1",
+   "quote": "vendor-provided agentic harnesses, including Claude Code and Codex across 388 tasks",
+   "term": "claude-code"
+  },
+  {
+   "id": "F141",
+   "about": "Claude Code|Claude-Fable-5.1",
+   "says": "tokens-reasoning",
+   "value": "42,237",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Claude Code / Claude-Fable-5.1, column think-tok (mean thinking tokens per task inside the harness)",
+   "quote": "Claude-Fable-5.1 | 41.2 | 57.7 | + 16.5 | + 15.4 | + 17.9 | + 16.8 | + 14.9 | + 22.1 | + 13.2 | 42,237 | 57",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F142",
+   "about": null,
+   "says": "note",
+   "value": "388 tasks (a subset of HSS)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3",
+   "quote": "across 388 tasks (a subset of HSS)"
+  },
+  {
+   "id": "F143",
+   "about": "Codex|GPT-6-astra",
+   "says": "score",
+   "value": "59.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-6-astra, column agent (overall pass@1)",
+   "quote": "Codex | GPT-6-astra | 54.4 | 59.3 | + 4.9 | + 4.5 | + 5.5 | + 6.7 | − 1.4 | + 9.5 | + 9.6 | 2,040 | 14",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F144",
+   "about": "Codex|GPT-6-astra",
+   "says": "model-name",
+   "value": "GPT-6-astra",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-6-astra, column Base model",
+   "quote": "Codex | GPT-6-astra | 54.4 | 59.3 | + 4.9 | + 4.5 | + 5.5 | + 6.7 | − 1.4 | + 9.5 | + 9.6 | 2,040 | 14"
+  },
+  {
+   "id": "F145",
+   "about": "Codex|GPT-6-astra",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3 text; Table 2 row group Codex / GPT-6-astra",
+   "quote": "vendor-provided agentic harnesses, including Claude Code and Codex across 388 tasks",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F146",
+   "about": "Codex|GPT-6-astra",
+   "says": "tokens-reasoning",
+   "value": "2,040",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-6-astra, column think-tok (mean thinking tokens per task inside the harness)",
+   "quote": "Codex | GPT-6-astra | 54.4 | 59.3 | + 4.9 | + 4.5 | + 5.5 | + 6.7 | − 1.4 | + 9.5 | + 9.6 | 2,040 | 14",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F147",
+   "about": null,
+   "says": "note",
+   "value": "388 tasks (a subset of HSS)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3",
+   "quote": "across 388 tasks (a subset of HSS)"
+  },
+  {
+   "id": "F148",
+   "about": "Codex|GPT-5.6-sol",
+   "says": "score",
+   "value": "35.8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-5.6-sol, column agent (overall pass@1)",
+   "quote": "GPT-5.6-sol | 28.4 | 35.8 | + 7.5 | + 8.0 | + 6.8 | + 3.4 | + 6.5 | + 6.9 | + 15.5 | 6,541 | 18",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F149",
+   "about": "Codex|GPT-5.6-sol",
+   "says": "model-name",
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-5.6-sol, column Base model",
+   "quote": "GPT-5.6-sol | 28.4 | 35.8 | + 7.5 | + 8.0 | + 6.8 | + 3.4 | + 6.5 | + 6.9 | + 15.5 | 6,541 | 18"
+  },
+  {
+   "id": "F150",
+   "about": "Codex|GPT-5.6-sol",
+   "says": "harness",
+   "value": "Codex",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3 text; Table 2 row group Codex / GPT-5.6-sol",
+   "quote": "vendor-provided agentic harnesses, including Claude Code and Codex across 388 tasks",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F151",
+   "about": "Codex|GPT-5.6-sol",
+   "says": "tokens-reasoning",
+   "value": "6,541",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Table 2, row Codex / GPT-5.6-sol, column think-tok (mean thinking tokens per task inside the harness)",
+   "quote": "GPT-5.6-sol | 28.4 | 35.8 | + 7.5 | + 8.0 | + 6.8 | + 3.4 | + 6.5 | + 6.9 | + 15.5 | 6,541 | 18",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F152",
+   "about": null,
+   "says": "note",
+   "value": "388 tasks (a subset of HSS)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2610.08966/evidence/arxiv-2610.08966v1.txt",
+   "where": "Section 3.3",
+   "quote": "across 388 tasks (a subset of HSS)"
+  }
+ ]
+}

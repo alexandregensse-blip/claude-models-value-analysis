@@ -1,0 +1,554 @@
+{
+ "id": "src-vals.ai-swebench-multimodal-2026-10-13",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://vals.ai/benchmarks/swebench-multimodal"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html": "b825f80fd0c365257cd11c43d402a0b60ceb9161965638483bd45443e5813325",
+  "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json": "d807888cf7b6ed9a83dd4946789da502b2a3962406164eb7b6ceca603e408b21",
+  "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-opus-5-5.20261014232301.html": "8e170f8be914d78839961295c5e505b3594c1c66a0ceb4761f748d767f00cae1",
+  "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-fable-5-1.20261014232142.html": "0dcfbe2ea7f30a67ccc09c83ea04f1aee1922bd1478258908d1517d77886b55c",
+  "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-sonnet-5-5.20260929202537.html": "6d2faeea659b2a800970c1051657141d80f264d6630876fb2caa32f2abd3cc4d",
+  "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-haiku-5-5.20261012140149.html": "25668e7d763abda0b31a4e31bdb28c444921737760eec5cedbf3d574fda05803"
+ },
+ "harvested_at": "2026-10-15T15:33:25Z",
+ "published": {
+  "value": "2026-10-13",
+  "where": "board page header \"Updated M/D/YYYY\" (payload metadata.updated)",
+  "quote": "updated 10/13/2026",
+  "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html"
+ },
+ "salvo": "salvo14/mig/convert-vals.ai (Wave C1)",
+ "agent": "convert-vals.ai (Sonnet 5.5)",
+ "snapshot_of": null,
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://vals.ai/benchmarks/swebench-multimodal",
+   "captured": "2026-10-15T15:33:25Z",
+   "note": "captured = the file modification time of our saved copy of the board page"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "from": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "tool": "convert_vals.py / vpage.py (astro-island props decoded, numbers verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "where": "$.tasks.overall",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "model": {
+     "says": "model-api-id",
+     "namespace": "prefix",
+     "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+    },
+    "accuracy": {
+     "says": "score",
+     "term": "resolved%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.001
+     }
+    },
+    "cost_per_test": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 1e-06
+     }
+    },
+    "reasoning_effort": "effort-setting",
+    "compute_effort": "effort-setting",
+    "harness": "harness",
+    "provider": "note",
+    "latency": "note",
+    "stderr": "note",
+    "token_totals.input_tokens": "tokens-in",
+    "token_totals.output_tokens": "tokens-out",
+    "token_totals.reasoning_tokens": "tokens-reasoning",
+    "token_totals.cache_read_tokens": "tokens-cache-read"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "version",
+   "value": "1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "payload metadata of the board (benchmarkView.metadata.version in the page's astro-island props)",
+   "quote": "\"version\":[0,\"1\"]",
+   "about": null
+  },
+  {
+   "id": "F2",
+   "says": "unit",
+   "value": "cost_per_test",
+   "term": "per-test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "payload key cost_per_test of every model entry of the board",
+   "quote": "\"cost_per_test\"",
+   "about": null
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "value": "$",
+   "term": "USD",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page: the first cost printed with a $ sign",
+   "quote": "$4.92",
+   "about": null
+  },
+  {
+   "id": "F4",
+   "says": "headline-metric",
+   "value": "Accuracy",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "board page: the \"Accuracy\" column / axis label and the payload key accuracy",
+   "quote": "accuracy",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-opus-5-5.20261014232301.html",
+   "where": "vals model page anthropic_claude-opus-5-5 (Wayback capture 20261014232301, 2026-10-14; board snapshot 2026-10-15): evaluation statement",
+   "quote": "evaluations were run with compute effort set to “max” except terminal-bench 2.1, which used “high” effort, and temperature set to 1.0.",
+   "id": "F11"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-fable-5-1.20261014232142.html",
+   "where": "vals model page anthropic_claude-fable-5-1 (Wayback capture 20261014232142, 2026-10-14; board snapshot 2026-10-15): evaluation statement",
+   "quote": "evaluations were run with compute effort set to “max” and temperature set to 1.0.",
+   "id": "F12"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-sonnet-5-5.20260929202537.html",
+   "where": "vals model page anthropic_claude-sonnet-5-5 (Wayback capture 20260929202537, 2026-09-29; board snapshot 2026-10-15): evaluation statement",
+   "quote": "evaluations were run with compute effort set to “max” except terminal-bench 2.1, which used “high” effort, and temperature set to 1.0.",
+   "id": "F13"
+  },
+  {
+   "says": "effort-setting",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-vals.ai/models/wb/anthropic_claude-haiku-5-5.20261012140149.html",
+   "where": "vals model page anthropic_claude-haiku-5-5 (Wayback capture 20261012140149, 2026-10-12; board snapshot 2026-10-15): evaluation statement",
+   "quote": "evaluations were run with compute effort set to “max”.",
+   "id": "F14"
+  },
+  {
+   "id": "F15",
+   "says": "price-table",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "4",
+   "written": "$4",
+   "term": "input",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Opus 5.5 (/models/anthropic_claude-opus-5-5), column \"Input / Output Cost\": the input price per million tokens",
+   "quote": "Claude Opus 5.5 70.21% $4.92 $4 / $20"
+  },
+  {
+   "id": "F16",
+   "says": "price-table",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "20",
+   "written": "$20",
+   "term": "output",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Opus 5.5 (/models/anthropic_claude-opus-5-5), column \"Input / Output Cost\": the output price per million tokens",
+   "quote": "Claude Opus 5.5 70.21% $4.92 $4 / $20"
+  },
+  {
+   "id": "F17",
+   "says": "price-table",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "10",
+   "written": "$10",
+   "term": "input",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Fable 5.1 (/models/anthropic_claude-fable-5-1), column \"Input / Output Cost\": the input price per million tokens",
+   "quote": "Claude Fable 5.1 61.25% $5.46 $10 / $50"
+  },
+  {
+   "id": "F18",
+   "says": "price-table",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "50",
+   "written": "$50",
+   "term": "output",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Fable 5.1 (/models/anthropic_claude-fable-5-1), column \"Input / Output Cost\": the output price per million tokens",
+   "quote": "Claude Fable 5.1 61.25% $5.46 $10 / $50"
+  },
+  {
+   "id": "F19",
+   "says": "price-table",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "2",
+   "written": "$2",
+   "term": "input",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Sonnet 5.5 (/models/anthropic_claude-sonnet-5-5), column \"Input / Output Cost\": the input price per million tokens",
+   "quote": "Claude Sonnet 5.5 58.33% $4.53 $2 / $10"
+  },
+  {
+   "id": "F20",
+   "says": "price-table",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "10",
+   "written": "$10",
+   "term": "output",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Sonnet 5.5 (/models/anthropic_claude-sonnet-5-5), column \"Input / Output Cost\": the output price per million tokens",
+   "quote": "Claude Sonnet 5.5 58.33% $4.53 $2 / $10"
+  },
+  {
+   "id": "F21",
+   "says": "price-table",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "0.1",
+   "written": "$0.1",
+   "term": "input",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Haiku 5.5 (/models/anthropic_claude-haiku-5-5), column \"Input / Output Cost\": the input price per million tokens",
+   "quote": "Claude Haiku 5.5 43.96% $0.70 $0.1 / $0.5"
+  },
+  {
+   "id": "F22",
+   "says": "price-table",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "0.5",
+   "written": "$0.5",
+   "term": "output",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/s23/b1/src/vals/swebench-multimodal.html",
+   "where": "leaderboard table of the page, row Claude Haiku 5.5 (/models/anthropic_claude-haiku-5-5), column \"Input / Output Cost\": the output price per million tokens",
+   "quote": "Claude Haiku 5.5 43.96% $0.70 $0.1 / $0.5"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "70.208",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-opus-5-5 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/anthropic/claude-opus-5-5/accuracy",
+   "quote": "model: anthropic/claude-opus-5-5 | accuracy: 70.208",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-api-id",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "anthropic/claude-opus-5-5",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-opus-5-5 / column model",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/anthropic/claude-opus-5-5/model",
+   "quote": "model: anthropic/claude-opus-5-5 | model: anthropic/claude-opus-5-5",
+   "namespace": "prefix",
+   "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+  },
+  {
+   "id": "F25",
+   "says": "cost",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "4.920591",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-opus-5-5 / column cost_per_test",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "cost_per_test",
+   "cell": "T1/anthropic/claude-opus-5-5/cost_per_test",
+   "quote": "model: anthropic/claude-opus-5-5 | cost_per_test: 4.920591",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F26",
+   "says": "note",
+   "about": "anthropic/claude-opus-5-5",
+   "value": "1111.602",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-opus-5-5 / column latency",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "latency",
+   "cell": "T1/anthropic/claude-opus-5-5/latency",
+   "quote": "model: anthropic/claude-opus-5-5 | latency: 1111.602"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "61.25",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-fable-5-1 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/anthropic/claude-fable-5-1/accuracy",
+   "quote": "model: anthropic/claude-fable-5-1 | accuracy: 61.25",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-api-id",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "anthropic/claude-fable-5-1",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-fable-5-1 / column model",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/anthropic/claude-fable-5-1/model",
+   "quote": "model: anthropic/claude-fable-5-1 | model: anthropic/claude-fable-5-1",
+   "namespace": "prefix",
+   "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+  },
+  {
+   "id": "F29",
+   "says": "cost",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "5.463719",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-fable-5-1 / column cost_per_test",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "cost_per_test",
+   "cell": "T1/anthropic/claude-fable-5-1/cost_per_test",
+   "quote": "model: anthropic/claude-fable-5-1 | cost_per_test: 5.463719",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F30",
+   "says": "note",
+   "about": "anthropic/claude-fable-5-1",
+   "value": "912.134",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-fable-5-1 / column latency",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "latency",
+   "cell": "T1/anthropic/claude-fable-5-1/latency",
+   "quote": "model: anthropic/claude-fable-5-1 | latency: 912.134"
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "58.333",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-sonnet-5-5 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/anthropic/claude-sonnet-5-5/accuracy",
+   "quote": "model: anthropic/claude-sonnet-5-5 | accuracy: 58.333",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F32",
+   "says": "model-api-id",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "anthropic/claude-sonnet-5-5",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-sonnet-5-5 / column model",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/anthropic/claude-sonnet-5-5/model",
+   "quote": "model: anthropic/claude-sonnet-5-5 | model: anthropic/claude-sonnet-5-5",
+   "namespace": "prefix",
+   "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+  },
+  {
+   "id": "F33",
+   "says": "cost",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "4.528625",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-sonnet-5-5 / column cost_per_test",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "cost_per_test",
+   "cell": "T1/anthropic/claude-sonnet-5-5/cost_per_test",
+   "quote": "model: anthropic/claude-sonnet-5-5 | cost_per_test: 4.528625",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": "anthropic/claude-sonnet-5-5",
+   "value": "1452.55",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-sonnet-5-5 / column latency",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "latency",
+   "cell": "T1/anthropic/claude-sonnet-5-5/latency",
+   "quote": "model: anthropic/claude-sonnet-5-5 | latency: 1452.55"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "43.958",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-haiku-5-5 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/anthropic/claude-haiku-5-5/accuracy",
+   "quote": "model: anthropic/claude-haiku-5-5 | accuracy: 43.958",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "anthropic/claude-haiku-5-5",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-haiku-5-5 / column model",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "model",
+   "cell": "T1/anthropic/claude-haiku-5-5/model",
+   "quote": "model: anthropic/claude-haiku-5-5 | model: anthropic/claude-haiku-5-5",
+   "namespace": "prefix",
+   "note": "the board's model key; its head up to '/' is the board's provider prefix (not a route statement)"
+  },
+  {
+   "id": "F37",
+   "says": "cost",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "0.704848",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-haiku-5-5 / column cost_per_test",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "cost_per_test",
+   "cell": "T1/anthropic/claude-haiku-5-5/cost_per_test",
+   "quote": "model: anthropic/claude-haiku-5-5 | cost_per_test: 0.704848",
+   "precision": {
+    "model": "printed",
+    "step": 1e-06
+   }
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": "anthropic/claude-haiku-5-5",
+   "value": "975.904",
+   "level": "written",
+   "form": "data-file",
+   "where": "$.tasks.overall / row anthropic/claude-haiku-5-5 / column latency",
+   "file": "/work/.salvo14/mig/convert-vals.ai/extract/src-vals.ai-swebench-multimodal-2026-10-13.json",
+   "table": "T1",
+   "column": "latency",
+   "cell": "T1/anthropic/claude-haiku-5-5/latency",
+   "quote": "model: anthropic/claude-haiku-5-5 | latency: 975.904"
+  }
+ ]
+}

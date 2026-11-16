@@ -1,0 +1,378 @@
+{
+ "id": "src-zenn-oubakiou-fa3b3914e081c8-2026-10-04",
+ "publisher": "zenn-oubakiou",
+ "urls": [
+  "https://zenn.dev/oubakiou/articles/fa3b3914e081c8"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://zenn.dev/oubakiou/articles/fa3b3914e081c8",
+   "captured": "2026-10-28T09:00:55Z",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.json",
+   "note": "Zenn API JSON of the article (salvo gc/c8 copy, file mtime); the txt is its body"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://zenn.dev/oubakiou/articles/c6c99df219465b",
+   "captured": "2026-10-28T09:00:55Z",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.json",
+   "note": "the series introduction article the post links to for its notes on reading the benchmark (salvo gc/c8 copy); its txt is cited for the cost method"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.json": "ca9095d9f2b36484b2e18df69c524e6a44b72ef65df8d3770673aa4bf30bc627",
+  "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.json": "56c146ae5e9d6ba8b124a9b8e6f61fc8d7ad9ff953ea948f6cdb43416049da5f",
+  "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt": "5e9dbc89b51437f617fd14f965303a396c262da07e1c112e910f6f92ec4a0690",
+  "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.txt": "d371653e313e9d84751ce6c037f9258cf165c575878e18a42feeeb2d0cf08e84"
+ },
+ "harvested_at": "2026-10-28T09:00:55Z",
+ "published": {
+  "value": "2026-10-04",
+  "where": "Zenn API JSON, field published_at",
+  "quote": "2026-10-04",
+  "file": "\"published_at\":\"2026-10-04T22:35:20.403+09:00\""
+ },
+ "salvo": "salvo14/mig/convert-zenn-oubakiou (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved article text (Zenn API body / saved page) and the series introduction article",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.json",
+   "tool": "text of body_html of the Zenn API JSON (salvo gc/c8), one line per paragraph / table cell; quotes are matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.txt",
+   "from": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.json",
+   "tool": "same extraction for the series introduction article (cost-method paragraph)"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "cost-method",
+   "about": null,
+   "value": "CLI 実測（Claude 系）",
+   "level": "written",
+   "form": "prose",
+   "where": "series introduction article, note on cost accuracy: Claude-family costs are CLI measurements",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.txt",
+   "quote": "コストの算定精度はモデルごとに違い、そもそも「実際に払う金額」ではありません。 算定方法は CLI 実測（Claude 系）、トークン単価換算（Codex / Cursor 系）",
+   "term": "cli-total"
+  },
+  {
+   "id": "F2",
+   "says": "cost-basis",
+   "about": null,
+   "value": "「API 従量課金を仮定したモデル間比較の共通物差し」",
+   "level": "written",
+   "form": "prose",
+   "where": "series introduction article, same paragraph",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/c6c99df219465b.txt",
+   "quote": "本表の USD は「API 従量課金を仮定したモデル間比較の共通物差し」であって、読者の環境での支払額の見積りではありません",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, header 子費用 and cells written with $",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "low $0.194 $0.448 $0.503 $0.779",
+   "term": "USD"
+  },
+  {
+   "id": "F4",
+   "says": "unit",
+   "about": null,
+   "value": "（いずれも 3 反復の平均）",
+   "level": "written",
+   "form": "prose",
+   "where": "note under the cost table",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "（いずれも 3 反復の平均）",
+   "term": "per-run-mean"
+  },
+  {
+   "id": "F5",
+   "says": "note",
+   "about": null,
+   "value": "子費用",
+   "level": "written",
+   "form": "label",
+   "where": "cost table: the cost is the child agent cost (子費用); the parent cost is a separate column (総額 = with parent)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "子費用 gpt-6.1-sol 子費用 opus-5.5 総額 gpt-6.1-sol 総額 opus-5.5"
+  },
+  {
+   "id": "F6",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code CLI",
+   "level": "written",
+   "form": "prose",
+   "where": "conditions of the run (今回測った条件)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "子は claude-opus-5-5 の effort 5 種（low / medium / high / xhigh / max）を Claude Code CLI で起動",
+   "term": "claude-code"
+  },
+  {
+   "id": "F7",
+   "says": "model-api-id",
+   "about": null,
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "where": "conditions of the run",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "子は claude-opus-5-5 の effort 5 種（low / medium / high / xhigh / max）を Claude Code CLI で起動",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F8",
+   "says": "aggregation",
+   "about": null,
+   "value": "各条件 3 反復・直列実行で 5 条件 × 3 反復 = 15 ラン",
+   "level": "written",
+   "form": "prose",
+   "where": "conditions of the run",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "各条件 3 反復・直列実行で 5 条件 × 3 反復 = 15 ラン"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "親（委譲元）は claude-opus-5-5@medium に固定",
+   "level": "written",
+   "form": "prose",
+   "where": "conditions of the run",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "親（委譲元）は claude-opus-5-5@medium に固定"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "opus-5.5 low",
+   "value": "96.36",
+   "level": "written",
+   "form": "prose",
+   "where": "section claude-opus-5-5@low: the effort mean of the auto-test score (自動テスト評価, 100 points)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@low 平均 96.36",
+   "term": "score-of-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "opus-5.5 low",
+   "value": "low",
+   "level": "written",
+   "form": "label",
+   "where": "section heading claude-opus-5-5@low",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@low"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "opus-5.5 low",
+   "value": "0.448",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, row low, column 子費用 opus-5.5 (child cost, mean of 3 runs)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "low $0.194 $0.448 $0.503 $0.779",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "opus-5.5 medium",
+   "value": "98.77",
+   "level": "written",
+   "form": "prose",
+   "where": "section claude-opus-5-5@medium: the effort mean of the auto-test score (自動テスト評価, 100 points)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@medium 平均 98.77",
+   "term": "score-of-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F14",
+   "says": "effort-label",
+   "about": "opus-5.5 medium",
+   "value": "medium",
+   "level": "written",
+   "form": "label",
+   "where": "section heading claude-opus-5-5@medium",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@medium"
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": "opus-5.5 medium",
+   "value": "0.588",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, row medium, column 子費用 opus-5.5 (child cost, mean of 3 runs)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "medium $0.211 $0.588 $0.499 $0.889",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "opus-5.5 high",
+   "value": "100.00",
+   "level": "written",
+   "form": "prose",
+   "where": "section claude-opus-5-5@high: the effort mean of the auto-test score (自動テスト評価, 100 points)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@high 平均 100.00",
+   "term": "score-of-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F17",
+   "says": "effort-label",
+   "about": "opus-5.5 high",
+   "value": "high",
+   "level": "written",
+   "form": "label",
+   "where": "section heading claude-opus-5-5@high",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@high"
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "opus-5.5 high",
+   "value": "0.769",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, row high, column 子費用 opus-5.5 (child cost, mean of 3 runs)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "high $0.398 $0.769 $0.691 $1.091",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "opus-5.5 xhigh",
+   "value": "100.00",
+   "level": "written",
+   "form": "prose",
+   "where": "section claude-opus-5-5@xhigh: the effort mean of the auto-test score (自動テスト評価, 100 points)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@xhigh 平均 100.00",
+   "term": "score-of-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F20",
+   "says": "effort-label",
+   "about": "opus-5.5 xhigh",
+   "value": "xhigh",
+   "level": "written",
+   "form": "label",
+   "where": "section heading claude-opus-5-5@xhigh",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@xhigh"
+  },
+  {
+   "id": "F21",
+   "says": "cost",
+   "about": "opus-5.5 xhigh",
+   "value": "2.109",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, row xhigh, column 子費用 opus-5.5 (child cost, mean of 3 runs)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "xhigh $0.564 $2.109 $0.843 $2.436",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "opus-5.5 max",
+   "value": "97.54",
+   "level": "written",
+   "form": "prose",
+   "where": "section claude-opus-5-5@max: the effort mean of the auto-test score (自動テスト評価, 100 points)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@max 平均 97.54",
+   "term": "score-of-100",
+   "scale": "raw",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F23",
+   "says": "effort-label",
+   "about": "opus-5.5 max",
+   "value": "max",
+   "level": "written",
+   "form": "label",
+   "where": "section heading claude-opus-5-5@max",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "claude-opus-5-5@max"
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": "opus-5.5 max",
+   "value": "7.734",
+   "level": "written",
+   "form": "table-cell",
+   "where": "cost table, row max, column 子費用 opus-5.5 (child cost, mean of 3 runs)",
+   "file": "/work/.salvo14/mig/convert-zenn-oubakiou/evidence/fa3b3914e081c8.txt",
+   "quote": "max $0.676 $7.734 $0.974 $8.080",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  }
+ ]
+}

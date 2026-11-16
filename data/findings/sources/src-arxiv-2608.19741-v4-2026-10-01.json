@@ -1,0 +1,1238 @@
+{
+ "id": "src-arxiv-2608.19741-v4-2026-10-01",
+ "publisher": "arxiv-2608.19741",
+ "urls": [
+  "https://arxiv.org/abs/2608.19741",
+  "https://arxiv.org/html/2608.19741"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2608.19741",
+   "captured": "2026-10-28T00:00:00Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.html",
+   "note": "arXiv HTML (stamp arXiv:2608.19741v4 [cs.CL] 01 Oct 2026) fetched on 28 Oct 2026"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.html": "ad6ab183857715c1726c2936581cd60f46aec60d1fb6eccaed6b9e16b20b0cf6",
+  "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt": "10253e7ba7adee0383c617007391e0326bf097f27563a5db64b3ba18aaf5e2a7"
+ },
+ "harvested_at": "2026-10-28T00:00:00Z",
+ "published": {
+  "value": "2026-10-01",
+  "where": "arXiv stamp",
+  "quote": "arXiv:2608.19741v4 [cs.CL] 01 Oct 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt"
+ },
+ "salvo": "salvo14/mig convert-arxiv-2608.19741 (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the arXiv HTML fetched 28 Oct 2026",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.html",
+   "tool": "/work/.salvo14/mig/c2lib-g/htmltxt2.py (bs4): visible text, one block per line, table rows with cells joined by \" | \""
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "metric-definition",
+   "about": null,
+   "value": "micro-averaged pass@1 (or pass rate) over tasks and repeated trials",
+   "level": "written",
+   "form": "prose",
+   "where": "Section 5.1 Evaluation Protocol",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "we report the micro-averaged pass@1 (or pass rate) over tasks and repeated trials"
+  },
+  {
+   "id": "F2",
+   "says": "aggregation",
+   "about": null,
+   "value": "micro-averaged over repeated N=20 trials per task",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 4 caption",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Table 4: Thinkingbox-bench pass@1 (%) by domain, micro-averaged over repeated N=20 trials per task."
+  },
+  {
+   "id": "F3",
+   "says": "route",
+   "about": null,
+   "value": "Azure-hosted API deployments",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1 Models and Inference Parameters",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "These models are accessed through Azure-hosted API deployments using an OpenAI-compatible Chat Completions interface. We use the inference configuration shown in Table 9.",
+   "term": "azure"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23 column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "# | Model | Rates: I / O / R / W | pass@1 (%) | Succ. | 20 / 20 | C ^ m ($) | $ / succ. | $ / all-20 task",
+   "term": "USD"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "total estimated inference cost over M=507 tasks and N=20 trials per task, including failures",
+   "level": "written",
+   "form": "prose",
+   "where": "D.6 Estimation protocol: C^m denotes total estimated inference cost over M=507 tasks and N=20 trials per task, including failures",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "total estimated inference cost over M=507 tasks and N=20 trials per task, including failures",
+   "term": "USD per 507x20-trial campaign"
+  },
+  {
+   "id": "F6",
+   "says": "cost-method",
+   "about": null,
+   "value": "We price observed token usage at the cheapest eligible OpenRouter endpoint on 2026-09-20",
+   "level": "written",
+   "form": "prose",
+   "where": "D.6 Estimation protocol",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "We price observed token usage at the cheapest eligible OpenRouter endpoint on 2026-09-20, reversing",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F7",
+   "says": "cost-basis",
+   "about": null,
+   "value": "usage-based estimates, not actual cloud bills",
+   "level": "written",
+   "form": "prose",
+   "where": "D.6 Estimation protocol",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "These are usage-based estimates, not actual cloud bills.",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "Claude request settings and returned model IDs are unverified",
+   "level": "written",
+   "form": "prose",
+   "where": "Table 21 caption (Appendix D)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude request settings and returned model IDs are unverified"
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "Claude Opus 5",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Opus 5 | – | 80.71 ± 3.68 | 65.80 ± 4.24 | 49.95 ± 4.38 | 70.62 ± 4.10 | 66.19 ± 4.32 | 66.50 ± 1.91"
+  },
+  {
+   "id": "F10",
+   "says": "score",
+   "about": "Claude Opus 5",
+   "value": "66.50",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Claude Opus 5, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Opus 5 | – | 80.71 ± 3.68 | 65.80 ± 4.24 | 49.95 ± 4.38 | 70.62 ± 4.10 | 66.19 ± 4.32 | 66.50 ± 1.91",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F11",
+   "says": "cost",
+   "about": "Claude Opus 5",
+   "value": "3,206.00",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Opus 5, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "12 | Claude Opus 5 | 5.00 / 25.00 / 0.50 / 6.25 | 66.50 | 6,743 | 241 | 3,206.00 | 0.475 | 13.30"
+  },
+  {
+   "id": "F12",
+   "says": "price-table",
+   "about": "Claude Opus 5",
+   "value": "5.00 / 25.00 / 0.50 / 6.25",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Opus 5, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "12 | Claude Opus 5 | 5.00 / 25.00 / 0.50 / 6.25 | 66.50 | 6,743 | 241 | 3,206.00 | 0.475 | 13.30"
+  },
+  {
+   "id": "F13",
+   "says": "effort-setting",
+   "about": "Claude Opus 5",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F14",
+   "says": "model-name",
+   "about": "GPT-5.4",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.4 | – | 76.33 ± 3.53 | 62.65 ± 3.71 | 68.12 ± 3.46 | 65.34 ± 3.17 | 54.60 ± 4.00 | 65.36 ± 1.63"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "65.36",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row GPT-5.4, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.4 | – | 76.33 ± 3.53 | 62.65 ± 3.71 | 68.12 ± 3.46 | 65.34 ± 3.17 | 54.60 ± 4.00 | 65.36 ± 1.63",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F16",
+   "says": "cost",
+   "about": "GPT-5.4",
+   "value": "869.80",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.4, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "2 | GPT-5.4 | 1.25 / 7.50 / 0.12 / – | 65.36 | 6,628 | 128 | 869.80 | 0.131 | 6.80"
+  },
+  {
+   "id": "F17",
+   "says": "price-table",
+   "about": "GPT-5.4",
+   "value": "1.25 / 7.50 / 0.12 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.4, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "2 | GPT-5.4 | 1.25 / 7.50 / 0.12 / – | 65.36 | 6,628 | 128 | 869.80 | 0.131 | 6.80"
+  },
+  {
+   "id": "F18",
+   "says": "effort-setting",
+   "about": "GPT-5.4",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "GPT-5.6-sol",
+   "value": "GPT-5.6-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.6-sol | – | 67.65 ± 3.55 | 65.30 ± 3.66 | 60.34 ± 3.65 | 59.09 ± 3.64 | 57.52 ± 4.02 | 61.91 ± 1.66"
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "GPT-5.6-sol",
+   "value": "61.91",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row GPT-5.6-sol, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.6-sol | – | 67.65 ± 3.55 | 65.30 ± 3.66 | 60.34 ± 3.65 | 59.09 ± 3.64 | 57.52 ± 4.02 | 61.91 ± 1.66",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F21",
+   "says": "cost",
+   "about": "GPT-5.6-sol",
+   "value": "800.00",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.6-sol, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "1 | GPT-5.6-sol | 2.00 / 10.00 / 0.20 / 2.50 | 61.91 | 6,278 | 82 | 800.00 | 0.127 | 9.76"
+  },
+  {
+   "id": "F22",
+   "says": "price-table",
+   "about": "GPT-5.6-sol",
+   "value": "2.00 / 10.00 / 0.20 / 2.50",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.6-sol, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "1 | GPT-5.6-sol | 2.00 / 10.00 / 0.20 / 2.50 | 61.91 | 6,278 | 82 | 800.00 | 0.127 | 9.76"
+  },
+  {
+   "id": "F23",
+   "says": "effort-setting",
+   "about": "GPT-5.6-sol",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "Claude Sonnet 4.6",
+   "value": "Claude Sonnet 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Sonnet 4.6 | – | 72.35 ± 3.65 | 54.40 ± 4.03 | 58.94 ± 3.8 | 56.39 ± 3.40 | 54.31 ± 3.73 | 59.19 ± 1.69"
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "Claude Sonnet 4.6",
+   "value": "59.19",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Claude Sonnet 4.6, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Sonnet 4.6 | – | 72.35 ± 3.65 | 54.40 ± 4.03 | 58.94 ± 3.8 | 56.39 ± 3.40 | 54.31 ± 3.73 | 59.19 ± 1.69",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F26",
+   "says": "cost",
+   "about": "Claude Sonnet 4.6",
+   "value": "1,587.60",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Sonnet 4.6, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "7 | Claude Sonnet 4.6 | 3.00 / 15.00 / 0.30 / 3.75 | 59.19 | 6,002 | 102 | 1,587.60 | 0.265 | 15.56"
+  },
+  {
+   "id": "F27",
+   "says": "price-table",
+   "about": "Claude Sonnet 4.6",
+   "value": "3.00 / 15.00 / 0.30 / 3.75",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Sonnet 4.6, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "7 | Claude Sonnet 4.6 | 3.00 / 15.00 / 0.30 / 3.75 | 59.19 | 6,002 | 102 | 1,587.60 | 0.265 | 15.56"
+  },
+  {
+   "id": "F28",
+   "says": "effort-setting",
+   "about": "Claude Sonnet 4.6",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F29",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-6 Astra | – | 71.73 ± 4.38 | 46.55 ± 4.31 | 55.87 ± 4.68 | 60.87 ± 4.41 | 56.83 ± 4.56 | 58.31 ± 2.03"
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "58.31",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row GPT-6 Astra, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-6 Astra | – | 71.73 ± 4.38 | 46.55 ± 4.31 | 55.87 ± 4.68 | 60.87 ± 4.41 | 56.83 ± 4.56 | 58.31 ± 2.03",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "cost",
+   "about": "GPT-6 Astra",
+   "value": "1,720.60",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-6 Astra, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "8 | GPT-6 Astra | 5.00 / 25.00 / 0.50 / 6.25 | 58.31 | 5,913 | 231 | 1,720.60 | 0.291 | 7.45"
+  },
+  {
+   "id": "F32",
+   "says": "price-table",
+   "about": "GPT-6 Astra",
+   "value": "5.00 / 25.00 / 0.50 / 6.25",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-6 Astra, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "8 | GPT-6 Astra | 5.00 / 25.00 / 0.50 / 6.25 | 58.31 | 5,913 | 231 | 1,720.60 | 0.291 | 7.45"
+  },
+  {
+   "id": "F33",
+   "says": "effort-setting",
+   "about": "GPT-6 Astra",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "Kimi-K3",
+   "value": "Kimi-K3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Kimi-K3 | 2.8T/104B | 82.24 ± 2.99 | 50.80 ± 3.44 | 61.83 ± 3.10 | 41.35 ± 3.04 | 51.63 ± 3.50 | 57.37 ± 1.55"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "Kimi-K3",
+   "value": "57.37",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Kimi-K3, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Kimi-K3 | 2.8T/104B | 82.24 ± 2.99 | 50.80 ± 3.44 | 61.83 ± 3.10 | 41.35 ± 3.04 | 51.63 ± 3.50 | 57.37 ± 1.55",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "Kimi-K3",
+   "value": "1,406.40",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Kimi-K3, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "6 | Kimi-K3 | 2.10 / 10.95 / 0.21 / – | 57.37 | 5,817 | 68 | 1,406.40 | 0.242 | 20.68"
+  },
+  {
+   "id": "F37",
+   "says": "price-table",
+   "about": "Kimi-K3",
+   "value": "2.10 / 10.95 / 0.21 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Kimi-K3, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "6 | Kimi-K3 | 2.10 / 10.95 / 0.21 / – | 57.37 | 5,817 | 68 | 1,406.40 | 0.242 | 20.68"
+  },
+  {
+   "id": "F38",
+   "says": "effort-setting",
+   "about": "Kimi-K3",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.8-27B | 27B | 64.03 ± 4.10 | 47.85 ± 3.24 | 53.41 ± 3.34 | 47.88 ± 3.05 | 45.69 ± 3.45 | 51.70 ± 1.56"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "51.70",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Qwen3.8-27B, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.8-27B | 27B | 64.03 ± 4.10 | 47.85 ± 3.24 | 53.41 ± 3.34 | 47.88 ± 3.05 | 45.69 ± 3.45 | 51.70 ± 1.56",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "cost",
+   "about": "Qwen3.8-27B",
+   "value": "925.80",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.8-27B, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "4 | Qwen3.8-27B | 0.20 / 2.50 / 0.05 / – | 51.70 | 5,242 | 38 | 925.80 | 0.177 | 24.36"
+  },
+  {
+   "id": "F42",
+   "says": "price-table",
+   "about": "Qwen3.8-27B",
+   "value": "0.20 / 2.50 / 0.05 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.8-27B, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "4 | Qwen3.8-27B | 0.20 / 2.50 / 0.05 / – | 51.70 | 5,242 | 38 | 925.80 | 0.177 | 24.36"
+  },
+  {
+   "id": "F43",
+   "says": "route",
+   "about": "Qwen3.8-27B",
+   "value": "We serve them locally with vLLM",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1: the Qwen models are served locally, not through the Azure API",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "We serve them locally with vLLM (Kwon et al., 2023) using an OpenAI-compatible Chat Completions endpoint.",
+   "term": "vllm"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "GPT-5.2",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.2 | 46.28 [43.12, 49.44] | 11.75 [9.02, 14.48] | 84.81 [81.42, 88.2] | 77 | 44"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "46.28",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, row GPT-5.2, column pass@1 (%)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GPT-5.2 | 46.28 [43.12, 49.44] | 11.75 [9.02, 14.48] | 84.81 [81.42, 88.2] | 77 | 44",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "says": "cost",
+   "about": "GPT-5.2",
+   "value": "878.00",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.2, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "5 | GPT-5.2 | 0.87 / 7.00 / 0.08 / – | 46.28 | 4,693 | 44 | 878.00 | 0.187 | 19.95"
+  },
+  {
+   "id": "F47",
+   "says": "price-table",
+   "about": "GPT-5.2",
+   "value": "0.87 / 7.00 / 0.08 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GPT-5.2, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "5 | GPT-5.2 | 0.87 / 7.00 / 0.08 / – | 46.28 | 4,693 | 44 | 878.00 | 0.187 | 19.95"
+  },
+  {
+   "id": "F48",
+   "says": "effort-setting",
+   "about": "GPT-5.2",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F49",
+   "says": "model-name",
+   "about": "DeepSeek-V4-Pro",
+   "value": "DeepSeek-V4-Pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "DeepSeek-V4-Pro | 1.6T/49B | 68.21 ± 3.11 | 29.65 ± 3.31 | 43.13 ± 2.99 | 44.86 ± 3.43 | 31.04 ± 3.29 | 43.26 ± 1.56"
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "DeepSeek-V4-Pro",
+   "value": "43.26",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row DeepSeek-V4-Pro, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "DeepSeek-V4-Pro | 1.6T/49B | 68.21 ± 3.11 | 29.65 ± 3.31 | 43.13 ± 2.99 | 44.86 ± 3.43 | 31.04 ± 3.29 | 43.26 ± 1.56",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "cost",
+   "about": "DeepSeek-V4-Pro",
+   "value": "2,245.86",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row DeepSeek-V4-Pro, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "13 | DeepSeek-V4-Pro | 1.04 / 2.08 / 0.20 / – | 43.26 | 4,387 | 18 | 2,245.86 | 0.512 | 124.77"
+  },
+  {
+   "id": "F52",
+   "says": "price-table",
+   "about": "DeepSeek-V4-Pro",
+   "value": "1.04 / 2.08 / 0.20 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row DeepSeek-V4-Pro, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "13 | DeepSeek-V4-Pro | 1.04 / 2.08 / 0.20 / – | 43.26 | 4,387 | 18 | 2,245.86 | 0.512 | 124.77"
+  },
+  {
+   "id": "F53",
+   "says": "effort-setting",
+   "about": "DeepSeek-V4-Pro",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F54",
+   "says": "model-name",
+   "about": "Claude Opus 4.6",
+   "value": "Claude Opus 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Opus 4.6 | – | 68.62 ± 3.78 | 8.30 ± 1.97 | 21.11 ± 3.10 | 35.67 ± 4.22 | 27.82 ± 3.87 | 32.09 ± 1.79"
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "Claude Opus 4.6",
+   "value": "32.09",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Claude Opus 4.6, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Claude Opus 4.6 | – | 68.62 ± 3.78 | 8.30 ± 1.97 | 21.11 ± 3.10 | 35.67 ± 4.22 | 27.82 ± 3.87 | 32.09 ± 1.79",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F56",
+   "says": "cost",
+   "about": "Claude Opus 4.6",
+   "value": "2,497.96",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Opus 4.6, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "14 | Claude Opus 4.6 | 5.00 / 25.00 / 0.50 / 6.25 | 32.09 | 3,254 | 70 | 2,497.96 | 0.768 | 35.69"
+  },
+  {
+   "id": "F57",
+   "says": "price-table",
+   "about": "Claude Opus 4.6",
+   "value": "5.00 / 25.00 / 0.50 / 6.25",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Claude Opus 4.6, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "14 | Claude Opus 4.6 | 5.00 / 25.00 / 0.50 / 6.25 | 32.09 | 3,254 | 70 | 2,497.96 | 0.768 | 35.69"
+  },
+  {
+   "id": "F58",
+   "says": "effort-setting",
+   "about": "Claude Opus 4.6",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F59",
+   "says": "model-name",
+   "about": "Kimi-K2.6",
+   "value": "Kimi-K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Kimi-K2.6 | 37.66 [34.87, 40.45] | 4.60 [2.82, 6.37] | 84.22 [80.74, 87.7] | 80 | 16"
+  },
+  {
+   "id": "F60",
+   "says": "score",
+   "about": "Kimi-K2.6",
+   "value": "37.66",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, row Kimi-K2.6, column pass@1 (%)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Kimi-K2.6 | 37.66 [34.87, 40.45] | 4.60 [2.82, 6.37] | 84.22 [80.74, 87.7] | 80 | 16",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "says": "cost",
+   "about": "Kimi-K2.6",
+   "value": "543.60",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Kimi-K2.6, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "3 | Kimi-K2.6 | 0.57 / 2.40 / 0.11 / – | 37.66 | 3,819 | 16 | 543.60 | 0.142 | 33.98"
+  },
+  {
+   "id": "F62",
+   "says": "price-table",
+   "about": "Kimi-K2.6",
+   "value": "0.57 / 2.40 / 0.11 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Kimi-K2.6, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "3 | Kimi-K2.6 | 0.57 / 2.40 / 0.11 / – | 37.66 | 3,819 | 16 | 543.60 | 0.142 | 33.98"
+  },
+  {
+   "id": "F63",
+   "says": "effort-setting",
+   "about": "Kimi-K2.6",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "GLM-5.1",
+   "value": "GLM-5.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GLM-5.1 | 744B/40B | 58.67 ± 3.52 | 25.70 ± 2.62 | 35.43 ± 3.35 | 13.27 ± 2.39 | 34.06 ± 3.57 | 33.19 ± 1.54"
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "GLM-5.1",
+   "value": "33.19",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row GLM-5.1, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "GLM-5.1 | 744B/40B | 58.67 ± 3.52 | 25.70 ± 2.62 | 35.43 ± 3.35 | 13.27 ± 2.39 | 34.06 ± 3.57 | 33.19 ± 1.54",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": "GLM-5.1",
+   "value": "1,140.95",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GLM-5.1, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "10 | GLM-5.1 | 1.40 / 4.40 / 0.26 / – | 33.19 | 3,365 | 14 | 1,140.95 | 0.339 | 81.50"
+  },
+  {
+   "id": "F67",
+   "says": "price-table",
+   "about": "GLM-5.1",
+   "value": "1.40 / 4.40 / 0.26 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row GLM-5.1, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "10 | GLM-5.1 | 1.40 / 4.40 / 0.26 / – | 33.19 | 3,365 | 14 | 1,140.95 | 0.339 | 81.50"
+  },
+  {
+   "id": "F68",
+   "says": "effort-setting",
+   "about": "GLM-5.1",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F69",
+   "says": "model-name",
+   "about": "Qwen3.6-27B",
+   "value": "Qwen3.6-27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.6-27B | 32.94 [30.1, 35.78] | 3.83 [2.21, 5.45] | 78.50 [74.57, 82.43] | 109 | 12"
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "Qwen3.6-27B",
+   "value": "32.94",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, row Qwen3.6-27B, column pass@1 (%)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.6-27B | 32.94 [30.1, 35.78] | 3.83 [2.21, 5.45] | 78.50 [74.57, 82.43] | 109 | 12",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "cost",
+   "about": "Qwen3.6-27B",
+   "value": "1,094.69",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.6-27B, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "9 | Qwen3.6-27B | 0.32 / 2.70 / 0.15 / – | 32.94 | 3,340 | 12 | 1,094.69 | 0.328 | 91.22"
+  },
+  {
+   "id": "F72",
+   "says": "price-table",
+   "about": "Qwen3.6-27B",
+   "value": "0.32 / 2.70 / 0.15 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.6-27B, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "9 | Qwen3.6-27B | 0.32 / 2.70 / 0.15 / – | 32.94 | 3,340 | 12 | 1,094.69 | 0.328 | 91.22"
+  },
+  {
+   "id": "F73",
+   "says": "route",
+   "about": "Qwen3.6-27B",
+   "value": "We serve them locally with vLLM",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1: the Qwen models are served locally, not through the Azure API",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "We serve them locally with vLLM (Kwon et al., 2023) using an OpenAI-compatible Chat Completions endpoint.",
+   "term": "vllm"
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "o3-pro",
+   "value": "o3-pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "o3-pro | – | 37.70 ± 3.18 | 2.95 ± 0.76 | 17.31 ± 1.94 | 24.28 ± 3.07 | 14.60 ± 2.08 | 19.31 ± 1.17"
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "o3-pro",
+   "value": "19.31",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row o3-pro, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "o3-pro | – | 37.70 ± 3.18 | 2.95 ± 0.76 | 17.31 ± 1.94 | 24.28 ± 3.07 | 14.60 ± 2.08 | 19.31 ± 1.17",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "cost",
+   "about": "o3-pro",
+   "value": "36,803.00",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row o3-pro, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "18 | o3-pro | 20.00 / 80.00 / – / – | 19.31 | 1,958 | 4 | 36,803.00 | 18.796 | 9,200.75"
+  },
+  {
+   "id": "F77",
+   "says": "price-table",
+   "about": "o3-pro",
+   "value": "20.00 / 80.00 / – / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row o3-pro, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "18 | o3-pro | 20.00 / 80.00 / – / – | 19.31 | 1,958 | 4 | 36,803.00 | 18.796 | 9,200.75"
+  },
+  {
+   "id": "F78",
+   "says": "effort-setting",
+   "about": "o3-pro",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1, note under Table 9: o3-pro, reasoning_effort set to medium",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "The o3-pro Responses API doesn’t accept temperature setting, so we just set the reasoning_effort as medium for it."
+  },
+  {
+   "id": "F79",
+   "says": "model-name",
+   "about": "Grok-4.3",
+   "value": "Grok-4.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Grok-4.3 | – | 43.93 ± 3.44 | 2.60 ± 0.70 | 15.14 ± 2.10 | 1.78 ± 0.69 | 9.55 ± 1.73 | 14.38 ± 1.11"
+  },
+  {
+   "id": "F80",
+   "says": "score",
+   "about": "Grok-4.3",
+   "value": "14.38",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Grok-4.3, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Grok-4.3 | – | 43.93 ± 3.44 | 2.60 ± 0.70 | 15.14 ± 2.10 | 1.78 ± 0.69 | 9.55 ± 1.73 | 14.38 ± 1.11",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "says": "cost",
+   "about": "Grok-4.3",
+   "value": "640.13",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Grok-4.3, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "11 | Grok-4.3 | 1.25 / 2.50 / 0.20 / – | 14.38 | 1,458 | 0 | 640.13 | 0.439 | N/A"
+  },
+  {
+   "id": "F82",
+   "says": "price-table",
+   "about": "Grok-4.3",
+   "value": "1.25 / 2.50 / 0.20 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Grok-4.3, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "11 | Grok-4.3 | 1.25 / 2.50 / 0.20 / – | 14.38 | 1,458 | 0 | 640.13 | 0.439 | N/A"
+  },
+  {
+   "id": "F83",
+   "says": "effort-setting",
+   "about": "Grok-4.3",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  },
+  {
+   "id": "F84",
+   "says": "model-name",
+   "about": "Qwen3.5-9B",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.5-9B | 9B | 19.90 ± 2.11 | 0.70 ± 0.28 | 4.71 ± 0.94 | 1.15 ± 0.87 | 2.33 ± 0.89 | 5.65 ± 0.60"
+  },
+  {
+   "id": "F85",
+   "says": "score",
+   "about": "Qwen3.5-9B",
+   "value": "5.65",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Qwen3.5-9B, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Qwen3.5-9B | 9B | 19.90 ± 2.11 | 0.70 ± 0.28 | 4.71 ± 0.94 | 1.15 ± 0.87 | 2.33 ± 0.89 | 5.65 ± 0.60",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "says": "cost",
+   "about": "Qwen3.5-9B",
+   "value": "568.89",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.5-9B, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "15 | Qwen3.5-9B | 0.17 / 0.25 / – / – | 5.65 | 573 | 0 | 568.89 | 0.993 | N/A"
+  },
+  {
+   "id": "F87",
+   "says": "price-table",
+   "about": "Qwen3.5-9B",
+   "value": "0.17 / 0.25 / – / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Qwen3.5-9B, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "15 | Qwen3.5-9B | 0.17 / 0.25 / – / – | 5.65 | 573 | 0 | 568.89 | 0.993 | N/A"
+  },
+  {
+   "id": "F88",
+   "says": "route",
+   "about": "Qwen3.5-9B",
+   "value": "We serve them locally with vLLM",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1: the Qwen models are served locally, not through the Azure API",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "We serve them locally with vLLM (Kwon et al., 2023) using an OpenAI-compatible Chat Completions endpoint.",
+   "term": "vllm"
+  },
+  {
+   "id": "F89",
+   "says": "model-name",
+   "about": "Mistral-Large-3",
+   "value": "Mistral-Large-3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Mistral-Large-3 | 675B/41B | 11.28 ± 1.92 | 1.30 ± 0.51 | 8.99 ± 1.69 | 1.15 ± 0.40 | 0.74 ± 0.31 | 4.66 ± 0.56"
+  },
+  {
+   "id": "F90",
+   "says": "score",
+   "about": "Mistral-Large-3",
+   "value": "4.66",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 4, row Mistral-Large-3, column Average",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Mistral-Large-3 | 675B/41B | 11.28 ± 1.92 | 1.30 ± 0.51 | 8.99 ± 1.69 | 1.15 ± 0.40 | 0.74 ± 0.31 | 4.66 ± 0.56",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F91",
+   "says": "cost",
+   "about": "Mistral-Large-3",
+   "value": "645.59",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Mistral-Large-3, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "16 | Mistral-Large-3 | 0.25 / 0.75 / 0.02 / – | 4.66 | 473 | 0 | 645.59 | 1.365 | N/A"
+  },
+  {
+   "id": "F92",
+   "says": "price-table",
+   "about": "Mistral-Large-3",
+   "value": "0.25 / 0.75 / 0.02 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row Mistral-Large-3, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "16 | Mistral-Large-3 | 0.25 / 0.75 / 0.02 / – | 4.66 | 473 | 0 | 645.59 | 1.365 | N/A"
+  },
+  {
+   "id": "F93",
+   "says": "thinking-off",
+   "about": "Mistral-Large-3",
+   "value": "agent reasoning is disabled",
+   "level": "written",
+   "form": "prose",
+   "where": "Appendix C.1, note under Table 9",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "Mistral-Large-3 does not support the seed, max_completion_tokens, or reasoning_effort parameters; these parameters are therefore omitted from its requests, and agent reasoning is disabled."
+  },
+  {
+   "id": "F94",
+   "says": "model-name",
+   "about": "MiniMax-M2.5",
+   "value": "MiniMax-M2.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, column Model",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "MiniMax-M2.5 | 0.19 [0.00, 0.53] | 0.00 [0.00,0.00] | 0.59 [0.00, 1.31] | 504 | 0"
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "MiniMax-M2.5",
+   "value": "0.19",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 15, row MiniMax-M2.5, column pass@1 (%)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "MiniMax-M2.5 | 0.19 [0.00, 0.53] | 0.00 [0.00,0.00] | 0.59 [0.00, 1.31] | 504 | 0",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F96",
+   "says": "cost",
+   "about": "MiniMax-M2.5",
+   "value": "59.47",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row MiniMax-M2.5, column C^m ($)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "17 | MiniMax-M2.5 | 0.27 / 0.95 / 0.03 / – | 0.19 | 19 | 0 | 59.47 | 3.130 | N/A"
+  },
+  {
+   "id": "F97",
+   "says": "price-table",
+   "about": "MiniMax-M2.5",
+   "value": "0.27 / 0.95 / 0.03 / –",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 23, row MiniMax-M2.5, column Rates: I / O / R / W (input / output / cache-read / cache-write, $ per million tokens)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "17 | MiniMax-M2.5 | 0.27 / 0.95 / 0.03 / – | 0.19 | 19 | 0 | 59.47 | 3.130 | N/A"
+  },
+  {
+   "id": "F98",
+   "says": "effort-setting",
+   "about": "MiniMax-M2.5",
+   "value": "medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Table 9, row reasoning_effort, column Agent (Azure API inference parameters, applied to all Azure-hosted agent models)",
+   "file": "/work/.salvo14/mig/convert-arxiv-2608.19741/evidence/a.txt",
+   "quote": "reasoning_effort | medium | none | none"
+  }
+ ]
+}

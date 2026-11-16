@@ -1,0 +1,871 @@
+{
+ "id": "src-mmdeepresearch-bench.github.io-2026-09-30",
+ "publisher": "mmdeepresearch-bench.github.io",
+ "urls": [
+  "https://mmdeepresearch-bench.github.io/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://mmdeepresearch-bench.github.io/",
+   "captured": "2026-09-30T16:51:01Z",
+   "note": "leaderboard page saved by salvo s17/b2 (file mtime 30 Sep 2026)"
+  },
+  {
+   "id": "G2",
+   "kind": "commit",
+   "url": "https://github.com/MMDeepResearch-Bench/MMDeepResearch-bench.github.io/commit/59b58b76c9681d9bd66faaa7a7a6a8fba614e1f4",
+   "commit": "59b58b76c9681d9bd66faaa7a7a6a8fba614e1f4",
+   "captured": "2026-08-25T17:54:38Z",
+   "note": "dating step 2 (agents on the web, 3 Nov 2026), b12: Les 29 entrées du tableau entier sont identiques à ce commit (comparaison du bloc). Date du dernier changement du tableau, borne haute des runs. Saved copy of the capture: /work/.salvo14/mig/dates2/ev/mmdr/index-59b58b76.html (sha256 c838331e03d2f37bef32b90ae5dfdd5cf7afe412f9c3d6a30b4db31791ff33c3).",
+   "evidence": [
+    {
+     "url": "https://github.com/MMDeepResearch-Bench/MMDeepResearch-bench.github.io/commit/59b58b76c9681d9bd66faaa7a7a6a8fba614e1f4",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/dates2/ev/mmdr/commits-index.json",
+     "sha256": "1f49498c9ebfc8376a0b8ef14c7e51a2c4effb73c91abe2dfcef2ec902dd07c3",
+     "where": "the date of commit 59b58b76c9681d9bd66faaa7a7a6a8fba614e1f4 (the agent: index.html, bloc `let DATA = [` (ligne 673), ligne 675; commit 59b58b76 'Add files via upload'. Sur les 62 commits de index.html (mmdr/commits-index.json), seul celui-ci a un bloc DATA identique à notre capture ; les 61 précédents (dont a503d85d du 7 août) diffèrent.)",
+     "quote": "YTZhOGZiYTYxNGUxZjQ\",\"commit\":{\"author\":{\"name\":\"MMDeepResearch-Bench\",\"email\":\"chimiyuzhe@gmail.com\",\"date\":\"2026-08-25T17:54:38Z\"},\"committer\":{\"name\":\"GitHub\",\"email\":\"noreply@github.com\",\"date\":\"2026-08-25T17:54:38Z\"},\"message\":\"Add fil"
+    }
+   ]
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json": "e6a47afdd4e5ca84a9eba4ba5e83fc8fd9a3500f0ee47e99f77600a252aec7bd",
+  "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.html": "7ee5549a2c3e2d007ce7d53306bf18db48573ce78f074911f3416953850ddf3f",
+  "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.txt": "4547a6071d72250cfced318a4526f81723a65e0a35fa9d2a30ed7bc3f27071e2"
+ },
+ "harvested_at": "2026-09-30T16:51:01Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "from": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.html",
+   "tool": "convert.py (this folder): the object literals of `let DATA = [ ... ]` in the page's script (29 entries), each key quoted so the array is valid JSON; the numbers are copied as written (e.g. 36.10)"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.txt",
+   "from": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.html",
+   "tool": "htmltxt.py (this folder): visible text of the page, scripts and styles dropped"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "$",
+   "format": "json",
+   "row_key": "model",
+   "columns": {
+    "overall": {
+     "says": "score",
+     "term": "score%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    }
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "note",
+   "value": "all metrics are reported on a 0–100 scale (higher is better) and averaged across tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.txt",
+   "where": "Leaderboard, 'How to read the scores'",
+   "quote": "all metrics are reported on a \n0–100\n scale (higher is better) and averaged across tasks"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Overall = mean over tasks of (0.2 · FLAE + 0.5 · TRACE + 0.3 · MOSAIC)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdeepresearch-bench-2026-09-30.txt",
+   "where": "Leaderboard, 'How to read the scores'",
+   "quote": "Overall = mean over tasks of (0.2 · FLAE + 0.5 · TRACE + 0.3 · MOSAIC)"
+  },
+  {
+   "id": "F3",
+   "about": "OpenAI o3-mini",
+   "says": "model-name",
+   "value": "OpenAI o3-mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'OpenAI o3-mini', field model",
+   "quote": "\"model\": \"OpenAI o3-mini\"",
+   "table": "T1"
+  },
+  {
+   "id": "F4",
+   "about": "DeepSeek-V3.2",
+   "says": "model-name",
+   "value": "DeepSeek-V3.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'DeepSeek-V3.2', field model",
+   "quote": "\"model\": \"DeepSeek-V3.2\"",
+   "table": "T1"
+  },
+  {
+   "id": "F5",
+   "about": "Kimi K2 (Thinking)",
+   "says": "model-name",
+   "value": "Kimi K2 (Thinking)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Kimi K2 (Thinking)', field model",
+   "quote": "\"model\": \"Kimi K2 (Thinking)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F6",
+   "about": "Qwen 3 235B (A22B)",
+   "says": "model-name",
+   "value": "Qwen 3 235B (A22B)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Qwen 3 235B (A22B)', field model",
+   "quote": "\"model\": \"Qwen 3 235B (A22B)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F7",
+   "about": "Qwen 3 VL 235B (A22B)",
+   "says": "model-name",
+   "value": "Qwen 3 VL 235B (A22B)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Qwen 3 VL 235B (A22B)', field model",
+   "quote": "\"model\": \"Qwen 3 VL 235B (A22B)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F8",
+   "about": "GPT-4o",
+   "says": "model-name",
+   "value": "GPT-4o",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-4o', field model",
+   "quote": "\"model\": \"GPT-4o\"",
+   "table": "T1"
+  },
+  {
+   "id": "F9",
+   "about": "GPT-4.1",
+   "says": "model-name",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-4.1', field model",
+   "quote": "\"model\": \"GPT-4.1\"",
+   "table": "T1"
+  },
+  {
+   "id": "F10",
+   "about": "GPT-4.1 mini",
+   "says": "model-name",
+   "value": "GPT-4.1 mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-4.1 mini', field model",
+   "quote": "\"model\": \"GPT-4.1 mini\"",
+   "table": "T1"
+  },
+  {
+   "id": "F11",
+   "about": "GPT-4.1 nano",
+   "says": "model-name",
+   "value": "GPT-4.1 nano",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-4.1 nano', field model",
+   "quote": "\"model\": \"GPT-4.1 nano\"",
+   "table": "T1"
+  },
+  {
+   "id": "F12",
+   "about": "GPT-5 mini",
+   "says": "model-name",
+   "value": "GPT-5 mini",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-5 mini', field model",
+   "quote": "\"model\": \"GPT-5 mini\"",
+   "table": "T1"
+  },
+  {
+   "id": "F13",
+   "about": "GPT-5.1",
+   "says": "model-name",
+   "value": "GPT-5.1",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-5.1', field model",
+   "quote": "\"model\": \"GPT-5.1\"",
+   "table": "T1"
+  },
+  {
+   "id": "F14",
+   "about": "GPT-5.2",
+   "says": "model-name",
+   "value": "GPT-5.2",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-5.2', field model",
+   "quote": "\"model\": \"GPT-5.2\"",
+   "table": "T1"
+  },
+  {
+   "id": "F15",
+   "about": "GPT-5.4",
+   "says": "model-name",
+   "value": "GPT-5.4",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'GPT-5.4', field model",
+   "quote": "\"model\": \"GPT-5.4\"",
+   "table": "T1"
+  },
+  {
+   "id": "F16",
+   "about": "Grok-3",
+   "says": "model-name",
+   "value": "Grok-3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Grok-3', field model",
+   "quote": "\"model\": \"Grok-3\"",
+   "table": "T1"
+  },
+  {
+   "id": "F17",
+   "about": "Grok-4 (Fast Reasoning)",
+   "says": "model-name",
+   "value": "Grok-4 (Fast Reasoning)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Grok-4 (Fast Reasoning)', field model",
+   "quote": "\"model\": \"Grok-4 (Fast Reasoning)\"",
+   "table": "T1"
+  },
+  {
+   "id": "F18",
+   "about": "Claude 4.5 Haiku",
+   "says": "model-name",
+   "value": "Claude 4.5 Haiku",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Claude 4.5 Haiku', field model",
+   "quote": "\"model\": \"Claude 4.5 Haiku\"",
+   "table": "T1"
+  },
+  {
+   "id": "F19",
+   "about": "Claude 4.5 Sonnet",
+   "says": "model-name",
+   "value": "Claude 4.5 Sonnet",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Claude 4.5 Sonnet', field model",
+   "quote": "\"model\": \"Claude 4.5 Sonnet\"",
+   "table": "T1"
+  },
+  {
+   "id": "F20",
+   "about": "Claude 4.5 Opus",
+   "says": "model-name",
+   "value": "Claude 4.5 Opus",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Claude 4.5 Opus', field model",
+   "quote": "\"model\": \"Claude 4.5 Opus\"",
+   "table": "T1"
+  },
+  {
+   "id": "F21",
+   "about": "Gemini 2.5 Flash",
+   "says": "model-name",
+   "value": "Gemini 2.5 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 2.5 Flash', field model",
+   "quote": "\"model\": \"Gemini 2.5 Flash\"",
+   "table": "T1"
+  },
+  {
+   "id": "F22",
+   "about": "Gemini 2.5 Pro",
+   "says": "model-name",
+   "value": "Gemini 2.5 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 2.5 Pro', field model",
+   "quote": "\"model\": \"Gemini 2.5 Pro\"",
+   "table": "T1"
+  },
+  {
+   "id": "F23",
+   "about": "Gemini 3 Flash",
+   "says": "model-name",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 3 Flash', field model",
+   "quote": "\"model\": \"Gemini 3 Flash\"",
+   "table": "T1"
+  },
+  {
+   "id": "F24",
+   "about": "Gemini 3 Pro",
+   "says": "model-name",
+   "value": "Gemini 3 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 3 Pro', field model",
+   "quote": "\"model\": \"Gemini 3 Pro\"",
+   "table": "T1"
+  },
+  {
+   "id": "F25",
+   "about": "Gemini 3.1 Flash Lite",
+   "says": "model-name",
+   "value": "Gemini 3.1 Flash Lite",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 3.1 Flash Lite', field model",
+   "quote": "\"model\": \"Gemini 3.1 Flash Lite\"",
+   "table": "T1"
+  },
+  {
+   "id": "F26",
+   "about": "Gemini 3.1 Pro",
+   "says": "model-name",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "where": "entry 'Gemini 3.1 Pro', field model",
+   "quote": "\"model\": \"Gemini 3.1 Pro\"",
+   "table": "T1"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "OpenAI o3-mini",
+   "value": "31.96",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row OpenAI o3-mini / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/OpenAI o3-mini/overall",
+   "quote": "model: OpenAI o3-mini | overall: 31.96",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "DeepSeek-V3.2",
+   "value": "43.71",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row DeepSeek-V3.2 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/DeepSeek-V3.2/overall",
+   "quote": "model: DeepSeek-V3.2 | overall: 43.71",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Kimi K2 (Thinking)",
+   "value": "36.91",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Kimi K2 (Thinking) / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Kimi K2 (Thinking)/overall",
+   "quote": "model: Kimi K2 (Thinking) | overall: 36.91",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "Qwen 3 235B (A22B)",
+   "value": "36.04",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Qwen 3 235B (A22B) / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Qwen 3 235B (A22B)/overall",
+   "quote": "model: Qwen 3 235B (A22B) | overall: 36.04",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "Qwen 3 VL 235B (A22B)",
+   "value": "35.08",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Qwen 3 VL 235B (A22B) / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Qwen 3 VL 235B (A22B)/overall",
+   "quote": "model: Qwen 3 VL 235B (A22B) | overall: 35.08",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "GPT-4o",
+   "value": "28.62",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-4o / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-4o/overall",
+   "quote": "model: GPT-4o | overall: 28.62",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GPT-4.1",
+   "value": "36.95",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-4.1 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-4.1/overall",
+   "quote": "model: GPT-4.1 | overall: 36.95",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "GPT-4.1 mini",
+   "value": "34.23",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-4.1 mini / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-4.1 mini/overall",
+   "quote": "model: GPT-4.1 mini | overall: 34.23",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "GPT-4.1 nano",
+   "value": "28.07",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-4.1 nano / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-4.1 nano/overall",
+   "quote": "model: GPT-4.1 nano | overall: 28.07",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F36",
+   "says": "score",
+   "about": "GPT-5 mini",
+   "value": "38.49",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-5 mini / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-5 mini/overall",
+   "quote": "model: GPT-5 mini | overall: 38.49",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "GPT-5.1",
+   "value": "32.69",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-5.1 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-5.1/overall",
+   "quote": "model: GPT-5.1 | overall: 32.69",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "GPT-5.2",
+   "value": "32.76",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-5.2 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-5.2/overall",
+   "quote": "model: GPT-5.2 | overall: 32.76",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GPT-5.4",
+   "value": "40.84",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row GPT-5.4 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/GPT-5.4/overall",
+   "quote": "model: GPT-5.4 | overall: 40.84",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "Grok-3",
+   "value": "29.89",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Grok-3 / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Grok-3/overall",
+   "quote": "model: Grok-3 | overall: 29.89",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "Grok-4 (Fast Reasoning)",
+   "value": "36.10",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Grok-4 (Fast Reasoning) / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Grok-4 (Fast Reasoning)/overall",
+   "quote": "model: Grok-4 (Fast Reasoning) | overall: 36.10",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F42",
+   "says": "score",
+   "about": "Claude 4.5 Haiku",
+   "value": "33.67",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Claude 4.5 Haiku / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Claude 4.5 Haiku/overall",
+   "quote": "model: Claude 4.5 Haiku | overall: 33.67",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "Claude 4.5 Sonnet",
+   "value": "33.61",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Claude 4.5 Sonnet / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Claude 4.5 Sonnet/overall",
+   "quote": "model: Claude 4.5 Sonnet | overall: 33.61",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F44",
+   "says": "score",
+   "about": "Claude 4.5 Opus",
+   "value": "33.84",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Claude 4.5 Opus / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Claude 4.5 Opus/overall",
+   "quote": "model: Claude 4.5 Opus | overall: 33.84",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Gemini 2.5 Flash",
+   "value": "38.40",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 2.5 Flash / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 2.5 Flash/overall",
+   "quote": "model: Gemini 2.5 Flash | overall: 38.40",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "Gemini 2.5 Pro",
+   "value": "38.04",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 2.5 Pro / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 2.5 Pro/overall",
+   "quote": "model: Gemini 2.5 Pro | overall: 38.04",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Gemini 3 Flash",
+   "value": "44.43",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 3 Flash / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 3 Flash/overall",
+   "quote": "model: Gemini 3 Flash | overall: 44.43",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "Gemini 3 Pro",
+   "value": "44.68",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 3 Pro / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 3 Pro/overall",
+   "quote": "model: Gemini 3 Pro | overall: 44.68",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "Gemini 3.1 Flash Lite",
+   "value": "49.08",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 3.1 Flash Lite / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 3.1 Flash Lite/overall",
+   "quote": "model: Gemini 3.1 Flash Lite | overall: 49.08",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "says": "score",
+   "about": "Gemini 3.1 Pro",
+   "value": "50.59",
+   "level": "written",
+   "form": "data-file",
+   "where": "$ / row Gemini 3.1 Pro / column overall",
+   "file": "/work/.salvo14/mig/convert-mmdeepresearch-bench.github.io/evidence/mmdr-data.json",
+   "table": "T1",
+   "column": "overall",
+   "cell": "T1/Gemini 3.1 Pro/overall",
+   "quote": "model: Gemini 3.1 Pro | overall: 50.59",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

@@ -1,0 +1,203 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "common.schema.json",
+ "title": "Shared definitions",
+ "description": "Definitions shared by the pipeline's schemas: ids, dates, evidence and the dated interval {from, to, evidence}.",
+ "$defs": {
+  "date": {
+   "type": "string",
+   "description": "A calendar date, YYYY-MM-DD (a real date).",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$",
+   "format": "date"
+  },
+  "datetime": {
+   "type": "string",
+   "description": "An ISO 8601 datetime with its offset (UTC preferred, Z).",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]+)?)?(Z|[+-][0-9]{2}:[0-9]{2})$",
+   "format": "date-time"
+  },
+  "date_or_datetime": {
+   "type": "string",
+   "description": "A date, or a datetime when known (DATA-PIPELINE §5.1: datetimes when known).",
+   "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}(T[0-9]{2}:[0-9]{2}(:[0-9]{2}(\\.[0-9]+)?)?(Z|[+-][0-9]{2}:[0-9]{2}))?$",
+   "format": "date-or-date-time"
+  },
+  "capture_id": {
+   "type": "string",
+   "description": "A capture id of the source: W<n> (Wayback), G<n> (commit), S<n> (our saved fetch).",
+   "pattern": "^[WGS][0-9]+$"
+  },
+  "sha256": {
+   "type": "string",
+   "description": "A lowercase hex SHA-256.",
+   "pattern": "^[0-9a-f]{64}$"
+  },
+  "model_key": {
+   "type": "string",
+   "description": "A models.json key (today's raw-data.csv model spelling).",
+   "pattern": "^[a-z0-9][a-z0-9.+_-]*$"
+  },
+  "publisher_id": {
+   "type": "string",
+   "description": "A publishers.json id: today's catalog publisher spelling (the value of data/catalog/publishers.json, or the raw-data.csv source itself when not merged), so lqm.load's maps resolve as today. Spaces and parentheses are allowed (23 Oct 2026) because two raw-data.csv sources carry them ('EQ-bench/eqbench-leaderboard-results (GitHub)', 'epoch.ai (vals.ai ProofBench v1.0-era)'); a source id writes its publisher slug lowercased, with '/', spaces and parentheses as '_'.",
+   "pattern": "^[A-Za-z0-9][A-Za-z0-9._/@() -]*[A-Za-z0-9._/@()-]$|^[A-Za-z0-9]$"
+  },
+  "source_id": {
+   "type": "string",
+   "description": "A source snapshot id: src-<publisher slug>-<what>-<YYYY-MM-DD> (lowercase; '/' of a publisher id written '_').",
+   "pattern": "^src-[a-z0-9][a-z0-9._-]*-[0-9]{4}-[0-9]{2}-[0-9]{2}$"
+  },
+  "setup_id": {
+   "type": "string",
+   "description": "A benchmarks.json setup id (today's group name where it exists).",
+   "pattern": "^[A-Za-z0-9][A-Za-z0-9._+-]*$"
+  },
+  "route_id": {
+   "type": "string",
+   "description": "A routes.json id.",
+   "pattern": "^[a-z0-9][a-z0-9._-]*$"
+  },
+  "fact_ref": {
+   "type": "string",
+   "description": "A fact of the measure's source: a fact id (F<n>), or a table cell T<n>/<row key>/<column> (table id before the first '/', column after the last '/', row key in between).",
+   "pattern": "^(F[0-9]+|T[0-9]+/.+/[^/]+)$"
+  },
+  "measure_ref": {
+   "type": "string",
+   "description": "A measure, globally: <source id>#M<n>.",
+   "pattern": "^src-[a-z0-9][a-z0-9._-]*-[0-9]{4}-[0-9]{2}-[0-9]{2}#M[0-9]+$"
+  },
+  "evidence": {
+   "type": "object",
+   "description": "One piece of evidence: a document (url) or a findings fact (source + fact), with a locator.",
+   "properties": {
+    "url": {
+     "type": "string",
+     "description": "Page or document URL (the live URL or a Wayback capture URL)."
+    },
+    "captured": {
+     "$ref": "common.schema.json#/$defs/date_or_datetime",
+     "description": "When this copy was captured (Wayback timestamp or our fetch)."
+    },
+    "file": {
+     "type": "string",
+     "description": "Saved copy (path in the salvo folders; outside git)."
+    },
+    "sha256": {
+     "$ref": "common.schema.json#/$defs/sha256",
+     "description": "SHA-256 of the saved copy."
+    },
+    "where": {
+     "type": "string",
+     "description": "Locator inside the document: page, section, line, JSON path, table cell.",
+     "minLength": 1
+    },
+    "quote": {
+     "type": "string",
+     "description": "Exact text supporting the statement.",
+     "minLength": 1
+    },
+    "source": {
+     "$ref": "common.schema.json#/$defs/source_id",
+     "description": "A findings source that holds the fact (instead of a URL)."
+    },
+    "fact": {
+     "type": "string",
+     "description": "The fact id in that source.",
+     "pattern": "^F[0-9]+$"
+    },
+    "note": {
+     "type": "string",
+     "description": "Anything the reader needs (why this evidence dates the interval...)."
+    }
+   },
+   "required": [
+    "where"
+   ],
+   "unevaluatedProperties": false,
+   "anyOf": [
+    {
+     "required": [
+      "url"
+     ]
+    },
+    {
+     "required": [
+      "source"
+     ]
+    }
+   ]
+  },
+  "evidence_list": {
+   "type": "array",
+   "description": "Evidence for a registry statement (at least one).",
+   "items": {
+    "$ref": "common.schema.json#/$defs/evidence"
+   },
+   "minItems": 1
+  },
+  "interval": {
+   "type": "object",
+   "description": "A dated interval {from, to, evidence} (DATA-PIPELINE §4): from = the effective date the document states, else its earliest capture (configurations served as themselves: the release); to = the change it states, else the last capture still showing it. Between two captures showing the same text the interval is covered; after the last one it is not; a single capture covers its own day only. A bound taken from a capture (from_basis earliest-capture, to_basis last-capture) is written as that capture's day (YYYY-MM-DD; a `to` date covers the whole day). to = null (no end known) is allowed only for configurations and names (release-dated, open); defaults, conversions, modes, route entries and prices always carry their last capture or stated change.",
+   "properties": {
+    "from": {
+     "$ref": "common.schema.json#/$defs/date_or_datetime",
+     "description": "Start (inclusive)."
+    },
+    "to": {
+     "description": "End (inclusive); null = no end known.",
+     "anyOf": [
+      {
+       "$ref": "common.schema.json#/$defs/date_or_datetime"
+      },
+      {
+       "type": "null"
+      }
+     ]
+    },
+    "from_basis": {
+     "$ref": "vocab.json#/$defs/interval_from_basis",
+     "description": "Why it starts there."
+    },
+    "to_basis": {
+     "$ref": "vocab.json#/$defs/interval_to_basis",
+     "description": "Why it ends there."
+    },
+    "evidence": {
+     "$ref": "common.schema.json#/$defs/evidence_list"
+    }
+   },
+   "required": [
+    "from",
+    "to",
+    "evidence"
+   ]
+  },
+  "dated_configuration": {
+   "type": "object",
+   "description": "A configuration in force over an interval (a default). `setting` splits a default in two when the maker documents the thinking default and the effort default separately (Anthropic Opus 4.5–4.8, Sonnet 4.6: a call with no thinking field is thinking off, the effort parameter defaults to high).",
+   "allOf": [
+    {
+     "$ref": "common.schema.json#/$defs/interval"
+    }
+   ],
+   "properties": {
+    "configuration": {
+     "$ref": "vocab.json#/$defs/configuration",
+     "description": "A configuration id."
+    },
+    "setting": {
+     "description": "Which part of a call with no setting the default covers (absent: the whole call). `thinking`: what a call with no thinking field gets (nothink = thinking off). `effort`: the level a call gets when it sends no effort level while thinking is on (a thinking-on fact, or a name selecting think). A call that sends neither gets the `thinking` default, the `effort` one only through thinking on; at most one default per setting at a time.",
+     "enum": [
+      "thinking",
+      "effort"
+     ]
+    }
+   },
+   "required": [
+    "configuration"
+   ],
+   "unevaluatedProperties": false
+  }
+ }
+}

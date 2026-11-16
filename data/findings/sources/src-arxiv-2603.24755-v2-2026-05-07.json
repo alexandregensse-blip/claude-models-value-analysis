@@ -1,0 +1,1555 @@
+{
+ "id": "src-arxiv-2603.24755-v2-2026-05-07",
+ "publisher": "arxiv-2603.24755",
+ "urls": [
+  "https://arxiv.org/abs/2603.24755",
+  "https://arxiv.org/html/2603.24755"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2603.24755",
+   "captured": "2026-10-28T09:37:48Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "note": "arXiv HTML (LaTeXML) of v2 ('arXiv:2603.24755v2 [cs.SE] 07 May 2026'), saved by salvo g/g6 (src/arxiv_2603.24755/v.html)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html": "5ab45778391c4554a5a99d1be54f90ba48fc102bb9580fe573d393d5c92a39ce",
+  "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv": "87becdde778aa46cdf0ab128acd96c2c394a8cb5714eba107e6b21b5fbd8c7f7",
+  "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table7.csv": "eaaa54816895470f55ae730875ecf1a3687a80597d7501932800c984390c7070"
+ },
+ "harvested_at": "2026-10-28T09:37:48Z",
+ "published": {
+  "value": "2026-05-07",
+  "where": "arXiv stamp in the page: v2, 07 May 2026",
+  "quote": "arXiv:2603.24755v2 [cs.SE] 07 May 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "tool": "Table 8 of the arXiv HTML (id A4.T8.6.1) -> CSV by parse_tables.py (html.parser, cells verbatim); the cells $/CKPT, Erosion and Verbosity ('2.53±\\pm1.57') are split at '±\\pm' into the value and its spread; the row key is 'Model · Harness Version · Prompt'"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table7.csv",
+   "from": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "tool": "Table 7 of the arXiv HTML (id A3.T7.5) -> CSV by parse_tables.py (cells verbatim)"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "Table 8 (Appendix D): full set of runs; one row per (model, harness, prompt)",
+   "format": "csv",
+   "row_key": "Row",
+   "columns": {
+    "Row": "note",
+    "Model": "model-name",
+    "Harness": "harness",
+    "Version": "note",
+    "Think": "effort-setting",
+    "Prompt": "note",
+    "Strict": "note",
+    "Iso.": {
+     "says": "score",
+     "term": "solve%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Core": {
+     "says": "score",
+     "term": "core%",
+     "scale": "percent",
+     "precision": {
+      "model": "printed",
+      "step": 0.1
+     }
+    },
+    "Partial": "note",
+    "$/CKPT": {
+     "says": "cost",
+     "precision": {
+      "model": "printed",
+      "step": 0.01
+     }
+    },
+    "$/CKPT ±": "note",
+    "Net $": "note",
+    "Erosion": "note",
+    "Erosion ±": "note",
+    "Verbosity": "note",
+    "Verbosity ±": "note"
+   },
+   "level": "written"
+  },
+  {
+   "id": "T2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table7.csv",
+   "where": "Table 7 (Appendix C.2): harness version and reasoning effort per model",
+   "format": "csv",
+   "row_key": "Model",
+   "columns": {
+    "Model": "model-name",
+    "Harness": "harness",
+    "Version": "note",
+    "Reasoning": "effort-setting"
+   },
+   "level": "written"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "headline-metric",
+   "value": "ranked by isolated solve rate",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 caption (Section 3.1)",
+   "quote": "ranked by isolated solve rate with core, strict, and $/checkpoint as tiebreakers"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "note",
+   "value": "best just-solve run",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 caption",
+   "quote": "For each model we report its best just-solve run",
+   "note": "Table 1 reports each model's best Just Solve run; the same rows are in Table 8 (Prompt = Just Solve), which carries the harness, version and Think level of each run"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "fixed 196-checkpoint denominator",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 caption",
+   "quote": "Solve rates use a fixed 196-checkpoint denominator; missing checkpoints count as unsolved."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "note",
+   "value": "$/checkpoint",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 caption",
+   "quote": "$/checkpoint as tiebreakers",
+   "note": "cost per checkpoint in dollars (header '$/CKPT'); mean ± spread over the checkpoints; 'Net $' is the total"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "note",
+   "value": "For Codex we set the reasoning effort parameter to high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Appendix C.1, paragraph 'Reasoning effort'",
+   "quote": "For Codex we set the reasoning effort parameter to high",
+   "note": "the general statement behind the Think / Reasoning column; the rows' own cell is the effort fact"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "note",
+   "value": "earliest publicly available harness version",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Appendix C.1, paragraph 'Harness version selection'",
+   "quote": "For each model we report the earliest publicly available harness version that supported that model and could execute the benchmark end-to-end."
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 / Table 8 header of the cost column ($/CKPT)",
+   "quote": "$/CKPT",
+   "term": "USD"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "unit",
+   "value": "$/CKPT",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/v.html",
+   "where": "Table 1 / Table 8 header ('$/CKPT'); Net $ is the total",
+   "quote": "$/CKPT",
+   "term": "per-ckpt"
+  },
+  {
+   "id": "F9",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "model-name",
+   "value": "Opus 4.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column Model",
+   "quote": "Opus 4.5 [5]"
+  },
+  {
+   "id": "F10",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F11",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F12",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "cost",
+   "value": "2.53",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "2.53",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "score",
+   "value": "57.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column Core",
+   "quote": "57.7",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve",
+   "says": "score",
+   "value": "17.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.5 [5] · Claude Code 2.0.51 · Just Solve, column Iso.",
+   "quote": "17.3",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F15",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "model-name",
+   "value": "Opus 4.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column Model",
+   "quote": "Opus 4.6 [6]"
+  },
+  {
+   "id": "F16",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F17",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F18",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "cost",
+   "value": "3.17",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "3.17",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F19",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "score",
+   "value": "67.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column Core",
+   "quote": "67.3",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve",
+   "says": "score",
+   "value": "20.9",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.6 [6] · Claude Code 2.1.32 · Just Solve, column Iso.",
+   "quote": "20.9",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F21",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "model-name",
+   "value": "Opus 4.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column Model",
+   "quote": "Opus 4.7 [7]"
+  },
+  {
+   "id": "F22",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F23",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F24",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "cost",
+   "value": "2.17",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "2.17",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F25",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "score",
+   "value": "65.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column Core",
+   "quote": "65.8",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "about": "Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve",
+   "says": "score",
+   "value": "20.9",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Opus 4.7 [7] · Claude Code 2.1.111 · Just Solve, column Iso.",
+   "quote": "20.9",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F27",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "model-name",
+   "value": "Sonnet 4.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column Model",
+   "quote": "Sonnet 4.6 [8]"
+  },
+  {
+   "id": "F28",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F29",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F30",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "cost",
+   "value": "1.96",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "1.96",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F31",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "57.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column Core",
+   "quote": "57.7",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "about": "Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "16.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Sonnet 4.6 [8] · Claude Code 2.1.44 · Just Solve, column Iso.",
+   "quote": "16.8",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F33",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.2 Codex",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column Model",
+   "quote": "GPT 5.2 Codex [45]"
+  },
+  {
+   "id": "F34",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F35",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F36",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "cost",
+   "value": "0.85",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.85",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F37",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "score",
+   "value": "56.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column Core",
+   "quote": "56.1",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F38",
+   "about": "GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve",
+   "says": "score",
+   "value": "21.9",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.2 Codex [45] · Codex CLI 0.93.0 · Just Solve, column Iso.",
+   "quote": "21.9",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.3 Codex",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column Model",
+   "quote": "GPT 5.3 Codex"
+  },
+  {
+   "id": "F40",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F41",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F42",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "cost",
+   "value": "0.66",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.66",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F43",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "score",
+   "value": "60.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column Core",
+   "quote": "60.7",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "about": "GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve",
+   "says": "score",
+   "value": "26.0",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Codex · Codex CLI 0.98.0 · Just Solve, column Iso.",
+   "quote": "26.0",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F45",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.3 Spark",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column Model",
+   "quote": "GPT 5.3 Spark [51]"
+  },
+  {
+   "id": "F46",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F47",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F48",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "cost",
+   "value": "0.20",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.20",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F49",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "score",
+   "value": "29.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column Core",
+   "quote": "29.1",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F50",
+   "about": "GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve",
+   "says": "score",
+   "value": "8.2",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.3 Spark [51] · Codex CLI 0.100.0 · Just Solve, column Iso.",
+   "quote": "8.2",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F51",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.4",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column Model",
+   "quote": "GPT 5.4"
+  },
+  {
+   "id": "F52",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F53",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F54",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "cost",
+   "value": "0.72",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.72",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F55",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "score",
+   "value": "62.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column Core",
+   "quote": "62.8",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F56",
+   "about": "GPT 5.4 · Codex CLI 0.110.0 · Just Solve",
+   "says": "score",
+   "value": "23.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 · Codex CLI 0.110.0 · Just Solve, column Iso.",
+   "quote": "23.5",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F57",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.4 Mini",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column Model",
+   "quote": "GPT 5.4 Mini [49]"
+  },
+  {
+   "id": "F58",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F59",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F60",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "cost",
+   "value": "0.45",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.45",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "score",
+   "value": "53.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column Core",
+   "quote": "53.1",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F62",
+   "about": "GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve",
+   "says": "score",
+   "value": "13.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.4 Mini [49] · Codex CLI 0.110.0 · Just Solve, column Iso.",
+   "quote": "13.8",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F63",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "model-name",
+   "value": "GPT 5.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column Model",
+   "quote": "GPT 5.5"
+  },
+  {
+   "id": "F64",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "harness",
+   "value": "Codex CLI",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column Harness",
+   "quote": "Codex CLI"
+  },
+  {
+   "id": "F65",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F66",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "cost",
+   "value": "1.51",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "1.51",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F67",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "score",
+   "value": "66.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column Core",
+   "quote": "66.8",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F68",
+   "about": "GPT 5.5 · Codex CLI 0.124.0 · Just Solve",
+   "says": "score",
+   "value": "28.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GPT 5.5 · Codex CLI 0.124.0 · Just Solve, column Iso.",
+   "quote": "28.1",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F69",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "model-name",
+   "value": "Composer 2",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column Model",
+   "quote": "Composer 2 [19]"
+  },
+  {
+   "id": "F70",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "harness",
+   "value": "Cursor CLI",
+   "term": "cursor-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column Harness",
+   "quote": "Cursor CLI"
+  },
+  {
+   "id": "F71",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "effort-setting",
+   "value": "None",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column Think",
+   "quote": "None"
+  },
+  {
+   "id": "F72",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "cost",
+   "value": "0.44",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.44",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "score",
+   "value": "52.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column Core",
+   "quote": "52.6",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F74",
+   "about": "Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve",
+   "says": "score",
+   "value": "16.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Composer 2 [19] · Cursor CLI 2026.04.13-a9d7fb5 · Just Solve, column Iso.",
+   "quote": "16.3",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F75",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "model-name",
+   "value": "GLM 5.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column Model",
+   "quote": "GLM 5.1 [67]"
+  },
+  {
+   "id": "F76",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F77",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F78",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "cost",
+   "value": "1.47",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "1.47",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F79",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "40.3",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column Core",
+   "quote": "40.3",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F80",
+   "about": "GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "13.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row GLM 5.1 [67] · Claude Code 2.1.44 · Just Solve, column Iso.",
+   "quote": "13.8",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F81",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "model-name",
+   "value": "Kimi K2.5",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column Model",
+   "quote": "Kimi K2.5"
+  },
+  {
+   "id": "F82",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "harness",
+   "value": "Kimi CLI",
+   "term": "kimi-code-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column Harness",
+   "quote": "Kimi CLI"
+  },
+  {
+   "id": "F83",
+   "about": "Kimi K2.5",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T2",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table7.csv",
+   "where": "row Kimi K2.5, column Harness (Table 7 names a different harness than Table 8's row for the same run: Kimi CLI)",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F84",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F85",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "cost",
+   "value": "0.33",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.33",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "score",
+   "value": "39.8",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column Core",
+   "quote": "39.8",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F87",
+   "about": "Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve",
+   "says": "score",
+   "value": "9.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.5 · Kimi CLI 1.37.0 · Just Solve, column Iso.",
+   "quote": "9.7",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F88",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "model-name",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column Model",
+   "quote": "Kimi K2.6 [32]"
+  },
+  {
+   "id": "F89",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "harness",
+   "value": "Kimi CLI",
+   "term": "kimi-code-cli",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column Harness",
+   "quote": "Kimi CLI"
+  },
+  {
+   "id": "F90",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F91",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "cost",
+   "value": "0.74",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.74",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F92",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "score",
+   "value": "51.0",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column Core",
+   "quote": "51.0",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F93",
+   "about": "Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve",
+   "says": "score",
+   "value": "18.9",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row Kimi K2.6 [32] · Kimi CLI 1.37.0 · Just Solve, column Iso.",
+   "quote": "18.9",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F94",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "model-name",
+   "value": "MiniMax M2.7",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column Model",
+   "quote": "MiniMax M2.7"
+  },
+  {
+   "id": "F95",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "harness",
+   "value": "Claude Code",
+   "term": "claude-code",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column Harness",
+   "quote": "Claude Code"
+  },
+  {
+   "id": "F96",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "effort-setting",
+   "value": "High",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column Think",
+   "quote": "High"
+  },
+  {
+   "id": "F97",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "cost",
+   "value": "0.34",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column $/CKPT (value before '±')",
+   "quote": "0.34",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F98",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "28.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column Core",
+   "quote": "28.1",
+   "term": "core%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F99",
+   "about": "MiniMax M2.7 · Claude Code 2.1.44 · Just Solve",
+   "says": "score",
+   "value": "4.1",
+   "level": "written",
+   "form": "data-file",
+   "table": "T1",
+   "file": "/work/.salvo14/mig/convert-arxiv-2603.24755/evidence/table8.csv",
+   "where": "row MiniMax M2.7 · Claude Code 2.1.44 · Just Solve, column Iso.",
+   "quote": "4.1",
+   "term": "solve%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}

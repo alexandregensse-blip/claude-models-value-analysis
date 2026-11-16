@@ -1,0 +1,68 @@
+{
+ "as_of": "2026-10-21",
+ "prices": [
+  {
+   "model": "opus-5.5",
+   "route": "maker-api",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 4,
+    "cache-write-5m": 5,
+    "cache-write-1h": 8,
+    "cache-read": 0.2,
+    "output": 20
+   },
+   "from": "2026-10-21",
+   "to": "2026-10-21",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-10-21T19:56:30Z",
+     "file": "/work/.salvo14/arb/costs/evidence/anthropic-pricing-page-fetch-21oct.txt",
+     "sha256": "cd91b9b575a49310938ef2de2aac6bcc2d41475611516ff36c994ead2e9469b9",
+     "where": "model pricing table, line 21",
+     "quote": "| Claude Opus 5.5 "
+    },
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-10-21T19:56:30Z",
+     "file": "/work/.salvo14/arb/costs/evidence/anthropic-pricing-page-fetch-21oct.txt",
+     "sha256": "cd91b9b575a49310938ef2de2aac6bcc2d41475611516ff36c994ead2e9469b9",
+     "where": "prompt caching, line 152",
+     "quote": "$0.20 USD per million tokens on Claude Opus 5.5"
+    }
+   ],
+   "note": "Only the 21 Oct capture is saved: runs before it need earlier captures (or the release post) to be priced."
+  },
+  {
+   "model": "opus-5.5",
+   "route": "maker-api",
+   "kind": "fast",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 8,
+    "output": 40
+   },
+   "from": "2026-10-21",
+   "to": "2026-10-21",
+   "from_basis": "earliest-capture",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+     "captured": "2026-10-21T19:56:30Z",
+     "file": "/work/.salvo14/arb/costs/evidence/anthropic-pricing-page-fetch-21oct.txt",
+     "sha256": "cd91b9b575a49310938ef2de2aac6bcc2d41475611516ff36c994ead2e9469b9",
+     "where": "fast mode pricing table, line 172",
+     "quote": "| Claude Opus 5.5                 | $8 USD / MTok  | $40 USD / MTok |"
+    }
+   ],
+   "note": "fast mode: part of the setup, never a base price"
+  }
+ ]
+}

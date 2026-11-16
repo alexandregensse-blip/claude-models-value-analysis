@@ -1,0 +1,268 @@
+{
+ "id": "src-arxiv-2611.13246-expertcrowd-swe-2026-11-09",
+ "publisher": "arxiv-2611.13246",
+ "urls": [
+  "https://arxiv.org/abs/2611.13246v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.13246v1",
+   "captured": "2026-11-12",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.pdf",
+   "note": "saved 12 Nov 2026 by the research agent (salvo s8); sha256 of the copy as in the research file | technical report of Toptal ExpertCrowd (arXiv v1, 9 Nov 2026): ExpertCrowd-SWE, 100 tasks, seven models, five runs each; two models of the fit (Claude Opus 5.5 and Claude Fable 5.1), no Fable 5.2; the five other models are not models of the fit; no cost in the paper"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.pdf": "3db3bd773c52ae58ab8de70925ba1974eae84a999b4605c997093258940e58cd",
+  "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt": "cde1b524cbc57f59a268dc5223f11646700eb6c80a75b78c070ed3fcd78aa414"
+ },
+ "harvested_at": "2026-11-12T12:00:00Z",
+ "published": {
+  "value": "2026-11-09",
+  "where": "arXiv stamp on the first page of the saved copy",
+  "quote": "arXiv:2611.13246v1 [cs.AI] 9 Nov 2026",
+  "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt"
+ },
+ "salvo": "salvo14/mig/s8 (12 Nov 2026), lot k8-fable52",
+ "agent": "convertisseur k8-fable52 (Claude Sonnet 5.5), lecture ligne par ligne; merged by integration 12 of salvo s8 (12 Nov 2026)",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "aggregation",
+   "about": null,
+   "value": "five runs each (3,495 scored runs)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "abstract",
+   "quote": "We evaluate seven frontier models, five runs each (3,495 scored runs), in a single platform harness that gives each model its provider-native tool interface."
+  },
+  {
+   "id": "F2",
+   "says": "metric-definition",
+   "about": null,
+   "value": "Score is the macro-average of task scores, with a 95% interval over tasks",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 caption",
+   "quote": "Score is the macro-average of task scores, with a 95% interval over tasks; the run-to-run interval covers agent sampling noise only"
+  },
+  {
+   "id": "F3",
+   "says": "harness",
+   "about": null,
+   "value": "HUD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2 caption",
+   "quote": "All models run in the HUD harness, which calls the provider API through the HUD inference gateway and exposes the provider’s native tool interface.",
+   "note": "HUD hosted runner and SDK (hud-python v0.6 series); \"no vendor product such as Claude Code, Codex CLI or Gemini CLI is involved\" (section 3.8)"
+  },
+  {
+   "id": "F4",
+   "says": "route",
+   "about": null,
+   "value": "HUD inference gateway",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2 caption",
+   "quote": "All models run in the HUD harness, which calls the provider API through the HUD inference gateway and exposes the provider’s native tool interface.",
+   "note": "a gateway between the harness and the provider API; the gateway is not a registered route; the provider API of the Claude models is \"Anthropic Messages\" (Table 2); the maker's API is not presumed"
+  },
+  {
+   "id": "F5",
+   "says": "route",
+   "about": "Claude Opus 5.5",
+   "value": "Anthropic Messages",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2, column Agent / API",
+   "quote": "Claude Opus 5.5 Anthropic Messagesbash, str_replace_based_edit_tool effort max 128,000",
+   "note": "API of the provider named in the row (Anthropic Messages), reached through the HUD inference gateway"
+  },
+  {
+   "id": "F6",
+   "says": "route",
+   "about": "Claude Fable 5.1",
+   "value": "Anthropic Messages",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2, column Agent / API",
+   "quote": "Claude Fable 5.1 Anthropic Messagesbash, str_replace_based_edit_tool effort max 128,000",
+   "note": "API of the provider named in the row (Anthropic Messages), reached through the HUD inference gateway"
+  },
+  {
+   "id": "F7",
+   "says": "run-start",
+   "about": null,
+   "value": "2026-10-01",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "section 3.8",
+   "quote": "The final dataset contains 3,495 scored runs, collected between 1 and 10 October 2026.",
+   "written": "between 1 and 10 October 2026"
+  },
+  {
+   "id": "F8",
+   "says": "run-end",
+   "about": null,
+   "value": "2026-10-10",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "section 3.8",
+   "quote": "The final dataset contains 3,495 scored runs, collected between 1 and 10 October 2026.",
+   "written": "between 1 and 10 October 2026"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "Reasoning effort and output-token limits are the platform defaults.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2 caption",
+   "quote": "Reasoning effort and output-token limits are the platform defaults.",
+   "note": "each model runs at its platform default high-effort setting (max, xhigh or high, depending on the provider); no sweep of reasoning effort (section 5)"
+  },
+  {
+   "id": "F10",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), row Claude Opus 5.5",
+   "quote": "Claude Opus 5.567.3±4.7±1.9 26.6% 47 / 9 13.6"
+  },
+  {
+   "id": "F11",
+   "says": "effort-label",
+   "about": "Claude Opus 5.5",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2 (Evaluated configurations), column Reasoning",
+   "quote": "Claude Opus 5.5 Anthropic Messagesbash, str_replace_based_edit_tool effort max 128,000",
+   "note": "\"effort max\" with output limit 128,000; effort is the platform default"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5 67.3 160 (128–205) 171 80 min",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 6 (Effort per scored run): score, median steps (IQR), mean steps, median container time",
+   "quote": "Claude Opus 5.5 67.3 160 (128–205) 171 80 min",
+   "note": "median steps per run (IQR), mean steps and median container time; no cost in the paper"
+  },
+  {
+   "id": "F13",
+   "says": "note",
+   "about": "Claude Opus 5.5",
+   "value": "67.3±4.7±1.9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), Score (95% CI) / Run-to-run CI / Full-credit runs / Tasks >=1 of 5 / 5 of 5 / Within-task SD",
+   "quote": "Claude Opus 5.567.3±4.7±1.9 26.6% 47 / 9 13.6",
+   "note": "the printed cell: score, 95% interval over tasks (first +-), run-to-run interval (second +-), then share of full-credit runs, tasks with at least one / five full-credit runs, within-task SD; the Opus 5.5 row is stuck in the extraction (\"Claude Opus 5.567.3\"): read 67.3, confirmed by the abstract \"Claude Opus 5.5 (67.3%)\""
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "67.3",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), row Claude Opus 5.5, Score",
+   "quote": "Claude Opus 5.567.3±4.7±1.9 26.6% 47 / 9 13.6",
+   "term": "macro-average-task-score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), row Claude Fable 5.1",
+   "quote": "Claude Fable 5.1 46.5±3.7±0.4 8.6% 25 / 1 16.9"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "Claude Fable 5.1",
+   "value": "max",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 2 (Evaluated configurations), column Reasoning",
+   "quote": "Claude Fable 5.1 Anthropic Messagesbash, str_replace_based_edit_tool effort max 128,000",
+   "note": "\"effort max\" with output limit 128,000; effort is the platform default"
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1 46.5 127 (94–166) 134 56 min",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 6 (Effort per scored run): score, median steps (IQR), mean steps, median container time",
+   "quote": "Claude Fable 5.1 46.5 127 (94–166) 134 56 min",
+   "note": "median steps per run (IQR), mean steps and median container time; no cost in the paper"
+  },
+  {
+   "id": "F18",
+   "says": "note",
+   "about": "Claude Fable 5.1",
+   "value": "46.5±3.7±0.4",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), Score (95% CI) / Run-to-run CI / Full-credit runs / Tasks >=1 of 5 / 5 of 5 / Within-task SD",
+   "quote": "Claude Fable 5.1 46.5±3.7±0.4 8.6% 25 / 1 16.9",
+   "note": "the printed cell: score, 95% interval over tasks (first +-), run-to-run interval (second +-), then share of full-credit runs, tasks with at least one / five full-credit runs, within-task SD"
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "Claude Fable 5.1",
+   "value": "46.5",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "where": "Table 3 (Main results on the 100 released tasks), row Claude Fable 5.1, Score",
+   "quote": "Claude Fable 5.1 46.5±3.7±0.4 8.6% 25 / 1 16.9",
+   "term": "macro-average-task-score%",
+   "scale": "percent"
+  }
+ ],
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.txt",
+   "from": "/work/.salvo14/mig/s8/ev/s8-fable52/arxiv-2611.13246v1.pdf",
+   "tool": "pypdf (run with uv), text extracted by the research agent of salvo s8, 12 Nov 2026"
+  }
+ ]
+}

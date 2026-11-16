@@ -1,0 +1,692 @@
+{
+ "rules": [
+  {
+   "id": "alias-by-date",
+   "kind": "deduction",
+   "statement": "A name that has served more than one key resolves to the key whose serves interval contains the whole run interval (one interval for all candidates, its lower bound the earliest candidate's release); an interval straddling the switch is ambiguous, never the newer model.",
+   "inputs": [
+    "model-api-id",
+    "model-name",
+    "run-date / run-start / run-end",
+    "models.json names.serves"
+   ],
+   "output": "model (computed)",
+   "conditions": "exactly one candidate's serves interval covers the run interval",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (straddling interval: ambiguous, 22 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 Model"
+  },
+  {
+   "id": "mode-to-line",
+   "kind": "deduction",
+   "statement": "A mode fact (Pro, a request parameter) selects the key its line's models.json modes record at the run date.",
+   "inputs": [
+    "mode",
+    "models.json modes"
+   ],
+   "output": "model (computed)",
+   "conditions": "the mode's interval covers the run interval; no router in the chain that cannot separate it (pro-via-router-out)",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 Model"
+  },
+  {
+   "id": "label-to-ladder",
+   "kind": "deduction",
+   "statement": "An effort label in other words maps to a configuration when the model's configurations make it unique (\"lowest effort setting\" on [low ... max] → low).",
+   "inputs": [
+    "effort-label",
+    "models.json configurations at the run date"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "unique match; the configuration is served as itself",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 5"
+  },
+  {
+   "id": "maker-conversion-dated",
+   "kind": "deduction",
+   "statement": "A requested level the maker converts (models.json conversions) is the configuration the maker serves, when the conversion's interval covers the run interval.",
+   "inputs": [
+    "effort-setting / effort-label",
+    "models.json conversions"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the conversion is dated and covers the run interval (decision-c-conversions-dated)",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews); decision C of the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 6"
+  },
+  {
+   "id": "route-mapping-dated",
+   "kind": "deduction",
+   "statement": "Each step of the route chain (harness → router / reseller / host → maker) maps the requested configuration as routes.json documents it at the run date (identity where documented; OpenRouter nearest supported level, ties ambiguous; a router budget → budget-converted); route unknown → every candidate route must agree.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json level_mapping, mapping, accepts"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "each mapping's interval covers the run interval",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §4 routes.json, §5.1 step 6"
+  },
+  {
+   "id": "api-default-documented",
+   "kind": "deduction",
+   "statement": "No effort sent → the documented default: the maker's on its API or a reseller; a router's or host's own dated default when the run is known to have gone through it.",
+   "inputs": [
+    "no-effort-sent",
+    "route",
+    "models.json default",
+    "routes.json default"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the default's interval covers the run interval",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (router clause, 22 Oct: latitude kimi-k3, OpenRouter default_effort max)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 7, §9"
+  },
+  {
+   "id": "config-unchanged-over-interval",
+   "kind": "deduction",
+   "statement": "A config file's history covering the run interval with the same setting gives that setting for the run.",
+   "inputs": [
+    "config-history",
+    "effort-setting"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the history covers the whole run interval with one setting",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json, §5.1 step 3"
+  },
+  {
+   "id": "no-effort-setting",
+   "kind": "deduction",
+   "statement": "A source stating that no effort was sent (an effort field null, no reasoning parameter) records no-effort-sent, which step 7 resolves through api-default-documented.",
+   "inputs": [
+    "no-effort-sent"
+   ],
+   "output": "configuration (via api-default-documented)",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 7"
+  },
+  {
+   "id": "thinking-off",
+   "kind": "deduction",
+   "statement": "A thinking-off statement (reasoning_effort none, enable_thinking false, thinking disabled, a non-reasoning id; spellings in vocab.json nothink_spelling) is the configuration nothink, when it is one of the model's configurations.",
+   "inputs": [
+    "thinking-off",
+    "effort-setting",
+    "models.json names.selects"
+   ],
+   "output": "configuration nothink (written or computed)",
+   "conditions": "nothink in the model's configurations, served as itself",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §4 models.json, §5.1 step 3"
+  },
+  {
+   "id": "mean-of-runs",
+   "kind": "deduction",
+   "statement": "A value that is a mean of runs including a failed run is recomputed from the per-run values with the failed runs excluded; the recomputed mean must reproduce the source's mean on the runs it covers.",
+   "inputs": [
+    "run-score",
+    "failure",
+    "aggregation"
+   ],
+   "output": "value (computed)",
+   "conditions": "per-run values written",
+   "precision": "the printed step of the run scores, propagated as a mean",
+   "date": "2026-10-22",
+   "decided_by": "the coordinator's answers to the build (commit 06ddbbf), on DATA-PIPELINE §5.2 step 4",
+   "ref": "docs/DATA-PIPELINE.md §5.2 step 4; data/BUILD.md"
+  },
+  {
+   "id": "percent-from-counts",
+   "kind": "deduction",
+   "statement": "A score written as counts (k of n) is put on the percent metric as 100·k/n, exactly.",
+   "inputs": [
+    "score (scale counts)"
+   ],
+   "output": "value (computed)",
+   "precision": "exact",
+   "date": "2026-10-22",
+   "decided_by": "the coordinator's answers to the build (commit 06ddbbf)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json; data/BUILD.md"
+  },
+  {
+   "id": "composite-residual",
+   "kind": "deduction",
+   "statement": "For a couple with some components of a linear composite measured, the composite keeps only its residual for the missing components: (composite − Σ present weight·component) / Σ missing weight, on the composite's scale.",
+   "inputs": [
+    "score of the composite",
+    "scores of the present components",
+    "benchmarks.json composite (weights, linear)"
+   ],
+   "output": "value of setup <composite>-resid-<missing> (computed)",
+   "conditions": "linear true, weights in hand, no normalisation; residuals of an estimated index refused",
+   "precision": "quadrature of the weighted precisions over the missing weight",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (composite residual rule, 22 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §5.2 step 8"
+  },
+  {
+   "id": "cost-publisher-figure",
+   "kind": "deduction",
+   "statement": "The publisher's own cost figure is kept when every price that could have applied over the price date equals the base price.",
+   "inputs": [
+    "cost",
+    "prices.json"
+   ],
+   "output": "cost at the base price (written)",
+   "conditions": "price date fully covered by registered prices",
+   "precision": "the cost's own precision",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.3 step 1; docs/METHODOLOGY.md §2"
+  },
+  {
+   "id": "cost-delta-on-source",
+   "kind": "deduction",
+   "statement": "The price change applied to the source's own cost once its formula reproduces it from the run's tokens: cost + Σ tokens × (base − old).",
+   "inputs": [
+    "cost",
+    "tokens-*",
+    "prices.json"
+   ],
+   "output": "cost at the base price (computed)",
+   "conditions": "one price vector over the price date; the formula reproduces the cost within its printed step; long-context tiers only with requests and per-call sizes",
+   "precision": "the cost's own precision",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.3 step 1"
+  },
+  {
+   "id": "cost-uniform-factor",
+   "kind": "deduction",
+   "statement": "When the base price is the old price times one factor across every class, the cost is multiplied by that factor.",
+   "inputs": [
+    "cost",
+    "prices.json"
+   ],
+   "output": "cost at the base price (computed)",
+   "conditions": "the same factor for every class and every price vector over the price date",
+   "precision": "the cost's precision × the factor",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §5.3 step 1"
+  },
+  {
+   "id": "cost-class-ratio",
+   "kind": "deduction",
+   "statement": "A cost put on a later price by the class-median ratio of the model's measured class shares (METHODOLOGY §2), its spread added to the precision.",
+   "inputs": [
+    "cost",
+    "class-ratios.json"
+   ],
+   "output": "cost at the base price (computed)",
+   "conditions": "a ratio registered for the model and the setup or measure, price date before its change",
+   "precision": "hypot(prec × k, cost × k × sd)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (METHODOLOGY §2; Sonnet 5.5 cache cut of 7 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §5.3 step 1; docs/METHODOLOGY.md §2"
+  },
+  {
+   "id": "chart-reading",
+   "kind": "deduction",
+   "statement": "A point read off a raster chart takes the chart's calibration and reading sd as its precision.",
+   "inputs": [
+    "read facts",
+    "chart calibration"
+   ],
+   "output": "value (read)",
+   "precision": "sd = reading_px × units per px (log axes: on log10)",
+   "date": "2026-09-29",
+   "decided_by": "data/README.md, reading precision (September 2026)",
+   "ref": "data/README.md 'Reading precision'"
+  },
+  {
+   "id": "currency-fixed",
+   "kind": "deduction",
+   "statement": "A cost's currency is the stated currency fact; costs of different currencies are never mixed in one subset and are re-priced only with prices in that currency.",
+   "inputs": [
+    "currency",
+    "prices.json currency"
+   ],
+   "output": "cost currency (written)",
+   "precision": "none (categorical)",
+   "date": "2026-10-22",
+   "decided_by": "DATA-PIPELINE v3 (22 Oct 2026, after four independent reviews)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json, §5.3 step 2"
+  },
+  {
+   "id": "scale-conversion",
+   "kind": "deduction",
+   "statement": "A score written as a fraction is put on a percent metric (× 100) and back (÷ 100), exactly; the scale comes from the fact's `scale`, never from the size of the value.",
+   "inputs": [
+    "score (scale)",
+    "setup metric"
+   ],
+   "output": "value (computed)",
+   "precision": "the printed step × 100 (or ÷ 100)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (DATA-PIPELINE 9f3e7ef)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json"
+  },
+  {
+   "id": "label-rule",
+   "kind": "standing",
+   "statement": "A label that names a level of the model's configurations, served as itself, is that level (LMArena kept).",
+   "inputs": [
+    "effort-label"
+   ],
+   "output": "configuration (written)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §4, §5.1 step 4"
+  },
+  {
+   "id": "closed-harness-label",
+   "kind": "standing",
+   "statement": "A closed harness (Cursor, Antigravity, Grok CLI, Copilot, Amp, Kiro) that shows a level label without documenting what it sends: the label is the level sent to the maker's API, flagged harness-label-as-level (as LMArena's labels). A documented, dated mapping of the harness wins.",
+   "inputs": [
+    "effort-label",
+    "route"
+   ],
+   "output": "configuration (computed)",
+   "date": "2026-10-26",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §4, §5.1 step 6"
+  },
+  {
+   "id": "route-unknown-candidates",
+   "kind": "standing",
+   "statement": "A route the source does not name is unknown, never presumed to be the maker's API: no route at all, only a harness (the harness applies first, the rest of the chain is unknown), or a named route the registry cannot resolve. Every candidate route (each route of routes.json that served the model at the run date, the maker's API included) is evaluated; the configuration is accepted only if all agree, else not-established:absent. It replaces route-presumed-maker-api (26 Oct).",
+   "inputs": [
+    "route"
+   ],
+   "output": "route chain (computed)",
+   "date": "2026-11-02",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.1 step 6"
+  },
+  {
+   "id": "candidate-route-served-span",
+   "kind": "standing",
+   "statement": "When the route is not written, a candidate route other than the maker's API is evaluated only over the part of the run interval where it serves the model (its dated records for the model, clipped to the run interval); before or after that part it is no possible route. The maker's API candidate keeps the whole interval (never presumed: it is weighed, not chosen). The configuration is accepted only if every candidate, each on its own part, agrees.",
+   "inputs": [
+    "route",
+    "run date",
+    "routes.json records of the model"
+   ],
+   "output": "route chain evaluation interval (computed)",
+   "date": "2026-11-12",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md §5.1 item 8 (12 Nov 2026)"
+  },
+  {
+   "id": "pro-via-router-out",
+   "kind": "standing",
+   "statement": "A Pro (or other) mode run through a router that cannot separate it from the base model is out: its model is not established.",
+   "inputs": [
+    "mode",
+    "route"
+   ],
+   "output": "model not-established:absent",
+   "date": "2026-10-20",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json, §5.1 Model"
+  },
+  {
+   "id": "decision-c-conversions-dated",
+   "kind": "standing",
+   "statement": "An effort the model's API does not expose takes the level the maker's documented conversion applies, only when the conversion is dated and its interval covers the run (decision C of 20 Oct, commit 7888b85, restated 22 Oct: conversions only when dated).",
+   "inputs": [
+    "models.json conversions"
+   ],
+   "output": "configuration (via maker-conversion-dated)",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer (decision C, 20 Oct; restated 22 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §4 rules.json; /work/.salvo14/arb/conv/report.md"
+  },
+  {
+   "id": "composite-residual-rule",
+   "kind": "standing",
+   "statement": "A couple with any component measured loses the composite; a linear composite keeps only its residual for the missing components; a non-linear composite is kept whole only for couples with no component.",
+   "inputs": [
+    "benchmarks.json composite"
+   ],
+   "output": "status out:composite / the residual measure",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.2 step 8"
+  },
+  {
+   "id": "cost-comparability-rule",
+   "kind": "standing",
+   "statement": "In each part of a setup's costs (basis × method × unit × currency × route), the re-priced measures form one subset; an unrepriced cost stays only as a price band toward the base (current) price (cost-price-band, own subset per model; cost-current-price-only, the maintainer, 3 Nov 2026: every cost of the fit at the current price, the band's reference always the base price); the others are out:cost-not-comparable (until 3 Nov a model whose price change over the price-date interval was uniform across classes formed its own subset at its old price, and a band's reference was the last price seen).",
+   "inputs": [
+    "cost basis, method, unit, currency, route",
+    "prices.json"
+   ],
+   "output": "cost subset / out:cost-not-comparable",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.3 step 2"
+  },
+  {
+   "id": "uninformative-scores",
+   "kind": "standing",
+   "statement": "A score at the floor or the ceiling of its metric for one couple while the others are not is left out (out:uninformative); its cost is kept.",
+   "inputs": [
+    "score",
+    "setup bounds"
+   ],
+   "output": "status out:uninformative (quality)",
+   "date": "2026-09-29",
+   "decided_by": "the maintainer (METHODOLOGY §2, method of 29 Sep 2026)",
+   "ref": "docs/METHODOLOGY.md §2; docs/DATA-PIPELINE.md §5.2 step 6"
+  },
+  {
+   "id": "score-direction",
+   "kind": "standing",
+   "statement": "A score whose setup's direction is lower (lower is better) is turned at f(y) so that higher is better, in its unit's transform: B − y on a bounded scale [0, B] before the empirical logit, −log y on a log scale, −y otherwise (lqm.load, DIRECTION_OF from group-setups.json); a setup whose direction is absent or not higher / lower keeps its measures out (out:direction-not-established); no other direction is guessed. A legacy row (no setup) keeps its metric label's rule (lqm.LOWER_IS_BETTER).",
+   "inputs": [
+    "setup direction",
+    "setup bounds"
+   ],
+   "output": "lqm f(y); status out:direction-not-established (quality)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.2 step 5; model/README.md; docs/METHODOLOGY.md"
+  },
+  {
+   "id": "same-run-weight",
+   "kind": "standing",
+   "statement": "When one source gives, for one run (one model, one configuration, one execution), k quality measurements (task scores, rates, errors, each with its direction; metrics, sub-scores, slices or aggregations of the same executions), all of them enter the fit, each with weight 1/k: lqm multiplies the row's noise variance by k, so that together they weigh as one row. One run = the measures of one source, one model, one configuration and one campaign whose setups share a run_set (benchmarks.json); a setup held twice there is separated by the table row (the model facts), and when that does not separate it the measures are not grouped (doubt: runs possibly distinct). k counts the run's rows that lqm keeps (after the composite and republication rules). Counts of calls, tokens, steps, latencies and durations are not quality measurements; behaviour, safety and system quantities stay out; a copy follows the republication rule; a composite whose components are held follows the composite rule first. Extended on 10 Nov 2026 (the maintainer, decisions a and b): (a) a metric the source leaves non-headline because it designates or ranks by another metric of the same runs enters too, run-share, weight 1/k (except the maintainer's decisions D3, D5, D6, D7); so does a metric of a table whose headline was only judged; (b) the components of a table without a declared composite enter with its final score, all of one run, each 1/k (the composite rule needs a declared composite).",
+   "inputs": [
+    "setup run_set",
+    "setup headline basis run-share",
+    "model, configuration, campaign",
+    "model facts"
+   ],
+   "output": "fit-quality.csv column run; lqm k per row (variance × k)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md (integration 10); model/README.md; docs/METHODOLOGY.md §5; data/BUILD.md (integration 11)"
+  },
+  {
+   "id": "configurations-per-model",
+   "kind": "standing",
+   "statement": "Each model has its own list of configurations; every configuration of the list enters the fit as its own couple (low … max, minimal, nothink, think, solo), except think-<budget> (out:budget-config) and the terms vocab.json marks in_fit false (between-tools); solo only for a model whose list is [solo]. A method change: before/after before main.",
+   "inputs": [
+    "models.json configurations"
+   ],
+   "output": "the fit's couples",
+   "date": "2026-10-22",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §5.1 In the fit, §9"
+  },
+  {
+   "id": "cost-method-unstated-single",
+   "kind": "standing",
+   "statement": "For a source whose cost method is found neither in its documentation nor by reproducing its costs from its tokens, one table of one source is taken as one method (cost_method_unstated = single-per-table, flag cost-method-assumed-single).",
+   "inputs": [
+    "cost-method (absent)"
+   ],
+   "output": "cost method unstated[<source>/<table>]",
+   "date": "2026-10-23",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §9; data/BUILD.md settings"
+  },
+  {
+   "id": "base-price-retired-last-list",
+   "kind": "standing",
+   "statement": "For a retired model the base price is its last list price.",
+   "inputs": [
+    "prices.json"
+   ],
+   "output": "base price",
+   "date": "2026-10-21",
+   "decided_by": "the maintainer (decision 1 of 21 Oct)",
+   "ref": "docs/DATA-PIPELINE.md §4 prices.json"
+  },
+  {
+   "id": "base-price-charged-never-applied",
+   "kind": "standing",
+   "statement": "For a model whose standard price never applied before it was withdrawn, the base price is the price actually charged (Gemini 3.7 Flash, $0.75).",
+   "inputs": [
+    "prices.json"
+   ],
+   "output": "base price (an entry marked base)",
+   "date": "2026-10-21",
+   "decided_by": "the maintainer",
+   "ref": "docs/DATA-PIPELINE.md §4 prices.json"
+  },
+  {
+   "id": "default-bridged-gap",
+   "kind": "deduction",
+   "statement": "A model's documented default identical on both sides of a span without captures covers the span: only between two default records of the same model and setting giving the same configuration, when no other record of that setting states another configuration inside the span and no name of the model (any route) starts or ends inside it. The span's basis is `bridged`; the measures it decides carry the flag default-bridged. The same rule applies to a route's own defaults for a model (the maintainer, 3 Nov 2026: OpenRouter's catalogue defaults), records of one setting and one via; a route id of the model starting or ending inside the span also forbids the bridge.",
+   "inputs": [
+    "models.json default",
+    "models.json names",
+    "routes.json models.<key>.default",
+    "routes.json models.<key>.ids"
+   ],
+   "output": "configuration (step 7)",
+   "date": "2026-10-29",
+   "decided_by": "the maintainer (29 Oct: qwen3.6-plus, think before 21 May and after 19 Oct)",
+   "ref": "data/BUILD.md, Added on 29 Oct, later"
+  },
+  {
+   "id": "cost-stated-prices",
+   "kind": "deduction",
+   "statement": "A cost whose price date no registered price covers is re-priced from the class prices the source states it applied (price-table facts whose term is a price class) to the registered base price, as a registered price vector would be (the publisher's figure, the delta on its tokens, a uniform factor); equal prices give factor 1. It needs a registered base price.",
+   "inputs": [
+    "price-table facts (term: a price class)",
+    "prices.json base price"
+   ],
+   "output": "cost at the base price",
+   "date": "2026-10-29",
+   "decided_by": "the maintainer (29 Oct: 'if the source gives the price, where is the problem?')",
+   "ref": "data/BUILD.md, Added on 29 Oct, later"
+  },
+  {
+   "id": "cost-uniform-factor-tiers",
+   "kind": "deduction",
+   "statement": "A cost that stays unrepriced only because its long-context tiers cannot be resolved (requests and per-call sizes not stated) is re-priced when every price vector over its price date relates to the base vector by one common factor on every class it can have used (the classes and long-context tiers of the base vector; the tiers the same on both sides): cost × that factor, whatever the token mix. It joins the part's re-priced subset instead of a subset of its own model. Several vectors at different factors, or a change in some classes only, keep the unrepriced path (own subset, cost-price-band).",
+   "inputs": [
+    "cost",
+    "prices.json (classes and long_context)"
+   ],
+   "output": "cost at the base price (computed)",
+   "conditions": "the same factor for every class and tier of the base vector and every price vector over the price date; a promotion is never the base",
+   "precision": "the cost's precision × the factor",
+   "date": "2026-10-30",
+   "decided_by": "the maintainer (30 Oct: GPT-5.6 Luna and Terra on OpenAI's launch page, 80 % and 20 % less from 30 Jul on every class)",
+   "ref": "data/BUILD.md, Added on 30 Oct; docs/DATA-PIPELINE.md §5.3 step 1"
+  },
+  {
+   "id": "router-maker-levels",
+   "kind": "standing",
+   "statement": "A router serving the model at the run date (OpenRouter) accepts the levels of the maker's API at that date and passes them on unchanged, besides the levels its own catalogue lists; only a conversion its documents establish for that model (a model mapping) changes the level. A generic sentence (OpenRouter's effort → budget_tokens formula for 'Anthropic models') applies only to the models it covers: the Claude models that take a thinking budget and no effort.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json accepts_maker, mapping, accepts",
+    "models.json configurations"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the accepts_maker record covers the run interval; the route's ids for the model overlap it; the route's catalogue lists no level of the model over the run (else router-listed-levels; the maintainer, 3 Nov 2026, later)",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "router-listed-levels",
+   "kind": "standing",
+   "statement": "Where a router's catalogue lists the model's levels at the run date (OpenRouter's supported_efforts in /api/v1/models, recorded as level accepts), its list decides what the router accepts: a level it does not list falls to the router's level_mapping (nearest supported, a tie → ambiguous). The maker's levels (router-maker-levels) count only where the catalogue lists no level of the model at that date. A run the listing covers in part is read both ways and kept only if both agree.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json accepts (levels), accepts_maker, level_mapping",
+    "models.json configurations"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "the router has a covering accepts_maker record; level accepts records of the model overlap the run",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: glm-5.2 max, which OpenRouter lists as xhigh / high / none)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "router-listed-thinking",
+   "kind": "standing",
+   "statement": "The router's catalogue listing (router-listed-levels) decides thinking off and on as well as the levels: thinking off is accepted only where the listing names it (OpenRouter's supported_efforts « none »); where the listing does not, thinking off asked for follows the router's level_mapping (nearest supported, thinking off being the lowest step of the order, a tie → ambiguous), thinking off asked for a model that has no thinking off at its maker is not established (no nearest level: kimi-k3, the maintainer, 3 Nov 2026, later); thinking on without a level, which the listing never names, is accepted where the listing names at least one level (the maintainer, 3 Nov 2026, later). The maker's thinking off / on count only where the catalogue lists nothing for the model at that date.",
+   "inputs": [
+    "route",
+    "effort-setting / effort-label",
+    "routes.json accepts (levels and nothink from supported_efforts), level_mapping",
+    "models.json configurations"
+   ],
+   "output": "configuration (computed)",
+   "conditions": "as router-listed-levels; the configuration asked for is nothink or think",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: gpt-5.5 nothink; OpenRouter lists « none » for most models only from 15 Oct 2026)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "harness-calls-route",
+   "kind": "standing",
+   "statement": "A harness that hands every call to one route (Claude Code → the Anthropic API, maker-api) closes the chain with that route when the measure names no other route: no other candidate route is weighed.",
+   "inputs": [
+    "route (a harness only)",
+    "routes.json calls_route"
+   ],
+   "output": "route chain",
+   "conditions": "every harness named has a calls_route naming the same route; the route slot names no router, reseller, host or self-hosting",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Claude Code goes directly to Anthropic)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "harness-passes-through",
+   "kind": "standing",
+   "statement": "A harness whose calls always go through a library or proxy route has that route as a step of every chain it is in, right after it (OpenHands → LiteLLM): the route then applies as any named step; a route documenting nothing (LiteLLM) leaves the run not established (strict rule).",
+   "inputs": [
+    "route (a harness)",
+    "routes.json passes_through"
+   ],
+   "output": "route chain",
+   "conditions": "the harness is a step of the measure's chain (named in its route slot) and carries passes_through",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: LiteLLM is in the chain of every OpenHands source, its SDK calling the providers through the LiteLLM library)",
+   "ref": "data/BUILD.md Interpretations 8; docs/DATA-PIPELINE.md §4 routes.json"
+  },
+  {
+   "id": "contradiction-before-route",
+   "kind": "standing",
+   "statement": "The effort facts of a measure are reconciled first on what they read (the configuration each asks for, before any route step: a setting, a label, thinking off / on, a budget, the name), with the same rules as after the route (a level beside thinking on → the level; the more specific statement of the same call; a reading outside the model's configurations counts for nothing beside one inside). Readings that still disagree make the configuration not-established:contradictory, whatever the route then serves; a reading the route no longer serves does not leave the other one alone.",
+   "inputs": [
+    "effort facts (effort-setting, effort-label, thinking-on / -off, thinking-budget, effort-order, name)",
+    "models.json configurations"
+   ],
+   "output": "configuration not-established:contradictory",
+   "conditions": "two or more effort readings of one measure",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Artificial Analysis opus-4.7 / sonnet-5, facts thinking off and high; thinking off no longer served through OpenRouter)",
+   "ref": "data/BUILD.md Added on 3 Nov 2026 (route5) 1; docs/DATA-PIPELINE.md §5.1"
+  },
+  {
+   "id": "cost-current-price-only",
+   "kind": "standing",
+   "statement": "A cost that none of the re-pricing rules (publisher figure, delta on the source's tokens, uniform factor, uniform factor across tiers, class ratio) brings to the base price is brought to it by a price band when every price over its price date is registered and shares the base price's classes and long-context tiers: the band [raw × the smallest, raw × the largest per-class ratio base / old] over its own price vectors (the bounds « mostly input » and « mostly output »), its reference always the base (current) price, never the last price seen (the maintainer, 3 Nov 2026, later: « les fourchettes de prix se calculent vers le prix courant »; GPT-5.6 Sol, base 5 / 30, promotion 4 / 20 over the price date: × [1.25, 1.5]). A cost no band can bring to the current price (no registered price over its price date, or tiers / classes not shared) is out:cost-not-comparable. The unrepriced model's own subset at an old price no longer exists.",
+   "inputs": [
+    "cost field (price vectors over the price date, base price)",
+    "prices.json"
+   ],
+   "output": "out:cost-not-comparable",
+   "conditions": "a cost not re-priced",
+   "date": "2026-11-03",
+   "decided_by": "the maintainer (3 Nov 2026: Sonnet 5.5 launch page, Terminal-Bench 4.0 costs at the 28 Sep price; cache read 0.20 → 0.10 on 7 Oct)",
+   "ref": "data/BUILD.md Interpretations 30; Added on 3 Nov 2026 (route5) 7, (route6) 2; docs/DATA-PIPELINE.md §5.3 step 2"
+  },
+  {
+   "id": "price-first-capture-from-release",
+   "kind": "standing",
+   "statement": "A run between a model's release and the first capture of its pricing page: the price of that first capture applies from the release (prices.json from_basis release), unless a launch promotion is announced or visible, a price change is documented in between, or a readable capture of a maker's pricing page taken on a later day than the release does not show the model's price. Applied to the (model, currency) pairs whose archive the price salvo of 3–4 Nov 2026 searched; each case read in the agents' notes (PASSES.md).",
+   "inputs": [
+    "prices.json",
+    "models.json released"
+   ],
+   "output": "prices.json from / from_basis",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision A, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices); docs/DATA-PIPELINE.md §9"
+  },
+  {
+   "id": "price-bracketed-captures",
+   "kind": "standing",
+   "statement": "Two captures showing the same price cover the interval between them (two registry entries of one model, kind, currency and configurations with the same price vector on both sides of a gap are one entry), unless a price change is documented in the interval.",
+   "inputs": [
+    "prices.json"
+   ],
+   "output": "prices.json from / to",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision I, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "price-end-inclusive-unit",
+   "kind": "standing",
+   "statement": "An inclusive end written to the second or the minute covers that whole second or minute (validate.when): a price to …T15:59:59Z followed by one from …T16:00:00Z leaves no gap.",
+   "inputs": [
+    "prices.json to",
+    "dated records"
+   ],
+   "output": "interval coverage",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision J, 4 Nov 2026: a build bug at the minute / second boundary)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "cost-currency-conversion",
+   "kind": "standing",
+   "statement": "A cost in yuan of a model whose maker publishes no yuan price is converted to USD only when the source gives its rate or says it starts from the maker's USD prices (its rate, else the ECB reference rate over the run, its spread a band); a source that goes through a reseller or says nothing stays out. On 4 Nov 2026: chinese-llm-benchmark (nonelinear's own platform prices) and llm2014 (OpenRouter / Zenmux relays) stay out; SuperCLUE prices no US model in yuan.",
+   "inputs": [
+    "cost currency",
+    "the source's saved files"
+   ],
+   "output": "out:cost-not-comparable (no base price in the cost's currency)",
+   "date": "2026-11-04",
+   "decided_by": "the maintainer (decision F, 4 Nov 2026)",
+   "ref": "data/BUILD.md, Added on 4 Nov 2026 (prices)"
+  },
+  {
+   "id": "f1-not-components",
+   "kind": "standing",
+   "statement": "When a table gives an F1 and its components precision and recall for the same run, the F1 alone enters the fit; the precision and the recall stay out (headline pending), noted in their setups. Precision or recall reported without an F1 is not concerned.",
+   "inputs": [
+    "setup headline",
+    "the F1 setup of the same table, row and slice"
+   ],
+   "output": "precision / recall setups: headline basis decision, no decision (out:not-headline)",
+   "date": "2026-11-10",
+   "decided_by": "the maintainer",
+   "ref": "data/BUILD.md (integration 11)"
+  }
+ ]
+}

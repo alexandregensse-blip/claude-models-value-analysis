@@ -1,0 +1,779 @@
+{
+ "id": "src-worklore-toolcount-2026-10-15",
+ "publisher": "worklore-toolcount",
+ "urls": [
+  "https://github.com/worklore/worklore-mcp/tree/main/research/tools-count"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://github.com/worklore/worklore-mcp/tree/main/research/tools-count",
+   "captured": "2026-10-18T16:44:01Z",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "note": "copies of README.md, report.md, tables-full.md, tables-cheap.md saved by salvo s24/c4 (file mtime); the folder was last committed 2026-10-15T03:12Z (salvo s24/c4 report); the Habr article 1094886 presents the same measurements"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md": "6f94b2209a50f5decb940bcc43be268f8d6e559d55e273f16863cd36e439a619",
+  "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md": "192176fb5212f48a746aa326e191022dcfc2bc203b351452eac6493c464d0b75",
+  "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md": "00227c33f148f5ea16eb7661df0037ba99fe2f5e5f3453d065e01f42de3b8756",
+  "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md": "ed15495bdb0dd18b35f362692c566f69edd85bc89a5a0b5a4e293fcda15c26fc"
+ },
+ "harvested_at": "2026-10-18T16:44:01Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-worklore-toolcount (Wave C2, 28 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the copies of research/tools-count saved by salvo s24/c4 (README.md, report.md, tables-full.md, tables-cheap.md)",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code 2.1.285, `claude -p`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents: CLI row (Claude lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| CLI | Claude Code 2.1.285, `claude -p` | Codex CLI 0.160.0, `codex exec` | Antigravity `agy` 1.2.17, `-p` |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F2",
+   "says": "harness",
+   "about": null,
+   "value": "Codex CLI 0.160.0, `codex exec`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents: CLI row (ChatGPT lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| CLI | Claude Code 2.1.285, `claude -p` | Codex CLI 0.160.0, `codex exec` | Antigravity `agy` 1.2.17, `-p` |",
+   "term": "codex-cli"
+  },
+  {
+   "id": "F3",
+   "says": "harness",
+   "about": null,
+   "value": "Antigravity `agy` 1.2.17, `-p`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents: CLI row (Gemini lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| CLI | Claude Code 2.1.285, `claude -p` | Codex CLI 0.160.0, `codex exec` | Antigravity `agy` 1.2.17, `-p` |",
+   "term": "antigravity-cli"
+  },
+  {
+   "id": "F4",
+   "says": "harness",
+   "about": null,
+   "value": "Claude Code",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph (phase cheap): Haiku 5.5 in Claude Code (tool search off)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity",
+   "term": "claude-code"
+  },
+  {
+   "id": "F5",
+   "says": "harness",
+   "about": null,
+   "value": "Antigravity",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph (phase cheap): Gemini 3.8 Flash (low) in Antigravity",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity",
+   "term": "antigravity-cli"
+  },
+  {
+   "id": "F6",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-10-07",
+   "level": "written",
+   "form": "prose",
+   "where": "report.md header: Date",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "Date: 2026-10-07, with a follow-up run on 2026-10-08. This experiment ran 3 agents on 1 fake MCP server exposing 5, 10, …, 50 tools, then 75 and 100, plus a grouped variant: 18 tasks × 2 repetitions per cell, 1,404 scored runs. Sizes 55–70 were not run. The 75/100 extension was added after nothing broke at 50."
+  },
+  {
+   "id": "F7",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-10-08",
+   "level": "written",
+   "form": "prose",
+   "where": "report.md header: follow-up run (tool search on / vague names lanes)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "Date: 2026-10-07, with a follow-up run on 2026-10-08. This experiment ran 3 agents on 1 fake MCP server exposing 5, 10, …, 50 tools, then 75 and 100, plus a grouped variant: 18 tasks × 2 repetitions per cell, 1,404 scored runs. Sizes 55–70 were not run. The 75/100 extension was added after nothing broke at 50."
+  },
+  {
+   "id": "F8",
+   "says": "run-date",
+   "about": null,
+   "value": "2026-10-14",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph: \"added 2026-10-14\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity"
+  },
+  {
+   "id": "F9",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "label",
+   "where": "tables header \"cost $/run\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "cost $/run",
+   "term": "USD"
+  },
+  {
+   "id": "F10",
+   "says": "unit",
+   "about": null,
+   "value": "cost $/run",
+   "level": "written",
+   "form": "label",
+   "where": "tables header \"cost $/run\": the mean cost of one run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "cost $/run",
+   "term": "per-run"
+  },
+  {
+   "id": "F11",
+   "says": "cost-method",
+   "about": null,
+   "value": "`total_cost_usd` at list price",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row \"tokens / time / cost from\" (Claude lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| tokens / time / cost from | stream-json: per-message usage + `result` (usage incl. cache; `total_cost_usd` at list price) | `turn.completed` usage + `token_count` per model call in the session rollout; no cost | `step_update` usage per step + `result` usage; no cost |",
+   "term": "cli-total"
+  },
+  {
+   "id": "F12",
+   "says": "cost-basis",
+   "about": null,
+   "value": "`total_cost_usd` at list price",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row \"tokens / time / cost from\" (Claude lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| tokens / time / cost from | stream-json: per-message usage + `result` (usage incl. cache; `total_cost_usd` at list price) | `turn.completed` usage + `token_count` per model call in the session rollout; no cost | `step_update` usage per step + `result` usage; no cost |",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F13",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "at default reasoning effort",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model (ChatGPT lane)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |"
+  },
+  {
+   "id": "F14",
+   "says": "headline-metric",
+   "about": null,
+   "value": "Accuracy did not break anywhere between 5 and 100 separate tools, for any of the three agents.",
+   "level": "written",
+   "form": "prose",
+   "where": "report.md, Short answer, first bullet",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "- **Accuracy did not break anywhere between 5 and 100 separate tools, for any of the three agents.**"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "opus-5.5 N=5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=5, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.22 | 0.00 | 4082 | 9336 | 189 | 6.0 | 0.0258 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-api-id",
+   "about": "opus-5.5 N=5",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F17",
+   "says": "cost",
+   "about": "opus-5.5 N=5",
+   "value": "0.0258",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=5, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.22 | 0.00 | 4082 | 9336 | 189 | 6.0 | 0.0258 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "haiku-5.5 N=5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=5, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.22 | 0.00 | 4994 | 11357 | 187 | 4.5 | 0.0010 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "model-name",
+   "about": "haiku-5.5 N=5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Claude Haiku 5.5 (Claude Code, tool search off)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Claude Haiku 5.5 (Claude Code, tool search off)"
+  },
+  {
+   "id": "F20",
+   "says": "cost",
+   "about": "haiku-5.5 N=5",
+   "value": "0.0010",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=5, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.22 | 0.00 | 4994 | 11357 | 187 | 4.5 | 0.0010 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "gpt-6.1-sol N=5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "GPT-6.1-sol (Codex CLI default), row tools=5, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.22 | 0.00 | 13203 | 45323 | 133 | 13.0 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol N=5",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "gemini-3.1-pro N=5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.1 Pro (Antigravity), row tools=5, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.39 | 0.14 | 3833 | 15680 | 841 | 19.5 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "model-name",
+   "about": "gemini-3.1-pro N=5",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.1 Pro (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "Gemini 3.1 Pro (Antigravity)"
+  },
+  {
+   "id": "F25",
+   "says": "effort-label",
+   "about": "gemini-3.1-pro N=5",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model (Gemini lane): model id gemini-3.1-pro-high",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |"
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "gemini-3.8-flash N=5",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.8 Flash low (Antigravity), row tools=5, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 5 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.33 | 0.03 | 3562 | 14716 | 313 | 12.5 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "gemini-3.8-flash N=5",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.8 Flash low (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Gemini 3.8 Flash low (Antigravity)"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "gemini-3.8-flash N=5",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph: Gemini 3.8 Flash (low)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "opus-5.5 N=50",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=50, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.39 | 0.00 | 11679 | 27897 | 198 | 6.2 | 0.0299 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "model-api-id",
+   "about": "opus-5.5 N=50",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F31",
+   "says": "cost",
+   "about": "opus-5.5 N=50",
+   "value": "0.0299",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=50, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.39 | 0.00 | 11679 | 27897 | 198 | 6.2 | 0.0299 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "haiku-5.5 N=50",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=50, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.72 | 0.00 | 12590 | 32643 | 259 | 5.0 | 0.0012 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "model-name",
+   "about": "haiku-5.5 N=50",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Claude Haiku 5.5 (Claude Code, tool search off)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Claude Haiku 5.5 (Claude Code, tool search off)"
+  },
+  {
+   "id": "F34",
+   "says": "cost",
+   "about": "haiku-5.5 N=50",
+   "value": "0.0012",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=50, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.72 | 0.00 | 12590 | 32643 | 259 | 5.0 | 0.0012 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "gpt-6.1-sol N=50",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "GPT-6.1-sol (Codex CLI default), row tools=50, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.56 | 0.00 | 13203 | 61417 | 142 | 14.2 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol N=50",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F37",
+   "says": "score",
+   "about": "gemini-3.1-pro N=50",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.1 Pro (Antigravity), row tools=50, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.81 | 0.53 | 4054 | 20500 | 1057 | 23.0 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "gemini-3.1-pro N=50",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.1 Pro (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "Gemini 3.1 Pro (Antigravity)"
+  },
+  {
+   "id": "F39",
+   "says": "effort-label",
+   "about": "gemini-3.1-pro N=50",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model (Gemini lane): model id gemini-3.1-pro-high",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "gemini-3.8-flash N=50",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.8 Flash low (Antigravity), row tools=50, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 50 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.33 | 0.00 | 3784 | 15586 | 388 | 12.5 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "model-name",
+   "about": "gemini-3.8-flash N=50",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.8 Flash low (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Gemini 3.8 Flash low (Antigravity)"
+  },
+  {
+   "id": "F42",
+   "says": "effort-label",
+   "about": "gemini-3.8-flash N=50",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph: Gemini 3.8 Flash (low)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "opus-5.5 N=100",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=100, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.39 | 0.00 | 20222 | 48619 | 188 | 6.7 | 0.0377 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "model-api-id",
+   "about": "opus-5.5 N=100",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F45",
+   "says": "cost",
+   "about": "opus-5.5 N=100",
+   "value": "0.0377",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Opus 5.5 (Claude Code, tool search off), row tools=100, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.39 | 0.00 | 20222 | 48619 | 188 | 6.7 | 0.0377 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "haiku-5.5 N=100",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=100, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.61 | 0.00 | 21133 | 53818 | 233 | 5.2 | 0.0013 |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F47",
+   "says": "model-name",
+   "about": "haiku-5.5 N=100",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Claude Haiku 5.5 (Claude Code, tool search off)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Claude Haiku 5.5 (Claude Code, tool search off)"
+  },
+  {
+   "id": "F48",
+   "says": "cost",
+   "about": "haiku-5.5 N=100",
+   "value": "0.0013",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Claude Haiku 5.5 (Claude Code, tool search off), row tools=100, column cost $/run",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.61 | 0.00 | 21133 | 53818 | 233 | 5.2 | 0.0013 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "gpt-6.1-sol N=100",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "GPT-6.1-sol (Codex CLI default), row tools=100, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.72 | 0.00 | 13202 | 78240 | 151 | 13.8 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F50",
+   "says": "model-api-id",
+   "about": "gpt-6.1-sol N=100",
+   "value": "gpt-6.1-sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "gemini-3.1-pro N=100",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.1 Pro (Antigravity), row tools=100, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 1.97 | 0.61 | 4309 | 18577 | 808 | 19.9 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "gemini-3.1-pro N=100",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.1 Pro (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-full.md",
+   "quote": "Gemini 3.1 Pro (Antigravity)"
+  },
+  {
+   "id": "F53",
+   "says": "effort-label",
+   "about": "gemini-3.1-pro N=100",
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "report.md, section Agents, row model (Gemini lane): model id gemini-3.1-pro-high",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/report.md",
+   "quote": "| model | `claude-opus-5-5` | **`gpt-6.1-sol`**, the `codex` default on this ChatGPT Plus account, at default reasoning effort; recorded per run from the session file. \"Astra\" is not what `codex` defaults to here. | `gemini-3.1-pro-high` through the Google AI Pro subscription. The API-key flash-lite substitute was not needed. |"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "gemini-3.8-flash N=100",
+   "value": "100",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Gemini 3.8 Flash low (Antigravity), row tools=100, column success",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "| 100 | 36 | 100% | 90%–100% | 100% | 100% | 0% | 0% | 2.00 | 0.33 | 4040 | 23345 | 729 | 17.3 | |",
+   "term": "success%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "model-name",
+   "about": "gemini-3.8-flash N=100",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "label",
+   "where": "section heading \"Gemini 3.8 Flash low (Antigravity)\"",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/tables-cheap.md",
+   "quote": "Gemini 3.8 Flash low (Antigravity)"
+  },
+  {
+   "id": "F56",
+   "says": "effort-label",
+   "about": "gemini-3.8-flash N=100",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "where": "README, cheapest models paragraph: Gemini 3.8 Flash (low)",
+   "file": "/work/.salvo14/mig/convert-worklore-toolcount/evidence/README.md",
+   "quote": "(added 2026-10-14, 1,404 more runs, phase `cheap`): Claude Haiku 5.5 in Claude Code (tool search off), GPT-Reserve in Codex CLI, Gemini 3.8 Flash (low) in Antigravity"
+  }
+ ]
+}

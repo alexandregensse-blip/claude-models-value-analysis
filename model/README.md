@@ -6,38 +6,123 @@ uncertainty. A change of method touches only this part (and `docs/METHODOLOGY.md
 | File | Role |
 |---|---|
 | `lqm.py` | data preparation (groups, scales, composites, republications, effects), the samplers, the read-out |
-| `lqm_ext2.stan` | the model, in Stan (since v2026.10.21; `LQM_MODEL` selects another) |
+| `lqm_ext4.stan` | the model fitted since 2 Nov 2026: each maker's scales and home effect its own (below), in `lqm_ext3.stan`'s coordinates; `LQM_MODEL` selects another |
+| `lqm_ext3.stan` | the model of 30 Oct – 2 Nov 2026: `lqm_ext2.stan` reparameterised (below) (`LQM_MODEL=lqm_ext3`) |
+| `lqm_ext2.stan` | the model published since v2026.10.21, in its original coordinates (`LQM_MODEL=lqm_ext2`) |
 | `lqm.stan` | the model until v2026.10.20, without the makers' scales and home effects |
 | `lqm_ext.stan` | an experiment of 19–20 Oct (makers' offsets not summing to zero; it did not converge) |
 | `precheck.py` | the checks run before a fit (bounds, twin metrics, discordant twins, memory) |
 | `peek.py` | a provisional R̂ from the draws on disk while a fit runs |
-| `fit.py` | fits both axes and writes `fit-cache.json` |
+| `fit.py` | fits both axes and writes `fit-cache.json`; `--dry` builds its inputs and prints them, without sampling |
 | `fit-cache.json` | **the model's only product**, read by the site |
 | `validation/` | the checks reported in docs/METHODOLOGY.md (see its README) |
 | `requirements-fit.txt` | the pinned fitting environment (the root README, "Refit", installs it in `.stan/`) |
 
+## Each maker's own biases, 2 Nov 2026 (`lqm_ext4.stan`)
+
+The maintainer's decision: each maker's biases are its own, with no reason to tie them across makers. Under
+`lqm_ext2.stan` and `lqm_ext3.stan` each maker's three effect scales were drawn around common ones (log s_k =
+log s_0 + η · ζ_k, ζ summing to zero) and its home effect around a common one (δ_k = δ_0 + τ_δ · zd_k); the tie made a
+funnel on η (fit of 30 Oct: η_τ from 0.002 to 1.3, and divergences past the allowed share on both axes).
+`lqm_ext4.stan` drops s_0, η, ζ, δ_0, τ_δ and zd (`s_tau0`, `psi0`, `omega0`, `eta_*`, `zf_*`, `delta0`,
+`tau_delta`, `zd`): every maker's `s_tau_f`, `psi_f`, `omega_f` ~ half-Student-t(3, 0, 2.5) and `delta_f` ~ N(0, 10²),
+independently (the priors the common terms had). `delta_f` is now a parameter; every other name is unchanged, and so
+is everything else (θ, offsets, gains, noise, ν, κ, `tau_raw`, the read-outs, the data block). The magnitude and
+direction coordinates below are kept: the Jacobian per maker and family is log s_k (s_k → log s_k) plus the χ(n_k)
+density of r_k, and a maker without effects of a family keeps its prior there; the header has it term by term.
+Checked with BridgeStan on both axes' data, six random points each: log density and gradient finite; moving a
+maker's r_k with its magnitude fixed changes the log density by exactly the formula (to 10⁻¹⁰); against
+`lqm_ext3.stan` at the matching points, the log densities differ by exactly the two models' priors on the makers'
+terms (a constant to 2 · 10⁻¹⁰ on cost, 6 · 10⁻¹⁰ on quality); and, by quadrature over (log A_k, log r_k) on a
+one-maker program with the same lines, the implied density of s_k is the half-Student-t(3, 0, 2.5) to 7 · 10⁻⁵ (the
+grid's truncation) for n_k = 1, 14 and 539 (without the log s_k term it is off by a factor up to 6.7). A warm start
+saved under another model (`.stan/inits-*.json`) gives the sampler only the parameters this model has.
+
+## The reparameterisation of 30 Oct 2026 (`lqm_ext3.stan`)
+
+The maintainer's decision: the same statistical model as `lqm_ext2.stan` (the same joint density of its parameters,
+the same data block, the same names for everything `lqm.py` and the site read: `theta`, `level`, `tau`, `z1`–`z3`,
+`s_tau_f`, `psi_f`, `omega_f`, `psi2`, `psiC`, `omegaC`, `delta_f`, …), sampled in other coordinates. In
+`lqm_ext2.stan` each maker's effects of a family are its scale times standard-normal effects, and the data see only
+the products: the scale and all the maker's effects move together along a curved ridge, which on the cost axis of
+29–30 Oct left the scale of a maker with few data (Qwen) mixing slowly between two modes. `lqm_ext3.stan` samples,
+for every maker and family (any number of effects, no threshold), the realised magnitude of the maker's block of
+effects (log scale), its direction (a free vector divided by its length) and the norm of the standard-normal block
+(with its χ density); the maker's scale is their ratio, and the common scale and the makers' sum-to-zero offsets are
+recovered from the makers' log scales. Per family: ψ (`la_psi`, `r_psi`, `y2`), ω (`la_omega`, `r_omega`, `y3`), τ
+(`la_tau`, `r_tau`, `y1`: the block is every z1 of the maker's couples, `tau_raw` unchanged). The Jacobian terms
+(log s_0, −(F − 1) log η, the χ density) and the reasons are in the file's header; docs/METHODOLOGY.md §5, Estimation,
+explains it in prose. Checked by evaluating both programs at random points on both axes' data (BridgeStan): the log
+densities differ by exactly the Jacobian and auxiliary terms (residual below 10⁻⁹ over six points per axis). A run
+stores the directions y and the effects z both (2,855 more scalars per draw on cost, 5,320 on quality).
+
+## Input
+
+The build's products (`python3 data/build.py --fit-models catalog`, see `data/BUILD.md`): `data/build/fit-quality.csv`
+for the quality axis and `data/build/fit-cost.csv` for the cost axis, the rows `in` on that axis in the columns of the
+former `raw-data.csv`. `lqm.load` reads each through `data/build_lqm.py`'s `load_table`, which resolves the catalogue's
+group-keyed maps (`COMPOSITES`, `FAMILY_OF`) for the build's fit groups through `group-map.json` (fit group → base
+group) and `group-setups.json` (fit group → setup, with its family and composite components) — the code the build's
+own lqm step uses. `precheck.py` checks the rows of `data/build/data.csv` in the fit and loads the tables the same way;
+`validation/` reads the tables. On the build of 29 Oct (migrated data): quality 1,608 groups, 17,705 rows, 334 couples;
+cost 923 groups, 8,403 rows, 271 couples (`fit.py --dry`). `raw-data.csv` is no longer read by the model.
+
+**Direction** (the maintainer, 10 Nov 2026, rule `score-direction`). The fit tables keep the source's values; a quality
+group whose setup's registry direction is `lower` (group-setups.json → `lqm.DIRECTION_OF`, set by `fit_maps`) is
+turned where the score becomes the fit's quantity, f(y) in `lqm.load`, in its unit's transform: a bounded score y on
+[0, B] → B − y before the empirical logit (apexharm-asr, ASR %: 30 % reads 70 %), an unbounded positive one → −log y,
+any other → −y. A group without a setup (legacy rows) keeps its metric label's rule (`LOWER_IS_BETTER`); the build
+keeps a setup without a known direction out (`out:direction-not-established`). Before 10 Nov 2026 the registry
+direction was not read: the `lower` groups were fitted as if higher were better.
+
+**One run, k measurements** (the maintainer, 10 Nov 2026, rule `same-run-weight`). When one source gives, for one run
+(one model, one configuration, one execution), k quality measurements — metrics, sub-scores, slices or aggregations of
+the same executions, each with its direction — all of them enter, each with weight 1/k: the row's whole noise variance
+is multiplied by k, `k_r · (κ_r h_r² σ_b² + d_r²)`, so that together they weigh as one row (with Gaussian noise, k rows
+of variance k·v carry the precision of one row of variance v). The build writes the run id in `fit-quality.csv`'s
+column `run` (data/BUILD.md: the measures of one source, one model@configuration and one campaign whose setups share a
+`run_set`); `lqm.load` counts k among the rows it keeps (after the composite and republication rules; rows of one run
+are never taken for republications of each other) and `stan_data` passes √k·h_r and √k·d_r, the row's scale in the
+likelihood — the one place where a row's weight enters it. The Stan programs are unchanged. A row without a run id has
+k = 1. Tests `same_run_weight` (with numpy) and `same_run_weight_build`.
+
 ## Run
 
 ```bash
+.stan/venv/bin/python model/fit.py --dry     # inputs, fingerprint, groups and rows per axis; no checks, no sampling
 .stan/venv/bin/python model/fit.py
 ```
 
-Quality: nutpie, 4 chains × (1,000 + 12,000). Cost: CmdStan, 4 chains × (500 + 4,500), started from the last draws of
-the previous fit (`.stan/inits-cost.json`; 1,000 warm-up iterations without it). The model is compiled with
-`stanc --O1` and `STAN_NO_RANGE_CHECKS`.
+Both axes: nutpie, 6 chains × (500 + 1,800) (warm-up 500 since 30 Oct 2026), continued in the sampling process by
+slices of 900 draws up to 16,200 more until the criteria hold. Each fit draws its own seed (printed, kept in the run's
+manifest in `.stan/runs` and per axis in `fit-cache.json`); a run resumed after a stop keeps its seed, and the seed is
+not part of an axis' data fingerprint (30 Oct 2026; a fixed seed before). The model is compiled with `stanc --O1`
+and `STAN_NO_RANGE_CHECKS`.
 
-Each axis is checked against the validity criteria as soon as it is sampled, within a budget of 10 minutes per axis:
-a chain left in another region (R̂ > 1.05) restarts the axis on CmdStan from the previous fit's last draws; too few
-effective draws continue the same chains (last state, adapted step size and metric, no new warm-up) until the
-criteria hold or the budget is spent. An axis whose prepared data and model code are unchanged since the cached,
-converged fit is kept as it is (`--all` refits both).
+A run stopped part-way resumes from its stored draws, each chain continued on CmdStan from its last draw with its
+adapted step size and metric. A chain left in a far region (its median log-density more than max(300, 5 × the others'
+spread) below the other chains', `lqm.FAR`) loses its draws and restarts alone on CmdStan from a good chain's last
+draw with that chain's adapted state; the good chains are kept (rule of 30 Oct 2026, which replaced the restart of the
+whole axis on CmdStan from the previous fit's draws). The chains are looked at whatever R̂ — every 250 iterations
+(warm-up iteration 400, draws 300, 700, …), at the end of warm-up (its last 100 iterations) and at every slice
+(`lqm._checks`; 30 Oct 2026, before only at a slice and when R̂ > 1.05); a chain far within warm-up is reported and
+restarted at the end of warm-up if still far there (no clean restart before nutpie's adaptation ends). No verdict on
+fewer than 100 draws of each chain's own (`FAR["least"]`, 30 Oct 2026: the check right after a restart at the end of
+warm-up, on one draw per chain, had flagged a good chain and stopped the run); after the restart all the chains go on
+together on CmdStan to the planned draws. A run that ends unconverged says why (`stopped` in the diagnostics), and
+R̂ undefined on too few draws reads `null`, its ESS 0. Without a far
+chain an R̂ above 1.05 continues the chains. An axis whose prepared data and model code are unchanged since the cached, converged fit is
+kept as it is (`--all` refits both).
 
 ## The contract with the site: `fit-cache.json`
 
-- `inputs` — the files the fit depends on (data file, catalogue, `lqm.py`, the Stan model in use, `fit.py`), and `fingerprint`
+- `inputs` — the files the fit depends on (the two fit tables and the two group maps of `data/build/`, the catalogue,
+  `data/build_lqm.py`, `lqm.py`, the Stan model in use, `fit.py`), and `fingerprint`
   — SHA-256 over their paths and contents, in order. The site recomputes it and refuses a stale cache.
 - `quality`, `cost` — per couple `[centre, half, publishers, [new_lo, new_hi], mcse]`, on the log scale and
   reference-free: `centre` is the posterior median of the read-out, `half` its quasi-standard error (16–84 %),
   `[new_lo, new_hi]` what one new source would report, `mcse` the Monte Carlo error of the centre.
+- `seed` — per axis, the seed its fit drew (also in the axis' `diagnostics`; one number for both axes before 30 Oct
+  2026).
 - `diagnostics` — per axis: R̂, bulk and tail ESS, divergences, sampler statistics, what was set aside, and
   `converged` (R̂ ≤ 1.01, ESS ≥ 400, no divergence); the site refuses a fit that did not converge.

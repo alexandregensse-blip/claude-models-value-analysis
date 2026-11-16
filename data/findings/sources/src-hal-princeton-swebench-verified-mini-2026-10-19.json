@@ -1,0 +1,1670 @@
+{
+ "id": "src-hal-princeton-swebench-verified-mini-2026-10-19",
+ "publisher": "hal-princeton",
+ "urls": [
+  "https://hal.cs.princeton.edu/swebench_verified_mini"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://hal.cs.princeton.edu/swebench_verified_mini",
+   "captured": "2026-10-19T07:57:15Z",
+   "note": "page evidence/swebench_verified_mini.html saved by salvo g/g6 (file mtime)"
+  },
+  {
+   "id": "W1",
+   "kind": "wayback",
+   "url": "https://web.archive.org/web/20251207141529id_/https://hal.cs.princeton.edu/swebench_verified_mini",
+   "captured": "2025-12-07T14:15:29Z",
+   "note": "dating step 2 (agents on the web, 3 Nov 2026), b30: Capture 20251002153315 lacks 7 of 33 rows (ranks 1,2,3,13,16...); no capture between it and 20251207 (CDX). 20251207 is first with all rows. Saved copy of the capture: /work/.salvo14/mig/dates2/ev/swe/20251207141529.html (sha256 8bb18112887a48ea47db117b838edc21e940950c4c8319f5cef3126dcd98382b).",
+   "evidence": [
+    {
+     "url": "https://web.archive.org/web/20251207141529id_/https://hal.cs.princeton.edu/swebench_verified_mini",
+     "captured": "2026-11-03",
+     "file": "/work/.salvo14/mig/dates2/ev/swe/20251207141529.html",
+     "sha256": "8bb18112887a48ea47db117b838edc21e940950c4c8319f5cef3126dcd98382b",
+     "where": "a value the capture shows (the agent: leaderboard table, rank 1 SWE-Agent Claude Sonnet 4.5 High (September 2025))",
+     "quote": "72.00%"
+    }
+   ]
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html": "c01f3a7167bf8885c6e72ae94d2560a57059a7a21f3af7e97d090a7535cea798",
+  "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv": "0be0e81100a51af44a5c0bbbfb8e889ba0da758d8c18e5ee75a388378b93ff2e"
+ },
+ "harvested_at": "2026-10-19T07:57:15Z",
+ "published": null,
+ "salvo": "salvo14/mig/convert-hal-princeton (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the HAL board page saved on 19 Oct by salvo g/g6",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "from": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html",
+   "tool": "python re: the rows of the leaderboard table of the page (rank, scaffold without the Pareto marker, model label, verified, accuracy and its CI, total cost and its CI, runs), one CSV row each, text copied as printed"
+  }
+ ],
+ "tables": [
+  {
+   "id": "T1",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank)",
+   "format": "csv",
+   "row_key": "rank",
+   "columns": {
+    "scaffold": "harness",
+    "model": "note",
+    "accuracy": {
+     "says": "score",
+     "term": "resolved%",
+     "scale": "percent"
+    },
+    "runs": "aggregation"
+   },
+   "level": "written",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "thinking-budget",
+   "about": null,
+   "value": "4,096",
+   "level": "written",
+   "form": "prose",
+   "where": "Primary Model column header note: \"the reasoning token budget is set at 1,024 (low), 2,048 (medium), and 4,096 (high)\" for non-OpenAI reasoning models",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini.html",
+   "quote": "and 4,096 (high)",
+   "term": "4096"
+  },
+  {
+   "id": "F2",
+   "says": "model-name",
+   "about": "1",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F3",
+   "says": "effort-label",
+   "about": "1",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F4",
+   "says": "note",
+   "about": "1",
+   "value": "September 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 1, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 High (September 2025)"
+  },
+  {
+   "id": "F5",
+   "says": "model-name",
+   "about": "2",
+   "value": "Claude Sonnet 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 2, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 (September 2025)"
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": "2",
+   "value": "September 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 2, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Sonnet 4.5 (September 2025)"
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "3",
+   "value": "Claude Opus 4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 3, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Opus 4.1 (August 2025)"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": "3",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 3, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Claude Opus 4.1 (August 2025)"
+  },
+  {
+   "id": "F9",
+   "says": "model-name",
+   "about": "4",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F10",
+   "says": "effort-label",
+   "about": "4",
+   "value": "Low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F11",
+   "says": "note",
+   "about": "4",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 4, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F12",
+   "says": "model-name",
+   "about": "7",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F13",
+   "says": "effort-label",
+   "about": "7",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": "7",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 7, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F15",
+   "says": "model-name",
+   "about": "10",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F16",
+   "says": "effort-label",
+   "about": "10",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F17",
+   "says": "note",
+   "about": "10",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 10, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F18",
+   "says": "model-name",
+   "about": "12",
+   "value": "o3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F19",
+   "says": "effort-label",
+   "about": "12",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F20",
+   "says": "note",
+   "about": "12",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 12, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "14",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 14, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F22",
+   "says": "note",
+   "about": "14",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 14, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F23",
+   "says": "model-name",
+   "about": "21",
+   "value": "Gemini 2.0 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 21, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F24",
+   "says": "note",
+   "about": "21",
+   "value": "February 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 21, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F25",
+   "says": "model-name",
+   "about": "22",
+   "value": "DeepSeek V3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 22, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F26",
+   "says": "note",
+   "about": "22",
+   "value": "March 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 22, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F27",
+   "says": "model-name",
+   "about": "25",
+   "value": "GPT-5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F28",
+   "says": "effort-label",
+   "about": "25",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F29",
+   "says": "note",
+   "about": "25",
+   "value": "August 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 25, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-5 Medium (August 2025)"
+  },
+  {
+   "id": "F30",
+   "says": "model-name",
+   "about": "26",
+   "value": "DeepSeek V3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 26, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F31",
+   "says": "note",
+   "about": "26",
+   "value": "March 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 26, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek V3 (March 2025)"
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "27",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F33",
+   "says": "effort-label",
+   "about": "27",
+   "value": "Low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F34",
+   "says": "note",
+   "about": "27",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 27, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini Low (April 2025)"
+  },
+  {
+   "id": "F35",
+   "says": "model-name",
+   "about": "28",
+   "value": "DeepSeek R1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 28, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F36",
+   "says": "note",
+   "about": "28",
+   "value": "January 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 28, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F37",
+   "says": "model-name",
+   "about": "29",
+   "value": "Gemini 2.0 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 29, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F38",
+   "says": "note",
+   "about": "29",
+   "value": "February 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 29, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "Gemini 2.0 Flash (February 2025)"
+  },
+  {
+   "id": "F39",
+   "says": "model-name",
+   "about": "30",
+   "value": "o4-mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F40",
+   "says": "effort-label",
+   "about": "30",
+   "value": "High",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F41",
+   "says": "note",
+   "about": "30",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 30, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o4-mini High (April 2025)"
+  },
+  {
+   "id": "F42",
+   "says": "model-name",
+   "about": "31",
+   "value": "GPT-4.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 31, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": "31",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 31, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "GPT-4.1 (April 2025)"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "32",
+   "value": "DeepSeek R1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 32, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F45",
+   "says": "note",
+   "about": "32",
+   "value": "January 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 32, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "DeepSeek R1 (January 2025)"
+  },
+  {
+   "id": "F46",
+   "says": "model-name",
+   "about": "33",
+   "value": "o3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model (label without its effort word and release month)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F47",
+   "says": "effort-label",
+   "about": "33",
+   "value": "Medium",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model (the effort word of the label)",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F48",
+   "says": "note",
+   "about": "33",
+   "value": "April 2025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "board row 33, column model: the release month in the label",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "quote": "o3 Medium (April 2025)"
+  },
+  {
+   "id": "F49",
+   "says": "score",
+   "about": "1",
+   "value": "72.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 1 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/1/accuracy",
+   "quote": "rank: 1 | accuracy: 72.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F50",
+   "says": "harness",
+   "about": "1",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 1 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/1/scaffold",
+   "quote": "rank: 1 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F51",
+   "says": "aggregation",
+   "about": "1",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 1 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/1/runs",
+   "quote": "rank: 1 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F52",
+   "says": "score",
+   "about": "2",
+   "value": "68.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 2 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/2/accuracy",
+   "quote": "rank: 2 | accuracy: 68.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F53",
+   "says": "harness",
+   "about": "2",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 2 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/2/scaffold",
+   "quote": "rank: 2 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F54",
+   "says": "aggregation",
+   "about": "2",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 2 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/2/runs",
+   "quote": "rank: 2 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F55",
+   "says": "score",
+   "about": "3",
+   "value": "61.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 3 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/3/accuracy",
+   "quote": "rank: 3 | accuracy: 61.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F56",
+   "says": "harness",
+   "about": "3",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 3 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/3/scaffold",
+   "quote": "rank: 3 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F57",
+   "says": "aggregation",
+   "about": "3",
+   "value": "2",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 3 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/3/runs",
+   "quote": "rank: 3 | runs: 2",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F58",
+   "says": "score",
+   "about": "4",
+   "value": "54.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 4 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/4/accuracy",
+   "quote": "rank: 4 | accuracy: 54.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F59",
+   "says": "harness",
+   "about": "4",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 4 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/4/scaffold",
+   "quote": "rank: 4 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F60",
+   "says": "aggregation",
+   "about": "4",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 4 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/4/runs",
+   "quote": "rank: 4 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F61",
+   "says": "score",
+   "about": "7",
+   "value": "50.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 7 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/7/accuracy",
+   "quote": "rank: 7 | accuracy: 50.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F62",
+   "says": "harness",
+   "about": "7",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 7 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/7/scaffold",
+   "quote": "rank: 7 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F63",
+   "says": "aggregation",
+   "about": "7",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 7 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/7/runs",
+   "quote": "rank: 7 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F64",
+   "says": "score",
+   "about": "10",
+   "value": "46.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 10 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/10/accuracy",
+   "quote": "rank: 10 | accuracy: 46.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F65",
+   "says": "harness",
+   "about": "10",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 10 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/10/scaffold",
+   "quote": "rank: 10 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F66",
+   "says": "aggregation",
+   "about": "10",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 10 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/10/runs",
+   "quote": "rank: 10 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F67",
+   "says": "score",
+   "about": "12",
+   "value": "46.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 12 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/12/accuracy",
+   "quote": "rank: 12 | accuracy: 46.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F68",
+   "says": "harness",
+   "about": "12",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 12 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/12/scaffold",
+   "quote": "rank: 12 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "says": "aggregation",
+   "about": "12",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 12 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/12/runs",
+   "quote": "rank: 12 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F70",
+   "says": "score",
+   "about": "14",
+   "value": "44.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 14 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/14/accuracy",
+   "quote": "rank: 14 | accuracy: 44.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F71",
+   "says": "harness",
+   "about": "14",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 14 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/14/scaffold",
+   "quote": "rank: 14 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F72",
+   "says": "aggregation",
+   "about": "14",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 14 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/14/runs",
+   "quote": "rank: 14 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "says": "score",
+   "about": "21",
+   "value": "24.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 21 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/21/accuracy",
+   "quote": "rank: 21 | accuracy: 24.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F74",
+   "says": "harness",
+   "about": "21",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 21 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/21/scaffold",
+   "quote": "rank: 21 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F75",
+   "says": "aggregation",
+   "about": "21",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 21 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/21/runs",
+   "quote": "rank: 21 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F76",
+   "says": "score",
+   "about": "22",
+   "value": "24.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 22 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/22/accuracy",
+   "quote": "rank: 22 | accuracy: 24.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "says": "harness",
+   "about": "22",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 22 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/22/scaffold",
+   "quote": "rank: 22 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F78",
+   "says": "aggregation",
+   "about": "22",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 22 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/22/runs",
+   "quote": "rank: 22 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F79",
+   "says": "score",
+   "about": "25",
+   "value": "12.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 25 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/25/accuracy",
+   "quote": "rank: 25 | accuracy: 12.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F80",
+   "says": "harness",
+   "about": "25",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 25 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/25/scaffold",
+   "quote": "rank: 25 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "says": "aggregation",
+   "about": "25",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 25 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/25/runs",
+   "quote": "rank: 25 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F82",
+   "says": "score",
+   "about": "26",
+   "value": "10.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 26 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/26/accuracy",
+   "quote": "rank: 26 | accuracy: 10.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F83",
+   "says": "harness",
+   "about": "26",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 26 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/26/scaffold",
+   "quote": "rank: 26 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F84",
+   "says": "aggregation",
+   "about": "26",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 26 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/26/runs",
+   "quote": "rank: 26 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F85",
+   "says": "score",
+   "about": "27",
+   "value": "6.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 27 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/27/accuracy",
+   "quote": "rank: 27 | accuracy: 6.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F86",
+   "says": "harness",
+   "about": "27",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 27 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/27/scaffold",
+   "quote": "rank: 27 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F87",
+   "says": "aggregation",
+   "about": "27",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 27 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/27/runs",
+   "quote": "rank: 27 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F88",
+   "says": "score",
+   "about": "28",
+   "value": "6.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 28 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/28/accuracy",
+   "quote": "rank: 28 | accuracy: 6.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F89",
+   "says": "harness",
+   "about": "28",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 28 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/28/scaffold",
+   "quote": "rank: 28 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F90",
+   "says": "aggregation",
+   "about": "28",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 28 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/28/runs",
+   "quote": "rank: 28 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F91",
+   "says": "score",
+   "about": "29",
+   "value": "2.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 29 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/29/accuracy",
+   "quote": "rank: 29 | accuracy: 2.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F92",
+   "says": "harness",
+   "about": "29",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 29 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/29/scaffold",
+   "quote": "rank: 29 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F93",
+   "says": "aggregation",
+   "about": "29",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 29 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/29/runs",
+   "quote": "rank: 29 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F94",
+   "says": "score",
+   "about": "30",
+   "value": "2.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 30 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/30/accuracy",
+   "quote": "rank: 30 | accuracy: 2.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F95",
+   "says": "harness",
+   "about": "30",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 30 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/30/scaffold",
+   "quote": "rank: 30 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F96",
+   "says": "aggregation",
+   "about": "30",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 30 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/30/runs",
+   "quote": "rank: 30 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F97",
+   "says": "score",
+   "about": "31",
+   "value": "2.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 31 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/31/accuracy",
+   "quote": "rank: 31 | accuracy: 2.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F98",
+   "says": "harness",
+   "about": "31",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 31 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/31/scaffold",
+   "quote": "rank: 31 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F99",
+   "says": "aggregation",
+   "about": "31",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 31 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/31/runs",
+   "quote": "rank: 31 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F100",
+   "says": "score",
+   "about": "32",
+   "value": "0.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 32 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/32/accuracy",
+   "quote": "rank: 32 | accuracy: 0.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F101",
+   "says": "harness",
+   "about": "32",
+   "value": "SWE-Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 32 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/32/scaffold",
+   "quote": "rank: 32 | scaffold: SWE-Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F102",
+   "says": "aggregation",
+   "about": "32",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 32 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/32/runs",
+   "quote": "rank: 32 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F103",
+   "says": "score",
+   "about": "33",
+   "value": "0.00",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 33 / column accuracy",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "accuracy",
+   "cell": "T1/33/accuracy",
+   "quote": "rank: 33 | accuracy: 0.00",
+   "term": "resolved%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F104",
+   "says": "harness",
+   "about": "33",
+   "value": "HAL Generalist Agent",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 33 / column scaffold",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "scaffold",
+   "cell": "T1/33/scaffold",
+   "quote": "rank: 33 | scaffold: HAL Generalist Agent",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F105",
+   "says": "aggregation",
+   "about": "33",
+   "value": "1",
+   "level": "written",
+   "form": "data-file",
+   "where": "leaderboard table of swebench_verified_mini.html: one row per evaluation (rank) / row 33 / column runs",
+   "file": "/work/.salvo14/mig/convert-hal-princeton/evidence/swebench_verified_mini-board.csv",
+   "table": "T1",
+   "column": "runs",
+   "cell": "T1/33/runs",
+   "quote": "rank: 33 | runs: 1",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  }
+ ]
+}

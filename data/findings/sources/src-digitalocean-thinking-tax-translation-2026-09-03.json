@@ -1,0 +1,779 @@
+{
+ "id": "src-digitalocean-thinking-tax-translation-2026-09-03",
+ "publisher": "digitalocean-thinking-tax",
+ "urls": [
+  "https://juejin.cn/post/7681126457180733466",
+  "https://github.com/Jameshskelton/GLM-Flash-Analysis"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://juejin.cn/post/7681126457180733466",
+   "captured": "2026-10-20T06:05:03Z",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "note": "juejin translation of the DigitalOcean article \"thinking tax\" (saved by gt/t4 via r.jina.ai); the effort ladder (low/high/max) and the 3 Sep accuracy numbers are only here"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://github.com/Jameshskelton/GLM-Flash-Analysis",
+   "captured": "2026-10-20T06:06:47Z",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/README.md",
+   "note": "study repo files README.md and pricing.json (commit dd4f8d5, 1 Sep); the repo snapshot (numbers.md) gives 95 % for the default accuracy arms (answer key of task v20), the translation 100 %: the translation is cited"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md": "82a94afc7e1ae9450521f4f2b24fe4248650b0da7799c171b8535a006946e61e",
+  "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/README.md": "9e80803ad2502db7ea65be53057b3e3b9726ab769f6b9226f854bc6a2784fa17",
+  "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/pricing.json": "6e5dac664671d225c545c639133edc48c12f59bcecef269f9bf98243f24d45e6"
+ },
+ "harvested_at": "2026-10-20T06:05:03Z",
+ "published": {
+  "value": "2026-09-03",
+  "where": "header of the saved translation: Published Time",
+  "quote": "Published Time: 2026-09-03T08:44:37+00:00",
+  "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md"
+ },
+ "salvo": "salvo14/mig/convert-digitalocean-thinking-tax (Wave C2, 27 Oct)",
+ "agent": "converter convert.py (Sonnet 5.5), from the Chinese translation of the DigitalOcean article (juejin, 3 Sep 2026; the English original was not found) saved by salvo gt/t4, and the study repo files (README.md, pricing.json; repo commit dd4f8d5 of 1 Sep)",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "route",
+   "about": null,
+   "value": "DigitalOcean 无服务器推理",
+   "level": "written",
+   "form": "prose",
+   "where": "article: the runs were made on DigitalOcean Serverless Inference",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "我们在 DigitalOcean 无服务器推理上实际跑了 2700 次 API 调用",
+   "term": "digitalocean"
+  },
+  {
+   "id": "F2",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "完全不发送思考参数",
+   "level": "written",
+   "form": "prose",
+   "where": "section \"enable_thinking ...\": one of the three runs per model sends no thinking parameter",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "一次完全不发送思考参数"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "没有 System Prompt 和采样参数",
+   "level": "written",
+   "form": "prose",
+   "where": "section on the measurement set-up",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "所有问题都没有指定输出格式，也没有 System Prompt 和采样参数"
+  },
+  {
+   "id": "F4",
+   "says": "aggregation",
+   "about": null,
+   "value": "每个 Prompt 都会针对每个模型运行 5 次",
+   "level": "written",
+   "form": "prose",
+   "where": "section on the measurement set-up (5 repetitions, order randomised)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "每个 Prompt 都会针对每个模型运行 5 次"
+  },
+  {
+   "id": "F5",
+   "says": "cost-method",
+   "about": null,
+   "value": "Computed from `pricing.json`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "README, file format table: cost_usd",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/README.md",
+   "quote": "`cost_usd` | Computed from `pricing.json`.",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F6",
+   "says": "cost-basis",
+   "about": null,
+   "value": "\"verified_against_balance\": false",
+   "level": "written",
+   "form": "code",
+   "where": "pricing.json: costs are computed from logged tokens and list rates, not checked against the account balance",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/pricing.json",
+   "quote": "\"verified_against_balance\": false",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F7",
+   "says": "price-table",
+   "about": null,
+   "value": "DO inference pricing page, 2026-08-31",
+   "level": "written",
+   "form": "code",
+   "where": "pricing.json, \"_source\" of every model entry (rates per 1M tokens at DigitalOcean Serverless Inference)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/pricing.json",
+   "quote": "\"_source\": \"DO inference pricing page, 2026-08-31\""
+  },
+  {
+   "id": "F8",
+   "says": "currency",
+   "about": null,
+   "value": "美元",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article tables: costs in 美元 (USD)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 1 | glm-5.3-flash / default | 0.00156 美元 | 1.00 倍 |",
+   "term": "USD"
+  },
+  {
+   "id": "F9",
+   "says": "thinking-on",
+   "about": null,
+   "value": "`enable_thinking` 设置为开启",
+   "level": "written",
+   "form": "prose",
+   "where": "article: the second of the three runs sets enable_thinking to on",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "一次将 `enable_thinking` 设置为开启"
+  },
+  {
+   "id": "F10",
+   "says": "thinking-off",
+   "about": null,
+   "value": "设置为关闭",
+   "level": "written",
+   "form": "prose",
+   "where": "article: the third of the three runs sets enable_thinking to off",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "一次设置为关闭"
+  },
+  {
+   "id": "F11",
+   "says": "unit",
+   "about": null,
+   "value": "单次请求成本",
+   "level": "written",
+   "form": "table-cell",
+   "where": "column \"单次请求成本\" (cost per request)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "单次请求成本",
+   "term": "usd/call"
+  },
+  {
+   "id": "F12",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00156",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / default",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 1 | glm-5.3-flash / default | 0.00156 美元 | 1.00 倍 |"
+  },
+  {
+   "id": "F13",
+   "says": "model-name",
+   "about": "glm-5.3-flash",
+   "value": "glm-5.3-flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table row for glm-5.3-flash",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | 0.15 美元 | 0.50 美元 | 0.03 美元 |"
+  },
+  {
+   "id": "F14",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00157",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / on",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 2 | glm-5.3-flash / on | 0.00157 美元 | 1.01 倍 |"
+  },
+  {
+   "id": "F15",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00174",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / off",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 3 | glm-5.3-flash / off | 0.00174 美元 | 1.11 倍 |"
+  },
+  {
+   "id": "F16",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.00361",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: qwen3.8-max / default",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 5 | qwen3.8-max / default | 0.00361 美元 | 2.31 倍 |"
+  },
+  {
+   "id": "F17",
+   "says": "model-name",
+   "about": "qwen3.8-max",
+   "value": "qwen3.8-max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table row for qwen3.8-max",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | 2.00 美元 | 6.00 美元 | 0.20 美元 |"
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.02196",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: qwen3.8-max / on",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 7 | qwen3.8-max / on | 0.02196 美元 | 14.04 倍 |"
+  },
+  {
+   "id": "F19",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.00359",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: qwen3.8-max / off",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 4 | qwen3.8-max / off | 0.00359 美元 | 2.29 倍 |"
+  },
+  {
+   "id": "F20",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.02661",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: kimi-k3 / default",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 8 | kimi-k3 / default | 0.02661 美元 | 17.01 倍 |"
+  },
+  {
+   "id": "F21",
+   "says": "model-name",
+   "about": "kimi-k3",
+   "value": "kimi-k3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table row for kimi-k3",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | 3.00 美元 | 15.00 美元 | 0.30 美元 |"
+  },
+  {
+   "id": "F22",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.02892",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: kimi-k3 / on",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 9 | kimi-k3 / on | 0.02892 美元 | 18.49 倍 |"
+  },
+  {
+   "id": "F23",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.00651",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: kimi-k3 / off",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| 6 | kimi-k3 / off | 0.00651 美元 | 4.17 倍 |"
+  },
+  {
+   "id": "F24",
+   "says": "effort-setting",
+   "about": null,
+   "value": "reasoning_effort: max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table (effort ladder), row `reasoning_effort: max`",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: max` | 1434 | 0.001526 美元 | 0.98 倍 |"
+  },
+  {
+   "id": "F25",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.001526",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / max",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: max` | 1434 | 0.001526 美元 | 0.98 倍 |"
+  },
+  {
+   "id": "F26",
+   "says": "effort-setting",
+   "about": null,
+   "value": "reasoning_effort: high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table (effort ladder), row `reasoning_effort: high`",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: high` | 580 | 0.000384 美元 | **0.25 倍** |"
+  },
+  {
+   "id": "F27",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.000384",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / high",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: high` | 580 | 0.000384 美元 | **0.25 倍** |"
+  },
+  {
+   "id": "F28",
+   "says": "effort-setting",
+   "about": null,
+   "value": "reasoning_effort: low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table (effort ladder), row `reasoning_effort: low`",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: low` | 414 | 0.000250 美元 | **0.16 倍** |"
+  },
+  {
+   "id": "F29",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.000250",
+   "level": "written",
+   "form": "table-cell",
+   "where": "article table: glm-5.3-flash / low",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| `reasoning_effort: low` | 414 | 0.000250 美元 | **0.16 倍** |"
+  },
+  {
+   "id": "F30",
+   "says": "effort-label",
+   "about": null,
+   "value": "low",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置 (`effort: low`)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: low` | **92.0%** | 0.00008 美元 | 1.00 倍 |"
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "92.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `effort: low`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: low` | **92.0%** | 0.00008 美元 | 1.00 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00008",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `effort: low`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: low` | **92.0%** | 0.00008 美元 | 1.00 倍 |"
+  },
+  {
+   "id": "F33",
+   "says": "unit",
+   "about": null,
+   "value": "单个正确答案成本",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column header",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "单个正确答案成本",
+   "term": "usd/correct-answer"
+  },
+  {
+   "id": "F34",
+   "says": "effort-label",
+   "about": null,
+   "value": "high",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置 (`effort: high`)",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: high` | **98.0%** | 0.00012 美元 | 1.47 倍 |"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "98.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `effort: high`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: high` | **98.0%** | 0.00012 美元 | 1.47 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00012",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `effort: high`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `effort: high` | **98.0%** | 0.00012 美元 | 1.47 倍 |"
+  },
+  {
+   "id": "F37",
+   "says": "thinking-off",
+   "about": null,
+   "value": "`enable_thinking: false`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: false` | 100.0% | 0.00018 美元 | 2.15 倍 |"
+  },
+  {
+   "id": "F38",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `enable_thinking: false`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: false` | 100.0% | 0.00018 美元 | 2.15 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F39",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00018",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `enable_thinking: false`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: false` | 100.0% | 0.00018 美元 | 2.15 倍 |"
+  },
+  {
+   "id": "F40",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / default, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | default | 100.0% | 0.00018 美元 | 2.17 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F41",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00018",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / default, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | default | 100.0% | 0.00018 美元 | 2.17 倍 |"
+  },
+  {
+   "id": "F42",
+   "says": "thinking-on",
+   "about": null,
+   "value": "`enable_thinking: true`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: true` | 100.0% | 0.00019 美元 | 2.26 倍 |"
+  },
+  {
+   "id": "F43",
+   "says": "score",
+   "about": "glm-5.3-flash",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `enable_thinking: true`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: true` | 100.0% | 0.00019 美元 | 2.26 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F44",
+   "says": "cost",
+   "about": "glm-5.3-flash",
+   "value": "0.00019",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, glm-5.3-flash / `enable_thinking: true`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| glm-5.3-flash | `enable_thinking: true` | 100.0% | 0.00019 美元 | 2.26 倍 |"
+  },
+  {
+   "id": "F45",
+   "says": "thinking-off",
+   "about": null,
+   "value": "`enable_thinking: false`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: false` | 100.0% | 0.00226 美元 | 26.64 倍 |"
+  },
+  {
+   "id": "F46",
+   "says": "score",
+   "about": "qwen3.8-max",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / `enable_thinking: false`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: false` | 100.0% | 0.00226 美元 | 26.64 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F47",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.00226",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / `enable_thinking: false`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: false` | 100.0% | 0.00226 美元 | 26.64 倍 |"
+  },
+  {
+   "id": "F48",
+   "says": "score",
+   "about": "qwen3.8-max",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / default, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | default | 100.0% | 0.00235 美元 | 27.65 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F49",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.00235",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / default, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | default | 100.0% | 0.00235 美元 | 27.65 倍 |"
+  },
+  {
+   "id": "F50",
+   "says": "thinking-off",
+   "about": null,
+   "value": "`enable_thinking: false`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: false` | 98.0% | 0.00282 美元 | 33.23 倍 |"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "98.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / `enable_thinking: false`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: false` | 98.0% | 0.00282 美元 | 33.23 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.00282",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / `enable_thinking: false`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: false` | 98.0% | 0.00282 美元 | 33.23 倍 |"
+  },
+  {
+   "id": "F53",
+   "says": "thinking-on",
+   "about": null,
+   "value": "`enable_thinking: true`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: true` | 100.0% | 0.00383 美元 | 45.14 倍 |"
+  },
+  {
+   "id": "F54",
+   "says": "score",
+   "about": "qwen3.8-max",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / `enable_thinking: true`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: true` | 100.0% | 0.00383 美元 | 45.14 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F55",
+   "says": "cost",
+   "about": "qwen3.8-max",
+   "value": "0.00383",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, qwen3.8-max / `enable_thinking: true`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| qwen3.8-max | `enable_thinking: true` | 100.0% | 0.00383 美元 | 45.14 倍 |"
+  },
+  {
+   "id": "F56",
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / default, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | default | 100.0% | 0.00565 美元 | 66.47 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F57",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.00565",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / default, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | default | 100.0% | 0.00565 美元 | 66.47 倍 |"
+  },
+  {
+   "id": "F58",
+   "says": "thinking-on",
+   "about": null,
+   "value": "`enable_thinking: true`",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, column 设置",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: true` | 100.0% | 0.00601 美元 | 70.78 倍 |"
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "kimi-k3",
+   "value": "100.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / `enable_thinking: true`, column pass@1",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: true` | 100.0% | 0.00601 美元 | 70.78 倍 |",
+   "term": "score%",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F60",
+   "says": "cost",
+   "about": "kimi-k3",
+   "value": "0.00601",
+   "level": "written",
+   "form": "table-cell",
+   "where": "accuracy table, kimi-k3 / `enable_thinking: true`, column 单个正确答案成本",
+   "file": "/work/.salvo14/mig/convert-digitalocean-thinking-tax/evidence/juejin-7681126457180733466.md",
+   "quote": "| kimi-k3 | `enable_thinking: true` | 100.0% | 0.00601 美元 | 70.78 倍 |"
+  }
+ ]
+}

@@ -1,0 +1,109 @@
+{
+ "id": "src-marginlab.ai-claude-code-historical-2026-09-29",
+ "publisher": "marginlab.ai",
+ "urls": [
+  "https://marginlab.ai/trackers/claude-code-historical-performance/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://marginlab.ai/trackers/claude-code-historical-performance/",
+   "captured": "2026-10-19T08:05:02Z",
+   "note": "page saved by salvo g7 (src/misc/marginlab_cc_live.html, capture time = file mtime; same bytes as the s18/s19/s23 copies); header 'Last updated: Sep 29, 2026'"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.html": "2a010dbcafcd2d667bbd25777ab81a0c18e743263d7a2cb685e4a0ddfee577d1",
+  "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.txt": "7f75fc53e578447b1cd110baf605639eec0b9738d86c4f16ebdfe3777d7ed3f7",
+  "/work/.salvo14/mig/convert-marginlab.ai/evidence/chart-data.txt": "0a737d6477b6e2ae5c95e8687aa430f5c612e261d4233ca381ecb236153261bc"
+ },
+ "harvested_at": "2026-10-19T08:05:02Z",
+ "published": {
+  "value": "2026-09-29",
+  "where": "page header 'Last updated: Sep 29, 2026'",
+  "quote": "Last updated: Sep 29, 2026",
+  "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/chart-data.txt",
+   "from": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.html",
+   "tool": "python re (convert.py): the objects of the page script's `const dailyChartData` (one per line, prefixed 'daily | ') and `const resolvedReleaseMarkers`; quotes matched after NFKC, whitespace and case normalisation"
+  },
+  {
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.txt",
+   "from": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.html",
+   "tool": "htmltxt.py (c2lib-f): visible text of the page, one block per line"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": "marginlabswe|opus-4.5|2026-02-05",
+   "says": "score",
+   "value": "48",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/chart-data.txt",
+   "where": "dailyChartData, record of 2026-02-05, field passRate (24 passed of 50 runs)",
+   "quote": "daily | {\"date\":\"2026-02-05\",\"passRate\":48,\"ciLower\":34.79691239550571,\"ciUpper\":61.48848774119157,\"runsCount\":50,\"passed\":24}",
+   "term": "pass%",
+   "scale": "percent",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F2",
+   "about": "marginlabswe|opus-4.5|2026-02-05",
+   "says": "model-name",
+   "value": "Opus 4.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.txt",
+   "where": "page intro: the history starts with Opus 4.5 (the first of the listed models; 2026-02-05 is the only day before the first release marker 'Opus 4.6 transition' 2026-02-06 in resolvedReleaseMarkers)",
+   "quote": "Daily and weekly SWE-Bench-Pro pass rates across Opus 4.5 through Opus 4.8"
+  },
+  {
+   "id": "F3",
+   "about": "marginlabswe|opus-4.5|2026-02-05",
+   "says": "harness",
+   "value": "Claude Code",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/cc.txt",
+   "where": "page title",
+   "quote": "Claude Code Historical Performance",
+   "term": "claude-code"
+  },
+  {
+   "id": "F4",
+   "about": "marginlabswe|opus-4.5|2026-02-05",
+   "says": "run-date",
+   "value": "2026-02-05",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/chart-data.txt",
+   "where": "dailyChartData record, field date",
+   "quote": "\"date\":\"2026-02-05\""
+  },
+  {
+   "id": "F5",
+   "about": "marginlabswe|opus-4.5|2026-02-05",
+   "says": "items",
+   "value": "50",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/convert-marginlab.ai/evidence/chart-data.txt",
+   "where": "dailyChartData record, field runsCount",
+   "quote": "\"runsCount\":50"
+  }
+ ]
+}

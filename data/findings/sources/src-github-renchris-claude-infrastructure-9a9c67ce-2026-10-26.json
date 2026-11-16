@@ -1,0 +1,1683 @@
+{
+ "id": "src-github-renchris-claude-infrastructure-9a9c67ce-2026-10-26",
+ "publisher": "github-renchris-infra",
+ "urls": [
+  "https://github.com/renchris/claude-infrastructure"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "commit",
+   "commit": "9a9c67ce8186d6206d48eca26abf8528d03e05ac",
+   "captured": "2026-10-27",
+   "url": "https://github.com/renchris/claude-infrastructure/tree/9a9c67ce8186d6206d48eca26abf8528d03e05ac/docs/research",
+   "note": "files fetched from raw.githubusercontent.com/renchris/claude-infrastructure/main on 27 Oct 2026 (HEAD 9a9c67ce, committed 2026-10-26T14:44:49Z): opus55-effort-sweep-2026-09-22/README.md, fable51-effort-sweep-2026-09-10/README.md, sonnet55-effort-sweep-2026-09-28/{table.txt,run-arms.sh,judge.py}, sonnet55-synth-probe-2026-09-28/table.md"
+  }
+ ],
+ "commit": "9a9c67ce8186d6206d48eca26abf8528d03e05ac",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md": "d8ac915409785bf2bfed0dbe78ba7359399ed32054a53cb9b8bb5edbe5fbfa70",
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md": "e56ca7abf6a826feef4e7d766b3e98954c16270691057a6d57443d4b9e93cb9b",
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt": "115e9632cbce77ace9b60f432d0b4bc06a622118715c567e6c29da89bf277175",
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md": "7624a449d728db569d17a1d1580731e44ea67036ef976ca9ed08bb998c140bd6",
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh": "6b205ad9b9add8220c0608367a20a74d5977333c4364e129fee86f052a532e67",
+  "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-judge.py": "6c1b13ba2ffba01cd7ac4101b9fc7f198d6f20375b033479414a6460b71024bf"
+ },
+ "harvested_at": "2026-10-27T10:00:00Z",
+ "published": null,
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "aggregation",
+   "value": "Every arm is measured on every brief.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Results: recall is the total over 9 briefs, one sample per cell (Limits: 'One sample per cell')",
+   "quote": "Every arm is measured on every brief."
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "judge",
+   "value": "the blind 3-judge `claude-opus-5 @xhigh` panel",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method",
+   "quote": "the blind 3-judge\n`claude-opus-5 @xhigh` panel with the mechanism-not-topic rule and a strict-majority headline"
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "judge",
+   "value": "three `claude-opus-5 @xhigh` judges",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Scoring",
+   "quote": "three `claude-opus-5 @xhigh` judges"
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "judge",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-judge.py",
+   "where": "judge.py of the sweep (the judge model); the panel has 3 judges per brief",
+   "quote": "MODEL = os.environ.get(\"JUDGE_MODEL\", \"claude-opus-5\")"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "harness",
+   "value": "2.1.280",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row binary: the 09-22 run used the Claude Code binary 2.1.280 (`claude -p`)",
+   "quote": "| binary | 2.1.260 | 2.1.280 (`~/.claude-280`; 2.1.260 refuses `claude-opus-5-5`) |",
+   "term": "claude-code"
+  },
+  {
+   "id": "F6",
+   "about": null,
+   "says": "cap",
+   "value": "128,000",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row output cap",
+   "quote": "**128,000** (Opus 5.5's max)"
+  },
+  {
+   "id": "F7",
+   "about": null,
+   "says": "cost-method",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Results, cost table caption: the cost is the CLI's total_cost_usd",
+   "quote": "`total_cost_usd` at API list price",
+   "term": "cli-total"
+  },
+  {
+   "id": "F8",
+   "about": null,
+   "says": "currency",
+   "value": "$",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost column",
+   "quote": "[$list] = `total_cost_usd` at API list price",
+   "term": "USD"
+  },
+  {
+   "id": "F9",
+   "about": null,
+   "says": "unit",
+   "value": "total out [tokens]",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table: one row per arm, totals over its 9 cells",
+   "quote": "| arm | median out [tokens] | total out [tokens] | total cache_create [tokens] | cost [$list] |",
+   "term": "per-suite"
+  },
+  {
+   "id": "F10",
+   "about": "opus-5.5@low",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5.5 arms",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F11",
+   "about": "opus-5.5@low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "column header o55@low: Opus 5.5 at effort low (method table: `claude-opus-5-5` low..max)",
+   "quote": "o55@low"
+  },
+  {
+   "id": "F12",
+   "about": "opus-5.5@low",
+   "says": "cost",
+   "value": "1.60",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@low, column cost [$list]",
+   "quote": "| o55@low | 2,578 | 23,202 | 141,485 | 1.60 | ≈0.05, ≈0.3 † | 0 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F13",
+   "about": "opus-5.5@low",
+   "says": "tokens-out",
+   "value": "23,202",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@low, column total out [tokens]",
+   "quote": "| o55@low | 2,578 | 23,202 | 141,485 | 1.60 | ≈0.05, ≈0.3 † | 0 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F14",
+   "about": "opus-5.5@low",
+   "says": "score",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o55@low",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F15",
+   "about": "opus-5.5@medium",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5.5 arms",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F16",
+   "about": "opus-5.5@medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "column header o55@medium: Opus 5.5 at effort medium (method table: `claude-opus-5-5` low..max)",
+   "quote": "o55@medium"
+  },
+  {
+   "id": "F17",
+   "about": "opus-5.5@medium",
+   "says": "cost",
+   "value": "2.96",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@medium, column cost [$list]",
+   "quote": "| o55@medium | 6,310 | 91,314 | 141,483 | 2.96 | ≈0.15, ≈0.9 † | 0 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F18",
+   "about": "opus-5.5@medium",
+   "says": "tokens-out",
+   "value": "91,314",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@medium, column total out [tokens]",
+   "quote": "| o55@medium | 6,310 | 91,314 | 141,483 | 2.96 | ≈0.15, ≈0.9 † | 0 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F19",
+   "about": "opus-5.5@medium",
+   "says": "score",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o55@medium",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F20",
+   "about": "opus-5.5@high",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5.5 arms",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F21",
+   "about": "opus-5.5@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "column header o55@high: Opus 5.5 at effort high (method table: `claude-opus-5-5` low..max)",
+   "quote": "o55@high"
+  },
+  {
+   "id": "F22",
+   "about": "opus-5.5@high",
+   "says": "cost",
+   "value": "4.18",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@high, column cost [$list]",
+   "quote": "| o55@high | 14,487 | 152,521 | 141,483 | 4.18 | ≈0.23, ≈1.4 † | 0 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F23",
+   "about": "opus-5.5@high",
+   "says": "tokens-out",
+   "value": "152,521",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@high, column total out [tokens]",
+   "quote": "| o55@high | 14,487 | 152,521 | 141,483 | 4.18 | ≈0.23, ≈1.4 † | 0 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F24",
+   "about": "opus-5.5@high",
+   "says": "score",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o55@high",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F25",
+   "about": "opus-5.5@xhigh",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5.5 arms",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F26",
+   "about": "opus-5.5@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "column header o55@xhigh: Opus 5.5 at effort xhigh (method table: `claude-opus-5-5` low..max)",
+   "quote": "o55@xhigh"
+  },
+  {
+   "id": "F27",
+   "about": "opus-5.5@xhigh",
+   "says": "cost",
+   "value": "9.10",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@xhigh, column cost [$list]",
+   "quote": "| o55@xhigh | 36,528 | 398,278 | 141,481 | 9.10 | ≈0.57, ≈3.6 † | 0 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F28",
+   "about": "opus-5.5@xhigh",
+   "says": "tokens-out",
+   "value": "398,278",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@xhigh, column total out [tokens]",
+   "quote": "| o55@xhigh | 36,528 | 398,278 | 141,481 | 9.10 | ≈0.57, ≈3.6 † | 0 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F29",
+   "about": "opus-5.5@xhigh",
+   "says": "score",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o55@xhigh",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F30",
+   "about": "opus-5.5@max",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5.5 arms",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F31",
+   "about": "opus-5.5@max",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "column header o55@max: Opus 5.5 at effort max (method table: `claude-opus-5-5` low..max)",
+   "quote": "o55@max"
+  },
+  {
+   "id": "F32",
+   "about": "opus-5.5@max",
+   "says": "cost",
+   "value": "46.18",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@max, column cost [$list]",
+   "quote": "| o55@max | 105,619 ‡ | 2,155,968 | 381,640 | 46.18 | ≈3.04, ≈18.9 † | 2 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F33",
+   "about": "opus-5.5@max",
+   "says": "tokens-out",
+   "value": "2,155,968",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o55@max, column total out [tokens]",
+   "quote": "| o55@max | 105,619 ‡ | 2,155,968 | 381,640 | 46.18 | ≈3.04, ≈18.9 † | 2 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F34",
+   "about": "opus-5.5@max",
+   "says": "score",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o55@max",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F35",
+   "about": "opus-5@high",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms: the Opus 5 @high reference arm",
+   "quote": "`claude-opus-5 @high`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F36",
+   "about": "opus-5@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "Method table, row arms",
+   "quote": "`claude-opus-5 @high`"
+  },
+  {
+   "id": "F37",
+   "about": "opus-5@high",
+   "says": "cost",
+   "value": "10.62",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o5@high, column cost [$list]",
+   "quote": "| o5@high | 43,040 | 364,535 | 150,479 | 10.62 | **+1 W, +3 5h observed** | 0 / 0 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F38",
+   "about": "opus-5@high",
+   "says": "tokens-out",
+   "value": "364,535",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "cost table, row o5@high, column total out [tokens]",
+   "quote": "| o5@high | 43,040 | 364,535 | 150,479 | 10.62 | **+1 W, +3 5h observed** | 0 / 0 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F39",
+   "about": "opus-5@high",
+   "says": "score",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "recall table, row TOTAL, column o5@high",
+   "quote": "| **TOTAL** | 36 | **6** | **8** | **8** | **10** | **9** | **8** | **13** | **10** |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F40",
+   "about": null,
+   "says": "harness",
+   "value": "claude -p",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Cost is MEASURED: the cells ran through `claude -p` (Claude Code 2.1.260, Method Binary)",
+   "quote": "`claude -p --output-format json`",
+   "term": "claude-code"
+  },
+  {
+   "id": "F41",
+   "about": null,
+   "says": "cap",
+   "value": "64000",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Results, Continuations paragraph: every cell ran under this cap",
+   "quote": "`CLAUDE_CODE_MAX_OUTPUT_TOKENS=64000`"
+  },
+  {
+   "id": "F42",
+   "about": null,
+   "says": "cost-method",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, 'Cost is MEASURED': each cell records its own total_cost_usd",
+   "quote": "`total_cost_usd` per call",
+   "term": "cli-total"
+  },
+  {
+   "id": "F43",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table header: cost USD",
+   "quote": "| effort | cells measured | arm failures | median output tokens | max output tokens | cells past the 64K cap | continuations | cost USD |",
+   "term": "USD"
+  },
+  {
+   "id": "F44",
+   "about": null,
+   "says": "unit",
+   "value": "cells measured",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table: one row per effort, totals over its measured cells",
+   "quote": "| effort | cells measured | arm failures | median output tokens | max output tokens | cells past the 64K cap | continuations | cost USD |",
+   "term": "per-suite"
+  },
+  {
+   "id": "F45",
+   "about": "fable-5.1@low",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Arms",
+   "quote": "`claude-fable-5-1` at `low · medium · high · xhigh · max`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F46",
+   "about": "fable-5.1@low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "column header f51@low: Fable 5.1 at effort low",
+   "quote": "f51@low"
+  },
+  {
+   "id": "F47",
+   "about": "fable-5.1@low",
+   "says": "cost",
+   "value": "7.52",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table, row low, column cost USD",
+   "quote": "| low | 9 | 0 | 6,449 | 16,699 | 0 | 0 | 7.52 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F48",
+   "about": "fable-5.1@low",
+   "says": "score",
+   "value": "6",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "recall table, row TOTAL (measured), column f51@low",
+   "quote": "| **TOTAL (measured)** | 36 | **6**/36 | **10**/36 | **10**/36 | **9**/36 | **9**/25 | **9**/36 | **12**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F49",
+   "about": "fable-5.1@medium",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Arms",
+   "quote": "`claude-fable-5-1` at `low · medium · high · xhigh · max`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F50",
+   "about": "fable-5.1@medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "column header f51@medium: Fable 5.1 at effort medium",
+   "quote": "f51@medium"
+  },
+  {
+   "id": "F51",
+   "about": "fable-5.1@medium",
+   "says": "cost",
+   "value": "12.50",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table, row medium, column cost USD",
+   "quote": "| medium | 9 | 0 | 18,077 | 41,339 | 0 | 0 | 12.50 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F52",
+   "about": "fable-5.1@medium",
+   "says": "score",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "recall table, row TOTAL (measured), column f51@medium",
+   "quote": "| **TOTAL (measured)** | 36 | **6**/36 | **10**/36 | **10**/36 | **9**/36 | **9**/25 | **9**/36 | **12**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F53",
+   "about": "fable-5.1@high",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Arms",
+   "quote": "`claude-fable-5-1` at `low · medium · high · xhigh · max`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F54",
+   "about": "fable-5.1@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "column header f51@high: Fable 5.1 at effort high",
+   "quote": "f51@high"
+  },
+  {
+   "id": "F55",
+   "about": "fable-5.1@high",
+   "says": "cost",
+   "value": "18.69",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table, row high, column cost USD",
+   "quote": "| high | 9 | 0 | 24,252 | 102,531 | 1 | 1 | 18.69 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F56",
+   "about": "fable-5.1@high",
+   "says": "score",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "recall table, row TOTAL (measured), column f51@high",
+   "quote": "| **TOTAL (measured)** | 36 | **6**/36 | **10**/36 | **10**/36 | **9**/36 | **9**/25 | **9**/36 | **12**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F57",
+   "about": "fable-5.1@xhigh",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "Method, Arms",
+   "quote": "`claude-fable-5-1` at `low · medium · high · xhigh · max`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F58",
+   "about": "fable-5.1@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "column header f51@xhigh: Fable 5.1 at effort xhigh",
+   "quote": "f51@xhigh"
+  },
+  {
+   "id": "F59",
+   "about": "fable-5.1@xhigh",
+   "says": "cost",
+   "value": "47.17",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "cost table, row xhigh, column cost USD",
+   "quote": "| xhigh | 9 | 0 | 62,062 | 255,464 | 3 | 6 | 47.17 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F60",
+   "about": "fable-5.1@xhigh",
+   "says": "score",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "recall table, row TOTAL (measured), column f51@xhigh",
+   "quote": "| **TOTAL (measured)** | 36 | **6**/36 | **10**/36 | **10**/36 | **9**/36 | **9**/25 | **9**/36 | **12**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F61",
+   "about": null,
+   "says": "harness",
+   "value": "~/.claude-284/node_modules/.bin/claude",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the Sonnet 5.5 sweep ran with the Claude Code binary 2.1.284 (`claude -p`)",
+   "quote": "# run with SWEEP_BIN=~/.claude-284/node_modules/.bin/claude SWEEP_MODEL=claude-sonnet-5-5 (2.1.280 cannot dispatch it).",
+   "term": "claude-code"
+  },
+  {
+   "id": "F62",
+   "about": null,
+   "says": "cost-method",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "fable51 sweep README (the runner s55 copies): each cell records its own total_cost_usd",
+   "quote": "`total_cost_usd` per call",
+   "term": "cli-total"
+  },
+  {
+   "id": "F63",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "table.txt, cost table header",
+   "quote": "cost USD (all measured cells)",
+   "term": "USD"
+  },
+  {
+   "id": "F64",
+   "about": null,
+   "says": "unit",
+   "value": "cells measured",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table: one row per arm, totals over its measured cells",
+   "quote": "| arm | cells measured | arm failures | median output tokens | max output tokens | cells continued past the cap | continuations | cost USD (all measured cells) |",
+   "term": "per-suite"
+  },
+  {
+   "id": "F65",
+   "about": null,
+   "says": "cap",
+   "value": "128000",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-judge.py",
+   "where": "judge.py header: the cap the cells ran under",
+   "quote": "OUTPUT_CAP (128000, the cap the cells ran under)"
+  },
+  {
+   "id": "F66",
+   "about": "sonnet-5.5@low",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the model of the sweep",
+   "quote": "SWEEP_MODEL=claude-sonnet-5-5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F67",
+   "about": "sonnet-5.5@low",
+   "says": "effort-label",
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header s55@low: Sonnet 5.5 at effort low (run-arms.sh passes --effort)",
+   "quote": "s55@low"
+  },
+  {
+   "id": "F68",
+   "about": "sonnet-5.5@low",
+   "says": "cost",
+   "value": "0.97",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table, row s55@low, column cost USD (all measured cells)",
+   "quote": "| s55@low | 9 | 0 | 4812 | 6082 | 0 | 0 | 0.97 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F69",
+   "about": "sonnet-5.5@low",
+   "says": "score",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column s55@low",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F70",
+   "about": "sonnet-5.5@medium",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the model of the sweep",
+   "quote": "SWEEP_MODEL=claude-sonnet-5-5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F71",
+   "about": "sonnet-5.5@medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header s55@medium: Sonnet 5.5 at effort medium (run-arms.sh passes --effort)",
+   "quote": "s55@medium"
+  },
+  {
+   "id": "F72",
+   "about": "sonnet-5.5@medium",
+   "says": "cost",
+   "value": "1.20",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table, row s55@medium, column cost USD (all measured cells)",
+   "quote": "| s55@medium | 9 | 0 | 6304 | 10037 | 0 | 0 | 1.20 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F73",
+   "about": "sonnet-5.5@medium",
+   "says": "score",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column s55@medium",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F74",
+   "about": "sonnet-5.5@high",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the model of the sweep",
+   "quote": "SWEEP_MODEL=claude-sonnet-5-5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F75",
+   "about": "sonnet-5.5@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header s55@high: Sonnet 5.5 at effort high (run-arms.sh passes --effort)",
+   "quote": "s55@high"
+  },
+  {
+   "id": "F76",
+   "about": "sonnet-5.5@high",
+   "says": "cost",
+   "value": "2.04",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table, row s55@high, column cost USD (all measured cells)",
+   "quote": "| s55@high | 9 | 0 | 15074 | 28881 | 0 | 0 | 2.04 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F77",
+   "about": "sonnet-5.5@high",
+   "says": "score",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column s55@high",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F78",
+   "about": "sonnet-5.5@xhigh",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the model of the sweep",
+   "quote": "SWEEP_MODEL=claude-sonnet-5-5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F79",
+   "about": "sonnet-5.5@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header s55@xhigh: Sonnet 5.5 at effort xhigh (run-arms.sh passes --effort)",
+   "quote": "s55@xhigh"
+  },
+  {
+   "id": "F80",
+   "about": "sonnet-5.5@xhigh",
+   "says": "cost",
+   "value": "3.52",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table, row s55@xhigh, column cost USD (all measured cells)",
+   "quote": "| s55@xhigh | 9 | 0 | 33256 | 60957 | 0 | 0 | 3.52 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F81",
+   "about": "sonnet-5.5@xhigh",
+   "says": "score",
+   "value": "11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column s55@xhigh",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F82",
+   "about": "sonnet-5.5@max",
+   "says": "model-api-id",
+   "value": "claude-sonnet-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-run-arms.sh",
+   "where": "run-arms.sh comment, line 3: the model of the sweep",
+   "quote": "SWEEP_MODEL=claude-sonnet-5-5",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F83",
+   "about": "sonnet-5.5@max",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header s55@max: Sonnet 5.5 at effort max (run-arms.sh passes --effort)",
+   "quote": "s55@max"
+  },
+  {
+   "id": "F84",
+   "about": "sonnet-5.5@max",
+   "says": "cost",
+   "value": "24.00",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "cost table, row s55@max, column cost USD (all measured cells)",
+   "quote": "| s55@max | 9 | 3 (cp-06, cp-08, cp-09) | 110715 | 233842 | 1 | 1 | 24.00 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F85",
+   "about": "sonnet-5.5@max",
+   "says": "score",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column s55@max",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F86",
+   "about": null,
+   "says": "note",
+   "value": "O55_RUNS",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-judge.py",
+   "where": "judge.py: the Opus 5.5 outputs are those of the 09-22 sweep, re-judged in this panel",
+   "quote": "O55_RUNS = HERE.parent / \"opus55-effort-sweep-2026-09-22\" / \"runs\" / \"o55\""
+  },
+  {
+   "id": "F87",
+   "about": "opus-5.5@medium",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "o55 README Method table, row arms (the o55@ arms of this table are those runs)",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F88",
+   "about": "opus-5.5@medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header o55@medium",
+   "quote": "o55@medium"
+  },
+  {
+   "id": "F89",
+   "about": "opus-5.5@medium",
+   "says": "score",
+   "value": "8",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column o55@medium",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F90",
+   "about": "opus-5.5@high",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "o55 README Method table, row arms (the o55@ arms of this table are those runs)",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F91",
+   "about": "opus-5.5@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header o55@high",
+   "quote": "o55@high"
+  },
+  {
+   "id": "F92",
+   "about": "opus-5.5@high",
+   "says": "score",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column o55@high",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F93",
+   "about": "opus-5.5@xhigh",
+   "says": "model-api-id",
+   "value": "claude-opus-5-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "o55 README Method table, row arms (the o55@ arms of this table are those runs)",
+   "quote": "`claude-opus-5-5` low..max",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F94",
+   "about": "opus-5.5@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header o55@xhigh",
+   "quote": "o55@xhigh"
+  },
+  {
+   "id": "F95",
+   "about": "opus-5.5@xhigh",
+   "says": "score",
+   "value": "10",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column o55@xhigh",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F96",
+   "about": "opus-5@max",
+   "says": "model-api-id",
+   "value": "claude-opus-5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/o55-README.md",
+   "where": "o55 README Method table, row arms: claude-opus-5 (the anchor o5@max of the panel: 'Opus 5 @max')",
+   "quote": "`claude-opus-5 @high`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F97",
+   "about": "opus-5@max",
+   "says": "effort-label",
+   "value": "max",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header o5@max",
+   "quote": "o5@max"
+  },
+  {
+   "id": "F98",
+   "about": "opus-5@max",
+   "says": "score",
+   "value": "14",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column o5@max",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F99",
+   "about": "fable-5.1@high",
+   "says": "model-api-id",
+   "value": "claude-fable-5-1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "f51 README Method, Arms (the anchor f51@high of the panel)",
+   "quote": "`claude-fable-5-1` at `low · medium · high · xhigh · max`",
+   "namespace": "maker-api"
+  },
+  {
+   "id": "F100",
+   "about": "fable-5.1@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "column header f51@high",
+   "quote": "f51@high"
+  },
+  {
+   "id": "F101",
+   "about": "fable-5.1@high",
+   "says": "score",
+   "value": "11",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s55-table.txt",
+   "where": "recall table, row TOTAL (measured), column f51@high",
+   "quote": "| **TOTAL (measured)** | 36 | **9**/36 | **9**/36 | **8**/36 | **11**/36 | **10**/36 | **14**/36 | **11**/36 | **8**/36 | **9**/36 | **10**/36 |",
+   "term": "recall/36",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F102",
+   "about": null,
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table header",
+   "quote": "cost USD (total)",
+   "term": "USD"
+  },
+  {
+   "id": "F103",
+   "about": null,
+   "says": "cost-method",
+   "value": "total_cost_usd",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/f51-README.md",
+   "where": "fable51 sweep README (the same runner): each cell records its own total_cost_usd",
+   "quote": "`total_cost_usd` per call",
+   "term": "cli-total"
+  },
+  {
+   "id": "F104",
+   "about": null,
+   "says": "unit",
+   "value": "summed over 6 cells",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 heading: totals over the 6 briefs",
+   "quote": "summed over 6 cells",
+   "term": "per-6-cells"
+  },
+  {
+   "id": "F105",
+   "about": null,
+   "says": "judge",
+   "value": "J0 and J1 are Opus 5.5 (session), J2 is Opus 5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph",
+   "quote": "J0 and J1 are Opus 5.5 (session), J2 is Opus 5"
+  },
+  {
+   "id": "F106",
+   "about": null,
+   "says": "aggregation",
+   "value": "18 judge rows",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph; section 3 column 'mean score (all 18)'",
+   "quote": "There are 18 judge rows (6 briefs x 3 judges)."
+  },
+  {
+   "id": "F107",
+   "about": "sonnet-5.5@medium",
+   "says": "model-name",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: arm legend",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F108",
+   "about": "sonnet-5.5@medium",
+   "says": "effort-label",
+   "value": "medium",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: SM = Sonnet 5.5 @medium",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F109",
+   "about": "sonnet-5.5@medium",
+   "says": "cost",
+   "value": "1.86",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SM, column cost USD (total)",
+   "quote": "| SM | 6 | 61,078 | 10,180 | 95 | 15.8 | 237,859 | 7 | 1.86 | 441 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F110",
+   "about": "sonnet-5.5@medium",
+   "says": "tokens-out",
+   "value": "61,078",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SM, column output tokens (total)",
+   "quote": "| SM | 6 | 61,078 | 10,180 | 95 | 15.8 | 237,859 | 7 | 1.86 | 441 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F111",
+   "about": "sonnet-5.5@medium",
+   "says": "score",
+   "value": "6.50",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 3 table, row SM, column mean score (all 18)",
+   "quote": "| SM | 6.58 | 6.33 | 49 / 34 | 42/390 (10.8%) | 23/157 (14.6%) | 6.50 |",
+   "term": "score/10",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F112",
+   "about": "sonnet-5.5@high",
+   "says": "model-name",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: arm legend",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F113",
+   "about": "sonnet-5.5@high",
+   "says": "effort-label",
+   "value": "high",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: SH = Sonnet 5.5 @high",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F114",
+   "about": "sonnet-5.5@high",
+   "says": "cost",
+   "value": "2.69",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SH, column cost USD (total)",
+   "quote": "| SH | 6 | 89,683 | 14,947 | 134 | 22.3 | 325,690 | 6 | 2.69 | 645 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F115",
+   "about": "sonnet-5.5@high",
+   "says": "tokens-out",
+   "value": "89,683",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SH, column output tokens (total)",
+   "quote": "| SH | 6 | 89,683 | 14,947 | 134 | 22.3 | 325,690 | 6 | 2.69 | 645 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F116",
+   "about": "sonnet-5.5@high",
+   "says": "score",
+   "value": "7.33",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 3 table, row SH, column mean score (all 18)",
+   "quote": "| SH | 7.42 | 7.17 | 36 / 23 | 32/434 (7.4%) | 12/156 (7.7%) | 7.33 |",
+   "term": "score/10",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F117",
+   "about": "sonnet-5.5@xhigh",
+   "says": "model-name",
+   "value": "Sonnet 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: arm legend",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F118",
+   "about": "sonnet-5.5@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: SX = Sonnet 5.5 @xhigh",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F119",
+   "about": "sonnet-5.5@xhigh",
+   "says": "cost",
+   "value": "4.25",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SX, column cost USD (total)",
+   "quote": "| SX | 6 | 192,787 | 32,131 | 157 | 26.2 | 410,652 | 12 | 4.25 | 1384 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F120",
+   "about": "sonnet-5.5@xhigh",
+   "says": "tokens-out",
+   "value": "192,787",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row SX, column output tokens (total)",
+   "quote": "| SX | 6 | 192,787 | 32,131 | 157 | 26.2 | 410,652 | 12 | 4.25 | 1384 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F121",
+   "about": "sonnet-5.5@xhigh",
+   "says": "score",
+   "value": "7.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 3 table, row SX, column mean score (all 18)",
+   "quote": "| SX | 7.50 | 7.33 | 28 / 24 | 20/449 (4.5%) | 11/178 (6.2%) | 7.44 |",
+   "term": "score/10",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F122",
+   "about": "opus-5.5@xhigh",
+   "says": "model-name",
+   "value": "Opus 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: arm legend",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F123",
+   "about": "opus-5.5@xhigh",
+   "says": "effort-label",
+   "value": "xhigh",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "header paragraph: OX = Opus 5.5 @xhigh",
+   "quote": "Arms: SM = Sonnet 5.5 @medium, SH = Sonnet 5.5 @high, SX = Sonnet 5.5 @xhigh, OX = Opus 5.5 @xhigh."
+  },
+  {
+   "id": "F124",
+   "about": "opus-5.5@xhigh",
+   "says": "cost",
+   "value": "8.60",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row OX, column cost USD (total)",
+   "quote": "| OX | 6 | 206,423 | 34,404 | 151 | 25.2 | 423,161 | 14 | 8.60 | 1930 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   }
+  },
+  {
+   "id": "F125",
+   "about": "opus-5.5@xhigh",
+   "says": "tokens-out",
+   "value": "206,423",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 4 table, row OX, column output tokens (total)",
+   "quote": "| OX | 6 | 206,423 | 34,404 | 151 | 25.2 | 423,161 | 14 | 8.60 | 1930 |",
+   "precision": {
+    "model": "exact"
+   }
+  },
+  {
+   "id": "F126",
+   "about": "opus-5.5@xhigh",
+   "says": "score",
+   "value": "8.94",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-github-renchris-infra/evidence/s5synth-table.md",
+   "where": "section 3 table, row OX, column mean score (all 18)",
+   "quote": "| OX | 9.00 | 8.83 | 17 / 7 | 6/517 (1.2%) | 4/195 (2.1%) | 8.94 |",
+   "term": "score/10",
+   "scale": "raw",
+   "precision": {
+    "model": "exact"
+   }
+  }
+ ]
+}

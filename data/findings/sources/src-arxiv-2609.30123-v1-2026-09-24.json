@@ -1,0 +1,549 @@
+{
+ "id": "src-arxiv-2609.30123-v1-2026-09-24",
+ "publisher": "arxiv-2609.30123",
+ "urls": [
+  "https://arxiv.org/abs/2609.30123",
+  "https://arxiv.org/html/2609.30123v1"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/html/2609.30123v1",
+   "captured": "2026-10-20T06:01:51Z",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.html",
+   "note": "arXiv HTML v1 saved by salvo gt/t2 (file mtime 20 Oct 2026)"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.html": "3d236cd07e6d5946fa3f964643ec875f1f0ad968b7c9e7781ff5d7e042beba6d",
+  "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt": "7b854e873d15c93547286998ffbd8e22ae5c826626e9b000e8083ac6f9a1cb95"
+ },
+ "harvested_at": "2026-10-20T06:01:51Z",
+ "published": {
+  "value": "2026-09-24",
+  "where": "arXiv stamp of the HTML",
+  "quote": "arXiv:2609.30123v1 [cs.AI] 24 Sep 2026",
+  "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt"
+ },
+ "salvo": "salvo14/mig C2 wave (converter by the C2 agent)",
+ "agent": "converter (Sonnet 5.5), from the saved files",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "from": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.html",
+   "tool": "../c2lib-g/htmltxt2.py (bs4): visible text of the arXiv HTML, one block per line, table rows on one line with ' | '"
+  }
+ ],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "about": null,
+   "says": "harness",
+   "value": "OpenCode shell/file tools",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Section 5.2 Settings",
+   "quote": "methods share the backbone and OpenCode shell/file tools"
+  },
+  {
+   "id": "F2",
+   "about": null,
+   "says": "metric-definition",
+   "value": "Success rates (%)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1 caption: every task is scored as a success or a failure; the success rate on held-out test tasks",
+   "quote": "Table 1: Success rates (%) on four benchmarks using four execution models."
+  },
+  {
+   "id": "F3",
+   "about": null,
+   "says": "note",
+   "value": "Skill + ReAct (Yao et al., 2023) supplies the skill document as context, and the model selects every tool call during interleaved reasoning and acting.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Section 5.2 Baselines (the native execution that HEXIS replaces)",
+   "quote": "Skill + ReAct (Yao et al., 2023) supplies the skill document as context, and the model selects every tool call during interleaved reasoning and acting."
+  },
+  {
+   "id": "F4",
+   "about": null,
+   "says": "route",
+   "value": "hosted qwen3.6-flash (Alibaba Cloud, 2026)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Section 5.2 Settings: hosted at Alibaba Cloud",
+   "quote": "Execution models are hosted qwen3.6-flash (Alibaba Cloud, 2026)",
+   "term": "maker-api"
+  },
+  {
+   "id": "F5",
+   "about": null,
+   "says": "route",
+   "value": "locally deployed Qwen3.5-9B and Qwen3.8-27B (vLLM",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Section 5.2 Settings: local vLLM, FP16",
+   "quote": "locally deployed Qwen3.5-9B and Qwen3.8-27B (vLLM",
+   "term": "vllm"
+  },
+  {
+   "id": "F6",
+   "about": "hexis-spreadsheetbench|Qwen3.6-flash",
+   "says": "model-name",
+   "value": "Qwen3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F7",
+   "about": "hexis-spreadsheetbench|Qwen3.6-flash",
+   "says": "score",
+   "value": "45.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark Spreadsheet Bench, row Skill + ReAct, column Qwen3.6-flash",
+   "quote": "Spreadsheet Bench | Skill + ReAct | 45.6% | 22.8% | 33.3% | 56.1%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F8",
+   "about": "hexis-spreadsheetbench|GLM-4.7-FlashX",
+   "says": "model-name",
+   "value": "GLM-4.7-FlashX",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F9",
+   "about": "hexis-spreadsheetbench|GLM-4.7-FlashX",
+   "says": "score",
+   "value": "22.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark Spreadsheet Bench, row Skill + ReAct, column GLM-4.7-FlashX",
+   "quote": "Spreadsheet Bench | Skill + ReAct | 45.6% | 22.8% | 33.3% | 56.1%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F10",
+   "about": "hexis-spreadsheetbench|Qwen3.5-9B",
+   "says": "model-name",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F11",
+   "about": "hexis-spreadsheetbench|Qwen3.5-9B",
+   "says": "score",
+   "value": "33.3%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark Spreadsheet Bench, row Skill + ReAct, column Qwen3.5-9B",
+   "quote": "Spreadsheet Bench | Skill + ReAct | 45.6% | 22.8% | 33.3% | 56.1%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F12",
+   "about": "hexis-spreadsheetbench|Qwen3.8-27B",
+   "says": "model-name",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F13",
+   "about": "hexis-spreadsheetbench|Qwen3.8-27B",
+   "says": "score",
+   "value": "56.1%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark Spreadsheet Bench, row Skill + ReAct, column Qwen3.8-27B",
+   "quote": "Spreadsheet Bench | Skill + ReAct | 45.6% | 22.8% | 33.3% | 56.1%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F14",
+   "about": "hexis-livemath|Qwen3.6-flash",
+   "says": "model-name",
+   "value": "Qwen3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F15",
+   "about": "hexis-livemath|Qwen3.6-flash",
+   "says": "score",
+   "value": "45.0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LiveMath, row Skill + ReAct, column Qwen3.6-flash",
+   "quote": "LiveMath | Skill + ReAct | 45.0% | 12.4% | 40.5% | 33.9%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "about": "hexis-livemath|GLM-4.7-FlashX",
+   "says": "model-name",
+   "value": "GLM-4.7-FlashX",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F17",
+   "about": "hexis-livemath|GLM-4.7-FlashX",
+   "says": "score",
+   "value": "12.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LiveMath, row Skill + ReAct, column GLM-4.7-FlashX",
+   "quote": "LiveMath | Skill + ReAct | 45.0% | 12.4% | 40.5% | 33.9%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "about": "hexis-livemath|Qwen3.5-9B",
+   "says": "model-name",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F19",
+   "about": "hexis-livemath|Qwen3.5-9B",
+   "says": "score",
+   "value": "40.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LiveMath, row Skill + ReAct, column Qwen3.5-9B",
+   "quote": "LiveMath | Skill + ReAct | 45.0% | 12.4% | 40.5% | 33.9%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F20",
+   "about": "hexis-livemath|Qwen3.8-27B",
+   "says": "model-name",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F21",
+   "about": "hexis-livemath|Qwen3.8-27B",
+   "says": "score",
+   "value": "33.9%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LiveMath, row Skill + ReAct, column Qwen3.8-27B",
+   "quote": "LiveMath | Skill + ReAct | 45.0% | 12.4% | 40.5% | 33.9%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "about": "hexis-dabench|Qwen3.6-flash",
+   "says": "model-name",
+   "value": "Qwen3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F23",
+   "about": "hexis-dabench|Qwen3.6-flash",
+   "says": "score",
+   "value": "78.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark DABench, row Skill + ReAct, column Qwen3.6-flash",
+   "quote": "DABench | Skill + ReAct | 78.4% | 78.4% | 82.4% | 86.3%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "about": "hexis-dabench|GLM-4.7-FlashX",
+   "says": "model-name",
+   "value": "GLM-4.7-FlashX",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F25",
+   "about": "hexis-dabench|GLM-4.7-FlashX",
+   "says": "score",
+   "value": "78.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark DABench, row Skill + ReAct, column GLM-4.7-FlashX",
+   "quote": "DABench | Skill + ReAct | 78.4% | 78.4% | 82.4% | 86.3%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F26",
+   "about": "hexis-dabench|Qwen3.5-9B",
+   "says": "model-name",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F27",
+   "about": "hexis-dabench|Qwen3.5-9B",
+   "says": "score",
+   "value": "82.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark DABench, row Skill + ReAct, column Qwen3.5-9B",
+   "quote": "DABench | Skill + ReAct | 78.4% | 78.4% | 82.4% | 86.3%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "about": "hexis-dabench|Qwen3.8-27B",
+   "says": "model-name",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F29",
+   "about": "hexis-dabench|Qwen3.8-27B",
+   "says": "score",
+   "value": "86.3%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark DABench, row Skill + ReAct, column Qwen3.8-27B",
+   "quote": "DABench | Skill + ReAct | 78.4% | 78.4% | 82.4% | 86.3%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "about": "hexis-longseal|Qwen3.6-flash",
+   "says": "model-name",
+   "value": "Qwen3.6-flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F31",
+   "about": "hexis-longseal|Qwen3.6-flash",
+   "says": "score",
+   "value": "7.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LongSeal, row Skill + ReAct, column Qwen3.6-flash",
+   "quote": "LongSeal | Skill + ReAct | 7.8% | 7.8% | 23.5% | 17.6%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F32",
+   "about": "hexis-longseal|GLM-4.7-FlashX",
+   "says": "model-name",
+   "value": "GLM-4.7-FlashX",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F33",
+   "about": "hexis-longseal|GLM-4.7-FlashX",
+   "says": "score",
+   "value": "7.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LongSeal, row Skill + ReAct, column GLM-4.7-FlashX",
+   "quote": "LongSeal | Skill + ReAct | 7.8% | 7.8% | 23.5% | 17.6%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "about": "hexis-longseal|Qwen3.5-9B",
+   "says": "model-name",
+   "value": "Qwen3.5-9B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F35",
+   "about": "hexis-longseal|Qwen3.5-9B",
+   "says": "score",
+   "value": "23.5%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LongSeal, row Skill + ReAct, column Qwen3.5-9B",
+   "quote": "LongSeal | Skill + ReAct | 7.8% | 7.8% | 23.5% | 17.6%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "about": "hexis-longseal|Qwen3.8-27B",
+   "says": "model-name",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, header: execution models",
+   "quote": "Benchmark | Method | Qwen3.6-flash | GLM-4.7-FlashX | Qwen3.5-9B | Qwen3.8-27B"
+  },
+  {
+   "id": "F37",
+   "about": "hexis-longseal|Qwen3.8-27B",
+   "says": "score",
+   "value": "17.6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/convert-arxiv-2609.30123/evidence/2609.30123.txt",
+   "where": "Table 1, benchmark LongSeal, row Skill + ReAct, column Qwen3.8-27B",
+   "quote": "LongSeal | Skill + ReAct | 7.8% | 7.8% | 23.5% | 17.6%",
+   "term": "success-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  }
+ ]
+}

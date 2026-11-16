@@ -1,0 +1,48 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "price-tables.schema.json",
+ "title": "Pinned price tables",
+ "description": "data/registry/price-tables.json (optional): price tables a source states it applied (a library's cards at a pinned version, a board's own table), so the build can reproduce a stated cost (coordinator rule, 23 Oct). A price-table fact whose term is a table id pins it; reproduced and off by more than its rounding → contradictory; no card → accepted as written.",
+ "type": "object",
+ "properties": {
+  "tables": {
+   "type": "object",
+   "description": "Table id → table.",
+   "additionalProperties": {
+    "type": "object",
+    "description": "A pinned table.",
+    "properties": {
+     "label": {"type": "string", "minLength": 1, "description": "Label."},
+     "version": {"type": "string", "description": "Library or table version (runcost 0.1.12)."},
+     "evidence": {"$ref": "common.schema.json#/$defs/evidence_list"},
+     "input_includes_cache_read": {"type": "boolean", "description": "The input count includes the cache reads: they are subtracted before pricing input."},
+     "reasoning_in_output": {"type": "boolean", "description": "Reasoning tokens are counted inside output (else added to output)."},
+     "cards": {
+      "type": "array",
+      "description": "One card per model (and route).",
+      "items": {
+       "type": "object",
+       "description": "A card.",
+       "properties": {
+        "model": {"$ref": "common.schema.json#/$defs/model_key"},
+        "route": {"description": "Route of the card, or null (any).", "anyOf": [{"$ref": "common.schema.json#/$defs/route_id"}, {"type": "null"}]},
+        "currency": {"$ref": "vocab.json#/$defs/currency"},
+        "per": {"type": "string", "enum": ["MTok"], "description": "Quantity."},
+        "classes": {"type": "object", "description": "Price per class.", "propertyNames": {"$ref": "vocab.json#/$defs/price_class"}, "additionalProperties": {"type": ["number", "null"], "minimum": 0}},
+        "note": {"type": "string", "description": "Free note."}
+       },
+       "required": ["model", "currency", "per", "classes"],
+       "unevaluatedProperties": false
+      }
+     },
+     "note": {"type": "string", "description": "Free note."}
+    },
+    "required": ["label", "evidence", "cards"],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {"type": "string", "description": "Free note."}
+ },
+ "required": ["tables"],
+ "unevaluatedProperties": false
+}

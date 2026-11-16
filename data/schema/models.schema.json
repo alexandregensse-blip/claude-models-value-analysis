@@ -1,0 +1,313 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "models.schema.json",
+ "title": "Models registry",
+ "description": "data/registry/models.json: the only model keys (DATA-PIPELINE §4). Name resolution (no substring or fuzzy match): a model-api-id fact carries a namespace. With a route id: strip once the longest of that route's name_prefixes the value starts with, then match exactly (case-sensitive) the names registered under that namespace serving at the run date; in a namespace whose route has names_case_insensitive (the Hugging Face namespace `huggingface`, repository ids 'Org/Name'), the match is case-insensitive (casefold), and the identity check compares those names casefolded. With `prefix`: the value's head up to the first '/' plus the '/' is looked up (case-insensitive) among the routes' name_prefixes; found → that route, as above; not found → route unknown: the value after the head, then the whole value, are matched in every candidate route's namespace (routes serving the model at the run date, the maker's API always included); exactly one key must result, else not established. A model-name fact matches a display name under N: NFKC, casefold, '_' '-' ':' '/' as spaces, spaces collapsed, the leading maker spellings (vocab maker x-terms.display_prefixes: 'Anthropic', 'Claude'…) dropped. A label that carries the configuration ('Anthropic Claude Opus 5.5 low') is not a model-name fact. Build checks (validate.py): two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail; solo only alone; defaults, selects and conversions within the model's configurations.",
+ "type": "object",
+ "properties": {
+  "models": {
+   "type": "object",
+   "description": "Model key → model.",
+   "propertyNames": {
+    "$ref": "common.schema.json#/$defs/model_key"
+   },
+   "additionalProperties": {
+    "type": "object",
+    "description": "One model key.",
+    "properties": {
+     "label": {
+      "type": "string",
+      "description": "Display label (site).",
+      "minLength": 1
+     },
+     "maker": {
+      "$ref": "vocab.json#/$defs/maker"
+     },
+     "released": {
+      "type": "object",
+      "description": "Release (datetime when known), from the maker (release post, model card, API reference).",
+      "properties": {
+       "value": {
+        "$ref": "common.schema.json#/$defs/date_or_datetime"
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list"
+       }
+      },
+      "required": [
+       "value",
+       "evidence"
+      ],
+      "unevaluatedProperties": false
+     },
+     "line": {
+      "description": "The key this model is a build / mode of (lqm LINE), or null.",
+      "anyOf": [
+       {
+        "$ref": "common.schema.json#/$defs/model_key"
+       },
+       {
+        "type": "null"
+       }
+      ]
+     },
+     "open_weights": {
+      "type": "boolean",
+      "description": "Weights published."
+     },
+     "configurations": {
+      "type": "array",
+      "description": "The configurations the model offers (DATA-PIPELINE §4); [solo] only for a single-configuration model. Empty: the model's configurations are not established (a doubt: every measure of it gets out:effort-not-established; registry fix, 26 Oct 2026, grok-4.20-multi-agent).",
+      "items": {
+       "type": "object",
+       "description": "One configuration the model offers, dated.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "id": {
+         "$ref": "vocab.json#/$defs/configuration",
+         "description": "Configuration id."
+        },
+        "served": {
+         "type": "string",
+         "description": "itself: served as itself; converted: the maker converts it (see conversions; a converted level goes through the route chain, DATA-PIPELINE §5.1 step 6).",
+         "enum": [
+          "itself",
+          "converted"
+         ]
+        },
+        "budget_min": {
+         "type": "integer",
+         "description": "For think-<budget>: smallest accepted budget (tokens).",
+         "minimum": 1
+        },
+        "budget_max": {
+         "description": "For think-<budget>: largest accepted budget (tokens), or null when bounded only by max_tokens.",
+         "anyOf": [
+          {
+           "type": "integer",
+           "description": "Tokens.",
+           "minimum": 1
+          },
+          {
+           "type": "null"
+          }
+         ]
+        }
+       },
+       "required": [
+        "id",
+        "served"
+       ],
+       "unevaluatedProperties": false
+      },
+      "minItems": 0
+     },
+     "names": {
+      "type": "array",
+      "description": "Names served over time.",
+      "items": {
+       "type": "object",
+       "description": "One name of the model.",
+       "properties": {
+        "name": {
+         "type": "string",
+         "description": "The API id or display name, verbatim.",
+         "minLength": 1
+        },
+        "kind": {
+         "$ref": "vocab.json#/$defs/name_kind"
+        },
+        "serves": {
+         "type": "array",
+         "description": "When this name served this key (the maker's own dates: release, redirect, shutdown).",
+         "items": {
+          "$ref": "common.schema.json#/$defs/interval"
+         },
+         "minItems": 1
+        },
+        "selects": {
+         "description": "The configuration this name selects (deepseek-chat → nothink, a -thinking id → think), or null.",
+         "anyOf": [
+          {
+           "$ref": "vocab.json#/$defs/configuration"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "route": {
+         "description": "The namespace of the name: the route whose ids it belongs to (null = the maker's API). An OpenRouter slug ('anthropic/claude-haiku-4.5') is registered under openrouter; the maker's id ('claude-haiku-4-5') under null. A Hugging Face repository id ('Qwen/Qwen3.8-27B') is registered under huggingface (matched case-insensitively).",
+         "anyOf": [
+          {
+           "$ref": "common.schema.json#/$defs/route_id"
+          },
+          {
+           "type": "null"
+          }
+         ]
+        },
+        "table": {
+         "type": "string",
+         "pattern": "^[^/]+/[^/]+$",
+         "description": "For a table-id name: the table it is valid in, '<publisher id>/<file name of the table>' ('epoch.ai/gpqa_diamond.csv'): the name resolves only for a model fact of a source of that publisher read in a file of that name (the maintainer, 9 Nov 2026: a per-table namespace)."
+        }
+       },
+       "required": [
+        "name",
+        "kind",
+        "serves"
+       ],
+       "unevaluatedProperties": false
+      },
+      "minItems": 1
+     },
+     "default": {
+      "type": "array",
+      "description": "The configuration a call with no setting gets (on the maker's API), dated by its evidence.",
+      "items": {
+       "$ref": "common.schema.json#/$defs/dated_configuration"
+      }
+     },
+     "conversions": {
+      "type": "array",
+      "description": "Conversions requested → served, per route, dated.",
+      "items": {
+       "type": "object",
+       "description": "A maker conversion requested → served (dated: decision C, conversions only when dated).",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "route": {
+         "$ref": "common.schema.json#/$defs/route_id",
+         "description": "Route where the conversion happens (maker-api for the maker's own)."
+        },
+        "requested": {
+         "type": "string",
+         "description": "Requested level or setting, verbatim configuration id where it is one.",
+         "minLength": 1
+        },
+        "served": {
+         "description": "Configuration actually served.",
+         "anyOf": [
+          {
+           "$ref": "vocab.json#/$defs/configuration"
+          },
+          {
+           "$ref": "vocab.json#/$defs/mapping_result"
+          }
+         ]
+        }
+       },
+       "required": [
+        "route",
+        "requested",
+        "served"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "modes": {
+      "type": "array",
+      "description": "Modes selecting another key, dated.",
+      "items": {
+       "type": "object",
+       "description": "A mode selecting another key.",
+       "allOf": [
+        {
+         "$ref": "common.schema.json#/$defs/interval"
+        }
+       ],
+       "properties": {
+        "parameter": {
+         "type": "string",
+         "description": "Request parameter or product switch (verbatim).",
+         "minLength": 1
+        },
+        "value": {
+         "type": "string",
+         "description": "Its value."
+        },
+        "key": {
+         "$ref": "common.schema.json#/$defs/model_key",
+         "description": "The key it selects (e.g. <id>-pro)."
+        }
+       },
+       "required": [
+        "parameter",
+        "key"
+       ],
+       "unevaluatedProperties": false
+      }
+     },
+     "note": {
+      "type": "string",
+      "description": "Free note."
+     },
+     "api_opens": {
+      "type": "array",
+      "description": "When the maker's own API began to serve the model later than its release (the maintainer, 4 Nov 2026, decision 2: GLM-5.3 « The GLM-5.3 API is coming soon. » on 15 Aug 2026): per platform (its currency), the latest day the maker writes that the API is not open yet. A cost whose single route chain is the maker's API has its price date start no earlier than that day (rule price-date-after-api-opening); a run on another or an unknown route is not moved.",
+      "items": {
+       "type": "object",
+       "properties": {
+        "currency": {
+         "$ref": "vocab.json#/$defs/currency",
+         "description": "The platform's currency (the maker's API priced in it)."
+        },
+        "after": {
+         "$ref": "common.schema.json#/$defs/date_or_datetime",
+         "description": "The day (or moment) the maker still writes that the API is not open: no call through the maker's API before it."
+        },
+        "basis": {
+         "enum": [
+          "maker-says-not-open"
+         ],
+         "description": "Why: the maker's own document says the API is not open yet."
+        },
+        "evidence": {
+         "$ref": "common.schema.json#/$defs/evidence_list"
+        },
+        "note": {
+         "type": "string"
+        }
+       },
+       "required": [
+        "currency",
+        "after",
+        "basis",
+        "evidence"
+       ],
+       "unevaluatedProperties": false
+      }
+     }
+    },
+    "required": [
+     "label",
+     "maker",
+     "released",
+     "line",
+     "open_weights",
+     "configurations",
+     "names",
+     "default"
+    ],
+    "unevaluatedProperties": false
+   }
+  },
+  "note": {
+   "type": "string",
+   "description": "Free note."
+  }
+ },
+ "required": [
+  "models"
+ ],
+ "unevaluatedProperties": false
+}

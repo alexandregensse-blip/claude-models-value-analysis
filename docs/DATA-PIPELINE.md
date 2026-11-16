@@ -1,0 +1,546 @@
+# Data pipeline: findings, registries, decision tree (proposal v3, 22 Oct 2026)
+
+Status: **draft — four independent reviews (/work/.salvo14/review-pipeline{,2,3,4}/), revised; schemas can be written;
+no code yet.**
+
+The data the fit reads becomes **computed tables**, built by one script from what agents write (the **findings**: what a
+source says) and what we define (the **registries**). **Agents write facts only**: what the source says and how it says it (printed,
+read off a chart, flagged by the source as an estimate…), which the verifiers check. The model, the configuration, the
+campaign, every measure field's level and every status are computed by the build. The maintainer's decisions are the only hand-set
+statuses; they live in one file, are pinned to the facts they judged, and are evaluated first.
+
+```
+data/findings/sources/<source-id>.json   one source snapshot: its words, as facts with proofs        ← salvo agents
+data/findings/measures/<source-id>.json  which facts form one measure, and on which setup          ← salvo agents
+data/registry/models.json                models, names served over time, efforts, defaults, conversions, modes (dated)
+data/registry/routes.json                makers' APIs, resellers, routers, harnesses, self-hosting: level maps (dated)
+data/registry/benchmarks.json            families, setups, versions, headline metrics, composites (formula)
+data/registry/publishers.json            publisher → maker (home effect)
+data/registry/prices.json                dated prices per model and route; as_of pinned per build
+data/registry/rules.json                 deduction rules and standing rules (each dated, with who decided)
+data/registry/vocab.json                 closed vocabularies: fact types, units (+ aliases), cost bases and methods,
+                                         anomalies, routes, effort ids, reason codes
+data/registry/flag-map.json              migration only: confound flag → fact/level, versioned, tested on every row
+data/decisions.json                      the maintainer's per-measure decisions
+data/build/fit-quality.csv, fit-cost.csv computed, committed: the rows each axis' fit reads (raw-data.csv's columns)
+data/build/group-map.json                computed, committed: fit group → base group (for families, composites, publishers)
+data/build/group-setups.json             computed, committed: fit group → setup, with its family and composite components
+data/build/data.csv                      computed, committed: every measure and its status per axis (the public data file)
+data/build/status-report.json            computed, not committed: every measure, its status per axis, its reason, the diff
+```
+
+Saved pages, dumps and clones stay outside git in the salvo folders, which are kept; git keeps their URLs, Wayback
+captures, sha256 and the extracted facts.
+
+---
+
+## 1. Certainty levels (of a fact; computed for each measure field)
+
+| Level | Meaning | Tree |
+|---|---|---|
+| `written` | the source states it: a printed number (also printed on an image), a data-file value, a code or config line, an API id, a label | accepted |
+| `read` | measured off a chart's geometry (pixels); vector paths are `written` (exact) | accepted; its reading sd enters the precision |
+| `computed` | produced by the build with a rule of rules.json from accepted inputs | accepted when every input is accepted; precision propagated by the rule's formula |
+| `source-estimate` | a value the source did not measure on this run: imputed, projected, filled, an "estimated" index | refused (`out:estimate`) |
+| `not-established` | `absent` · `assumed` · `contradictory` (the source, or two facts, state two things) · `ambiguous` (a rule gives two answers) | refused, with the reason |
+
+A cost the source computed from this run's own tokens at a stated price, or a CLI's `total_cost_usd`, is `written` with
+basis `list-estimate`. Each measure field (model, effort, run date, value, each setup field, each usage class, the price)
+gets its own level; a measure is in only if every field the tree reads is accepted.
+
+When one value is both printed and read off a chart, the printed value is used. A chart's effort labels (legend, axis,
+point labels) are `written`; a level inferred from a marker's position or order alone is `not-established:assumed`.
+
+Attributes, never levels: the **precision model** (`printed` step · `chart-pixel` sd · `exact`), the **route**,
+**restated-from** and **same-runs-as** (each with its own level), **anomalies** (each with its own level).
+
+---
+
+## 2. Source file
+
+```json
+{"id": "src-<publisher>-<what>-<YYYY-MM-DD>", "publisher": "<publishers.json id>",
+ "urls": ["…"], "wayback": ["…"], "commit": "<repo commit or null>", "sha256": {"<saved file>": "<hash>"},
+ "harvested_at": "<ISO datetime UTC>", "salvo": "…", "agent": "…",
+ "snapshot_of": "<earlier source id of the same board, or null>",
+ "facts": [{"id": "F1", "says": "<fact type>", "about": "<the source's entry name, verbatim>", "value": "<verbatim>",
+            "level": "written|read|source-estimate|not-established:<reason>", "where": "<locator>",
+            "quote": "<exact text; required for prose, labels and code>", "translation": "<English, if needed>"}],
+ "tables": [{"id": "T1", "file": "<saved file>", "where": "<JSON path / CSV / table>", "columns": {…}}]}
+```
+
+**The findings are self-sufficient; the build is a filter (the maintainer, 4 Nov 2026).** « Les fichiers findings
+recensent tout. Ils doivent garder une liste des URL qui ont permis leur construction, et c'est tout. Le build est
+censé n'être qu'un filtre simple. » Every value the build uses is written in a findings file, with its exact quote
+(or, for a data-file fact, its locator), the URL and the capture date: `urls` and `captures` (url, captured) list
+what the source was built from, `sha256` and each `file` are the trace of the copies the agent read. The build
+(data/build.py) reads only the repository's files (findings, registries, catalogue, settings) and never a saved copy:
+the saved copies may be removed. What needs a file is checked when it is written, by the agent writing it
+(`validate.py --check-files`, a manual tool, never a condition of the build).
+
+A data file is proven by its sha256 and a locator. A `tables` entry declares a saved table (its columns' fact types);
+a cell a measure cites is written as a fact (data/convert/cells.py): its value as the file writes it, its quote the
+cell and what identifies its row and column copied from the file (« <row key column>: <row key> | <column>: <cell> »),
+`table`, `column` and `cell` (the cell reference `T<n>/<row key>/<column>` it stands for; a run's id is its row
+key), and the column's types (a list when the column states several), term, scale, namespace and precision. A cell
+reference cited without its fact gets no value: the measure is `out:no-proof` on its axis. Fact types (vocab.json):
+`score`, `metric-definition`, `headline-metric`, `cost`, `currency`, `unit` (vocabulary = today's unit list + aliases;
+usage and spend share it), `cost-basis`, `cost-method`, `price-table`, `tokens-in`, `tokens-out`, `tokens-cache-read`,
+`tokens-cache-write-5m`, `tokens-cache-write-1h`, `tokens-reasoning` (+ `reasoning-included-in-out`), `tokens-total` (no class split: usable only through a uniform
+factor, or for ratios within one model), `cached-share`,
+`requests`, `model-name`, `model-api-id`, `route`, `mode`, `effort-label`, `effort-setting` (a setting line read in code or config, with where it was read),
+`thinking-on` (thinking enabled with no level, e.g. a `-thinking` id or AA "(Reasoning)"), `thinking-off`,
+`no-effort-sent`, `config-history` (a config file's history over an interval), `thinking-budget`, `tools-regime`,
+`run-date`, `run-start`, `run-end`, `run-id`, `version` (benchmark/protocol/board version), `early-access`, `harness`,
+`judge` (per row when it varies), `aggregation` (which runs a mean covers), `failure`, `partial`, `cap`,
+`restated-from`, `same-runs-as`, `evaluated-by`, `component-of` (with weights). Optional, never read by the tree:
+`items`, `attempts`, `note`.
+
+**Dates and their proof (dating step 2, 3 Nov 2026).** A capture (`captures`: Wayback, commit, our fetch) and the
+source's `published` may carry `evidence`, the evidence format of the registries (url, captured, file, sha256, where,
+quote): the saved file that proves the date (a commit's date in the saved commit list, an HTTP `Last-Modified`
+header, a value a Wayback capture shows) and the exact quote. The proof is checked when the date is written, by the
+agent writing it (`validate.py --check-files`: each file's sha256 and quote); the build does not re-read it, and a
+proof missing or failing no longer removes the date (the maintainer, 4 Nov 2026; until then the build left such a
+date out). The evidence fields stay in the source as the trace. A capture bounds only the measures that list it in `value_seen_in`: the
+measures whose value it shows. A time written without its time zone is kept as written (a local time:
+`2026-08-03T23:01:31`, in a fact's value with the text in `written`, or in `published.value`).
+
+## 3. Measure file
+
+The agent groups the facts of one measure and names the setup; it writes no key, effort, level or campaign.
+
+```json
+{"source": "src-…",
+ "measures": [{"id": "M1", "setup": "<benchmarks.json setup id>",
+   "facts": {"value": "F1", "model": ["F2"], "effort": ["F3"], "run_date": ["F4"], "usage": ["F5", "F6"],
+             "spend": ["F7", "F8", "F9"], "version": "F10", "judge": null, "anomalies": [], "restated_from": null,
+             "same_runs_as": null, "value_seen_in": ["<capture ids carrying this value>"]},
+   "verified": {"by": "…", "at": "…", "rederived": true}}]}
+```
+
+---
+
+## 4. Registries
+
+**models.json** — the only keys. Per model: label, maker, `released` (datetime, from the maker), `line`,
+`open_weights`, and its **configurations**: the list of configurations the model offers, each dated (`{from, to,
+evidence}`) and each either served as itself or converted:
+- levels of an effort parameter (`minimal`, `low` … `max`), `nothink` (thinking off: `reasoning_effort: none`,
+  `enable_thinking: false`, `thinking: disabled`, a non-reasoning id…; the spellings are listed in vocab.json),
+  `think` (thinking on with no level: the only thinking configuration of an on-off model without levels — DeepSeek
+  V3.2 thinking mode, Kimi K2.5, GLM-5, the Qwen 3.5–3.7 hybrids), `think-<budget>` (thinking on with a token budget),
+  `between-tools` (Sonnet 5.5's `thinking: {type: between_tools}`, combined with a level ≤ high: recorded, not
+  fitted; 23 Oct, in the fit 26–29 Oct, out with the configurations-per-model change: vocab x-terms `in_fit: false`, not in `lqm.EFFORTS`);
+- `solo` only for a model whose list is `[solo]`: nothing to set (K2.7 Code, a model with thinking always on and no
+  level). Examples: Opus 5.5 `[low … max]`; GPT-5.x `[nothink, minimal, low … xhigh]`; Haiku 4.5 `[nothink,
+  think-<budget>]`; a hybrid Qwen `[nothink, think]` or `[nothink, low … xhigh]`.
+`names`: each API id or display name, the model it **serves** over `{from, to}` (the maker's own dates: release,
+redirect, shutdown), and optionally the configuration it selects (`deepseek-chat` → nothink, a `-thinking` id →
+think). Names are matched exactly, except in the Hugging Face namespace (`huggingface`: repository ids such as
+`Qwen/Qwen3.8-27B`), matched case-insensitively (23 Oct). A `table-id` name (`table`: `<publisher>/<file name>`) is a
+publisher's own id valid in that table only — Epoch's « Model version », LiveBench's ids — each proven by the table's
+row or page that fixes the version (the maintainer, 9 Nov 2026). `default` (the configuration a call with no setting gets; when the maker documents the thinking default and the effort default separately, two dated records with `setting: thinking` and `setting: effort`: Anthropic Opus 4.5–4.8 and Sonnet 4.6, a call with no thinking field is thinking off, the effort default high applies with thinking on; 26 Oct), `conversions` (requested → served, per route),
+`modes` (request parameters that select another key: Pro → `<id>-pro`). Configurations served as themselves start at
+the release (release post, model card or API reference) unless a document dates a later addition, and last until the
+maker states a change or the model's shutdown (a capability is not bounded by the last capture); `default`,
+`conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
+its earliest capture; `to` = the change it states, else the last capture still showing it. Between two captures showing
+the same text the interval is covered; between a capture showing it and the next one not showing it, it is not; a single
+capture covers its own day only. Build
+checks: two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail the
+build until resolved.
+
+**routes.json** — vocabulary `maker-api · reseller (Bedrock, Vertex, Azure: the maker's model resold) · host (Fireworks,
+Together, DeepInfra…: open weights served by a third party) · router (OpenRouter, AI Gateway) · harness/CLI (Inspect,
+Pi, Claude Code, Codex CLI, IronBee…) · self-hosted (vLLM, SGLang…)`. Per route and model, dated: the configurations it
+accepts, how it maps a level (identity when documented as identity; OpenRouter nearest supported level,
+ties `ambiguous`; a model without an effort parameter → a token budget: `budget-converted`), its documented default.
+On a self-hosted route the maker's defaults and conversions do not apply. A harness maps a level per provider: its records name the next step they apply to (`via`), and route-wide records the maker and models (26 Oct). A router's route-wide `accepts_maker` (dated, with the decision) makes it accept, for a model it serves at the run date, the levels of the maker's API at that date and pass them on unchanged, beside its own `accepts`; a model `mapping` (a conversion its documents establish for that model, such as OpenRouter's effort → budget_tokens for the Claude models that take only a budget) is read first. The maintainer, 3 Nov 2026: « OpenRouter accepte les mêmes niveaux d'effort que l'API du fabricant et les transmet tels quels, sauf là où sa doc documente une conversion pour ce modèle. » (rule `router-maker-levels`). A generic sentence covers only the models it can apply to: a budget conversion never applies to a model whose maker API rejects a budget. Where the router's catalogue lists the model's levels at the run date (OpenRouter's `supported_efforts`, recorded as level `accepts` quoting it), that list decides the levels and thinking off / on as well (« none » → `nothink`; the maintainer, 3 Nov 2026, later, rule `router-listed-thinking`) and an unlisted level, or an unlisted thinking off (the lowest step of the order), falls to the router's level mapping (nearest supported, a tie `ambiguous`); `accepts_maker` counts only where it lists none; a run over which the listing changes is read piece by piece and kept only if all pieces agree (the maintainer, 3 Nov 2026, rule `router-listed-levels`). OpenRouter's budget conversion is removed for Opus 4.6 and Sonnet 4.6 (/models lists their levels), kept for Opus 4.5 and Gemini 2.5 (3 Nov 2026). A router's own defaults are bridged over a gap between captures as the maker's (`default-bridged-gap`, same conditions; a route id of the model starting or ending inside the span also forbids it; 3 Nov 2026). A harness's `calls_route` names the route every call of it goes to: Claude Code → `maker-api` (the maintainer, 3 Nov 2026, rule `harness-calls-route`). The router's listing records are copied mechanically from every saved, dated /api/v1/models capture (one record per listed value and run of captures giving the same list, first to last capture; clipped to the model's own configuration dates; 3 Nov 2026). What a harness sends by default to a model it has no entry for comes from its own saved docs only, never the maker's default (Claude Code: nothing usable for Sonnet 4.5, Haiku 4.5, Opus 4.5; the maintainer, 3 Nov 2026). Opus 4.5 under Claude Code thinks with a fixed budget (MAX_THINKING_TOKENS) whose default is not saved: out of the fit, quotes in the claude-code note (3 Nov 2026). A proxy on the chain the registry documents nothing for (`litellm`, komodor: Claude Code → LiteLLM → Bedrock) is a strict step: the run is not established (3 Nov 2026). OpenHands goes through LiteLLM: the OpenHands Index ids `litellm_proxy/<provider>/<model>` give each measure a route fact LiteLLM copied from the id's quote (chain OpenHands → LiteLLM → the provider; not a name prefix, since LiteLLM lists no names; the maintainer, 3 Nov 2026). LiteLLM is in the chain of every OpenHands source, not only the litellm_proxy/ ids, because the OpenHands SDK calls the providers through the LiteLLM library: the harness carries `passes_through` (route `litellm`, its evidence the SDK's llm.py, `ret = litellm_completion(`), and the build puts that route right after the harness in every chain the harness is in (rule `harness-passes-through`; strict, LiteLLM documents nothing; the maintainer, 3 Nov 2026). Unlike `calls_route`, it does not close the chain.
+
+**benchmarks.json** — `family` ⊃ `setup` = benchmark × subset × harness (without its version: patch releases are one
+configuration) × tools regime × judge panel × metric. Per setup: headline metric (the source's designated one; if none,
+the metric the source ranks by; if the source reports a single metric for this benchmark, that one (`only-metric`, 26 Oct); else a decision; with its level, `written` or `not-established:assumed` when it is only
+the metric held; a cost-only setup has metric `none`), bounds, direction, task type, complexity, `kind` (`rating` — Elo,
+arena, re-fitted index — or `runs`); for composites the components (a setup, or a named component the
+registry does not hold), the formula (weights, normalisation), validated on
+complete couples, and whether it is linear (`true`, `false`, or `unknown` while the formula is not in hand: no residual). Setup ids keep today's group names where they exist (the catalog maps keep
+working).
+
+**publishers.json** — publisher → its maker, or none.
+
+**prices.json** — per model and route: list prices per class (input, output, cache read, cache write 5m and 1h; OpenAI's 30m and 12h), per
+configuration when the maker prices them differently (Qwen3-8B thinking output), long-
+context tiers with their per-request threshold, promotions (recorded, flagged, never a base; their display on the site
+is set aside), batch and flex factors; each dated with evidence. `as_of` pinned per build. Base route = the maker's API.
+Base price = the standard list price in force on `as_of`; for a retired model, its last list price (decision 1 of
+21 Oct); for a model whose standard price never applied before it was withdrawn, the price actually charged (Gemini 3.7
+Flash, $0.75: the maintainer, 21 Oct). An introductory price with a stated end is a promotion; when it states the list price after it
+(`list_after`: Gemini 3.6 / 3.8 Flash, Gemini 4 Argon), that list price is the base while no standard price is in force,
+flag `base-scheduled-list-price` (coordinator, 26 Oct, from the rule that promotions are never a base).
+
+**rules.json** — each rule: id, inputs, output, conditions, precision formula, date, decided by. Deduction rules:
+`alias-by-date`, `mode-to-line`, `label-to-ladder`, `maker-conversion-dated`, `route-mapping-dated`,
+`api-default-documented`, `config-unchanged-over-interval` (the config's history covers the run interval with the same
+setting), `no-effort-setting`, `thinking-off`, `mean-of-runs` (failed runs excluded), `percent-from-counts`,
+`composite-residual`, `scale-conversion` (fraction ↔ percent, exact), `cost-publisher-figure`, `cost-delta-on-source` (the price change applied to the source's own
+cost once its formula reproduces it), `cost-uniform-factor`, `cost-class-ratio` (METHODOLOGY §2, spread added),
+`chart-reading`, `currency-fixed`. Standing rules (the maintainer's): the label rule (a label that names a level of the
+model's ladder is that level — LMArena kept, 22 Oct), `closed-harness-label` (a closed harness — Cursor, Antigravity, Grok CLI, Copilot, Amp, Kiro: routes with `label_as_level` — that shows a level without documenting what it sends: the label is the level sent to the maker's API, flag `harness-label-as-level:<route>`; a dated mapping of the harness wins; 26 Oct), "Pro via a router that cannot separate it → out" (20 Oct),
+decision C as restated (conversions only when dated), the composite residual rule (22 Oct), the cost comparability rule
+(22 Oct), uninformative scores (METHODOLOGY §2).
+
+**decisions.json** — `{id, measures: [ids], facts_hash, axis, status, reason, date}`; evaluated first; a decision whose
+facts hash no longer matches is reported, not applied.
+
+---
+
+## 5. Decision tree
+
+### 5.1 Facts → fields (build)
+
+**Run date.** A stated `run-date` (a per-run timestamp counts as one) gives the day; `run-start` and `run-end` give the
+interval; a lone start or end gives that bound, the other is the default bound. Default bounds: lower = the model's
+`released` (computed per candidate key for an alias; not clamped for an `early-access` run), upper = the earliest of
+the source's publication, the earliest capture carrying the measure's value, and the commit. Datetimes when known. A
+time written without its time zone is a local time whose zone is unknown: its upper bound is the end of the day after
+and its lower bound the start of the day before (the maintainer, 3 Nov 2026: « la borne haute est toujours la date + 1
+jour »; lhtb « _generated 2026-08-03T23:01:31_ » bounds the run by 4 Aug), for every date the build reads (facts,
+cells, the publication).
+Needed only when a dated event of the model falls inside it. The source's `published` may be a board's « last updated » label or a page's modification date (the maintainer, 3 Nov 2026): both are upper bounds of the run dates of the values on the page, never used when older than the release of a model the page shows (a stale label); a printed run date is a `run-date` fact on the measures it covers only. A date the source writes that does not say it is the run date (a scoring file's date, a report's completion date, a results document's date, a generated scoreboard) is a `run-end` fact only — an upper bound, never a run date nor a lower bound — and only when it can only be on or after the run; in doubt, nothing (the maintainer, 3 Nov 2026). A changelog's latest entry is an « updated on » bound only when the changelog says it records additions of models or results (cognition FrontierCode: « Models added to the leaderboard and changes to how results are reported. »); otherwise it is none (posttrainbench, 3 Nov 2026).
+
+**Model.** The model-name / API-id facts resolve through `names` at the run date; for a name that has served more than one
+model (an alias), the run interval must lie inside one `serves` interval (names that never moved are not date-checked,
+so early-access runs pass); for an alias the run interval is one for all candidates, its lower bound the earliest
+candidate's release, so an interval straddling the switch is ambiguous, never the newer model (22 Oct) (a stated run date before a redirect, or a proven bound like `alias-date-proven`, does). Two facts that
+resolve to different keys → `contradictory`. `mode` facts → the line key; a route that cannot separate the mode →
+`not-established:absent`. **Early access**: an `early-access` fact, or a run upper bound before `released`.
+
+**Configuration** (the effort) — first match wins; every rule's interval must cover the run interval; "the model's
+configurations" are those of models.json at the run date:
+1. a model whose configurations are `[solo]` → `solo`, whatever else is stated (K2.7 Code);
+2. a `thinking-budget` → `think-<budget>` (exact token count; budgets within 5 % are one value: 10k = 10,000 = 10,240);
+   a numeric scale → `scalar-<n>`;
+3. an `effort-setting` (a code/config line at the run, or `config-unchanged-over-interval`; read in the source's own
+   call, or in a harness/router config), a `thinking-on` / `thinking-off` fact, or a `names` entry that selects a
+   configuration → that configuration, when it is one of the model's configurations and every step of the route chain
+   serves it as itself; a configuration the maker or a route converts goes to step 6;
+4. an `effort-label` that names one of the model's configurations, served as itself → that configuration (standing label
+   rule); a label naming a converted level (GLM-5.2 `low`) goes to step 6;
+5. an `effort-label` in other words → `label-to-ladder` when the model's configurations make it unique;
+6. a requested or converted configuration → the route chain applied in order **harness → router / reseller / host →
+   maker**, each step dated (identity where documented); the route is **unknown** when the source names no router,
+   reseller or host (nothing, or only a harness), or names one the registry cannot resolve: the maker's API is never
+   presumed (the maintainer, 2 Nov 2026: « En aucun cas on suppose l'API si on n'a pas l'info. »; it replaces the
+   presumption `route-presumed-maker-api` of 26 Oct). Every candidate route (each route of routes.json that served the
+   model at the run date, the maker's API always included) is evaluated, after the harness when one is named, and the
+   configuration is accepted only if all agree, else `not-established:absent` (rule `route-unknown-candidates`), except
+   after a harness with a `calls_route` (Claude Code → the maker's API, the maintainer, 3 Nov 2026). A name
+   prefix that names a route, or a harness, counts only as a fact of the measure's `route` slot; a router budget →
+   `budget-converted`; a tie → `ambiguous`;
+7. `no-effort-sent` → `api-default-documented`: on the maker's API or a reseller, the maker's documented default (Haiku
+   4.5: thinking off → `nothink`); through a router or host (route known), its own documented default for that model
+   (the maintainer, 22 Oct); else `default`;
+8. nothing → `unstated`.
+Two facts giving two configurations (a `-thinking` id with an effort field null) → `not-established:contradictory`
+unless one is the more specific statement of the same call (the id selects thinking, the null field says no level was
+sent → `think`). The facts are reconciled first on what they read, before the route chain, and again after it: readings that
+disagree before the route are contradictory whatever the route serves (the maintainer, 3 Nov 2026, rule
+`contradiction-before-route`: AA opus-4.7 nothink and high). Through a router's listing, thinking off asked for a model
+that has none at its maker is not established (no nearest level, kimi-k3), and thinking on without a level is accepted
+where the listing names at least one level (the maintainer, 3 Nov 2026). **In the fit**: every configuration of the model's list as its own couple (`low … max`, `minimal`,
+`nothink`, `think`, `solo`), **except** `think-<budget>` (recorded, `out:budget-config`: too few and an unusual use,
+the maintainer, 22 Oct) and `between-tools` (recorded, `out:effort-not-established`, 29 Oct). A configuration not in the model's list → `out:effort-not-established`; not established
+(`scalar-*` without a mapping, `budget-converted`, `enabled` without a level, `adaptive`, `default`, `unstated`,
+`req-<label>`, `app-*`, `priceblend`) → `out:effort-not-established`. A tools regime (`nt-*`), a fast mode or an
+application setting is part of the setup, not the configuration.
+
+**Campaign** (computed). A setup's campaign is its `version` (benchmark, protocol or board version). Snapshots of one
+board are linked by `snapshot_of`; a snapshot without a version fact inherits the campaign of the snapshot it continues,
+and a board that never states a version has one campaign. Within one campaign, a couple measured again replaces the earlier value (recorded as
+`prev`): rating boards always (Elo, arena, rolling means, re-fitted indices), run boards when the version is unchanged
+(a re-score or a regrade of the same runs). New couples join the current campaign. A new version is a new campaign; the
+earlier campaign stays (both are measurements). `same-runs-as` (stated, or proven by identical other-axis values on all
+shared couples, ≥ 2 of them, equality by METHODOLOGY §3's closeness test) links two documents: the later grading replaces the earlier, and the cost counts once.
+
+### 5.2 Quality axis (decisions first; then the first failing step gives the status)
+0. **Decision** pinned to the measure → its status (`in:decision:<id>` / `out:decision:<id>`).
+1. **Proof**: every fact used has a locator (and a quote where required) → else `out:no-proof`.
+2. **Model** accepted and in models.json → else `out:model-not-established`.
+3. **Configuration** established, in the model's list and in the fit → else `out:budget-config` /
+   `out:effort-not-established`.
+4. **Value** accepted; `source-estimate` → `out:estimate`; `failure` (did not complete, infrastructure error) →
+   `out:failed-run`; a source's mean that includes a failed run → recomputed by `mean-of-runs` when the per-run values
+   are written, else `out:failed-run`; `partial` (items missing, not scored) → `out:partial` unless the source scores them as wrong; `cap`
+   (a declared cap, scored) is a setup attribute, in; an anomaly `assumed` → `out:anomaly-assumed`; `contradictory` →
+   `out:contradictory`.
+5. **Metric** = the setup's headline → else `out:not-headline`; the setup's **direction** `higher` or `lower` → else
+   `out:direction-not-established` (no direction guessed; the maintainer, 10 Nov 2026). A `lower` score is turned so
+   that higher is better where it becomes the fit's quantity, lqm's f(y), in its unit (B − y on a bounded scale before
+   the logit, −log y on a log scale, −y otherwise); the build writes the source's value unchanged in the tables and
+   carries the direction in `group-setups.json` (rule `score-direction`).
+6. **Uninformative**: a score at the floor or the ceiling of its metric for one couple while the others are not → score
+   out (`out:uninformative`), its cost kept (METHODOLOGY §2).
+7. **Campaign**: an earlier value replaced within its campaign → `out:superseded` (kept as `prev`).
+8. **Composites**: a couple with **any** component measured loses the composite; a linear composite keeps only its
+   `composite-residual` for the missing components (the residual's setup = composite × missing set; capture is its
+   campaign; residuals of an estimated index refused); a non-linear composite is kept whole only for couples with no
+   component. (Phase 1: the build computes the residuals; dropping the composite stays in `lqm.load`.)
+9. **Republication**: `restated-from` → counted once (phase 1: `lqm.load`'s rule — the larger group keeps it; phase 2:
+   the original); identical values across groups beyond chance → once (`lqm.load`). Stated measure by measure (the
+   maintainer, 9 Nov 2026): `restated-from` with a `same-runs-as` fact whose `held` names the measure we hold with the
+   same runs → `out:copy`, on both axes, whatever lqm finds; with `capture` (an older capture of the original showing
+   the copied value) and `held` the board we hold newer → `out:copy-older-snapshot`.
+   `held` may name a measure of the same source: a table that repeats a run another table of the same document
+   reports (integration 4, 9 Nov 2026).
+10. **Group** = setup × publisher × campaign, ≥ 2 accepted couples of models in the fit's model list → `in`; else
+   `out:single-couple`.
+
+### 5.3 Cost axis
+Steps 0–4 and 7–10 apply. Measures citing the same spend facts (one run scored under several metrics) are one cost
+measure, on the headline measure's setup (else the first). A composite's cost residual is the total minus the present
+components' costs, only on one unit and one run; otherwise the composite's cost is dropped. Then:
+1. **Base-price value**, METHODOLOGY's order: the publisher's own figure at the base price; the price change applied to
+   the source's own cost once its formula reproduces it from the run's tokens (`cost-delta-on-source`; per-request
+   long-context tiers only when `requests` and per-call sizes are known); a uniform factor (`cost-uniform-factor`); the
+   class-median ratio (`cost-class-ratio`); otherwise the cost is **unrepriced**, at its own basis.
+   *Uniform factor across tiers (the maintainer, 30 Oct 2026).* When the tiers cannot be resolved (no `requests` or
+   per-call sizes), a cost is still exact if every price vector over its price date relates to the base vector by one
+   common factor on every class it can have used — the classes and long-context tiers of the base vector, the tiers the
+   same on both sides (a promotion is never the base): its base value is cost × factor, its uncertainty × the factor,
+   it joins the re-priced subset of its part (rule and flag `cost-uniform-factor-tiers`) and forms no subset of its
+   own. Several vectors at different factors to the base, or a change in some classes only (Sonnet 5.5's cache read on
+   7 Oct), are not exact and keep the unrepriced path below (own subset, or `cost-price-band`). First case: GPT-5.6
+   Luna and Terra on OpenAI's launch page (1 / 6 / 0.1 and 2.5 / 15 / 0.25 on 9 Jul; "80 % / 20 % less" from 30 Jul on
+   every class and tier: × 0.2, × 0.8).
+   `price_date` = the date of the prices the source applied: the run date for a billed spend; the capture date for a
+   source that recomputes at its current price (AA); the stated date for a list estimate, else [run lower bound,
+   publication].
+2. **Partition** of the setup's measures by `basis` (`billed · list-estimate · router-billed · subscription · unknown`)
+   × `method` (vocab: `tokens×list`, `cli-total`, `provider-invoice`, `router-invoice`, `publisher-table`,
+   `library-table` (litellm-style price tables)…; a "simulated" cost is classified per source at migration: computed from
+   this run's tokens → `tokens×list`, otherwise `source-estimate`) × unit ×
+   currency × route. In each part: the re-priced measures form one subset; every cost of the fit is at the current
+   (base) price (the maintainer, 3 Nov 2026, rule `cost-current-price-only`): an unrepriced cost stays only as a price
+   band toward the base price (`cost-price-band`, a subset per model): over its own price vectors, raw × [the smallest,
+   the largest per-class ratio base / old] (« mostly input » / « mostly output »), its reference always the current
+   price, never the last price seen (the maintainer, 3 Nov 2026, later; GPT-5.6 Sol under its 4 / 20 promotion, base
+   5 / 30: × [1.25, 1.5]); a cost no band can bring to the current price (no registered price over its price date,
+   tiers or classes not shared) →
+   `out:cost-not-comparable` (until 3 Nov an unrepriced model whose price change over the price-date interval was
+   uniform across classes formed its own subset at its old price).
+3. A subset with fewer than 2 couples → `out:cost-single-couple`; `subscription` → `out:cost-basis`.
+4. The price list read (the maintainer, 4 Nov 2026): the cost's own currency; else the maker's single list
+   (`maker_currencies`) by the price ratio, for a cost with no currency or, with the source's `maker-price-multiple`
+   fact, in another currency; the cost keeps its currency in its part. A cost no rule and no band brings to the current
+   price, with total tokens and the source's own platform prices: the total-tokens split (4 Nov 2026), its part in the
+   maker's list's currency.
+5. Promotions and off-peak prices are never the base. A promotion is a price charged over its interval: it is one of
+   the prices a source may have applied over the price date (`prices_over`), so a window where only a promotion is
+   printed is covered (26 Oct).
+
+---
+
+## 6. Fit tables and the fit (phase 1)
+
+The build writes **one table per axis** in today's `raw-data.csv` columns, holding only the measures `in` on that axis:
+- `fit-quality.csv`: group = setup × publisher × campaign (today's group name where it exists), the score, and the cost of
+  the same execution when known (republication detection reads it; the quality fit never does);
+- `fit-cost.csv`: group = the quality group × cost subset (suffix `~c<n>`), the cost at the base price, and the score of
+  the same execution when known;
+- `source` = the publisher's id in publishers.json (maker publishers named as `lqm.load`'s maker map: anthropic,
+  openai, google, alibaba…), never a snapshot id, so publishers, unit aliases and the home effect resolve as today;
+- confound flags regenerated from the facts in the exact spellings `lqm.load` reads (`EAP-run`, `restated-from:<maker>`,
+  `vendor-reported:<org>`, `evaluated-by:`, …, listed in vocab.json), plus `prev`; the reading sd in its column (`score_prec` / `cost_prec`), as today;
+- `group-map.json`: fit group → base group, for the group-keyed catalog maps (families, composites, group display);
+  the source-keyed maps (publishers, unit aliases) are keyed by the publisher id in the `source` column.
+
+Code changes for the tables (no change of method) — **made 29 Oct** (data/BUILD.md, "The fit reads the build"):
+`fit.py` reads one path per axis (`data/build/fit-quality.csv`, `fit-cost.csv`, both in its INPUTS); the group-keyed
+catalog maps (composites, families) resolve a fit group through `group-map.json` and `group-setups.json` with the
+build's own code (`build_lqm.fit_maps`, `load_table`), also used by precheck.py and validation/*.py; precheck.py and
+site/sources.py read `data/build/data.csv` (its rows in the fit; sources.py through the group map), and the CSV
+download links it. `fit.py --dry` builds the inputs without sampling: quality 1,608 groups / 17,705 rows, cost 923 /
+8,403. `raw-data.csv` stays as the frozen legacy input (legacy.py, the acceptance test, mapping.py); no fit has read
+the tables yet (the maintainer's yes, §8.5). `lqm.load`'s per-row outcome is recovered by comparing its input with the rows it keeps
+(group, couple, value): a row dropped by its composites rule → `out:composite`, by its republication rule →
+`out:republished`, written into the status report. **Method change** (configurations per model, planned 22 Oct, made 29 Oct), with its
+before/after: `lqm.EFFORTS` → the configurations in the fit (`nothink`, `minimal`, `low` … `max`, `think`, `solo`);
+METHODOLOGY §1–2 and DISPLAY-METHODOLOGY (effort ladders) rewritten; the site's effort order, grids, monotonicity report
+and duels (`EFFORT_ORDER`, `LEVELS`, `CAP`, `EFF` in `site/config.py`, `ORD` in `site/grids.py`, `EFFORT_ORDER`/`capE` in
+`app.js`) extended to `nothink` and `minimal` (below `low`) and `think` (after `max`, compared with `nothink` only). The build also writes the public data file (every measure, today's columns plus `status_quality` and
+`status_cost`), read by precheck.py, validation/*.py, site/sources.py (through the group map) and the CSV download;
+precision.py is replaced by the facts' precision model. **Acceptance test** before any new fact is used: the legacy
+facts alone must give `lqm.load` the same groups, rows and report as v2026.10.21's raw-data.csv. `lqm.load` keeps its composites rule, homogeneity split and republication rule in phase 1, and its
+report is written back into the status report. Site fields stay in the site's registry.
+
+## 7. Validation
+- Schema: every file against its schema and vocab.json; every key registered; the identity checks of models.json.
+  The build runs these checks on the repository's files only. The checks against saved copies (sha256, a quote in its
+  file, a cell in its table, a legacy row in its CSV, a date's proof, a value the same in every capture listed) are
+  `validate.py --check-files`, run by the agent that writes the findings (4 Nov 2026).
+- Verifier agents re-derive, for every measure `in` or changing status: each number from the saved file, each label and
+  fact type (`effort-setting` vs `effort-label` vs `no-effort-sent`), the identities (model names, setup against its
+  harness / judge / version / tools / metric facts); a quote must contain its value and the saved file the quote. Each
+  salvo audits a sample of its `unstated` / `default` measures.
+- Precheck fails when a measure `in` lacks an accepted model, effort, value or (when an event is in its window) run date;
+  it reports counts per reason and the status diff to the last build.
+
+## 8. Migration
+1. Legacy facts: each `raw-data.csv` row becomes a fact set whose proof is `legacy` (its `ref` and confound text),
+   accepted by step 1 only until its source is converted. A legacy measure is a pass-through (22 Oct): it carries
+   today's row as it is, its status is today's (lqm.load's admission), none of the tree's steps apply, and the build
+   writes it verbatim (data/legacy.py, data/BUILD.md; acceptance: data/tests/acceptance.py); `flag-map.json` maps the confound flags (4,571 distinct
+   prefixes) to facts and levels — e.g. `requested-as` → requested level, `alias-date-proven` → run bound,
+   `index-estimated` → `source-estimate`, AA `was-estimate=` → `prev` (our earlier estimate, replaced) — versioned,
+   tested on every row, with the unmapped prefixes reported.
+2. prices.json filled for every model in the fit before the first cost build; `as_of` pinned.
+3. First build; the status report lists, per source, the measures of today's fit that become `out:*-not-established`
+   (≈ 3,780 configuration rows carry no recognisable effort proof today; every `solo` row of a model whose list is not
+`[solo]` — ≈ 1,760 in-list rows, Haiku 4.5's 375 included, ≈ 1,200 of them on hybrid models where `solo` meant
+"thinking on" — is re-read into `nothink`, `think`, a level, a budget, or not established) and those still in the data that the tree now refuses
+   (e.g. AA indices flagged estimated).
+4. Agents convert sources to real files, worst first, re-reading the saved copy or the live source; legacy proof retires
+   source by source.
+5. Rebuild; before/after against v2026.10.21; the maintainer's yes before any fit.
+
+## 9. Decisions
+
+Decided by the maintainer during the reviews:
+- **Cost method unstated** (23 Oct): for a source whose cost method is found neither in its documentation nor by
+  reproducing its costs from its tokens, one table of one source is taken as one method (`cost_method_unstated =
+  single-per-table`, flag `cost-method-assumed-single`).
+- **Configurations per model** (22 Oct): each model has its own list of configurations; `nothink` and `minimal` enter
+  the fit as couples of their model (≈ 72 + 12 couples measured by ≥ 2 publishers today); thinking budgets stay out.
+  `solo` only for a model with a single configuration: every `solo` row of a model whose list is not `[solo]` (Haiku 4.5's 375 included) are re-read at migration into
+  `nothink`, a budget, or not established. A method change: before/after before main.
+- `api-default-documented` through a router (22 Oct): when the run is known to have gone through the router with no
+  effort sent, the router's dated documented default for that model is the effort (latitude kimi-k3: OpenRouter
+  `default_effort: max`, captured 21 Jul, run 23 Jul).
+- **Closed harnesses** (26 Oct): the level label a closed harness shows (Cursor 371 fit rows, Antigravity 65, Grok CLI 31,
+  Copilot 27, Amp 18, Kiro 15) is the level sent, as LMArena's labels, flagged; strict doubt (out, LMArena with them)
+  was not retained. Rule `closed-harness-label`, route field `label_as_level`.
+- **Route not named** (2 Nov, replaces the decision of 26 Oct): « En aucun cas on suppose l'API si on n'a pas l'info. »
+  The route is written "API" only when the source says so, "unknown" otherwise. An unknown route (nothing named, only a
+  harness, or a name the registry cannot resolve) takes the strict path: every candidate route that served the model at
+  the run date, the maker's API included, must agree (rule `route-unknown-candidates`); with a harness named, the
+  harness applies first and the rest of the chain is unknown. The presumption of 26 Oct (a source naming no router,
+  reseller or host ran through the maker's API, flag and rule `route-presumed-maker-api`: 15,234 of 18,717 quality and
+  7,351 of 9,496 cost rows of the fit tables, 25,167 measures of 596 sources) is withdrawn. Harnesses and routes the converters had already cited for the run (a
+  harness-slot fact, a name prefix, a sentence about the run) were put in the measures' `route` slots on 2 Nov, from
+  the extracted citations only (PASSES.md). On 3 Nov, likewise, a harness cited in the harness slot of a measure whose
+  route was already stated joined its chain (964 measures; the harness applies first).
+- **OpenRouter and Claude Code** (3 Nov, the maintainer): Opus 4.6 and Sonnet 4.6 pass their effort through OpenRouter
+  as sent (budget conversion kept for Opus 4.5 and Gemini 2.5); where OpenRouter's /models lists a model's levels at
+  the run date its list decides (`router-listed-levels`), the maker's levels counting only where it lists none;
+  OpenRouter's defaults are bridged over gaps between captures as the maker's; Claude Code calls the maker's API
+  (`harness-calls-route`, no other candidate route). Not changed: closed harnesses keep the maker's level for their
+  label; repricing stays at the maker's tariff. Later that day: the listing decides thinking off / on too
+  (`router-listed-thinking`: nothink only where « none » is listed, else the route's nearest supported level); the
+  listing records are copied from every saved catalogue capture; Claude Code's default for a model it has no entry for
+  comes from its own saved docs only (none usable for the 4.5 models); harnesses cited for the run in other slots
+  were copied into the harness slot (22 measures), and a harness quote about other runs was replaced (arxiv-2607.02436).
+- **Prices (the maintainer, 4 Nov 2026, after the price salvo of 3–4 Nov).** A: a run between a model's release and
+  the first capture of its pricing page takes that capture's price from the release (`from_basis release`), unless a
+  launch promotion is announced or visible, a price change is documented in between, or a readable capture of a
+  maker's pricing page on a later day than the release does not show the price (then not applied, case listed). B: no
+  price after a retirement whose alias serves another model (deepseek-r1 after 27 May 2025, gemini-3.7-flash after its
+  routing to 3.8 Flash, grok-4 after 15 May 2026): identity in doubt, out. C: OpenAI's Pro mode (gpt-5.6-sol-pro,
+  luna-pro, terra-pro) is billed at the base model's standard rate, as the reasoning guide says. D: a permanent
+  discount shown on the page (MiniMax « 永久五折 » / « Permanent 50% off ») is the standard price. E: a Mainland China /
+  Beijing price does not apply to a source that does not say its region; Alibaba's « Singapore region » table is the
+  international price (a capture whose table carries no region is not used). F: a yuan cost of a model whose maker
+  publishes no yuan price is converted only with the source's rate, or the ECB reference rate when the source says it
+  starts from the maker's USD prices (the rates' spread over the run a band); a source that goes through a reseller or
+  says nothing stays out — chinese-llm-benchmark (nonelinear's own platform prices) and llm2014 (OpenRouter / Zenmux
+  relays) stay out. G: a free price (free tier, trial, free introductory offer) is never a price. H: a neighbouring
+  identity (a quantised serving id, a preview id, an alias) is not priced unless models.json already names it for the
+  key. I: two captures showing the same price cover the interval between them, unless a change is documented in it.
+  J: an inclusive end written to the second or the minute covers that whole unit (`validate.when`; a price « to
+  …T15:59:59Z » then one « from …T16:00:00Z » left one uncovered second: a build bug, fixed). Rules
+  `price-first-capture-from-release`, `price-bracketed-captures`, `price-end-inclusive-unit`,
+  `cost-currency-conversion`.
+- **Prices and dates, later (the maintainer, 4 Nov 2026).** 1. The price the source writes, when it equals one of the
+  registered prices over its price date, applies alone, without a band (`cost-stated-price-registered`). 2. A model
+  whose maker writes that its API is not open yet (GLM-5.3: « The GLM-5.3 API is coming soon. », docs.z.ai, 15 Aug 2026)
+  carries models.json `api_opens`; a cost whose route the source states to be the maker's API has its price date start
+  no earlier than that day (`price-date-after-api-opening`), the first price applying from it (A at the API's opening);
+  another or an unknown route stays out. 3. A capture without the model blocks A only if that page lists the model
+  when it has a price (openai.com/api/pricing never lists o3-pro, gpt-5.1-codex, -mini: A from their release). 4. The
+  q2 prices (step-3.7-flash USD and CNY, kimi-k2-instruct USD) written, then A and I. 5. Alibaba's single USD table with
+  no region heading on www.alibabacloud.com is the international price (it replaces decision E's exclusion of those
+  captures). 6. deepseek-v4.1-flash on 10 Sep: the announcement dates the new price (04:00 UTC), not the model's first
+  serving: out as before. 7. bullshitbench: a run-end per row (the latest `finished_at_utc` of its responses). 8.
+  proofbench: the zip of 20 Aug recorded (sha256), 34 measures dated. 9. livebench G2's URL. 10. arXiv URLs in https.
+- **The price-ratio method (the maintainer, 4 Nov 2026; a method change, before main: his yes).** The fit reads only cost
+  relations inside a group, so a re-pricing needs only « current price / price at the run's date », independent of
+  the currency. When the maker publishes no price in the cost's currency, that ratio (band, tiers, classes) is read on
+  the maker's list in the currency it publishes, if it publishes a single one (prices.json `maker_currencies`, each
+  page checked); the cost keeps its currency and unit, a group never mixes two currencies. A cost in another currency
+  needs the source's statement that it pays the maker's prices times one factor (fact `maker-price-multiple`: a rate,
+  or a relay passing the maker's prices on); a cost with no currency written takes the single list's ratio as such;
+  several lists and the source not saying which, or the maker's currencies not established: doubt, out. Rules
+  `cost-price-ratio-other-currency`, `cost-price-ratio-no-currency` (they replace F's « converted only with a rate »).
+- **The total-tokens split (the maintainer, 4 Nov 2026; a method change, before main: his yes).** A source that gives a
+  run's total cost and total tokens (no class split) and whose own price list at the run's date is in its findings
+  (facts `platform-price`, each dated by its capture): cost = t_in × p_in + t_out × p_out and t_in + t_out = T give the
+  split, and the cost at the maker's current price is t_in × P_in + t_out × P_out, on the maker's list (the cost's
+  currency when the maker prices the model in it, else its single list), the row's part in that list's currency. The
+  platform's price over the price date: A (release → first capture) and I (between captures of the same price), stopped
+  by a change of the maker's registered price in between; nothing after the last capture; a discount or off-peak field
+  → out. Conditions, else out: p_in ≠ p_out; the split inside [0, T] with the source's rounding; cache classes and
+  long-context tiers — none on either list, or the platform's list one multiple k of the current list on every class
+  and tier (then cost × k, whatever the mix). The reading precision (cost to 0.1 元 / 1,000 calls, tokens to the unit)
+  propagates into the row's sd. Rule `cost-total-tokens-split` (data/BUILD.md, « the total-tokens split »).
+- **The total-tokens split, checked in time and without the classes that cannot apply (the maintainer, 4 Nov 2026).**
+  The board's commerce tables at every commit (« 输出价格 », the output price alone) are written as `platform-price`
+  facts dated by their commit: partial captures, each a check on the span A or I it falls in (another price there →
+  that span is not known, out); they never price a run alone. Rule `cost-class-cannot-apply`: when the split fails
+  with every class, a class that cannot apply to calls of the run's size is left out of both lists and of the
+  comparisons A and I make — a long-context tier when the input per call (from the split, with the source's rounding)
+  is below its threshold; the cache when it is below the maker's documented minimum cacheable length (prices.json
+  `cache_minimums`, each with its quote; null or absent → not excluded). The platform resells the maker's API and
+  nothing it writes excludes a cache of its own: a split that needs the cache left out stays out (doubt
+  « cache-reseller », its value kept apart in the report); one that needs the tiers only enters (data/BUILD.md).
+  The maintainer's decisions of 4 Nov 2026, later, on that rule: (1) the doubt is lifted when the platform bills the
+  maker's cache — its cache class the same multiple of the maker's list as its input and output, for the model and at
+  the run's date (A and I with the cache kept); (2) the rule, tiers and cache, applies only to a source that states
+  that each question is one call with no conversation read back (fact `one-call-per-question`, its exact quote: the
+  protocol, the evaluation code or the README); the input per call from the split is an indication, not a proof;
+  (3) the tier left out below its threshold is accepted, under (2). chinese-llm-benchmark does not state it (its
+  total and 通用能力 average TAU, BFCL-V3 « 多轮 » and Terminal-Bench agent runs): the rule does not apply to it.
+- **Dates (the maintainer, 4 Nov 2026, the points left by the dating step 2).** 1. toolathlon's « Date » column is not
+  written (its meaning is unknown). 2. Terminal-Bench submission dates before a model's release are kept (early
+  access). 3. SimpleBench `dateAdded` before the release: kept. 4. designarena: each board's own `lastUpdateTime` is
+  accepted. 5. epoch.ai: a « Started at » does not bound the end; the upper bound stays the batch's. 6. Binary proofs:
+  the CSV / text extracted from a zip is saved with its sha256 and cited; a capture identical byte for byte to our copy
+  is its own proof (its quote « sha256 <hash> », validate.py checks the hash against the source's sha256 map). 7. A
+  per-measure pass from the saved files only: yc-bench (the 52-model data.json of 2 Oct for 43 of its 45 measures),
+  codereviewbench (each file's commit); bullshitbench per row not written (the saved commit list has messages, not
+  file versions).
+- **Effort charts** (26 Oct): a chart whose caption, title, legend or text says its points are effort levels
+  ('reasoning-effort scaling'): the k-th of a series' n points in increasing cost (or tokens) order is the model's k-th
+  level when the model has n levels (fact `effort-order` 'k/n', rule `chart-effort-order`, flag
+  `effort-from-chart-order`); a different count → ambiguous. Judgement asked by the maintainer: the order is not doubted.
+- **A publisher's model page** (vals.ai '/models/…': 'All evaluations were run … using "xhigh" reasoning, except on …')
+  states the configuration of that model's runs on its boards, except where it names an exception or the board states
+  another: a written effort fact for those rows (26 Oct).
+- **Thinking on, no level** (26 Oct): 'Reasoning' or thinking-on without a level, on a model whose list has levels but no
+  `think`, is the maker's documented effort default over the route chain (step 7), rule `thinking-on-default-level`,
+  flag `level-from-default`; no documented default → not established.
+- **Run before shutdown** (26 Oct): a closed model's run with no stated end lies before its maker-API ids stopped
+  serving it (every such id ended): the default upper bound is capped there (rule `run-before-shutdown`, basis
+  `shutdown`); open weights are not capped.
+- **LMArena bare names** (27 Oct, the maintainer): a model name without a setting on LMArena's boards is a call with no
+  reasoning parameter (Search Arena post of 14 Apr 2025: "By default, we use each provider's standard API settings";
+  FastChat's api_provider.py sends none), extended to the 2026 boards: the maker's documented default at the run date.
+  chinese-llm-benchmark: the board's own catalogue (nonelinear.com) states each model's default setting.
+- **Integration 3 of salvo s5 (the maintainer, 9 Nov 2026).** Copies are marked measure by measure (`held`,
+  `out:copy`, `out:copy-older-snapshot`; §5.2 step 9); a publisher's own ids get per-table names (`table-id`);
+  METR's time horizon is a quality measure in minutes (« 2h42m » = 162, validate.py checks the hours and minutes);
+  SpireClimb's main table is the composite of its sts1 and sts2 tables (the composite rule applies). Values, names,
+  efforts and routes are read by the agent line by line, never by a script that walks a table; a script only writes
+  the JSON and checks (data/BUILD.md, « Added on 9 Nov 2026 »).
+- **Integration 4 of salvo s5 (the maintainer, 9 Nov 2026).** Measure decisions D32–D34 (data/decisions.json): an ARC
+  row stating both a thinking budget and a level is out; a dated pass of an ARC couple replaces the undated row of the
+  same payload; benchmarklist's Terminal-Bench 2.1 value (two possible origins) is pending, out. No rule changed.

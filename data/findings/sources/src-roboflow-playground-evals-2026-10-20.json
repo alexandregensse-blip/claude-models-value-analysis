@@ -1,0 +1,4813 @@
+{
+ "id": "src-roboflow-playground-evals-2026-10-20",
+ "publisher": "roboflow-playground-evals",
+ "urls": [
+  "https://playground.roboflow.com/evals/"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "G1",
+   "kind": "fetch",
+   "url": "https://playground.roboflow.com/evals/",
+   "captured": "2026-10-20T06:18:11Z",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "note": "markdown render of the page by r.jina.ai (the site is behind a Vercel checkpoint); salvo gt/t2, SOURCE.txt: \"fetched 2026-10-20T06:18:11Z via r.jina.ai\""
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md": "f23f5d9273d2baa614cf2a354277812648e1fdc7a6e14b1327d849e93da446f5",
+  "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/SOURCE.txt": "ad8df32e88e8ca909d016b2246ef4d7a4f8c3c0eadb21b6f99c2ba8afc560eb9",
+  "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/compare_qwen3-7-flash_vs_plus.jina.md": "8bf659fcad77034d9add9dbcdc43605935d3e11e06b76e9f7e825720eb9e00a4"
+ },
+ "harvested_at": "2026-10-20T06:18:11Z",
+ "published": {
+  "value": "2026-10-13",
+  "where": "page header \"Evals updated October 13, 2026 Pricing updated October 19, 2026\" (the evals were last updated on 13 Oct; the pricing on 19 Oct)",
+  "quote": "Evals updated October 13, 2026 Pricing updated October 19, 2026",
+  "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md"
+ },
+ "salvo": "salvo14/mig/convert-roboflow-playground-evals (Wave C2)",
+ "agent": "converter convert.py (Sonnet 5.5), from the saved r.jina.ai render of the Playground Vision Evals page",
+ "snapshot_of": null,
+ "extractions": [],
+ "tables": [],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "effort-label",
+   "about": null,
+   "value": "low",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph: the low-effort pass is the one every table uses",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Every table on this site other than a task leaderboard, including the Average column, uses the low-effort pass so all models are compared on the same amount of compute.",
+   "note": "the tiers are benchmark-wide and mapped to each model's native mechanism (next sentence of the page); the build maps the tier label to the model's level"
+  },
+  {
+   "id": "F2",
+   "says": "thinking-off",
+   "about": null,
+   "value": "low disables",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph: tier mapping for Qwen, GLM, Kimi",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "a thinking mode that low disables and high enables (Qwen, GLM, Kimi)",
+   "note": "the page states that for these families the low tier is the thinking mode disabled"
+  },
+  {
+   "id": "F3",
+   "says": "judge",
+   "about": null,
+   "value": "Gemini 3.5 Flash at temperature zero",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Counting, Identification, and Reasoning are scored by a second model acting as judge, Gemini 3.5 Flash at temperature zero"
+  },
+  {
+   "id": "F4",
+   "says": "currency",
+   "about": null,
+   "value": "cost per sample",
+   "level": "written",
+   "form": "prose",
+   "where": "chart caption under the Overall ranking",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Overall benchmark score against estimated cost per sample, on a log scale.",
+   "term": "USD",
+   "note": "the page prints dollar amounts ($0.0058)"
+  },
+  {
+   "id": "F5",
+   "says": "unit",
+   "about": null,
+   "value": "cost per sample",
+   "level": "written",
+   "form": "prose",
+   "where": "chart caption under the Overall ranking",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Overall benchmark score against estimated cost per sample, on a log scale.",
+   "term": "USD",
+   "note": "unit term USD as in the legacy rows of this source: one sample of the benchmark"
+  },
+  {
+   "id": "F6",
+   "says": "cost-basis",
+   "about": null,
+   "value": "Estimated cost per sample multiplies that measured input and output usage by the model’s published per-1M pricing",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Estimated cost per sample multiplies that measured input and output usage by the model’s published per-1M pricing at the time of our last price sync",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F7",
+   "says": "cost-method",
+   "about": null,
+   "value": "multiplies that measured input and output usage by the model’s published per-1M pricing",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Estimated cost per sample multiplies that measured input and output usage by the model’s published per-1M pricing at the time of our last price sync",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F8",
+   "says": "price-table",
+   "about": null,
+   "value": "Pricing updated October 19, 2026",
+   "level": "written",
+   "form": "prose",
+   "where": "page header: date of the last price sync",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Evals updated October 13, 2026 Pricing updated October 19, 2026",
+   "note": "\"at the time of our last price sync\" (methodology) = 19 Oct 2026 (header); the per-class prices are not on this page"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "Their Average covers the four tasks they have",
+   "level": "written",
+   "form": "prose",
+   "where": "FAQ answer on the Average",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "A few self-hosted models do not have OCR results yet; their Average covers the four tasks they have and is marked as such."
+  },
+  {
+   "id": "F10",
+   "says": "metric-definition",
+   "about": null,
+   "value": "The Average is the unweighted mean of those five scores",
+   "level": "written",
+   "form": "prose",
+   "where": "FAQ answer on the Average",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "The Average is the unweighted mean of those five scores, so every task counts equally."
+  },
+  {
+   "id": "F11",
+   "says": "metric-definition",
+   "about": null,
+   "value": "mAP@50 for Object Detection",
+   "level": "written",
+   "form": "prose",
+   "where": "FAQ answer on the headline scores",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Each of the five tasks produces one headline score: mAP@50 for Object Detection, the mean score over all OCR questions for OCR, and LLM-judged accuracy for the rest."
+  },
+  {
+   "id": "F12",
+   "says": "metric-definition",
+   "about": null,
+   "value": "the mean score over all OCR questions for OCR",
+   "level": "written",
+   "form": "prose",
+   "where": "FAQ answer on the headline scores",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Each of the five tasks produces one headline score: mAP@50 for Object Detection, the mean score over all OCR questions for OCR, and LLM-judged accuracy for the rest."
+  },
+  {
+   "id": "F13",
+   "says": "metric-definition",
+   "about": null,
+   "value": "LLM-judged accuracy for the rest",
+   "level": "written",
+   "form": "prose",
+   "where": "FAQ answer on the headline scores",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "Each of the five tasks produces one headline score: mAP@50 for Object Detection, the mean score over all OCR questions for OCR, and LLM-judged accuracy for the rest."
+  },
+  {
+   "id": "F14",
+   "says": "note",
+   "about": null,
+   "value": "OCR results are currently a single preliminary run per model",
+   "level": "written",
+   "form": "prose",
+   "where": "Methodology paragraph",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "OCR results are currently a single preliminary run per model, so they carry no ±."
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "Gemini 4 Argon",
+   "value": "85.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 4 Argon\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW | 82.5 | 86.0 | 93.8 | 85.7 | 89.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "model-name",
+   "about": "Gemini 4 Argon",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 4 Argon\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW | 82.5 | 86.0 | 93.8 | 85.7 | 89.4 |"
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "Gemini 4 Argon",
+   "value": "87.5%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 4 Argon\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 1 | [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW |  | 87.5% | 1.6K | $0.0058 | 13.40 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "cost",
+   "about": "Gemini 4 Argon",
+   "value": "$0.0058",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 4 Argon\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 1 | [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW |  | 87.5% | 1.6K | $0.0058 | 13.40 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F19",
+   "says": "note",
+   "about": "Gemini 4 Argon",
+   "value": "1.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 4 Argon\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 1 | [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW |  | 87.5% | 1.6K | $0.0058 | 13.40 s |"
+  },
+  {
+   "id": "F20",
+   "says": "model-name",
+   "about": "Gemini 4 Argon",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 4 Argon\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 1 | [Gemini 4 Argon](https://playground.roboflow.com/models/google/gemini-4-argon)NEW |  | 87.5% | 1.6K | $0.0058 | 13.40 s |"
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "77.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-6 Astra\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) | 82.1 | 80.2 | 89.6 | 77.8 | 87.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Astra\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) | 82.1 | 80.2 | 89.6 | 77.8 | 87.2 |"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "83.4%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Astra\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 2 | [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) |  | 83.4% | 2.1K | $0.034 | 9.94 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "cost",
+   "about": "GPT-6 Astra",
+   "value": "$0.034",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Astra\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 2 | [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) |  | 83.4% | 2.1K | $0.034 | 9.94 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F25",
+   "says": "note",
+   "about": "GPT-6 Astra",
+   "value": "2.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Astra\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 2 | [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) |  | 83.4% | 2.1K | $0.034 | 9.94 s |"
+  },
+  {
+   "id": "F26",
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Astra\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 2 | [GPT-6 Astra](https://playground.roboflow.com/models/openai/gpt-6-astra) |  | 83.4% | 2.1K | $0.034 | 9.94 s |"
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "78.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Opus 5.5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) | 74.5 | 80.6 | 93.8 | 78.3 | 83.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) | 74.5 | 80.6 | 93.8 | 78.3 | 83.0 |"
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "82.0%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5.5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 3 | [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) |  | 82.0% | 2.5K | $0.015 | 7.63 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "cost",
+   "about": "Claude Opus 5.5",
+   "value": "$0.015",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5.5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 3 | [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) |  | 82.0% | 2.5K | $0.015 | 7.63 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F31",
+   "says": "note",
+   "about": "Claude Opus 5.5",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5.5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 3 | [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) |  | 82.0% | 2.5K | $0.015 | 7.63 s |"
+  },
+  {
+   "id": "F32",
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 3 | [Claude Opus 5.5](https://playground.roboflow.com/models/anthropic/claude-opus-5-5) |  | 82.0% | 2.5K | $0.015 | 7.63 s |"
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "76.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.5 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) | 70.6 | 80.6 | 99.0 | 76.7 | 82.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.5 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) | 70.6 | 80.6 | 99.0 | 76.7 | 82.1 |"
+  },
+  {
+   "id": "F35",
+   "says": "score",
+   "about": "Gemini 3.5 Flash",
+   "value": "81.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 4 | [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) |  | 81.8% | 2.4K | $0.012 | 11.52 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F36",
+   "says": "cost",
+   "about": "Gemini 3.5 Flash",
+   "value": "$0.012",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 4 | [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) |  | 81.8% | 2.4K | $0.012 | 11.52 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F37",
+   "says": "note",
+   "about": "Gemini 3.5 Flash",
+   "value": "2.4K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 4 | [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) |  | 81.8% | 2.4K | $0.012 | 11.52 s |"
+  },
+  {
+   "id": "F38",
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash",
+   "value": "Gemini 3.5 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.5 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 4 | [Gemini 3.5 Flash](https://playground.roboflow.com/models/google/gemini-3-5-flash) |  | 81.8% | 2.4K | $0.012 | 11.52 s |"
+  },
+  {
+   "id": "F39",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "75.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-6.1 Sol\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) | 80.8 | 78.8 | 89.6 | 75.8 | 83.7 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F40",
+   "says": "model-name",
+   "about": "GPT-6.1 Sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6.1 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) | 80.8 | 78.8 | 89.6 | 75.8 | 83.7 |"
+  },
+  {
+   "id": "F41",
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "81.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6.1 Sol\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 5 | [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) |  | 81.7% | 2.1K | $0.0068 | 12.82 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F42",
+   "says": "cost",
+   "about": "GPT-6.1 Sol",
+   "value": "$0.0068",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6.1 Sol\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 5 | [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) |  | 81.7% | 2.1K | $0.0068 | 12.82 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F43",
+   "says": "note",
+   "about": "GPT-6.1 Sol",
+   "value": "2.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6.1 Sol\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 5 | [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) |  | 81.7% | 2.1K | $0.0068 | 12.82 s |"
+  },
+  {
+   "id": "F44",
+   "says": "model-name",
+   "about": "GPT-6.1 Sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6.1 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 5 | [GPT-6.1 Sol](https://playground.roboflow.com/models/openai/gpt-6-1-sol) |  | 81.7% | 2.1K | $0.0068 | 12.82 s |"
+  },
+  {
+   "id": "F45",
+   "says": "score",
+   "about": "Gemini 3.7 Flash",
+   "value": "73.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.7 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) | 70.5 | 78.4 | 96.9 | 73.9 | 80.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F46",
+   "says": "model-name",
+   "about": "Gemini 3.7 Flash",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.7 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) | 70.5 | 78.4 | 96.9 | 73.9 | 80.8 |"
+  },
+  {
+   "id": "F47",
+   "says": "score",
+   "about": "Gemini 3.7 Flash",
+   "value": "80.1%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.7 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 6 | [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) |  | 80.1% | 1.8K | $0.0033 | 11.04 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F48",
+   "says": "cost",
+   "about": "Gemini 3.7 Flash",
+   "value": "$0.0033",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.7 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 6 | [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) |  | 80.1% | 1.8K | $0.0033 | 11.04 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F49",
+   "says": "note",
+   "about": "Gemini 3.7 Flash",
+   "value": "1.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.7 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 6 | [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) |  | 80.1% | 1.8K | $0.0033 | 11.04 s |"
+  },
+  {
+   "id": "F50",
+   "says": "model-name",
+   "about": "Gemini 3.7 Flash",
+   "value": "Gemini 3.7 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.7 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 6 | [Gemini 3.7 Flash](https://playground.roboflow.com/models/google/gemini-3-7-flash) |  | 80.1% | 1.8K | $0.0033 | 11.04 s |"
+  },
+  {
+   "id": "F51",
+   "says": "score",
+   "about": "Gemini 3.8 Flash",
+   "value": "72.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.8 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) | 68.1 | 78.8 | 97.9 | 72.8 | 81.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F52",
+   "says": "model-name",
+   "about": "Gemini 3.8 Flash",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.8 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) | 68.1 | 78.8 | 97.9 | 72.8 | 81.2 |"
+  },
+  {
+   "id": "F53",
+   "says": "score",
+   "about": "Gemini 3.8 Flash",
+   "value": "79.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.8 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 7 | [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) |  | 79.8% | 2.1K | $0.0045 | 12.76 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F54",
+   "says": "cost",
+   "about": "Gemini 3.8 Flash",
+   "value": "$0.0045",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.8 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 7 | [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) |  | 79.8% | 2.1K | $0.0045 | 12.76 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F55",
+   "says": "note",
+   "about": "Gemini 3.8 Flash",
+   "value": "2.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.8 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 7 | [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) |  | 79.8% | 2.1K | $0.0045 | 12.76 s |"
+  },
+  {
+   "id": "F56",
+   "says": "model-name",
+   "about": "Gemini 3.8 Flash",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.8 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 7 | [Gemini 3.8 Flash](https://playground.roboflow.com/models/google/gemini-3-8-flash) |  | 79.8% | 2.1K | $0.0045 | 12.76 s |"
+  },
+  {
+   "id": "F57",
+   "says": "score",
+   "about": "Qwen3.8 Max",
+   "value": "74.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Max\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) | 76.7 | 81.1 | 88.5 | 74.0 | 75.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F58",
+   "says": "model-name",
+   "about": "Qwen3.8 Max",
+   "value": "Qwen3.8 Max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Max\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) | 76.7 | 81.1 | 88.5 | 74.0 | 75.9 |"
+  },
+  {
+   "id": "F59",
+   "says": "score",
+   "about": "Qwen3.8 Max",
+   "value": "79.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Max\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 8 | [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) |  | 79.3% | 2.3K | $0.0080 | 18.95 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F60",
+   "says": "cost",
+   "about": "Qwen3.8 Max",
+   "value": "$0.0080",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Max\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 8 | [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) |  | 79.3% | 2.3K | $0.0080 | 18.95 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F61",
+   "says": "note",
+   "about": "Qwen3.8 Max",
+   "value": "2.3K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Max\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 8 | [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) |  | 79.3% | 2.3K | $0.0080 | 18.95 s |"
+  },
+  {
+   "id": "F62",
+   "says": "model-name",
+   "about": "Qwen3.8 Max",
+   "value": "Qwen3.8 Max",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Max\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 8 | [Qwen3.8 Max](https://playground.roboflow.com/models/qwen/qwen3-8-max) |  | 79.3% | 2.3K | $0.0080 | 18.95 s |"
+  },
+  {
+   "id": "F63",
+   "says": "score",
+   "about": "Claude Sonnet 5.5",
+   "value": "66.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Sonnet 5.5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) | 74.3 | 79.3 | 91.7 | 66.3 | 76.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F64",
+   "says": "model-name",
+   "about": "Claude Sonnet 5.5",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Sonnet 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) | 74.3 | 79.3 | 91.7 | 66.3 | 76.4 |"
+  },
+  {
+   "id": "F65",
+   "says": "score",
+   "about": "Claude Sonnet 5.5",
+   "value": "77.6%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5.5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 10 | [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) |  | 77.6% | 2.5K | $0.0073 | 8.33 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F66",
+   "says": "cost",
+   "about": "Claude Sonnet 5.5",
+   "value": "$0.0073",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5.5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 10 | [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) |  | 77.6% | 2.5K | $0.0073 | 8.33 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F67",
+   "says": "note",
+   "about": "Claude Sonnet 5.5",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5.5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 10 | [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) |  | 77.6% | 2.5K | $0.0073 | 8.33 s |"
+  },
+  {
+   "id": "F68",
+   "says": "model-name",
+   "about": "Claude Sonnet 5.5",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Sonnet 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 10 | [Claude Sonnet 5.5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5-5) |  | 77.6% | 2.5K | $0.0073 | 8.33 s |"
+  },
+  {
+   "id": "F69",
+   "says": "score",
+   "about": "Gemini 3.6 Flash",
+   "value": "71.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.6 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) | 57.1 | 80.2 | 99.0 | 71.8 | 77.7 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F70",
+   "says": "model-name",
+   "about": "Gemini 3.6 Flash",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.6 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) | 57.1 | 80.2 | 99.0 | 71.8 | 77.7 |"
+  },
+  {
+   "id": "F71",
+   "says": "score",
+   "about": "Gemini 3.6 Flash",
+   "value": "77.1%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.6 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 11 | [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) |  | 77.1% | 1.8K | $0.0033 | 10.43 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F72",
+   "says": "cost",
+   "about": "Gemini 3.6 Flash",
+   "value": "$0.0033",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.6 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 11 | [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) |  | 77.1% | 1.8K | $0.0033 | 10.43 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F73",
+   "says": "note",
+   "about": "Gemini 3.6 Flash",
+   "value": "1.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.6 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 11 | [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) |  | 77.1% | 1.8K | $0.0033 | 10.43 s |"
+  },
+  {
+   "id": "F74",
+   "says": "model-name",
+   "about": "Gemini 3.6 Flash",
+   "value": "Gemini 3.6 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.6 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 11 | [Gemini 3.6 Flash](https://playground.roboflow.com/models/google/gemini-3-6-flash) |  | 77.1% | 1.8K | $0.0033 | 10.43 s |"
+  },
+  {
+   "id": "F75",
+   "says": "score",
+   "about": "GPT-6 Sol",
+   "value": "66.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-6 Sol\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) | 74.7 | 76.6 | 93.8 | 66.7 | 72.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F76",
+   "says": "model-name",
+   "about": "GPT-6 Sol",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) | 74.7 | 76.6 | 93.8 | 66.7 | 72.6 |"
+  },
+  {
+   "id": "F77",
+   "says": "score",
+   "about": "GPT-6 Sol",
+   "value": "76.9%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Sol\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 12 | [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) |  | 76.9% | 2.2K | $0.0074 | 10.20 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F78",
+   "says": "cost",
+   "about": "GPT-6 Sol",
+   "value": "$0.0074",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Sol\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 12 | [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) |  | 76.9% | 2.2K | $0.0074 | 10.20 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F79",
+   "says": "note",
+   "about": "GPT-6 Sol",
+   "value": "2.2K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Sol\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 12 | [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) |  | 76.9% | 2.2K | $0.0074 | 10.20 s |"
+  },
+  {
+   "id": "F80",
+   "says": "model-name",
+   "about": "GPT-6 Sol",
+   "value": "GPT-6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 12 | [GPT-6 Sol](https://playground.roboflow.com/models/openai/gpt-6-sol) |  | 76.9% | 2.2K | $0.0074 | 10.20 s |"
+  },
+  {
+   "id": "F81",
+   "says": "score",
+   "about": "Gemini 3.1 Pro",
+   "value": "72.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.1 Pro\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) | 67.4 | 71.6 | 100.0 | 72.6 | 72.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F82",
+   "says": "model-name",
+   "about": "Gemini 3.1 Pro",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.1 Pro\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) | 67.4 | 71.6 | 100.0 | 72.6 | 72.2 |"
+  },
+  {
+   "id": "F83",
+   "says": "score",
+   "about": "Gemini 3.1 Pro",
+   "value": "76.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.1 Pro\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 13 | [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) |  | 76.8% | 1.8K | $0.010 | 8.44 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F84",
+   "says": "cost",
+   "about": "Gemini 3.1 Pro",
+   "value": "$0.010",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.1 Pro\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 13 | [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) |  | 76.8% | 1.8K | $0.010 | 8.44 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F85",
+   "says": "note",
+   "about": "Gemini 3.1 Pro",
+   "value": "1.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.1 Pro\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 13 | [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) |  | 76.8% | 1.8K | $0.010 | 8.44 s |"
+  },
+  {
+   "id": "F86",
+   "says": "model-name",
+   "about": "Gemini 3.1 Pro",
+   "value": "Gemini 3.1 Pro",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.1 Pro\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 13 | [Gemini 3.1 Pro](https://playground.roboflow.com/models/google/gemini-3-1-pro) |  | 76.8% | 1.8K | $0.010 | 8.44 s |"
+  },
+  {
+   "id": "F87",
+   "says": "score",
+   "about": "Claude Fable 5.1",
+   "value": "72.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Fable 5.1\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) | 61.4 | 69.4 | 97.9 | 72.9 | 72.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F88",
+   "says": "model-name",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Fable 5.1\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) | 61.4 | 69.4 | 97.9 | 72.9 | 72.0 |"
+  },
+  {
+   "id": "F89",
+   "says": "score",
+   "about": "Claude Fable 5.1",
+   "value": "74.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5.1\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 14 | [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) |  | 74.7% | 2.5K | $0.039 | 8.35 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F90",
+   "says": "cost",
+   "about": "Claude Fable 5.1",
+   "value": "$0.039",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5.1\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 14 | [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) |  | 74.7% | 2.5K | $0.039 | 8.35 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F91",
+   "says": "note",
+   "about": "Claude Fable 5.1",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5.1\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 14 | [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) |  | 74.7% | 2.5K | $0.039 | 8.35 s |"
+  },
+  {
+   "id": "F92",
+   "says": "model-name",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Fable 5.1\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 14 | [Claude Fable 5.1](https://playground.roboflow.com/models/anthropic/claude-fable-5-1) |  | 74.7% | 2.5K | $0.039 | 8.35 s |"
+  },
+  {
+   "id": "F93",
+   "says": "score",
+   "about": "GPT-5.6 Sol",
+   "value": "63.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-5.6 Sol\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) | 68.4 | 74.3 | 89.6 | 63.6 | 66.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F94",
+   "says": "model-name",
+   "about": "GPT-5.6 Sol",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) | 68.4 | 74.3 | 89.6 | 63.6 | 66.0 |"
+  },
+  {
+   "id": "F95",
+   "says": "score",
+   "about": "GPT-5.6 Sol",
+   "value": "72.4%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Sol\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 18 | [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) |  | 72.4% | 2.4K | $0.019 | 12.16 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F96",
+   "says": "cost",
+   "about": "GPT-5.6 Sol",
+   "value": "$0.019",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Sol\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 18 | [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) |  | 72.4% | 2.4K | $0.019 | 12.16 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F97",
+   "says": "note",
+   "about": "GPT-5.6 Sol",
+   "value": "2.4K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Sol\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 18 | [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) |  | 72.4% | 2.4K | $0.019 | 12.16 s |"
+  },
+  {
+   "id": "F98",
+   "says": "model-name",
+   "about": "GPT-5.6 Sol",
+   "value": "GPT-5.6 Sol",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Sol\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 18 | [GPT-5.6 Sol](https://playground.roboflow.com/models/openai/gpt-5-6-sol) |  | 72.4% | 2.4K | $0.019 | 12.16 s |"
+  },
+  {
+   "id": "F99",
+   "says": "score",
+   "about": "Claude Fable 5",
+   "value": "72.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Fable 5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) | 56.4 | 63.5 | 100.0 | 72.3 | 66.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F100",
+   "says": "model-name",
+   "about": "Claude Fable 5",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Fable 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) | 56.4 | 63.5 | 100.0 | 72.3 | 66.2 |"
+  },
+  {
+   "id": "F101",
+   "says": "score",
+   "about": "Claude Fable 5",
+   "value": "71.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 19 | [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) |  | 71.7% | 2.6K | $0.039 | 9.54 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F102",
+   "says": "cost",
+   "about": "Claude Fable 5",
+   "value": "$0.039",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 19 | [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) |  | 71.7% | 2.6K | $0.039 | 9.54 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F103",
+   "says": "note",
+   "about": "Claude Fable 5",
+   "value": "2.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Fable 5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 19 | [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) |  | 71.7% | 2.6K | $0.039 | 9.54 s |"
+  },
+  {
+   "id": "F104",
+   "says": "model-name",
+   "about": "Claude Fable 5",
+   "value": "Claude Fable 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Fable 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 19 | [Claude Fable 5](https://playground.roboflow.com/models/anthropic/claude-fable-5) |  | 71.7% | 2.6K | $0.039 | 9.54 s |"
+  },
+  {
+   "id": "F105",
+   "says": "score",
+   "about": "Claude Opus 5",
+   "value": "68.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Opus 5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) | 54.4 | 70.3 | 90.6 | 68.0 | 71.5 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F106",
+   "says": "model-name",
+   "about": "Claude Opus 5",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) | 54.4 | 70.3 | 90.6 | 68.0 | 71.5 |"
+  },
+  {
+   "id": "F107",
+   "says": "score",
+   "about": "Claude Opus 5",
+   "value": "70.9%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 20 | [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) |  | 70.9% | 2.6K | $0.020 | 8.21 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F108",
+   "says": "cost",
+   "about": "Claude Opus 5",
+   "value": "$0.020",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 20 | [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) |  | 70.9% | 2.6K | $0.020 | 8.21 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F109",
+   "says": "note",
+   "about": "Claude Opus 5",
+   "value": "2.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 20 | [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) |  | 70.9% | 2.6K | $0.020 | 8.21 s |"
+  },
+  {
+   "id": "F110",
+   "says": "model-name",
+   "about": "Claude Opus 5",
+   "value": "Claude Opus 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 20 | [Claude Opus 5](https://playground.roboflow.com/models/anthropic/claude-opus-5) |  | 70.9% | 2.6K | $0.020 | 8.21 s |"
+  },
+  {
+   "id": "F111",
+   "says": "score",
+   "about": "GPT-6 Luna",
+   "value": "59.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-6 Luna\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) | 65.5 | 71.6 | 87.5 | 59.8 | 64.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F112",
+   "says": "model-name",
+   "about": "GPT-6 Luna",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Luna\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) | 65.5 | 71.6 | 87.5 | 59.8 | 64.2 |"
+  },
+  {
+   "id": "F113",
+   "says": "score",
+   "about": "GPT-6 Luna",
+   "value": "69.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Luna\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 21 | [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) |  | 69.7% | 2.3K | $0.0004 | 10.21 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F114",
+   "says": "cost",
+   "about": "GPT-6 Luna",
+   "value": "$0.0004",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Luna\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 21 | [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) |  | 69.7% | 2.3K | $0.0004 | 10.21 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F115",
+   "says": "note",
+   "about": "GPT-6 Luna",
+   "value": "2.3K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-6 Luna\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 21 | [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) |  | 69.7% | 2.3K | $0.0004 | 10.21 s |"
+  },
+  {
+   "id": "F116",
+   "says": "model-name",
+   "about": "GPT-6 Luna",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-6 Luna\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 21 | [GPT-6 Luna](https://playground.roboflow.com/models/openai/gpt-6-luna) |  | 69.7% | 2.3K | $0.0004 | 10.21 s |"
+  },
+  {
+   "id": "F117",
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "61.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Haiku 5.5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW | 65.8 | 68.9 | 83.3 | 61.2 | 68.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F118",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Haiku 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW | 65.8 | 68.9 | 83.3 | 61.2 | 68.9 |"
+  },
+  {
+   "id": "F119",
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "69.6%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Haiku 5.5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 22 | [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW |  | 69.6% | 2.9K | $0.0006 | 11.01 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F120",
+   "says": "cost",
+   "about": "Claude Haiku 5.5",
+   "value": "$0.0006",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Haiku 5.5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 22 | [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW |  | 69.6% | 2.9K | $0.0006 | 11.01 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F121",
+   "says": "note",
+   "about": "Claude Haiku 5.5",
+   "value": "2.9K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Haiku 5.5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 22 | [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW |  | 69.6% | 2.9K | $0.0006 | 11.01 s |"
+  },
+  {
+   "id": "F122",
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Haiku 5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 22 | [Claude Haiku 5.5](https://playground.roboflow.com/models/anthropic/claude-haiku-5-5)NEW |  | 69.6% | 2.9K | $0.0006 | 11.01 s |"
+  },
+  {
+   "id": "F123",
+   "says": "score",
+   "about": "Qwen3.8 27B",
+   "value": "65.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 27B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F124",
+   "says": "model-name",
+   "about": "Qwen3.8 27B",
+   "value": "Qwen3.8 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |"
+  },
+  {
+   "id": "F125",
+   "says": "score",
+   "about": "Qwen3.8 27B",
+   "value": "64.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 27B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F126",
+   "says": "model-name",
+   "about": "Qwen3.8 27B",
+   "value": "Qwen3.8 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |"
+  },
+  {
+   "id": "F127",
+   "says": "score",
+   "about": "Qwen3.8 27B",
+   "value": "85.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 27B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F128",
+   "says": "model-name",
+   "about": "Qwen3.8 27B",
+   "value": "Qwen3.8 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |"
+  },
+  {
+   "id": "F129",
+   "says": "score",
+   "about": "Qwen3.8 27B",
+   "value": "62.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 27B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F130",
+   "says": "model-name",
+   "about": "Qwen3.8 27B",
+   "value": "Qwen3.8 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) | 65.7 | 64.9 | 85.4 | – | 62.0 |"
+  },
+  {
+   "id": "F131",
+   "says": "score",
+   "about": "Qwen3.8 27B",
+   "value": "69.5%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 27B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 23 | [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) |  | 69.5% 4/5 tasks | 2.8K | ~$0.0009 | 17.99 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F132",
+   "says": "cost",
+   "about": "Qwen3.8 27B",
+   "value": "$0.0009",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 27B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 23 | [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) |  | 69.5% 4/5 tasks | 2.8K | ~$0.0009 | 17.99 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F133",
+   "says": "partial",
+   "about": "Qwen3.8 27B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 27B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 23 | [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) |  | 69.5% 4/5 tasks | 2.8K | ~$0.0009 | 17.99 s |"
+  },
+  {
+   "id": "F134",
+   "says": "note",
+   "about": "Qwen3.8 27B",
+   "value": "2.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 27B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 23 | [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) |  | 69.5% 4/5 tasks | 2.8K | ~$0.0009 | 17.99 s |"
+  },
+  {
+   "id": "F135",
+   "says": "model-name",
+   "about": "Qwen3.8 27B",
+   "value": "Qwen3.8 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 23 | [Qwen3.8 27B](https://playground.roboflow.com/models/qwen/qwen3-8-27b) |  | 69.5% 4/5 tasks | 2.8K | ~$0.0009 | 17.99 s |"
+  },
+  {
+   "id": "F136",
+   "says": "score",
+   "about": "Qwen3.6 27B",
+   "value": "59.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 27B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F137",
+   "says": "model-name",
+   "about": "Qwen3.6 27B",
+   "value": "Qwen3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |"
+  },
+  {
+   "id": "F138",
+   "says": "score",
+   "about": "Qwen3.6 27B",
+   "value": "67.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 27B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F139",
+   "says": "model-name",
+   "about": "Qwen3.6 27B",
+   "value": "Qwen3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |"
+  },
+  {
+   "id": "F140",
+   "says": "score",
+   "about": "Qwen3.6 27B",
+   "value": "82.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 27B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F141",
+   "says": "model-name",
+   "about": "Qwen3.6 27B",
+   "value": "Qwen3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |"
+  },
+  {
+   "id": "F142",
+   "says": "score",
+   "about": "Qwen3.6 27B",
+   "value": "59.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 27B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F143",
+   "says": "model-name",
+   "about": "Qwen3.6 27B",
+   "value": "Qwen3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) | 59.7 | 67.1 | 82.3 | – | 59.2 |"
+  },
+  {
+   "id": "F144",
+   "says": "score",
+   "about": "Qwen3.6 27B",
+   "value": "67.1%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 27B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 24 | [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) |  | 67.1% 4/5 tasks | 4.1K | ~$0.0021 | 42.09 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F145",
+   "says": "cost",
+   "about": "Qwen3.6 27B",
+   "value": "$0.0021",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 27B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 24 | [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) |  | 67.1% 4/5 tasks | 4.1K | ~$0.0021 | 42.09 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F146",
+   "says": "partial",
+   "about": "Qwen3.6 27B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 27B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 24 | [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) |  | 67.1% 4/5 tasks | 4.1K | ~$0.0021 | 42.09 s |"
+  },
+  {
+   "id": "F147",
+   "says": "note",
+   "about": "Qwen3.6 27B",
+   "value": "4.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 27B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 24 | [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) |  | 67.1% 4/5 tasks | 4.1K | ~$0.0021 | 42.09 s |"
+  },
+  {
+   "id": "F148",
+   "says": "model-name",
+   "about": "Qwen3.6 27B",
+   "value": "Qwen3.6 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 24 | [Qwen3.6 27B](https://playground.roboflow.com/models/qwen/qwen3-6-27b) |  | 67.1% 4/5 tasks | 4.1K | ~$0.0021 | 42.09 s |"
+  },
+  {
+   "id": "F149",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "58.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-5.5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) | 43.6 | 68.0 | 89.6 | 58.4 | 70.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F150",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) | 43.6 | 68.0 | 89.6 | 58.4 | 70.6 |"
+  },
+  {
+   "id": "F151",
+   "says": "score",
+   "about": "GPT-5.5",
+   "value": "66.0%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 25 | [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) |  | 66.0% | 2.4K | $0.025 | 10.10 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F152",
+   "says": "cost",
+   "about": "GPT-5.5",
+   "value": "$0.025",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 25 | [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) |  | 66.0% | 2.4K | $0.025 | 10.10 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F153",
+   "says": "note",
+   "about": "GPT-5.5",
+   "value": "2.4K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 25 | [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) |  | 66.0% | 2.4K | $0.025 | 10.10 s |"
+  },
+  {
+   "id": "F154",
+   "says": "model-name",
+   "about": "GPT-5.5",
+   "value": "GPT-5.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 25 | [GPT-5.5](https://playground.roboflow.com/models/openai/gpt-5-5) |  | 66.0% | 2.4K | $0.025 | 10.10 s |"
+  },
+  {
+   "id": "F155",
+   "says": "score",
+   "about": "GPT-5.6 Terra",
+   "value": "56.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-5.6 Terra\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) | 60.6 | 65.8 | 86.5 | 56.3 | 60.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F156",
+   "says": "model-name",
+   "about": "GPT-5.6 Terra",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Terra\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) | 60.6 | 65.8 | 86.5 | 56.3 | 60.9 |"
+  },
+  {
+   "id": "F157",
+   "says": "score",
+   "about": "GPT-5.6 Terra",
+   "value": "66.0%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Terra\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 26 | [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) |  | 66.0% | 2.4K | $0.010 | 9.52 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F158",
+   "says": "cost",
+   "about": "GPT-5.6 Terra",
+   "value": "$0.010",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Terra\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 26 | [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) |  | 66.0% | 2.4K | $0.010 | 9.52 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F159",
+   "says": "note",
+   "about": "GPT-5.6 Terra",
+   "value": "2.4K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Terra\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 26 | [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) |  | 66.0% | 2.4K | $0.010 | 9.52 s |"
+  },
+  {
+   "id": "F160",
+   "says": "model-name",
+   "about": "GPT-5.6 Terra",
+   "value": "GPT-5.6 Terra",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Terra\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 26 | [GPT-5.6 Terra](https://playground.roboflow.com/models/openai/gpt-5-6-terra) |  | 66.0% | 2.4K | $0.010 | 9.52 s |"
+  },
+  {
+   "id": "F161",
+   "says": "score",
+   "about": "Gemini 3 Flash",
+   "value": "63.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) | 38.6 | 67.6 | 93.8 | 63.9 | 64.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F162",
+   "says": "model-name",
+   "about": "Gemini 3 Flash",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) | 38.6 | 67.6 | 93.8 | 63.9 | 64.9 |"
+  },
+  {
+   "id": "F163",
+   "says": "score",
+   "about": "Gemini 3 Flash",
+   "value": "65.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 27 | [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) |  | 65.7% | 1.8K | $0.0024 | 5.83 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F164",
+   "says": "cost",
+   "about": "Gemini 3 Flash",
+   "value": "$0.0024",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 27 | [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) |  | 65.7% | 1.8K | $0.0024 | 5.83 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F165",
+   "says": "note",
+   "about": "Gemini 3 Flash",
+   "value": "1.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 27 | [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) |  | 65.7% | 1.8K | $0.0024 | 5.83 s |"
+  },
+  {
+   "id": "F166",
+   "says": "model-name",
+   "about": "Gemini 3 Flash",
+   "value": "Gemini 3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 27 | [Gemini 3 Flash](https://playground.roboflow.com/models/google/gemini-3-flash) |  | 65.7% | 1.8K | $0.0024 | 5.83 s |"
+  },
+  {
+   "id": "F167",
+   "says": "score",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "57.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 35B-A3B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F168",
+   "says": "model-name",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "Qwen3.6 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |"
+  },
+  {
+   "id": "F169",
+   "says": "score",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "65.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 35B-A3B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F170",
+   "says": "model-name",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "Qwen3.6 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |"
+  },
+  {
+   "id": "F171",
+   "says": "score",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "82.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 35B-A3B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F172",
+   "says": "model-name",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "Qwen3.6 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |"
+  },
+  {
+   "id": "F173",
+   "says": "score",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "54.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.6 35B-A3B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F174",
+   "says": "model-name",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "Qwen3.6 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) | 57.0 | 65.3 | 82.3 | – | 54.8 |"
+  },
+  {
+   "id": "F175",
+   "says": "score",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "64.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 35B-A3B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 28 | [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) |  | 64.8% 4/5 tasks | 4.6K | ~$0.0012 | 27.10 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F176",
+   "says": "cost",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "$0.0012",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 35B-A3B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 28 | [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) |  | 64.8% 4/5 tasks | 4.6K | ~$0.0012 | 27.10 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F177",
+   "says": "partial",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 35B-A3B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 28 | [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) |  | 64.8% 4/5 tasks | 4.6K | ~$0.0012 | 27.10 s |"
+  },
+  {
+   "id": "F178",
+   "says": "note",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "4.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.6 35B-A3B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 28 | [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) |  | 64.8% 4/5 tasks | 4.6K | ~$0.0012 | 27.10 s |"
+  },
+  {
+   "id": "F179",
+   "says": "model-name",
+   "about": "Qwen3.6 35B-A3B",
+   "value": "Qwen3.6 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.6 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 28 | [Qwen3.6 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-6-35b-a3b) |  | 64.8% 4/5 tasks | 4.6K | ~$0.0012 | 27.10 s |"
+  },
+  {
+   "id": "F180",
+   "says": "score",
+   "about": "GPT-5.6 Luna",
+   "value": "51.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-5.6 Luna\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) | 61.0 | 67.1 | 83.3 | 51.8 | 60.5 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F181",
+   "says": "model-name",
+   "about": "GPT-5.6 Luna",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Luna\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) | 61.0 | 67.1 | 83.3 | 51.8 | 60.5 |"
+  },
+  {
+   "id": "F182",
+   "says": "score",
+   "about": "GPT-5.6 Luna",
+   "value": "64.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Luna\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 29 | [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) |  | 64.7% | 2.4K | $0.0011 | 8.60 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F183",
+   "says": "cost",
+   "about": "GPT-5.6 Luna",
+   "value": "$0.0011",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Luna\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 29 | [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) |  | 64.7% | 2.4K | $0.0011 | 8.60 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F184",
+   "says": "note",
+   "about": "GPT-5.6 Luna",
+   "value": "2.4K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.6 Luna\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 29 | [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) |  | 64.7% | 2.4K | $0.0011 | 8.60 s |"
+  },
+  {
+   "id": "F185",
+   "says": "model-name",
+   "about": "GPT-5.6 Luna",
+   "value": "GPT-5.6 Luna",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.6 Luna\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 29 | [GPT-5.6 Luna](https://playground.roboflow.com/models/openai/gpt-5-6-luna) |  | 64.7% | 2.4K | $0.0011 | 8.60 s |"
+  },
+  {
+   "id": "F186",
+   "says": "score",
+   "about": "Qwen3.5 27B",
+   "value": "50.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 27B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F187",
+   "says": "model-name",
+   "about": "Qwen3.5 27B",
+   "value": "Qwen3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |"
+  },
+  {
+   "id": "F188",
+   "says": "score",
+   "about": "Qwen3.5 27B",
+   "value": "67.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 27B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F189",
+   "says": "model-name",
+   "about": "Qwen3.5 27B",
+   "value": "Qwen3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |"
+  },
+  {
+   "id": "F190",
+   "says": "score",
+   "about": "Qwen3.5 27B",
+   "value": "80.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 27B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F191",
+   "says": "model-name",
+   "about": "Qwen3.5 27B",
+   "value": "Qwen3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |"
+  },
+  {
+   "id": "F192",
+   "says": "score",
+   "about": "Qwen3.5 27B",
+   "value": "58.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 27B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F193",
+   "says": "model-name",
+   "about": "Qwen3.5 27B",
+   "value": "Qwen3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) | 50.5 | 67.6 | 80.2 | – | 58.1 |"
+  },
+  {
+   "id": "F194",
+   "says": "score",
+   "about": "Qwen3.5 27B",
+   "value": "64.1%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 27B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 30 | [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) |  | 64.1% 4/5 tasks | 5.0K | ~$0.0043 | 80.37 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F195",
+   "says": "cost",
+   "about": "Qwen3.5 27B",
+   "value": "$0.0043",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 27B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 30 | [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) |  | 64.1% 4/5 tasks | 5.0K | ~$0.0043 | 80.37 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F196",
+   "says": "partial",
+   "about": "Qwen3.5 27B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 27B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 30 | [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) |  | 64.1% 4/5 tasks | 5.0K | ~$0.0043 | 80.37 s |"
+  },
+  {
+   "id": "F197",
+   "says": "note",
+   "about": "Qwen3.5 27B",
+   "value": "5.0K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 27B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 30 | [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) |  | 64.1% 4/5 tasks | 5.0K | ~$0.0043 | 80.37 s |"
+  },
+  {
+   "id": "F198",
+   "says": "model-name",
+   "about": "Qwen3.5 27B",
+   "value": "Qwen3.5 27B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 27B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 30 | [Qwen3.5 27B](https://playground.roboflow.com/models/qwen/qwen3-5-27b) |  | 64.1% 4/5 tasks | 5.0K | ~$0.0043 | 80.37 s |"
+  },
+  {
+   "id": "F199",
+   "says": "score",
+   "about": "Grok 4.7",
+   "value": "63.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Grok 4.7\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) | 40.4 | 61.7 | 87.5 | 63.6 | 64.2 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F200",
+   "says": "model-name",
+   "about": "Grok 4.7",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.7\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) | 40.4 | 61.7 | 87.5 | 63.6 | 64.2 |"
+  },
+  {
+   "id": "F201",
+   "says": "score",
+   "about": "Grok 4.7",
+   "value": "63.5%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.7\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 31 | [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) |  | 63.5% | 5.1K | $0.020 | 33.31 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F202",
+   "says": "cost",
+   "about": "Grok 4.7",
+   "value": "$0.020",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.7\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 31 | [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) |  | 63.5% | 5.1K | $0.020 | 33.31 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F203",
+   "says": "note",
+   "about": "Grok 4.7",
+   "value": "5.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.7\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 31 | [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) |  | 63.5% | 5.1K | $0.020 | 33.31 s |"
+  },
+  {
+   "id": "F204",
+   "says": "model-name",
+   "about": "Grok 4.7",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.7\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 31 | [Grok 4.7](https://playground.roboflow.com/models/spacexai/grok-4-7) |  | 63.5% | 5.1K | $0.020 | 33.31 s |"
+  },
+  {
+   "id": "F205",
+   "says": "score",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "52.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 35B-A3B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F206",
+   "says": "model-name",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "Qwen3.5 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |"
+  },
+  {
+   "id": "F207",
+   "says": "score",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "62.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 35B-A3B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F208",
+   "says": "model-name",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "Qwen3.5 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |"
+  },
+  {
+   "id": "F209",
+   "says": "score",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "80.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 35B-A3B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F210",
+   "says": "model-name",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "Qwen3.5 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |"
+  },
+  {
+   "id": "F211",
+   "says": "score",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "54.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 35B-A3B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F212",
+   "says": "model-name",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "Qwen3.5 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) | 52.9 | 62.6 | 80.2 | – | 54.1 |"
+  },
+  {
+   "id": "F213",
+   "says": "score",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "62.5%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 35B-A3B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 32 | [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) |  | 62.5% 4/5 tasks | 5.6K | ~$0.0016 | 31.88 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F214",
+   "says": "cost",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "$0.0016",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 35B-A3B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 32 | [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) |  | 62.5% 4/5 tasks | 5.6K | ~$0.0016 | 31.88 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F215",
+   "says": "partial",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 35B-A3B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 32 | [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) |  | 62.5% 4/5 tasks | 5.6K | ~$0.0016 | 31.88 s |"
+  },
+  {
+   "id": "F216",
+   "says": "note",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "5.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 35B-A3B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 32 | [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) |  | 62.5% 4/5 tasks | 5.6K | ~$0.0016 | 31.88 s |"
+  },
+  {
+   "id": "F217",
+   "says": "model-name",
+   "about": "Qwen3.5 35B-A3B",
+   "value": "Qwen3.5 35B-A3B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 35B-A3B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 32 | [Qwen3.5 35B-A3B](https://playground.roboflow.com/models/qwen/qwen3-5-35b-a3b) |  | 62.5% 4/5 tasks | 5.6K | ~$0.0016 | 31.88 s |"
+  },
+  {
+   "id": "F218",
+   "says": "score",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "65.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Gemini 3.5 Flash-Lite\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) | 57.5 | 52.7 | 84.4 | 65.8 | 48.3 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F219",
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "Gemini 3.5 Flash-Lite",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.5 Flash-Lite\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) | 57.5 | 52.7 | 84.4 | 65.8 | 48.3 |"
+  },
+  {
+   "id": "F220",
+   "says": "score",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "61.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash-Lite\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 33 | [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) |  | 61.7% | 1.6K | $0.0014 | 3.92 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F221",
+   "says": "cost",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "$0.0014",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash-Lite\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 33 | [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) |  | 61.7% | 1.6K | $0.0014 | 3.92 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F222",
+   "says": "note",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "1.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Gemini 3.5 Flash-Lite\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 33 | [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) |  | 61.7% | 1.6K | $0.0014 | 3.92 s |"
+  },
+  {
+   "id": "F223",
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "Gemini 3.5 Flash-Lite",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Gemini 3.5 Flash-Lite\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 33 | [Gemini 3.5 Flash-Lite](https://playground.roboflow.com/models/google/gemini-3-5-flash-lite) |  | 61.7% | 1.6K | $0.0014 | 3.92 s |"
+  },
+  {
+   "id": "F224",
+   "says": "score",
+   "about": "Qwen3.8 Flash",
+   "value": "58.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) | 59.8 | 56.3 | 88.5 | 58.9 | 35.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F225",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash",
+   "value": "Qwen3.8 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) | 59.8 | 56.3 | 88.5 | 58.9 | 35.1 |"
+  },
+  {
+   "id": "F226",
+   "says": "score",
+   "about": "Qwen3.8 Flash",
+   "value": "59.7%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 35 | [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) |  | 59.7% | 1.8K | $0.0004 | 7.34 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F227",
+   "says": "cost",
+   "about": "Qwen3.8 Flash",
+   "value": "$0.0004",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 35 | [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) |  | 59.7% | 1.8K | $0.0004 | 7.34 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F228",
+   "says": "note",
+   "about": "Qwen3.8 Flash",
+   "value": "1.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 35 | [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) |  | 59.7% | 1.8K | $0.0004 | 7.34 s |"
+  },
+  {
+   "id": "F229",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash",
+   "value": "Qwen3.8 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 35 | [Qwen3.8 Flash](https://playground.roboflow.com/models/qwen/qwen3-8-flash) |  | 59.7% | 1.8K | $0.0004 | 7.34 s |"
+  },
+  {
+   "id": "F230",
+   "says": "score",
+   "about": "Grok 4.6",
+   "value": "60.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Grok 4.6\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) | 23.8 | 65.8 | 84.4 | 60.6 | 61.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F231",
+   "says": "model-name",
+   "about": "Grok 4.6",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.6\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) | 23.8 | 65.8 | 84.4 | 60.6 | 61.1 |"
+  },
+  {
+   "id": "F232",
+   "says": "score",
+   "about": "Grok 4.6",
+   "value": "59.1%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.6\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 36 | [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) |  | 59.1% | 3.1K | $0.011 | 19.32 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F233",
+   "says": "cost",
+   "about": "Grok 4.6",
+   "value": "$0.011",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.6\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 36 | [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) |  | 59.1% | 3.1K | $0.011 | 19.32 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F234",
+   "says": "note",
+   "about": "Grok 4.6",
+   "value": "3.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.6\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 36 | [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) |  | 59.1% | 3.1K | $0.011 | 19.32 s |"
+  },
+  {
+   "id": "F235",
+   "says": "model-name",
+   "about": "Grok 4.6",
+   "value": "Grok 4.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.6\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 36 | [Grok 4.6](https://playground.roboflow.com/models/spacexai/grok-4-6) |  | 59.1% | 3.1K | $0.011 | 19.32 s |"
+  },
+  {
+   "id": "F236",
+   "says": "score",
+   "about": "Qwen3.7 Plus",
+   "value": "60.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.7 Plus\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) | 60.1 | 50.0 | 84.4 | 60.3 | 39.7 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F237",
+   "says": "model-name",
+   "about": "Qwen3.7 Plus",
+   "value": "Qwen3.7 Plus",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.7 Plus\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) | 60.1 | 50.0 | 84.4 | 60.3 | 39.7 |"
+  },
+  {
+   "id": "F238",
+   "says": "score",
+   "about": "Qwen3.7 Plus",
+   "value": "58.9%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Plus\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 37 | [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) |  | 58.9% | 1.7K | $0.0008 | 7.77 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F239",
+   "says": "cost",
+   "about": "Qwen3.7 Plus",
+   "value": "$0.0008",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Plus\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 37 | [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) |  | 58.9% | 1.7K | $0.0008 | 7.77 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F240",
+   "says": "note",
+   "about": "Qwen3.7 Plus",
+   "value": "1.7K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Plus\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 37 | [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) |  | 58.9% | 1.7K | $0.0008 | 7.77 s |"
+  },
+  {
+   "id": "F241",
+   "says": "model-name",
+   "about": "Qwen3.7 Plus",
+   "value": "Qwen3.7 Plus",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.7 Plus\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 37 | [Qwen3.7 Plus](https://playground.roboflow.com/models/qwen/qwen3-7-plus) |  | 58.9% | 1.7K | $0.0008 | 7.77 s |"
+  },
+  {
+   "id": "F242",
+   "says": "score",
+   "about": "Claude Opus 4.8",
+   "value": "61.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Opus 4.8\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) | 38.6 | 54.0 | 84.4 | 61.5 | 53.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F243",
+   "says": "model-name",
+   "about": "Claude Opus 4.8",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 4.8\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) | 38.6 | 54.0 | 84.4 | 61.5 | 53.0 |"
+  },
+  {
+   "id": "F244",
+   "says": "score",
+   "about": "Claude Opus 4.8",
+   "value": "58.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 4.8\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 38 | [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) |  | 58.3% | 2.6K | $0.021 | 7.66 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F245",
+   "says": "cost",
+   "about": "Claude Opus 4.8",
+   "value": "$0.021",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 4.8\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 38 | [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) |  | 58.3% | 2.6K | $0.021 | 7.66 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.001
+   }
+  },
+  {
+   "id": "F246",
+   "says": "note",
+   "about": "Claude Opus 4.8",
+   "value": "2.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Opus 4.8\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 38 | [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) |  | 58.3% | 2.6K | $0.021 | 7.66 s |"
+  },
+  {
+   "id": "F247",
+   "says": "model-name",
+   "about": "Claude Opus 4.8",
+   "value": "Claude Opus 4.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Opus 4.8\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 38 | [Claude Opus 4.8](https://playground.roboflow.com/models/anthropic/claude-opus-4-8) |  | 58.3% | 2.6K | $0.021 | 7.66 s |"
+  },
+  {
+   "id": "F248",
+   "says": "score",
+   "about": "Qwen3.5 9B",
+   "value": "38.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 9B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F249",
+   "says": "model-name",
+   "about": "Qwen3.5 9B",
+   "value": "Qwen3.5 9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 9B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |"
+  },
+  {
+   "id": "F250",
+   "says": "score",
+   "about": "Qwen3.5 9B",
+   "value": "56.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 9B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F251",
+   "says": "model-name",
+   "about": "Qwen3.5 9B",
+   "value": "Qwen3.5 9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 9B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |"
+  },
+  {
+   "id": "F252",
+   "says": "score",
+   "about": "Qwen3.5 9B",
+   "value": "83.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 9B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F253",
+   "says": "model-name",
+   "about": "Qwen3.5 9B",
+   "value": "Qwen3.5 9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 9B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |"
+  },
+  {
+   "id": "F254",
+   "says": "score",
+   "about": "Qwen3.5 9B",
+   "value": "45.9",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 9B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F255",
+   "says": "model-name",
+   "about": "Qwen3.5 9B",
+   "value": "Qwen3.5 9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 9B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) | 38.1 | 56.8 | 83.3 | – | 45.9 |"
+  },
+  {
+   "id": "F256",
+   "says": "score",
+   "about": "Qwen3.5 9B",
+   "value": "56.0%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 9B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 42 | [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) |  | 56.0% 4/5 tasks | 6.3K | ~$0.0021 | 41.36 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F257",
+   "says": "cost",
+   "about": "Qwen3.5 9B",
+   "value": "$0.0021",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 9B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 42 | [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) |  | 56.0% 4/5 tasks | 6.3K | ~$0.0021 | 41.36 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F258",
+   "says": "partial",
+   "about": "Qwen3.5 9B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 9B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 42 | [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) |  | 56.0% 4/5 tasks | 6.3K | ~$0.0021 | 41.36 s |"
+  },
+  {
+   "id": "F259",
+   "says": "note",
+   "about": "Qwen3.5 9B",
+   "value": "6.3K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 9B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 42 | [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) |  | 56.0% 4/5 tasks | 6.3K | ~$0.0021 | 41.36 s |"
+  },
+  {
+   "id": "F260",
+   "says": "model-name",
+   "about": "Qwen3.5 9B",
+   "value": "Qwen3.5 9B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 9B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 42 | [Qwen3.5 9B](https://playground.roboflow.com/models/qwen/qwen3-5-9b) |  | 56.0% 4/5 tasks | 6.3K | ~$0.0021 | 41.36 s |"
+  },
+  {
+   "id": "F261",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "58.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Kimi K3\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) | 51.9 | 46.0 | 81.3 | 58.6 | 42.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F262",
+   "says": "model-name",
+   "about": "Kimi K3",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Kimi K3\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) | 51.9 | 46.0 | 81.3 | 58.6 | 42.4 |"
+  },
+  {
+   "id": "F263",
+   "says": "score",
+   "about": "Kimi K3",
+   "value": "56.0%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K3\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 43 | [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) |  | 56.0% | 3.7K | $0.0042 | 9.86 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F264",
+   "says": "cost",
+   "about": "Kimi K3",
+   "value": "$0.0042",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K3\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 43 | [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) |  | 56.0% | 3.7K | $0.0042 | 9.86 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F265",
+   "says": "note",
+   "about": "Kimi K3",
+   "value": "3.7K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K3\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 43 | [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) |  | 56.0% | 3.7K | $0.0042 | 9.86 s |"
+  },
+  {
+   "id": "F266",
+   "says": "model-name",
+   "about": "Kimi K3",
+   "value": "Kimi K3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Kimi K3\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 43 | [Kimi K3](https://playground.roboflow.com/models/moonshot-ai/kimi-k3) |  | 56.0% | 3.7K | $0.0042 | 9.86 s |"
+  },
+  {
+   "id": "F267",
+   "says": "score",
+   "about": "GLM 5.3 Flash",
+   "value": "55.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GLM 5.3 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) | 33.1 | 55.4 | 84.4 | 55.4 | 51.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F268",
+   "says": "model-name",
+   "about": "GLM 5.3 Flash",
+   "value": "GLM 5.3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GLM 5.3 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) | 33.1 | 55.4 | 84.4 | 55.4 | 51.0 |"
+  },
+  {
+   "id": "F269",
+   "says": "score",
+   "about": "GLM 5.3 Flash",
+   "value": "55.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5.3 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 44 | [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) |  | 55.8% | 3.1K | $0.0002 | 9.29 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F270",
+   "says": "cost",
+   "about": "GLM 5.3 Flash",
+   "value": "$0.0002",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5.3 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 44 | [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) |  | 55.8% | 3.1K | $0.0002 | 9.29 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F271",
+   "says": "note",
+   "about": "GLM 5.3 Flash",
+   "value": "3.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5.3 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 44 | [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) |  | 55.8% | 3.1K | $0.0002 | 9.29 s |"
+  },
+  {
+   "id": "F272",
+   "says": "model-name",
+   "about": "GLM 5.3 Flash",
+   "value": "GLM 5.3 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GLM 5.3 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 44 | [GLM 5.3 Flash](https://playground.roboflow.com/models/z-ai/glm-5-3-flash) |  | 55.8% | 3.1K | $0.0002 | 9.29 s |"
+  },
+  {
+   "id": "F273",
+   "says": "score",
+   "about": "Qwen3.8 Flash Next",
+   "value": "54.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Flash Next\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F274",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash Next",
+   "value": "Qwen3.8 Flash Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash Next\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |"
+  },
+  {
+   "id": "F275",
+   "says": "score",
+   "about": "Qwen3.8 Flash Next",
+   "value": "51.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Flash Next\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F276",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash Next",
+   "value": "Qwen3.8 Flash Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash Next\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |"
+  },
+  {
+   "id": "F277",
+   "says": "score",
+   "about": "Qwen3.8 Flash Next",
+   "value": "81.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Flash Next\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F278",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash Next",
+   "value": "Qwen3.8 Flash Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash Next\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |"
+  },
+  {
+   "id": "F279",
+   "says": "score",
+   "about": "Qwen3.8 Flash Next",
+   "value": "34.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.8 Flash Next\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F280",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash Next",
+   "value": "Qwen3.8 Flash Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash Next\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) | 54.3 | 51.4 | 81.3 | – | 34.4 |"
+  },
+  {
+   "id": "F281",
+   "says": "score",
+   "about": "Qwen3.8 Flash Next",
+   "value": "55.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash Next\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 45 | [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) |  | 55.3% 4/5 tasks | 2.2K | — | 38.37 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F282",
+   "says": "partial",
+   "about": "Qwen3.8 Flash Next",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash Next\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 45 | [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) |  | 55.3% 4/5 tasks | 2.2K | — | 38.37 s |"
+  },
+  {
+   "id": "F283",
+   "says": "note",
+   "about": "Qwen3.8 Flash Next",
+   "value": "2.2K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.8 Flash Next\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 45 | [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) |  | 55.3% 4/5 tasks | 2.2K | — | 38.37 s |"
+  },
+  {
+   "id": "F284",
+   "says": "model-name",
+   "about": "Qwen3.8 Flash Next",
+   "value": "Qwen3.8 Flash Next",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.8 Flash Next\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 45 | [Qwen3.8 Flash Next](https://playground.roboflow.com/models/qwen/qwen3-8-flash-next) |  | 55.3% 4/5 tasks | 2.2K | — | 38.37 s |"
+  },
+  {
+   "id": "F285",
+   "says": "score",
+   "about": "Grok 4.5",
+   "value": "57.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Grok 4.5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) | 19.0 | 59.5 | 83.3 | 57.1 | 57.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F286",
+   "says": "model-name",
+   "about": "Grok 4.5",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) | 19.0 | 59.5 | 83.3 | 57.1 | 57.6 |"
+  },
+  {
+   "id": "F287",
+   "says": "score",
+   "about": "Grok 4.5",
+   "value": "55.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 46 | [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) |  | 55.3% | 2.5K | $0.0078 | 16.41 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F288",
+   "says": "cost",
+   "about": "Grok 4.5",
+   "value": "$0.0078",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 46 | [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) |  | 55.3% | 2.5K | $0.0078 | 16.41 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F289",
+   "says": "note",
+   "about": "Grok 4.5",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Grok 4.5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 46 | [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) |  | 55.3% | 2.5K | $0.0078 | 16.41 s |"
+  },
+  {
+   "id": "F290",
+   "says": "model-name",
+   "about": "Grok 4.5",
+   "value": "Grok 4.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Grok 4.5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 46 | [Grok 4.5](https://playground.roboflow.com/models/spacexai/grok-4-5) |  | 55.3% | 2.5K | $0.0078 | 16.41 s |"
+  },
+  {
+   "id": "F291",
+   "says": "score",
+   "about": "Claude Sonnet 5",
+   "value": "59.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Claude Sonnet 5\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) | 36.1 | 56.8 | 81.3 | 59.4 | 43.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F292",
+   "says": "model-name",
+   "about": "Claude Sonnet 5",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Sonnet 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) | 36.1 | 56.8 | 81.3 | 59.4 | 43.0 |"
+  },
+  {
+   "id": "F293",
+   "says": "score",
+   "about": "Claude Sonnet 5",
+   "value": "55.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 47 | [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) |  | 55.3% | 2.5K | $0.0074 | 5.86 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F294",
+   "says": "cost",
+   "about": "Claude Sonnet 5",
+   "value": "$0.0074",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 47 | [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) |  | 55.3% | 2.5K | $0.0074 | 5.86 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F295",
+   "says": "note",
+   "about": "Claude Sonnet 5",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Claude Sonnet 5\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 47 | [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) |  | 55.3% | 2.5K | $0.0074 | 5.86 s |"
+  },
+  {
+   "id": "F296",
+   "says": "model-name",
+   "about": "Claude Sonnet 5",
+   "value": "Claude Sonnet 5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Claude Sonnet 5\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 47 | [Claude Sonnet 5](https://playground.roboflow.com/models/anthropic/claude-sonnet-5) |  | 55.3% | 2.5K | $0.0074 | 5.86 s |"
+  },
+  {
+   "id": "F297",
+   "says": "score",
+   "about": "GLM 5V Turbo",
+   "value": "51.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GLM 5V Turbo\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) | 56.5 | 48.6 | 84.4 | 51.5 | 31.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F298",
+   "says": "model-name",
+   "about": "GLM 5V Turbo",
+   "value": "GLM 5V Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GLM 5V Turbo\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) | 56.5 | 48.6 | 84.4 | 51.5 | 31.8 |"
+  },
+  {
+   "id": "F299",
+   "says": "score",
+   "about": "GLM 5V Turbo",
+   "value": "54.6%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5V Turbo\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 49 | [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) |  | 54.6% | 2.6K | $0.0037 | 5.89 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F300",
+   "says": "cost",
+   "about": "GLM 5V Turbo",
+   "value": "$0.0037",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5V Turbo\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 49 | [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) |  | 54.6% | 2.6K | $0.0037 | 5.89 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F301",
+   "says": "note",
+   "about": "GLM 5V Turbo",
+   "value": "2.6K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GLM 5V Turbo\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 49 | [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) |  | 54.6% | 2.6K | $0.0037 | 5.89 s |"
+  },
+  {
+   "id": "F302",
+   "says": "model-name",
+   "about": "GLM 5V Turbo",
+   "value": "GLM 5V Turbo",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GLM 5V Turbo\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 49 | [GLM 5V Turbo](https://playground.roboflow.com/models/z-ai/glm-5v-turbo) |  | 54.6% | 2.6K | $0.0037 | 5.89 s |"
+  },
+  {
+   "id": "F303",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "51.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"GPT-5.4 mini\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) | 15.8 | 58.6 | 83.3 | 51.1 | 57.0 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F304",
+   "says": "model-name",
+   "about": "GPT-5.4 mini",
+   "value": "GPT-5.4 mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.4 mini\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) | 15.8 | 58.6 | 83.3 | 51.1 | 57.0 |"
+  },
+  {
+   "id": "F305",
+   "says": "score",
+   "about": "GPT-5.4 mini",
+   "value": "53.2%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.4 mini\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 51 | [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) |  | 53.2% | 2.2K | $0.0034 | 5.51 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F306",
+   "says": "cost",
+   "about": "GPT-5.4 mini",
+   "value": "$0.0034",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.4 mini\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 51 | [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) |  | 53.2% | 2.2K | $0.0034 | 5.51 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F307",
+   "says": "note",
+   "about": "GPT-5.4 mini",
+   "value": "2.2K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"GPT-5.4 mini\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 51 | [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) |  | 53.2% | 2.2K | $0.0034 | 5.51 s |"
+  },
+  {
+   "id": "F308",
+   "says": "model-name",
+   "about": "GPT-5.4 mini",
+   "value": "GPT-5.4 mini",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"GPT-5.4 mini\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 51 | [GPT-5.4 mini](https://playground.roboflow.com/models/openai/gpt-5-4-mini) |  | 53.2% | 2.2K | $0.0034 | 5.51 s |"
+  },
+  {
+   "id": "F309",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "54.4",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Kimi K2.6\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| Kimi K2.6 | 35.7 | 56.8 | 78.1 | 54.4 | 39.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F310",
+   "says": "model-name",
+   "about": "Kimi K2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Kimi K2.6\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| Kimi K2.6 | 35.7 | 56.8 | 78.1 | 54.4 | 39.1 |"
+  },
+  {
+   "id": "F311",
+   "says": "score",
+   "about": "Kimi K2.6",
+   "value": "52.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K2.6\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 52 | Kimi K2.6 |  | 52.8% | 2.5K | $0.0031 | 21.67 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F312",
+   "says": "cost",
+   "about": "Kimi K2.6",
+   "value": "$0.0031",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K2.6\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 52 | Kimi K2.6 |  | 52.8% | 2.5K | $0.0031 | 21.67 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F313",
+   "says": "note",
+   "about": "Kimi K2.6",
+   "value": "2.5K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Kimi K2.6\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 52 | Kimi K2.6 |  | 52.8% | 2.5K | $0.0031 | 21.67 s |"
+  },
+  {
+   "id": "F314",
+   "says": "model-name",
+   "about": "Kimi K2.6",
+   "value": "Kimi K2.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Kimi K2.6\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 52 | Kimi K2.6 |  | 52.8% | 2.5K | $0.0031 | 21.67 s |"
+  },
+  {
+   "id": "F315",
+   "says": "score",
+   "about": "Qwen3.7 Flash",
+   "value": "54.3",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.7 Flash\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) | 42.8 | 46.0 | 84.4 | 54.3 | 34.4 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F316",
+   "says": "model-name",
+   "about": "Qwen3.7 Flash",
+   "value": "Qwen3.7 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.7 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) | 42.8 | 46.0 | 84.4 | 54.3 | 34.4 |"
+  },
+  {
+   "id": "F317",
+   "says": "score",
+   "about": "Qwen3.7 Flash",
+   "value": "52.4%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Flash\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 53 | [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) |  | 52.4% | 1.7K | $0.0001 | 5.77 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F318",
+   "says": "cost",
+   "about": "Qwen3.7 Flash",
+   "value": "$0.0001",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Flash\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 53 | [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) |  | 52.4% | 1.7K | $0.0001 | 5.77 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F319",
+   "says": "note",
+   "about": "Qwen3.7 Flash",
+   "value": "1.7K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.7 Flash\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 53 | [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) |  | 52.4% | 1.7K | $0.0001 | 5.77 s |"
+  },
+  {
+   "id": "F320",
+   "says": "model-name",
+   "about": "Qwen3.7 Flash",
+   "value": "Qwen3.7 Flash",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.7 Flash\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 53 | [Qwen3.7 Flash](https://playground.roboflow.com/models/qwen/qwen3-7-flash) |  | 52.4% | 1.7K | $0.0001 | 5.77 s |"
+  },
+  {
+   "id": "F321",
+   "says": "score",
+   "about": "Qwen3.5 4B",
+   "value": "38.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 4B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F322",
+   "says": "model-name",
+   "about": "Qwen3.5 4B",
+   "value": "Qwen3.5 4B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 4B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |"
+  },
+  {
+   "id": "F323",
+   "says": "score",
+   "about": "Qwen3.5 4B",
+   "value": "39.2",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 4B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F324",
+   "says": "model-name",
+   "about": "Qwen3.5 4B",
+   "value": "Qwen3.5 4B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 4B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |"
+  },
+  {
+   "id": "F325",
+   "says": "score",
+   "about": "Qwen3.5 4B",
+   "value": "77.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 4B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F326",
+   "says": "model-name",
+   "about": "Qwen3.5 4B",
+   "value": "Qwen3.5 4B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 4B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |"
+  },
+  {
+   "id": "F327",
+   "says": "score",
+   "about": "Qwen3.5 4B",
+   "value": "38.6",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 4B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F328",
+   "says": "model-name",
+   "about": "Qwen3.5 4B",
+   "value": "Qwen3.5 4B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 4B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) | 38.1 | 39.2 | 77.1 | – | 38.6 |"
+  },
+  {
+   "id": "F329",
+   "says": "score",
+   "about": "Qwen3.5 4B",
+   "value": "48.3%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 4B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 57 | [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) |  | 48.3% 4/5 tasks | 6.8K | ~$0.0018 | 34.78 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F330",
+   "says": "cost",
+   "about": "Qwen3.5 4B",
+   "value": "$0.0018",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 4B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 57 | [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) |  | 48.3% 4/5 tasks | 6.8K | ~$0.0018 | 34.78 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F331",
+   "says": "partial",
+   "about": "Qwen3.5 4B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 4B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 57 | [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) |  | 48.3% 4/5 tasks | 6.8K | ~$0.0018 | 34.78 s |"
+  },
+  {
+   "id": "F332",
+   "says": "note",
+   "about": "Qwen3.5 4B",
+   "value": "6.8K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 4B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 57 | [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) |  | 48.3% 4/5 tasks | 6.8K | ~$0.0018 | 34.78 s |"
+  },
+  {
+   "id": "F333",
+   "says": "model-name",
+   "about": "Qwen3.5 4B",
+   "value": "Qwen3.5 4B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 4B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 57 | [Qwen3.5 4B](https://playground.roboflow.com/models/qwen/qwen3-5-4b) |  | 48.3% 4/5 tasks | 6.8K | ~$0.0018 | 34.78 s |"
+  },
+  {
+   "id": "F334",
+   "says": "score",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "44.0",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"DeepSeek V4 Flash Vision Exp\", column OCR",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| DeepSeek V4 Flash Vision Exp | 45.3 | 46.0 | 68.8 | 44.0 | 31.8 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F335",
+   "says": "model-name",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "DeepSeek V4 Flash Vision Exp",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"DeepSeek V4 Flash Vision Exp\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| DeepSeek V4 Flash Vision Exp | 45.3 | 46.0 | 68.8 | 44.0 | 31.8 |"
+  },
+  {
+   "id": "F336",
+   "says": "score",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "47.2%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"DeepSeek V4 Flash Vision Exp\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 58 | DeepSeek V4 Flash Vision Exp |  | 47.2% | 3.1K | $0.0036 | 18.20 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F337",
+   "says": "cost",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "$0.0036",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"DeepSeek V4 Flash Vision Exp\", column cost per sample",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 58 | DeepSeek V4 Flash Vision Exp |  | 47.2% | 3.1K | $0.0036 | 18.20 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F338",
+   "says": "note",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "3.1K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"DeepSeek V4 Flash Vision Exp\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 58 | DeepSeek V4 Flash Vision Exp |  | 47.2% | 3.1K | $0.0036 | 18.20 s |"
+  },
+  {
+   "id": "F339",
+   "says": "model-name",
+   "about": "DeepSeek V4 Flash Vision Exp",
+   "value": "DeepSeek V4 Flash Vision Exp",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"DeepSeek V4 Flash Vision Exp\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 58 | DeepSeek V4 Flash Vision Exp |  | 47.2% | 3.1K | $0.0036 | 18.20 s |"
+  },
+  {
+   "id": "F340",
+   "says": "score",
+   "about": "Qwen3.5 2B",
+   "value": "31.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 2B\", column Object Detection",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F341",
+   "says": "model-name",
+   "about": "Qwen3.5 2B",
+   "value": "Qwen3.5 2B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 2B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |"
+  },
+  {
+   "id": "F342",
+   "says": "score",
+   "about": "Qwen3.5 2B",
+   "value": "28.8",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 2B\", column Counting",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F343",
+   "says": "model-name",
+   "about": "Qwen3.5 2B",
+   "value": "Qwen3.5 2B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 2B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |"
+  },
+  {
+   "id": "F344",
+   "says": "score",
+   "about": "Qwen3.5 2B",
+   "value": "63.5",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 2B\", column Identification",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F345",
+   "says": "model-name",
+   "about": "Qwen3.5 2B",
+   "value": "Qwen3.5 2B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 2B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |"
+  },
+  {
+   "id": "F346",
+   "says": "score",
+   "about": "Qwen3.5 2B",
+   "value": "27.1",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Results by task table, row \"Qwen3.5 2B\", column Reasoning",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |",
+   "term": "score-0-100",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F347",
+   "says": "model-name",
+   "about": "Qwen3.5 2B",
+   "value": "Qwen3.5 2B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 2B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) | 31.5 | 28.8 | 63.5 | – | 27.1 |"
+  },
+  {
+   "id": "F348",
+   "says": "score",
+   "about": "Qwen3.5 2B",
+   "value": "37.8%",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 2B\", column score",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 59 | [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) |  | 37.8% 4/5 tasks | 7.7K | ~$0.0014 | 30.60 s |",
+   "term": "overall-mean-pct",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F349",
+   "says": "cost",
+   "about": "Qwen3.5 2B",
+   "value": "$0.0014",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 2B\", column cost per sample (marked ~ by the page, meaning not explained)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 59 | [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) |  | 37.8% 4/5 tasks | 7.7K | ~$0.0014 | 30.60 s |",
+   "precision": {
+    "model": "printed",
+    "step": 0.0001
+   }
+  },
+  {
+   "id": "F350",
+   "says": "partial",
+   "about": "Qwen3.5 2B",
+   "value": "4/5 tasks",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 2B\": the score is marked \"4/5 tasks\" (FAQ: the Average covers the four tasks the model has, no OCR)",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 59 | [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) |  | 37.8% 4/5 tasks | 7.7K | ~$0.0014 | 30.60 s |"
+  },
+  {
+   "id": "F351",
+   "says": "note",
+   "about": "Qwen3.5 2B",
+   "value": "7.7K",
+   "level": "written",
+   "form": "table-cell",
+   "where": "Overall ranking table, row \"Qwen3.5 2B\", tokens per sample column (the model pages label it \"Avg tokens / sample\")",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 59 | [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) |  | 37.8% 4/5 tasks | 7.7K | ~$0.0014 | 30.60 s |"
+  },
+  {
+   "id": "F352",
+   "says": "model-name",
+   "about": "Qwen3.5 2B",
+   "value": "Qwen3.5 2B",
+   "level": "written",
+   "form": "table-cell",
+   "where": "row \"Qwen3.5 2B\", model cell",
+   "file": "/work/.salvo14/mig/convert-roboflow-playground-evals/evidence/evals_main.jina.md",
+   "quote": "| 59 | [Qwen3.5 2B](https://playground.roboflow.com/models/qwen/qwen3-5-2b) |  | 37.8% 4/5 tasks | 7.7K | ~$0.0014 | 30.60 s |"
+  }
+ ]
+}

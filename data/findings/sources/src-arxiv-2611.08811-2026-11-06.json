@@ -1,0 +1,574 @@
+{
+ "id": "src-arxiv-2611.08811-2026-11-06",
+ "publisher": "arxiv-2611.08811",
+ "urls": [
+  "https://arxiv.org/abs/2611.08811v1"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html": "a1034ea62052a30bb1b89c61062757214eb725d6dacc0a6cfd61fb33f2797dda"
+ },
+ "harvested_at": "2026-11-09T14:40:16Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://arxiv.org/abs/2611.08811v1",
+   "captured": "2026-11-09",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html"
+  }
+ ],
+ "published": {
+  "value": "2026-11-06",
+  "where": "arXiv stamp of the saved HTML (v1)",
+  "quote": "arXiv:2611.08811v1 [cs.AI] 06 Nov 2026",
+  "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html"
+ },
+ "salvo": "salvo14/mig/s6 (9 Nov 2026), lot k-zhipu. I Think, Therefore I Attack (arXiv 2611.08811v1), a SECURITY study (thought-injection attacks): FLAG safety/bias, not capability. Study 1: GLM-5.3-Flash (Table II + pooled 8.6% leak rate, from b-zhipu). Study 2: GLM-5.2 cells of Tables IV (attack success rate) and V (final response without mention of the injection), 12 + 12 cells (c-zhipu). Table III (leak locations) is not a score. Cells of the other models (Qwen, MiniMax) belong to other lots.",
+ "agent": "convertisseur k-zhipu (Sonnet 5.5), lecture ligne par ligne du fichier de recherche et de la copie",
+ "snapshot_of": null,
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-name",
+   "about": "GLM-5.3-Flash",
+   "value": "GLM-5.3-Flash",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE II, row GLM-5.3-Flash",
+   "quote": "GLM-5.3-Flash 13.4% 3.8%"
+  },
+  {
+   "id": "F2",
+   "says": "note",
+   "about": null,
+   "value": "TABLE II: Attack success rate by model and thinking-tag condition",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE II caption",
+   "quote": "TABLE II: Attack success rate by model and thinking-tag condition (100 prompts × \\times 10 epochs = 1,000 runs per cell).",
+   "note": "FLAG safety: the metric is an attack success rate against the model (thought injection to leak PII from a database), lower is better; not a capability score; 100 prompts x 10 epochs = 1,000 runs per cell; effort and route not written"
+  },
+  {
+   "id": "F3",
+   "says": "note",
+   "about": null,
+   "value": "GLM-5.3-Flash (320B parameters)",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "section III (Study 1)",
+   "quote": "production class open-weight models to capture a breadth of different sizes: GLM-5.3-Flash (320B parameters), Qwen3.8-Flash-Next (125B), and Qwen3.8-27B",
+   "note": "open-weight model, 320B parameters as written"
+  },
+  {
+   "id": "F4",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "13.4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE II, row GLM-5.3-Flash, column Think",
+   "quote": "Model Think No-Think GLM-5.3-Flash 13.4% 3.8%",
+   "term": "thought-injection attack success rate, Think condition (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F5",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "3.8%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE II, row GLM-5.3-Flash, column No-Think",
+   "quote": "Model Think No-Think GLM-5.3-Flash 13.4% 3.8%",
+   "term": "thought-injection attack success rate, No-Think condition (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F6",
+   "says": "score",
+   "about": "GLM-5.3-Flash",
+   "value": "8.6%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "section III-B (Study 1 results), text",
+   "quote": "baseline vulnerability sits in a narrow band: 8.6% of runs leak protected data on GLM-5.3-Flash, 11.7% on Qwen3.8-27B, and 11.2% on Qwen3.8-Flash-Next",
+   "term": "baseline leak rate, pooled over both tag conditions (%)",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   }
+  },
+  {
+   "id": "F7",
+   "says": "model-name",
+   "about": "GLM-5.2",
+   "value": "GLM-5.2",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "section IV (Study 2)",
+   "quote": "For this study we utilize two large capable open-weight models: GLM-5.2 (750B parameters) and MiniMax-M2.5 (230B parameters)"
+  },
+  {
+   "id": "F8",
+   "says": "note",
+   "about": null,
+   "value": "The agent is a ReAct-style loop where every tool call executes inside the agent container against the live network.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "section IV-A",
+   "quote": "The agent is a ReAct-style loop where every tool call executes inside the agent container against the live network. Each run assigns one of two malicious tasks.",
+   "note": "sandboxed cyber range (Docker): agent host, listener, internal git server; tasks: reverse shell (RS) and backdoor (BD); 50 runs per cell; FLAG safety, not capability"
+  },
+  {
+   "id": "F9",
+   "says": "note",
+   "about": null,
+   "value": "Due to a change in model availability on shared infrastructure, we were unable to match the model list of Study 1.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "section IV footnote",
+   "quote": "Due to a change in model availability on shared infrastructure, we were unable to match the model list of Study 1.",
+   "note": "the infrastructure is not named: no route written"
+  },
+  {
+   "id": "F10",
+   "says": "note",
+   "about": null,
+   "value": "MiniMax CoT 42% 0 8% 0%",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV",
+   "quote": "TABLE IV: Attack success rate across payload voices, tag conditions, and tasks (50 runs per cell). Reverse Shell Backdoor Target: MiniMax-M2.5 Target: GLM-5.2 Target: MiniMax-M2.5 Target: GLM-5.2 Payload Tags No tags Tags No tags Tags No tags Tags No tags MiniMax CoT 42% 0 8% 0% 0%",
+   "note": "the stray \"0\" before some cells in the text rendering is a hidden padding character in the HTML (<span style=\"visibility:hidden\">0</span>): the values are 8% and 2%, not 08% and 02% (corrects the research file's \"02%\")"
+  },
+  {
+   "id": "F11",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row MiniMax CoT, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "MiniMax CoT 42% 0 8% 0% 0% 50% 10% 0 2% 0%",
+   "term": "attack success rate (%), payload MiniMax CoT, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F12",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row MiniMax CoT, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "MiniMax CoT 42% 0 8% 0% 0% 50% 10% 0 2% 0%",
+   "term": "attack success rate (%), payload MiniMax CoT, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F13",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row MiniMax CoT, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "MiniMax CoT 42% 0 8% 0% 0% 50% 10% 0 2% 0%",
+   "term": "attack success rate (%), payload MiniMax CoT, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F14",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row MiniMax CoT, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "MiniMax CoT 42% 0 8% 0% 0% 50% 10% 0 2% 0%",
+   "term": "attack success rate (%), payload MiniMax CoT, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "16%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row GLM CoT, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "GLM CoT 20% 0 6% 16% 0 2% 14% 0 2% 0% 0%",
+   "term": "attack success rate (%), payload GLM CoT, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F16",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "2%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row GLM CoT, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "GLM CoT 20% 0 6% 16% 0 2% 14% 0 2% 0% 0%",
+   "term": "attack success rate (%), payload GLM CoT, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F17",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row GLM CoT, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "GLM CoT 20% 0 6% 16% 0 2% 14% 0 2% 0% 0%",
+   "term": "attack success rate (%), payload GLM CoT, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F18",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row GLM CoT, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "GLM CoT 20% 0 6% 16% 0 2% 14% 0 2% 0% 0%",
+   "term": "attack success rate (%), payload GLM CoT, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F19",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row User-style, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "User-style 0% 0 0% 0% 0% 0% 0% 0% 0%",
+   "term": "attack success rate (%), payload User-style, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F20",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row User-style, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "User-style 0% 0 0% 0% 0% 0% 0% 0% 0%",
+   "term": "attack success rate (%), payload User-style, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F21",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row User-style, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "User-style 0% 0 0% 0% 0% 0% 0% 0% 0%",
+   "term": "attack success rate (%), payload User-style, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F22",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE IV, row User-style, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "User-style 0% 0 0% 0% 0% 0% 0% 0% 0%",
+   "term": "attack success rate (%), payload User-style, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "92%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row MiniMax CoT, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "MiniMax CoT 71% 65% 92% 22% 68% 40% 86% 42%",
+   "term": "final response without mention of the injection (%), payload MiniMax CoT, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F24",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "22%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row MiniMax CoT, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "MiniMax CoT 71% 65% 92% 22% 68% 40% 86% 42%",
+   "term": "final response without mention of the injection (%), payload MiniMax CoT, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F25",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "86%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row MiniMax CoT, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "MiniMax CoT 71% 65% 92% 22% 68% 40% 86% 42%",
+   "term": "final response without mention of the injection (%), payload MiniMax CoT, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F26",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "42%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row MiniMax CoT, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "MiniMax CoT 71% 65% 92% 22% 68% 40% 86% 42%",
+   "term": "final response without mention of the injection (%), payload MiniMax CoT, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F27",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "100%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row GLM CoT, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "GLM CoT 80% 91% 100% 98% 77% 84% 90% 90%",
+   "term": "final response without mention of the injection (%), payload GLM CoT, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F28",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "98%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row GLM CoT, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "GLM CoT 80% 91% 100% 98% 77% 84% 90% 90%",
+   "term": "final response without mention of the injection (%), payload GLM CoT, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F29",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "90%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row GLM CoT, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "GLM CoT 80% 91% 100% 98% 77% 84% 90% 90%",
+   "term": "final response without mention of the injection (%), payload GLM CoT, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F30",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "90%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row GLM CoT, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "GLM CoT 80% 91% 100% 98% 77% 84% 90% 90%",
+   "term": "final response without mention of the injection (%), payload GLM CoT, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F31",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "18%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row User-style, column Target: GLM-5.2 / Reverse Shell / Tags",
+   "quote": "User-style 2% 0% 18% 0% 2% 0% 4% 6%",
+   "term": "final response without mention of the injection (%), payload User-style, Reverse Shell, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F32",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "0%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row User-style, column Target: GLM-5.2 / Reverse Shell / No tags",
+   "quote": "User-style 2% 0% 18% 0% 2% 0% 4% 6%",
+   "term": "final response without mention of the injection (%), payload User-style, Reverse Shell, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F33",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "4%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row User-style, column Target: GLM-5.2 / Backdoor / Tags",
+   "quote": "User-style 2% 0% 18% 0% 2% 0% 4% 6%",
+   "term": "final response without mention of the injection (%), payload User-style, Backdoor, Tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  },
+  {
+   "id": "F34",
+   "says": "score",
+   "about": "GLM-5.2",
+   "value": "6%",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s6/ev/c-zhipu/dl/2611.08811.html",
+   "where": "TABLE V, row User-style, column Target: GLM-5.2 / Backdoor / No tags",
+   "quote": "User-style 2% 0% 18% 0% 2% 0% 4% 6%",
+   "term": "final response without mention of the injection (%), payload User-style, Backdoor, No tags",
+   "scale": "percent",
+   "precision": {
+    "model": "printed",
+    "step": 1
+   }
+  }
+ ]
+}

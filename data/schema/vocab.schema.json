@@ -1,0 +1,95 @@
+{
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "$id": "vocab.schema.json",
+ "title": "Vocabulary file",
+ "description": "Validates vocab.json: each $defs entry is a closed vocabulary.",
+ "type": "object",
+ "properties": {
+  "$schema": {
+   "type": "string"
+  },
+  "$id": {
+   "type": "string"
+  },
+  "title": {
+   "type": "string"
+  },
+  "description": {
+   "type": "string"
+  },
+  "$defs": {
+   "type": "object",
+   "description": "Vocabulary name → vocabulary.",
+   "additionalProperties": {
+    "type": "object",
+    "description": "One vocabulary: a JSON Schema (enum, or anyOf of enums and patterns) plus x-terms.",
+    "properties": {
+     "description": {
+      "type": "string",
+      "description": "What the vocabulary is.",
+      "minLength": 1
+     },
+     "enum": {
+      "type": "array",
+      "description": "The terms.",
+      "items": {
+       "type": "string"
+      },
+      "minItems": 1
+     },
+     "anyOf": {
+      "type": "array",
+      "description": "Enum and pattern alternatives.",
+      "items": {
+       "type": "object"
+      },
+      "minItems": 1
+     },
+     "x-terms": {
+      "type": "object",
+      "description": "Term → record (description, mapping data)."
+     },
+     "x-order": {
+      "type": "array",
+      "description": "Evaluation order of x-terms (first match wins).",
+      "items": {
+       "type": "string"
+      }
+     },
+     "x-rows": {
+      "type": "object",
+      "description": "Term → rows of today's data using it."
+     },
+     "x-aliases": {
+      "type": "object",
+      "description": "Publisher → {label: term}."
+     },
+     "x-not-methods": {
+      "type": "object",
+      "description": "Flag spellings that are not cost methods, and what they are."
+     }
+    },
+    "required": [
+     "description"
+    ],
+    "anyOf": [
+     {
+      "required": [
+       "enum"
+      ]
+     },
+     {
+      "required": [
+       "anyOf"
+      ]
+     }
+    ],
+    "unevaluatedProperties": false
+   }
+  }
+ },
+ "required": [
+  "$defs"
+ ],
+ "unevaluatedProperties": false
+}

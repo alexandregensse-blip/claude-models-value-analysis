@@ -1,0 +1,2081 @@
+{
+ "urls": [
+  "https://github.com/rlwillen0121/identity-eval-harness"
+ ],
+ "wayback": [],
+ "commit": "6cab5ce8e986898f5c650797c2e1f73c8e7e2b69",
+ "sha256": {
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_6cab5ce.md": "69d4fedd0dc20febe943109475f4e0a212a81eb7c7f664509c190145903b088b",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md": "7eec729fa993e4a22257032a9430c13400607d86b3a5bba757291e3346be57a7",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml": "799bc8913bf3a06d4b6b3245a3accc74e04a99609c221b5775f1b31b7925d7ad",
+  "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml": "6339cfcf35fbdaaca328b2d9fd6b47ef2eb754d20e0e747d5320798f49a18606"
+ },
+ "harvested_at": "2026-10-15T15:55:00Z",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "commit": "6cab5ce8e986898f5c650797c2e1f73c8e7e2b69",
+   "url": "https://github.com/rlwillen0121/identity-eval-harness/blob/6cab5ce8e986898f5c650797c2e1f73c8e7e2b69/README.md",
+   "captured": "2026-10-15T10:33:19Z",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_6cab5ce.md",
+   "note": "README.md at commit 6cab5ce ('Publish dots3-note Preview on the v1 leaderboard (33 models)'; committer date from the GitHub commits API on 27 Oct): byte-identical to the copy saved by salvo s23 b4 (2026-10-15 15:55, sha256 69d4fedd...); the two yaml files are experiments/v1-leaderboard.yaml (same as the saved copy) and experiments/v1-leaderboard-openai-compatible.example.yaml at the same commit, fetched on 27 Oct"
+  }
+ ],
+ "published": null,
+ "salvo": "salvo14/mig/convert-github-identitybench (Wave C2)",
+ "agent": "converter convert_v1.py (Sonnet 5.5), from the README at the commit and its experiments yaml",
+ "snapshot_of": null,
+ "extractions": [
+  {
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "from": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_6cab5ce.md",
+   "tool": "ibcommon.clean_md: HTML entities unescaped (nbsp, narrow nbsp), word joiners U+2060 removed, <br> to space, <sup>x</sup> to [x]; nothing else changed; quotes are matched against this text"
+  }
+ ],
+ "tables": [],
+ "charts": [],
+ "id": "src-github-identitybench-v1-6cab5ce-2026-10-15",
+ "publisher": "github-identitybench",
+ "facts": [
+  {
+   "says": "unit",
+   "value": "USD per 1,000 decisions",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "note under the leaderboard table",
+   "quote": "Cost is USD per 1,000 decisions.",
+   "term": "per-1k-decisions",
+   "id": "F1",
+   "about": null
+  },
+  {
+   "says": "currency",
+   "value": "USD",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "note under the leaderboard table",
+   "quote": "Cost is USD per 1,000 decisions.",
+   "term": "USD",
+   "id": "F2",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "API-equivalent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "footnote [a] of the leaderboard table",
+   "quote": "[a] API-equivalent: the model's list price × the tokens recorded through a subscription CLI or an endpoint that charged nothing per call; a price, not a charge.",
+   "term": "list-estimate",
+   "id": "F3",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "API-equivalent: the model's list price × the tokens recorded",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "footnote [a] of the leaderboard table",
+   "quote": "[a] API-equivalent: the model's list price × the tokens recorded",
+   "term": "tokens×list",
+   "id": "F4",
+   "about": null
+  },
+  {
+   "says": "price-table",
+   "value": "dated pricing table (pricing.yaml sha256 52c9e54a0bbe; rows dated 2026-10-06, 2026-10-12, 2026-10-14 and 2026-10-15",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "Method, Inference cost definition (the table itself is not in the repository copy saved)",
+   "quote": "from the dated pricing table (pricing.yaml sha256 52c9e54a0bbe; rows dated 2026-10-06, 2026-10-12, 2026-10-14 and 2026-10-15; source: Anthropic API pricing (as cached 2026-10-06), Google Gemini API pricing and OpenRouter model catalog)",
+   "id": "F5",
+   "about": null
+  },
+  {
+   "says": "cost-basis",
+   "value": "OpenRouter states each call's USD cost",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "header comment of experiments/v1-leaderboard-openai-compatible.example.yaml",
+   "quote": "OpenRouter states each call's USD cost (cost_mode: reported)",
+   "term": "router-billed",
+   "id": "F6",
+   "about": null
+  },
+  {
+   "says": "cost-method",
+   "value": "OpenRouter states each call's USD cost",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "header comment of experiments/v1-leaderboard-openai-compatible.example.yaml",
+   "quote": "OpenRouter states each call's USD cost (cost_mode: reported)",
+   "term": "router-invoice",
+   "id": "F7",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "A plain figure is a recorded API charge",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "Method, Inference cost definition",
+   "quote": "A plain figure is a recorded API charge, metered from the dated pricing table or billed by a gateway.",
+   "id": "F8",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "unmetered",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "note under the leaderboard table",
+   "quote": "Unmetered: the endpoint charged nothing per call, so there is no comparable price; it does not mean inference is free.",
+   "id": "F9",
+   "about": null
+  },
+  {
+   "says": "note",
+   "value": "Claude CLI rows price cache writes at the 1-hour rate the CLI uses",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "Method, Inference cost bullets",
+   "quote": "Claude CLI rows price cache writes at the 1-hour rate the CLI uses (2× the input rate)",
+   "id": "F10",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "GPT-6.1 Sol",
+   "value": "GPT-6.1 Sol",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 33), first column",
+   "quote": "| GPT-6.1 Sol | 99.7 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $11.22[a] |",
+   "id": "F11"
+  },
+  {
+   "says": "score",
+   "about": "GPT-6.1 Sol",
+   "value": "99.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 33), column 'Grounded accuracy'",
+   "quote": "| GPT-6.1 Sol | 99.7 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $11.22[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F12"
+  },
+  {
+   "says": "harness",
+   "value": "codex_cli",
+   "term": "codex-cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 41: entry 'gpt-6.1-sol'",
+   "quote": "provider: codex_cli",
+   "id": "F13",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "about": "GPT-6.1 Sol",
+   "value": "effort: medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 41: entry 'gpt-6.1-sol', key effort",
+   "quote": "effort: medium",
+   "id": "F14"
+  },
+  {
+   "says": "cost",
+   "about": "GPT-6.1 Sol",
+   "value": "11.22",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 33), column 'Cost per 1k'",
+   "quote": "| GPT-6.1 Sol | 99.7 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $11.22[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F15"
+  },
+  {
+   "says": "model-name",
+   "about": "GPT-6 Astra",
+   "value": "GPT-6 Astra",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 34), first column",
+   "quote": "| GPT-6 Astra | 99.6 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $54.96[a] |",
+   "id": "F16"
+  },
+  {
+   "says": "score",
+   "about": "GPT-6 Astra",
+   "value": "99.6",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 34), column 'Grounded accuracy'",
+   "quote": "| GPT-6 Astra | 99.6 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $54.96[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F17"
+  },
+  {
+   "says": "effort-setting",
+   "about": "GPT-6 Astra",
+   "value": "effort: medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 37: entry 'gpt-6-astra', key effort",
+   "quote": "effort: medium",
+   "id": "F18"
+  },
+  {
+   "says": "cost",
+   "about": "GPT-6 Astra",
+   "value": "54.96",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 34), column 'Cost per 1k'",
+   "quote": "| GPT-6 Astra | 99.6 | 80.2 | 0.0 / 0.0 | 0.0 | 0.198 | $54.96[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F19"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemini 4 Argon",
+   "value": "Gemini 4 Argon",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 35), first column",
+   "quote": "| Gemini 4 Argon | 98.7 | 80.1 | 0.0 / 0.2 | 0.0 | 0.204 | $23.06[a] |",
+   "id": "F20"
+  },
+  {
+   "says": "score",
+   "about": "Gemini 4 Argon",
+   "value": "98.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 35), column 'Grounded accuracy'",
+   "quote": "| Gemini 4 Argon | 98.7 | 80.1 | 0.0 / 0.2 | 0.0 | 0.204 | $23.06[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F21"
+  },
+  {
+   "says": "harness",
+   "value": "agy_cli",
+   "term": "antigravity-cli",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 49: entry 'gemini-4-argon'",
+   "quote": "provider: agy_cli",
+   "id": "F22",
+   "about": null
+  },
+  {
+   "says": "effort-setting",
+   "about": "Gemini 4 Argon",
+   "value": "effort: medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 49: entry 'gemini-4-argon', key effort",
+   "quote": "effort: medium",
+   "id": "F23"
+  },
+  {
+   "says": "cost",
+   "about": "Gemini 4 Argon",
+   "value": "23.06",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 35), column 'Cost per 1k'",
+   "quote": "| Gemini 4 Argon | 98.7 | 80.1 | 0.0 / 0.2 | 0.0 | 0.204 | $23.06[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F24"
+  },
+  {
+   "says": "model-name",
+   "about": "Claude Haiku 5.5",
+   "value": "Claude Haiku 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 36), first column",
+   "quote": "| Claude Haiku 5.5 | 93.3 | 80.2 | 0.0 / 0.0 | 0.8 | 0.198 | $1.25[a] |",
+   "id": "F25"
+  },
+  {
+   "says": "score",
+   "about": "Claude Haiku 5.5",
+   "value": "93.3",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 36), column 'Grounded accuracy'",
+   "quote": "| Claude Haiku 5.5 | 93.3 | 80.2 | 0.0 / 0.0 | 0.8 | 0.198 | $1.25[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F26"
+  },
+  {
+   "says": "harness",
+   "value": "claude_cli",
+   "term": "claude-code",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 31: entry 'claude-haiku-5-5'",
+   "quote": "provider: claude_cli",
+   "id": "F27",
+   "about": null
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Claude Haiku 5.5",
+   "value": "model: claude-haiku-5-5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 31: entry 'claude-haiku-5-5' (provider: claude_cli model: claude-haiku-5-5 concurrency: 4): the entry has no effort key",
+   "quote": "model: claude-haiku-5-5",
+   "id": "F28"
+  },
+  {
+   "says": "cost",
+   "about": "Claude Haiku 5.5",
+   "value": "1.25",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 36), column 'Cost per 1k'",
+   "quote": "| Claude Haiku 5.5 | 93.3 | 80.2 | 0.0 / 0.0 | 0.8 | 0.198 | $1.25[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F29"
+  },
+  {
+   "says": "model-name",
+   "about": "Claude Sonnet 5.5",
+   "value": "Claude Sonnet 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 37), first column",
+   "quote": "| Claude Sonnet 5.5 | 93.3 | 80.1 | 0.0 / 0.0 | 0.0 | 0.200 | $21.31[a] |",
+   "id": "F30"
+  },
+  {
+   "says": "score",
+   "about": "Claude Sonnet 5.5",
+   "value": "93.3",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 37), column 'Grounded accuracy'",
+   "quote": "| Claude Sonnet 5.5 | 93.3 | 80.1 | 0.0 / 0.0 | 0.0 | 0.200 | $21.31[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F31"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Claude Sonnet 5.5",
+   "value": "model: claude-sonnet-5-5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 28: entry 'claude-sonnet-5-5' (provider: claude_cli model: claude-sonnet-5-5 concurrency: 3): the entry has no effort key",
+   "quote": "model: claude-sonnet-5-5",
+   "id": "F32"
+  },
+  {
+   "says": "cost",
+   "about": "Claude Sonnet 5.5",
+   "value": "21.31",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 37), column 'Cost per 1k'",
+   "quote": "| Claude Sonnet 5.5 | 93.3 | 80.1 | 0.0 / 0.0 | 0.0 | 0.200 | $21.31[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F33"
+  },
+  {
+   "says": "model-name",
+   "about": "Claude Fable 5.1",
+   "value": "Claude Fable 5.1",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 38), first column",
+   "quote": "| Claude Fable 5.1 | 85.5 | 80.1 | 0.0 / 0.0 | 0.0 | 0.199 | $115.20[a] |",
+   "id": "F34"
+  },
+  {
+   "says": "score",
+   "about": "Claude Fable 5.1",
+   "value": "85.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 38), column 'Grounded accuracy'",
+   "quote": "| Claude Fable 5.1 | 85.5 | 80.1 | 0.0 / 0.0 | 0.0 | 0.199 | $115.20[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F35"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Claude Fable 5.1",
+   "value": "model: claude-fable-5-1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 34: entry 'claude-fable-5-1' (provider: claude_cli model: claude-fable-5-1 concurrency: 2): the entry has no effort key",
+   "quote": "model: claude-fable-5-1",
+   "id": "F36"
+  },
+  {
+   "says": "cost",
+   "about": "Claude Fable 5.1",
+   "value": "115.20",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 38), column 'Cost per 1k'",
+   "quote": "| Claude Fable 5.1 | 85.5 | 80.1 | 0.0 / 0.0 | 0.0 | 0.199 | $115.20[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F37"
+  },
+  {
+   "says": "model-name",
+   "about": "Grok 4.7",
+   "value": "Grok 4.7",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 40), first column",
+   "quote": "| Grok 4.7 | 99.5 | 80.1 | 0.0 / 0.0 | 2.5 | 0.199 | $14.65[a] |",
+   "id": "F38"
+  },
+  {
+   "says": "score",
+   "about": "Grok 4.7",
+   "value": "99.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 40), column 'Grounded accuracy'",
+   "quote": "| Grok 4.7 | 99.5 | 80.1 | 0.0 / 0.0 | 2.5 | 0.199 | $14.65[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F39"
+  },
+  {
+   "says": "cost",
+   "about": "Grok 4.7",
+   "value": "14.65",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 40), column 'Cost per 1k'",
+   "quote": "| Grok 4.7 | 99.5 | 80.1 | 0.0 / 0.0 | 2.5 | 0.199 | $14.65[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F40"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemini 3.8 Flash",
+   "value": "Gemini 3.8 Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 41), first column",
+   "quote": "| Gemini 3.8 Flash | 95.8 | 79.1 | 0.0 / 0.2 | 4.2 | 0.221 | $8.67 |",
+   "id": "F41"
+  },
+  {
+   "says": "score",
+   "about": "Gemini 3.8 Flash",
+   "value": "95.8",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 41), column 'Grounded accuracy'",
+   "quote": "| Gemini 3.8 Flash | 95.8 | 79.1 | 0.0 / 0.2 | 4.2 | 0.221 | $8.67 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F42"
+  },
+  {
+   "says": "route",
+   "value": "OPENROUTER_BASE_URL",
+   "term": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml: base_url_env of the OpenRouter rows",
+   "quote": "base_url_env: OPENROUTER_BASE_URL",
+   "id": "F43",
+   "about": null
+  },
+  {
+   "says": "model-api-id",
+   "about": "Gemini 3.8 Flash",
+   "value": "google/gemini-3.8-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 98: entry 'gemini-3.8-flash'",
+   "quote": "model: google/gemini-3.8-flash",
+   "id": "F44"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Gemini 3.8 Flash",
+   "value": "model: google/gemini-3.8-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 98: entry 'gemini-3.8-flash' (provider: openai_compatible model: google/gemini-3.8-flash label: gemini-3.8-flash base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: google/gemini-3.8-flash",
+   "id": "F45"
+  },
+  {
+   "says": "cost",
+   "about": "Gemini 3.8 Flash",
+   "value": "8.67",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 41), column 'Cost per 1k'",
+   "quote": "| Gemini 3.8 Flash | 95.8 | 79.1 | 0.0 / 0.2 | 4.2 | 0.221 | $8.67 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F46"
+  },
+  {
+   "says": "model-name",
+   "about": "Muse Spark 1.3",
+   "value": "Muse Spark 1.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 42), first column",
+   "quote": "| Muse Spark 1.3 | 95.5 | 80.1 | 0.0 / 0.0 | 3.3 | 0.199 | $8.77[a] |",
+   "id": "F47"
+  },
+  {
+   "says": "score",
+   "about": "Muse Spark 1.3",
+   "value": "95.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 42), column 'Grounded accuracy'",
+   "quote": "| Muse Spark 1.3 | 95.5 | 80.1 | 0.0 / 0.0 | 3.3 | 0.199 | $8.77[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F48"
+  },
+  {
+   "says": "cost",
+   "about": "Muse Spark 1.3",
+   "value": "8.77",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 42), column 'Cost per 1k'",
+   "quote": "| Muse Spark 1.3 | 95.5 | 80.1 | 0.0 / 0.0 | 3.3 | 0.199 | $8.77[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F49"
+  },
+  {
+   "says": "model-name",
+   "about": "Claude Opus 5.5",
+   "value": "Claude Opus 5.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 43), first column",
+   "quote": "| Claude Opus 5.5 | 93.0 | 79.4 | 0.0 / 0.0 | 0.0 | 0.208 | $38.48[a] |",
+   "id": "F50"
+  },
+  {
+   "says": "score",
+   "about": "Claude Opus 5.5",
+   "value": "93.0",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 43), column 'Grounded accuracy'",
+   "quote": "| Claude Opus 5.5 | 93.0 | 79.4 | 0.0 / 0.0 | 0.0 | 0.208 | $38.48[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F51"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Claude Opus 5.5",
+   "value": "model: claude-opus-5-5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 25: entry 'claude-opus-5-5' (provider: claude_cli model: claude-opus-5-5 concurrency: 2): the entry has no effort key",
+   "quote": "model: claude-opus-5-5",
+   "id": "F52"
+  },
+  {
+   "says": "cost",
+   "about": "Claude Opus 5.5",
+   "value": "38.48",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 43), column 'Cost per 1k'",
+   "quote": "| Claude Opus 5.5 | 93.0 | 79.4 | 0.0 / 0.0 | 0.0 | 0.208 | $38.48[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F53"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek V4.1 Flash",
+   "value": "DeepSeek V4.1 Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 44), first column",
+   "quote": "| DeepSeek V4.1 Flash | 92.7 | 77.4 | 0.0 / 0.6 | 9.2 | 0.249 | $1.77 |",
+   "id": "F54"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek V4.1 Flash",
+   "value": "92.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 44), column 'Grounded accuracy'",
+   "quote": "| DeepSeek V4.1 Flash | 92.7 | 77.4 | 0.0 / 0.6 | 9.2 | 0.249 | $1.77 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F55"
+  },
+  {
+   "says": "model-api-id",
+   "about": "DeepSeek V4.1 Flash",
+   "value": "deepseek/deepseek-v4.1-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 76: entry 'deepseek-v4.1-flash'",
+   "quote": "model: deepseek/deepseek-v4.1-flash",
+   "id": "F56"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "DeepSeek V4.1 Flash",
+   "value": "model: deepseek/deepseek-v4.1-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 76: entry 'deepseek-v4.1-flash' (provider: openai_compatible model: deepseek/deepseek-v4.1-flash label: deepseek-v4.1-flash base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: deepseek/deepseek-v4.1-flash",
+   "id": "F57"
+  },
+  {
+   "says": "cost",
+   "about": "DeepSeek V4.1 Flash",
+   "value": "1.77",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 44), column 'Cost per 1k'",
+   "quote": "| DeepSeek V4.1 Flash | 92.7 | 77.4 | 0.0 / 0.6 | 9.2 | 0.249 | $1.77 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F58"
+  },
+  {
+   "says": "model-name",
+   "about": "Mistral Large 4",
+   "value": "Mistral Large 4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 45), first column",
+   "quote": "| Mistral Large 4 | 92.1 | 77.1 | 0.0 / 0.8 | 9.2 | 0.257 | $5.70 |",
+   "id": "F59"
+  },
+  {
+   "says": "score",
+   "about": "Mistral Large 4",
+   "value": "92.1",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 45), column 'Grounded accuracy'",
+   "quote": "| Mistral Large 4 | 92.1 | 77.1 | 0.0 / 0.8 | 9.2 | 0.257 | $5.70 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F60"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Mistral Large 4",
+   "value": "mistralai/mistral-large-4-0",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 52: entry 'mistral-large-4'",
+   "quote": "model: mistralai/mistral-large-4-0",
+   "id": "F61"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Mistral Large 4",
+   "value": "model: mistralai/mistral-large-4-0",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 52: entry 'mistral-large-4' (provider: openai_compatible model: mistralai/mistral-large-4-0 label: mistral-large-4 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536): the entry has no effort or reasoning key",
+   "quote": "model: mistralai/mistral-large-4-0",
+   "id": "F62"
+  },
+  {
+   "says": "cost",
+   "about": "Mistral Large 4",
+   "value": "5.70",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 45), column 'Cost per 1k'",
+   "quote": "| Mistral Large 4 | 92.1 | 77.1 | 0.0 / 0.8 | 9.2 | 0.257 | $5.70 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F63"
+  },
+  {
+   "says": "model-name",
+   "about": "DeepSeek V4 Pro",
+   "value": "DeepSeek V4 Pro",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 46), first column",
+   "quote": "| DeepSeek V4 Pro | 90.3 | 79.9 | 0.0 / 1.7 | 2.5 | 0.222 | $9.65 |",
+   "id": "F64"
+  },
+  {
+   "says": "score",
+   "about": "DeepSeek V4 Pro",
+   "value": "90.3",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 46), column 'Grounded accuracy'",
+   "quote": "| DeepSeek V4 Pro | 90.3 | 79.9 | 0.0 / 1.7 | 2.5 | 0.222 | $9.65 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F65"
+  },
+  {
+   "says": "model-api-id",
+   "about": "DeepSeek V4 Pro",
+   "value": "deepseek/deepseek-v4-pro-0813",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 39: entry 'deepseek-v4-pro'",
+   "quote": "model: deepseek/deepseek-v4-pro-0813",
+   "id": "F66"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "DeepSeek V4 Pro",
+   "value": "model: deepseek/deepseek-v4-pro-0813",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 39: entry 'deepseek-v4-pro' (provider: openai_compatible model: deepseek/deepseek-v4-pro-0813 label: deepseek-v4-pro base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: order: [Baidu, Alibaba] allow_fallbacks: false require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: deepseek/deepseek-v4-pro-0813",
+   "id": "F67"
+  },
+  {
+   "says": "cost",
+   "about": "DeepSeek V4 Pro",
+   "value": "9.65",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 46), column 'Cost per 1k'",
+   "quote": "| DeepSeek V4 Pro | 90.3 | 79.9 | 0.0 / 1.7 | 2.5 | 0.222 | $9.65 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F68"
+  },
+  {
+   "says": "model-name",
+   "about": "MiMo-V2.6-Pro",
+   "value": "MiMo-V2.6-Pro",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 47), first column",
+   "quote": "| MiMo-V2.6-Pro | 89.2 | 77.0 | 1.0 / 0.0 | 10.0 | 0.256 | $2.00 |",
+   "id": "F69"
+  },
+  {
+   "says": "score",
+   "about": "MiMo-V2.6-Pro",
+   "value": "89.2",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 47), column 'Grounded accuracy'",
+   "quote": "| MiMo-V2.6-Pro | 89.2 | 77.0 | 1.0 / 0.0 | 10.0 | 0.256 | $2.00 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F70"
+  },
+  {
+   "says": "model-api-id",
+   "about": "MiMo-V2.6-Pro",
+   "value": "xiaomi/mimo-v2.6-pro",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 131: entry 'mimo-v2.6-pro'",
+   "quote": "model: xiaomi/mimo-v2.6-pro",
+   "id": "F71"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "MiMo-V2.6-Pro",
+   "value": "model: xiaomi/mimo-v2.6-pro",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 131: entry 'mimo-v2.6-pro' (provider: openai_compatible model: xiaomi/mimo-v2.6-pro label: mimo-v2.6-pro base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: xiaomi/mimo-v2.6-pro",
+   "id": "F72"
+  },
+  {
+   "says": "cost",
+   "about": "MiMo-V2.6-Pro",
+   "value": "2.00",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 47), column 'Cost per 1k'",
+   "quote": "| MiMo-V2.6-Pro | 89.2 | 77.0 | 1.0 / 0.0 | 10.0 | 0.256 | $2.00 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F73"
+  },
+  {
+   "says": "model-name",
+   "about": "LongCat 2.0",
+   "value": "LongCat 2.0",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 48), first column",
+   "quote": "| LongCat 2.0 | 88.4 | 78.4 | 2.6 / 2.4 | 10.8 | 0.314 | $2.24 |",
+   "id": "F74"
+  },
+  {
+   "says": "score",
+   "about": "LongCat 2.0",
+   "value": "88.4",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 48), column 'Grounded accuracy'",
+   "quote": "| LongCat 2.0 | 88.4 | 78.4 | 2.6 / 2.4 | 10.8 | 0.314 | $2.24 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F75"
+  },
+  {
+   "says": "model-api-id",
+   "about": "LongCat 2.0",
+   "value": "meituan/longcat-2.0",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 186: entry 'longcat-2.0'",
+   "quote": "model: meituan/longcat-2.0",
+   "id": "F76"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "LongCat 2.0",
+   "value": "model: meituan/longcat-2.0",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 186: entry 'longcat-2.0' (provider: openai_compatible model: meituan/longcat-2.0 label: longcat-2.0 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536): the entry has no effort or reasoning key",
+   "quote": "model: meituan/longcat-2.0",
+   "id": "F77"
+  },
+  {
+   "says": "cost",
+   "about": "LongCat 2.0",
+   "value": "2.24",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 48), column 'Cost per 1k'",
+   "quote": "| LongCat 2.0 | 88.4 | 78.4 | 2.6 / 2.4 | 10.8 | 0.314 | $2.24 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F78"
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.3 Flash",
+   "value": "GLM-5.3 Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 49), first column",
+   "quote": "| GLM-5.3 Flash | 86.5 | 79.5 | 0.0 / 0.0 | 5.0 | 0.210 | $1.64[a] |",
+   "id": "F79"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.3 Flash",
+   "value": "86.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 49), column 'Grounded accuracy'",
+   "quote": "| GLM-5.3 Flash | 86.5 | 79.5 | 0.0 / 0.0 | 5.0 | 0.210 | $1.64[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F80"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5.3 Flash",
+   "value": "1.64",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 49), column 'Cost per 1k'",
+   "quote": "| GLM-5.3 Flash | 86.5 | 79.5 | 0.0 / 0.0 | 5.0 | 0.210 | $1.64[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F81"
+  },
+  {
+   "says": "model-name",
+   "about": "Hunyuan 3",
+   "value": "Hunyuan 3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 50), first column",
+   "quote": "| Hunyuan 3 | 86.1 | 78.0 | 0.0 / 2.1 | 9.2 | 0.283 | $1.30 |",
+   "id": "F82"
+  },
+  {
+   "says": "score",
+   "about": "Hunyuan 3",
+   "value": "86.1",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 50), column 'Grounded accuracy'",
+   "quote": "| Hunyuan 3 | 86.1 | 78.0 | 0.0 / 2.1 | 9.2 | 0.283 | $1.30 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F83"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Hunyuan 3",
+   "value": "tencent/hy3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 87: entry 'hunyuan-3'",
+   "quote": "model: tencent/hy3",
+   "id": "F84"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Hunyuan 3",
+   "value": "model: tencent/hy3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 87: entry 'hunyuan-3' (provider: openai_compatible model: tencent/hy3 label: hunyuan-3 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: tencent/hy3",
+   "id": "F85"
+  },
+  {
+   "says": "cost",
+   "about": "Hunyuan 3",
+   "value": "1.30",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 50), column 'Cost per 1k'",
+   "quote": "| Hunyuan 3 | 86.1 | 78.0 | 0.0 / 2.1 | 9.2 | 0.283 | $1.30 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F86"
+  },
+  {
+   "says": "model-name",
+   "about": "Muse Glimmer 30B",
+   "value": "Muse Glimmer 30B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 51), first column",
+   "quote": "| Muse Glimmer 30B | 81.9 | 78.8 | 0.5 / 1.7 | 17.5 | 0.256 | $2.85 |",
+   "id": "F87"
+  },
+  {
+   "says": "score",
+   "about": "Muse Glimmer 30B",
+   "value": "81.9",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 51), column 'Grounded accuracy'",
+   "quote": "| Muse Glimmer 30B | 81.9 | 78.8 | 0.5 / 1.7 | 17.5 | 0.256 | $2.85 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F88"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Muse Glimmer 30B",
+   "value": "meta/muse-glimmer-30b",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 153: entry 'muse-glimmer-30b'",
+   "quote": "model: meta/muse-glimmer-30b",
+   "id": "F89"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Muse Glimmer 30B",
+   "value": "model: meta/muse-glimmer-30b",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 153: entry 'muse-glimmer-30b' (provider: openai_compatible model: meta/muse-glimmer-30b label: muse-glimmer-30b base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: meta/muse-glimmer-30b",
+   "id": "F90"
+  },
+  {
+   "says": "cost",
+   "about": "Muse Glimmer 30B",
+   "value": "2.85",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 51), column 'Cost per 1k'",
+   "quote": "| Muse Glimmer 30B | 81.9 | 78.8 | 0.5 / 1.7 | 17.5 | 0.256 | $2.85 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F91"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.8-27B",
+   "value": "Qwen3.8-27B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 52), first column",
+   "quote": "| Qwen3.8-27B[b] | 81.3 | 78.9 | 0.0 / 1.1 | 4.2 | 0.233 | unmetered |",
+   "id": "F92"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.8-27B",
+   "value": "81.3",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 52), column 'Grounded accuracy'",
+   "quote": "| Qwen3.8-27B[b] | 81.3 | 78.9 | 0.0 / 1.1 | 4.2 | 0.233 | unmetered |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F93"
+  },
+  {
+   "says": "note",
+   "value": "4-bit, self-hosted.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "footnote [b] of the leaderboard table",
+   "quote": "[b] 4-bit, self-hosted.",
+   "id": "F94",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "GLM-5.3",
+   "value": "GLM-5.3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 53), first column",
+   "quote": "| GLM-5.3 | 80.2 | 76.0 | 0.5 / 1.1 | 7.5 | 0.276 | $8.39 |",
+   "id": "F95"
+  },
+  {
+   "says": "score",
+   "about": "GLM-5.3",
+   "value": "80.2",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 53), column 'Grounded accuracy'",
+   "quote": "| GLM-5.3 | 80.2 | 76.0 | 0.5 / 1.1 | 7.5 | 0.276 | $8.39 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F96"
+  },
+  {
+   "says": "model-api-id",
+   "about": "GLM-5.3",
+   "value": "z-ai/glm-5.3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 202: entry 'glm-5.3'",
+   "quote": "model: z-ai/glm-5.3",
+   "id": "F97"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "GLM-5.3",
+   "value": "model: z-ai/glm-5.3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 202: entry 'glm-5.3' (provider: openai_compatible model: z-ai/glm-5.3 label: glm-5.3 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: z-ai/glm-5.3",
+   "id": "F98"
+  },
+  {
+   "says": "cost",
+   "about": "GLM-5.3",
+   "value": "8.39",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 53), column 'Cost per 1k'",
+   "quote": "| GLM-5.3 | 80.2 | 76.0 | 0.5 / 1.1 | 7.5 | 0.276 | $8.39 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F99"
+  },
+  {
+   "says": "model-name",
+   "about": "MiMo-V2.6-Flash",
+   "value": "MiMo-V2.6-Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 54), first column",
+   "quote": "| MiMo-V2.6-Flash | 74.0 | 75.1 | 2.6 / 13.2 | 5.8 | 0.506 | $0.67 |",
+   "id": "F100"
+  },
+  {
+   "says": "score",
+   "about": "MiMo-V2.6-Flash",
+   "value": "74.0",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 54), column 'Grounded accuracy'",
+   "quote": "| MiMo-V2.6-Flash | 74.0 | 75.1 | 2.6 / 13.2 | 5.8 | 0.506 | $0.67 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F101"
+  },
+  {
+   "says": "model-api-id",
+   "about": "MiMo-V2.6-Flash",
+   "value": "xiaomi/mimo-v2.6-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 60: entry 'mimo-v2.6-flash'",
+   "quote": "model: xiaomi/mimo-v2.6-flash",
+   "id": "F102"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "MiMo-V2.6-Flash",
+   "value": "model: xiaomi/mimo-v2.6-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 60: entry 'mimo-v2.6-flash' (provider: openai_compatible model: xiaomi/mimo-v2.6-flash label: mimo-v2.6-flash base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536): the entry has no effort or reasoning key",
+   "quote": "model: xiaomi/mimo-v2.6-flash",
+   "id": "F103"
+  },
+  {
+   "says": "cost",
+   "about": "MiMo-V2.6-Flash",
+   "value": "0.67",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 54), column 'Cost per 1k'",
+   "quote": "| MiMo-V2.6-Flash | 74.0 | 75.1 | 2.6 / 13.2 | 5.8 | 0.506 | $0.67 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F104"
+  },
+  {
+   "says": "model-name",
+   "about": "dots3-note Preview",
+   "value": "dots3-note Preview",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 55), first column",
+   "quote": "| dots3-note Preview | 72.7 | 79.7 | 0.0 / 1.3 | 8.3 | 0.223 | unmetered |",
+   "id": "F105"
+  },
+  {
+   "says": "score",
+   "about": "dots3-note Preview",
+   "value": "72.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 55), column 'Grounded accuracy'",
+   "quote": "| dots3-note Preview | 72.7 | 79.7 | 0.0 / 1.3 | 8.3 | 0.223 | unmetered |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F106"
+  },
+  {
+   "says": "model-name",
+   "about": "Inkling Small",
+   "value": "Inkling Small",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 56), first column",
+   "quote": "| Inkling Small | 72.6 | 78.5 | 0.0 / 2.8 | 9.2 | 0.267 | $2.82 |",
+   "id": "F107"
+  },
+  {
+   "says": "score",
+   "about": "Inkling Small",
+   "value": "72.6",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 56), column 'Grounded accuracy'",
+   "quote": "| Inkling Small | 72.6 | 78.5 | 0.0 / 2.8 | 9.2 | 0.267 | $2.82 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F108"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Inkling Small",
+   "value": "thinkingmachines/inkling-small",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 194: entry 'inkling-small'",
+   "quote": "model: thinkingmachines/inkling-small",
+   "id": "F109"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Inkling Small",
+   "value": "model: thinkingmachines/inkling-small",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 194: entry 'inkling-small' (provider: openai_compatible model: thinkingmachines/inkling-small label: inkling-small base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536): the entry has no effort or reasoning key",
+   "quote": "model: thinkingmachines/inkling-small",
+   "id": "F110"
+  },
+  {
+   "says": "cost",
+   "about": "Inkling Small",
+   "value": "2.82",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 56), column 'Cost per 1k'",
+   "quote": "| Inkling Small | 72.6 | 78.5 | 0.0 / 2.8 | 9.2 | 0.267 | $2.82 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F111"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.8 Flash",
+   "value": "Qwen3.8 Flash",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 57), first column",
+   "quote": "| Qwen3.8 Flash | 65.1 | 75.6 | 0.0 / 0.0 | 1.7 | 0.270 | $1.45 |",
+   "id": "F112"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.8 Flash",
+   "value": "65.1",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 57), column 'Grounded accuracy'",
+   "quote": "| Qwen3.8 Flash | 65.1 | 75.6 | 0.0 / 0.0 | 1.7 | 0.270 | $1.45 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F113"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Qwen3.8 Flash",
+   "value": "qwen/qwen3.8-flash",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 142: entry 'qwen3.8-flash-api'",
+   "quote": "model: qwen/qwen3.8-flash",
+   "id": "F114"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Qwen3.8 Flash",
+   "value": "model: qwen/qwen3.8-flash",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 142: entry 'qwen3.8-flash-api' (provider: openai_compatible model: qwen/qwen3.8-flash label: qwen3.8-flash-api base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: qwen/qwen3.8-flash",
+   "id": "F115"
+  },
+  {
+   "says": "cost",
+   "about": "Qwen3.8 Flash",
+   "value": "1.45",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 57), column 'Cost per 1k'",
+   "quote": "| Qwen3.8 Flash | 65.1 | 75.6 | 0.0 / 0.0 | 1.7 | 0.270 | $1.45 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F116"
+  },
+  {
+   "says": "model-name",
+   "about": "Qwen3.8-Flash-Next",
+   "value": "Qwen3.8-Flash-Next",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 58), first column",
+   "quote": "| Qwen3.8-Flash-Next[c] | 59.5 | 49.0 | 0.0 / 0.0 | 20.8 | 0.684 | unmetered |",
+   "id": "F117"
+  },
+  {
+   "says": "score",
+   "about": "Qwen3.8-Flash-Next",
+   "value": "59.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 58), column 'Grounded accuracy'",
+   "quote": "| Qwen3.8-Flash-Next[c] | 59.5 | 49.0 | 0.0 / 0.0 | 20.8 | 0.684 | unmetered |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F118"
+  },
+  {
+   "says": "note",
+   "value": "Self-hosted.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "footnote [c] of the leaderboard table",
+   "quote": "[c] Self-hosted.",
+   "id": "F119",
+   "about": null
+  },
+  {
+   "says": "model-name",
+   "about": "gpt-oss-120b",
+   "value": "gpt-oss-120b",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 59), first column",
+   "quote": "| gpt-oss-120b | 54.7 | 68.2 | 7.2 / 20.0 | 17.5 | 0.868 | $0.40 |",
+   "id": "F120"
+  },
+  {
+   "says": "score",
+   "about": "gpt-oss-120b",
+   "value": "54.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 59), column 'Grounded accuracy'",
+   "quote": "| gpt-oss-120b | 54.7 | 68.2 | 7.2 / 20.0 | 17.5 | 0.868 | $0.40 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F121"
+  },
+  {
+   "says": "cost",
+   "about": "gpt-oss-120b",
+   "value": "0.40",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 59), column 'Cost per 1k'",
+   "quote": "| gpt-oss-120b | 54.7 | 68.2 | 7.2 / 20.0 | 17.5 | 0.868 | $0.40 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F122"
+  },
+  {
+   "says": "model-name",
+   "about": "GPT-6 Luna",
+   "value": "GPT-6 Luna",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 60), first column",
+   "quote": "| GPT-6 Luna | 51.0 | 65.7 | 5.7 / 23.2 | 16.7 | 0.888 | $0.53[a] |",
+   "id": "F123"
+  },
+  {
+   "says": "score",
+   "about": "GPT-6 Luna",
+   "value": "51.0",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 60), column 'Grounded accuracy'",
+   "quote": "| GPT-6 Luna | 51.0 | 65.7 | 5.7 / 23.2 | 16.7 | 0.888 | $0.53[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F124"
+  },
+  {
+   "says": "effort-setting",
+   "about": "GPT-6 Luna",
+   "value": "effort: medium",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_cli_6cab5ce.yaml",
+   "where": "v1_cli_6cab5ce.yaml line 45: entry 'gpt-6-luna', key effort",
+   "quote": "effort: medium",
+   "id": "F125"
+  },
+  {
+   "says": "cost",
+   "about": "GPT-6 Luna",
+   "value": "0.53",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 60), column 'Cost per 1k'",
+   "quote": "| GPT-6 Luna | 51.0 | 65.7 | 5.7 / 23.2 | 16.7 | 0.888 | $0.53[a] |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F126"
+  },
+  {
+   "says": "model-name",
+   "about": "Mercury 2.5",
+   "value": "Mercury 2.5",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 61), first column",
+   "quote": "| Mercury 2.5 | 42.5 | 64.5 | 1.5 / 49.3 | 17.5 | 1.292 | $0.24 |",
+   "id": "F127"
+  },
+  {
+   "says": "score",
+   "about": "Mercury 2.5",
+   "value": "42.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 61), column 'Grounded accuracy'",
+   "quote": "| Mercury 2.5 | 42.5 | 64.5 | 1.5 / 49.3 | 17.5 | 1.292 | $0.24 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F128"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Mercury 2.5",
+   "value": "inception/mercury-2.5",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 109: entry 'mercury-2.5'",
+   "quote": "model: inception/mercury-2.5",
+   "id": "F129"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Mercury 2.5",
+   "value": "model: inception/mercury-2.5",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 109: entry 'mercury-2.5' (provider: openai_compatible model: inception/mercury-2.5 label: mercury-2.5 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: inception/mercury-2.5",
+   "id": "F130"
+  },
+  {
+   "says": "cost",
+   "about": "Mercury 2.5",
+   "value": "0.24",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 61), column 'Cost per 1k'",
+   "quote": "| Mercury 2.5 | 42.5 | 64.5 | 1.5 / 49.3 | 17.5 | 1.292 | $0.24 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F131"
+  },
+  {
+   "says": "model-name",
+   "about": "Nemotron 3.5 Lightning",
+   "value": "Nemotron 3.5 Lightning",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 62), first column",
+   "quote": "| Nemotron 3.5 Lightning | 39.6 | 54.1 | 1.5 / 14.1 | 10.8 | 0.832 | $0.85 |",
+   "id": "F132"
+  },
+  {
+   "says": "score",
+   "about": "Nemotron 3.5 Lightning",
+   "value": "39.6",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 62), column 'Grounded accuracy'",
+   "quote": "| Nemotron 3.5 Lightning | 39.6 | 54.1 | 1.5 / 14.1 | 10.8 | 0.832 | $0.85 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F133"
+  },
+  {
+   "says": "cost",
+   "about": "Nemotron 3.5 Lightning",
+   "value": "0.85",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 62), column 'Cost per 1k'",
+   "quote": "| Nemotron 3.5 Lightning | 39.6 | 54.1 | 1.5 / 14.1 | 10.8 | 0.832 | $0.85 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F134"
+  },
+  {
+   "says": "model-name",
+   "about": "MiniMax M3",
+   "value": "MiniMax M3",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 63), first column",
+   "quote": "| MiniMax M3 | 36.5 | 58.3 | 11.3 / 40.5 | 24.2 | 1.314 | $1.04 |",
+   "id": "F135"
+  },
+  {
+   "says": "score",
+   "about": "MiniMax M3",
+   "value": "36.5",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 63), column 'Grounded accuracy'",
+   "quote": "| MiniMax M3 | 36.5 | 58.3 | 11.3 / 40.5 | 24.2 | 1.314 | $1.04 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F136"
+  },
+  {
+   "says": "model-api-id",
+   "about": "MiniMax M3",
+   "value": "minimax/minimax-m3",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 164: entry 'minimax-m3'",
+   "quote": "model: minimax/minimax-m3",
+   "id": "F137"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "MiniMax M3",
+   "value": "model: minimax/minimax-m3",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 164: entry 'minimax-m3' (provider: openai_compatible model: minimax/minimax-m3 label: minimax-m3 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: minimax/minimax-m3",
+   "id": "F138"
+  },
+  {
+   "says": "cost",
+   "about": "MiniMax M3",
+   "value": "1.04",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 63), column 'Cost per 1k'",
+   "quote": "| MiniMax M3 | 36.5 | 58.3 | 11.3 / 40.5 | 24.2 | 1.314 | $1.04 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F139"
+  },
+  {
+   "says": "model-name",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "Gemini 3.5 Flash-Lite",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 64), first column",
+   "quote": "| Gemini 3.5 Flash-Lite | 30.1 | 57.2 | 16.5 / 65.0 | 39.2 | 2.075 | $1.57 |",
+   "id": "F140"
+  },
+  {
+   "says": "score",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "30.1",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 64), column 'Grounded accuracy'",
+   "quote": "| Gemini 3.5 Flash-Lite | 30.1 | 57.2 | 16.5 / 65.0 | 39.2 | 2.075 | $1.57 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F141"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "google/gemini-3.5-flash-lite",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 68: entry 'gemini-3.5-flash-lite'",
+   "quote": "model: google/gemini-3.5-flash-lite",
+   "id": "F142"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "model: google/gemini-3.5-flash-lite",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 68: entry 'gemini-3.5-flash-lite' (provider: openai_compatible model: google/gemini-3.5-flash-lite label: gemini-3.5-flash-lite base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536): the entry has no effort or reasoning key",
+   "quote": "model: google/gemini-3.5-flash-lite",
+   "id": "F143"
+  },
+  {
+   "says": "cost",
+   "about": "Gemini 3.5 Flash-Lite",
+   "value": "1.57",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 64), column 'Cost per 1k'",
+   "quote": "| Gemini 3.5 Flash-Lite | 30.1 | 57.2 | 16.5 / 65.0 | 39.2 | 2.075 | $1.57 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F144"
+  },
+  {
+   "says": "model-name",
+   "about": "Solar Pro 4",
+   "value": "Solar Pro 4",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 65), first column",
+   "quote": "| Solar Pro 4 | 28.2 | 53.7 | 22.7 / 44.3 | 27.5 | 2.007 | $0.44 |",
+   "id": "F145"
+  },
+  {
+   "says": "score",
+   "about": "Solar Pro 4",
+   "value": "28.2",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 65), column 'Grounded accuracy'",
+   "quote": "| Solar Pro 4 | 28.2 | 53.7 | 22.7 / 44.3 | 27.5 | 2.007 | $0.44 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F146"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Solar Pro 4",
+   "value": "upstage/solar-pro4",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 120: entry 'solar-pro-4'",
+   "quote": "model: upstage/solar-pro4",
+   "id": "F147"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Solar Pro 4",
+   "value": "model: upstage/solar-pro4",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 120: entry 'solar-pro-4' (provider: openai_compatible model: upstage/solar-pro4 label: solar-pro-4 base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: upstage/solar-pro4",
+   "id": "F148"
+  },
+  {
+   "says": "cost",
+   "about": "Solar Pro 4",
+   "value": "0.44",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 65), column 'Cost per 1k'",
+   "quote": "| Solar Pro 4 | 28.2 | 53.7 | 22.7 / 44.3 | 27.5 | 2.007 | $0.44 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F149"
+  },
+  {
+   "says": "model-name",
+   "about": "Granite 4.2 8B",
+   "value": "Granite 4.2 8B",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 66), first column",
+   "quote": "| Granite 4.2 8B | 0.7 | 40.2 | 24.2 / 49.7 | 61.7 | 2.614 | $0.89 |",
+   "id": "F150"
+  },
+  {
+   "says": "score",
+   "about": "Granite 4.2 8B",
+   "value": "0.7",
+   "term": "grounded-acc%",
+   "scale": "percent",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 66), column 'Grounded accuracy'",
+   "quote": "| Granite 4.2 8B | 0.7 | 40.2 | 24.2 / 49.7 | 61.7 | 2.614 | $0.89 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.1
+   },
+   "id": "F151"
+  },
+  {
+   "says": "model-api-id",
+   "about": "Granite 4.2 8B",
+   "value": "ibm-granite/granite-4.2-8b",
+   "namespace": "openrouter",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 175: entry 'granite-4.2-8b'",
+   "quote": "model: ibm-granite/granite-4.2-8b",
+   "id": "F152"
+  },
+  {
+   "says": "no-effort-sent",
+   "about": "Granite 4.2 8B",
+   "value": "model: ibm-granite/granite-4.2-8b",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_oc_6cab5ce.yaml",
+   "where": "v1_oc_6cab5ce.yaml line 175: entry 'granite-4.2-8b' (provider: openai_compatible model: ibm-granite/granite-4.2-8b label: granite-4.2-8b base_url_env: OPENROUTER_BASE_URL api_key_env: OPENROUTER_API_KEY cost_mode: reported concurrency: 4 max_output_tokens: 65536 extra: provider_routing: require_parameters: true): the entry has no effort or reasoning key",
+   "quote": "model: ibm-granite/granite-4.2-8b",
+   "id": "F153"
+  },
+  {
+   "says": "cost",
+   "about": "Granite 4.2 8B",
+   "value": "0.89",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/convert-github-identitybench/evidence/v1_README_clean.md",
+   "where": "leaderboard table (line 66), column 'Cost per 1k'",
+   "quote": "| Granite 4.2 8B | 0.7 | 40.2 | 24.2 / 49.7 | 61.7 | 2.614 | $0.89 |",
+   "precision": {
+    "model": "printed",
+    "step": 0.01
+   },
+   "id": "F154"
+  }
+ ]
+}

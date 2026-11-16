@@ -4,7 +4,7 @@ import datetime, hashlib, html as htmlmod, json, os, re
 
 import duels
 
-from config import HERE, ROOT, SITE_URL, REPO_URL, TITLE, SITE_NAME, DESCRIPTION, SITE_HOST, BING_SITE_VERIFICATION, INDEXNOW_KEY
+from config import HERE, ROOT, SITE_URL, REPO_URL, DATA_URL, TITLE, SITE_NAME, DESCRIPTION, SITE_HOST, BING_SITE_VERIFICATION, INDEXNOW_KEY
 
 
 DATE_FILE = os.path.join(HERE, "content-date.json")   # {fingerprint, date} of the last content change (committed)
@@ -45,9 +45,10 @@ def head_tags(date, counts):
     dataset = {
         "@context": "https://schema.org", "@type": "Dataset",
         "name": TITLE,
-        "description": ("What each recent Claude model actually costs, at every effort level — reconstructed from public "
-                        "measurements and reduced to a relative cost by chaining same-task comparisons. Aggregated from "
-                        f"{counts}; cost as a multiple of the cheapest couple, quality as the expected score on the benchmark panel."),
+        "description": ("What each recent Claude model actually costs, at every effort level, and the quality it delivers — "
+                        "fused from public measurements taken on the same task, each traced to its source by its exact "
+                        "quote and URL, by a latent-quality model that estimates each benchmark's own scale. Aggregated from "
+                        f"{counts}; cost at today's prices as a multiple of the cheapest couple, quality as the expected score on the benchmark panel."),
         "url": SITE_URL, "sameAs": REPO_URL,
         "creator": {"@type": "Person", "name": "Alexandre Gensse", "url": "https://github.com/alexandregensse-blip"},
         "dateModified": date.isoformat(),
@@ -56,7 +57,7 @@ def head_tags(date, counts):
         "keywords": ["Claude", "Claude models", "LLM cost", "effort level", "Fable", "Opus", "Sonnet", "Haiku",
                      "benchmark", "Pareto frontier"],
         "variableMeasured": ["Cost per task, as a multiple of the cheapest couple", "Expected score on the benchmark panel (%)"],
-        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": SITE_URL + "raw-data.csv"}],
+        "distribution": [{"@type": "DataDownload", "encodingFormat": "text/csv", "contentUrl": DATA_URL}],
     }
     website = {"@context": "https://schema.org", "@type": "WebSite", "name": SITE_NAME, "url": SITE_URL}
     ld = json.dumps([website, dataset], ensure_ascii=False, indent=1).replace("</", "<\\/")
@@ -94,7 +95,7 @@ def write_root_files(date, pre, duel_summary=()):
 
 {pre.get("answer-full", "")}
 
-Costs are multiples of the cheapest couple's; quality is the expected score on the benchmark panel. Both are fused from measurements taken on the same task by a latent-quality model that estimates each benchmark's own scale (method: docs/METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
+Costs are at today's prices, as multiples of the cheapest couple's; quality is the expected score on the benchmark panel. Both are fused from measurements taken on the same task, each traced to its source by its exact quote and URL, by a latent-quality model that estimates each benchmark's own scale (method: docs/METHODOLOGY.md in the source repository), from {plain(pre.get(".nsrc", ""))}. Updated {date.isoformat()}. Figures are indicative, derived from public third-party measurements; not affiliated with Anthropic.
 
 ## Report
 
@@ -107,7 +108,7 @@ Costs are multiples of the cheapest couple's; quality is the expected score on t
 
 ## Data
 
-- [raw-data.csv]({SITE_URL}raw-data.csv): every measured row (source, model, effort, task, harness, cost, tokens, score, reference), CC BY 4.0.
+- [data.csv]({DATA_URL}): every measure (source, model, effort, task, harness, cost, tokens, score, reference) and its status in the fit on each axis, CC BY 4.0.
 
 ## Optional
 
