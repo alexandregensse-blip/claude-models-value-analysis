@@ -34,6 +34,7 @@
     "haiku-"
    ],
    "colours": "catalog",
+   "from_claude_page": "The Claude page's own settings, one place: models and labels from data/catalog/models.json (display_order), current = site/duels.py CURRENT, hidden by default = site/duels.py LEGACY, generation card = the page's own (site/body.html).",
    "hue": 30,
    "title": "Claude models compared: cost vs quality at every effort level",
    "description": "What each Claude model (Fable, Opus, Sonnet, Haiku) costs at every effort level, and which gives the best quality for the price. Open data, CC BY 4.0.",
@@ -44,20 +45,6 @@
     "haiku-4.5"
    ],
    "hide_note": " <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.",
-   "generation": "Each release buys the same quality for less — <b>Sonnet&nbsp;5.5</b> beats Sonnet&nbsp;5's <em>max</em> quality at its own <em>high</em> effort for about a fifth of the cost, <b>Opus&nbsp;5.5</b> beats Fable&nbsp;5.1's <em>max</em> quality at its own <em>high</em> effort for about a sixth of the cost, <b>Fable&nbsp;5.1</b> beats Fable&nbsp;5's <em>max</em> quality at its own <em>xHigh</em> effort for about three quarters of the cost, and <b>Opus&nbsp;5</b> reaches Fable-5-class quality for a little over half the cost per task; Sonnet&nbsp;5 is the verbose exception, cheap per token but talkative.",
-   "models": {
-    "fable-5.1": "Fable 5.1",
-    "fable-5": "Fable 5",
-    "opus-5.5": "Opus 5.5",
-    "opus-5": "Opus 5",
-    "opus-4.8": "Opus 4.8",
-    "sonnet-5.5": "Sonnet 5.5",
-    "sonnet-5": "Sonnet 5",
-    "opus-4.7": "Opus 4.7",
-    "sonnet-4.6": "Sonnet 4.6",
-    "haiku-5.5": "Haiku 5.5",
-    "haiku-4.5": "Haiku 4.5"
-   },
    "lines": {}
   },
   "openai": {
@@ -70,6 +57,7 @@
    "hue": 150,
    "models": {
     "gpt-6.1-sol": "GPT-6.1 Sol",
+    "gpt-6.1-terra": "GPT-6.1 Terra",
     "gpt-6-sol": "GPT-6 Sol",
     "gpt-6-astra": "GPT-6 Astra",
     "gpt-6-luna": "GPT-6 Luna",
@@ -126,6 +114,7 @@
    "hue": 250,
    "models": {
     "gemini-4-argon": "Gemini 4 Argon",
+    "gemini-4-carbon": "Gemini 4 Carbon",
     "gemini-3.8-flash": "Gemini 3.8 Flash",
     "gemini-3.8-flash-cyber": "Gemini 3.8 Flash Cyber",
     "gemini-3.7-flash": "Gemini 3.7 Flash",
@@ -291,74 +280,8 @@
    "lines": {}
   }
  },
- "_families_doc": "Per catalogue key: its family, whether it is current (the latest model of its family: the price trend's couples, and always shown on the global page) and whether it is hidden by default on its maker's page (older models). The one place for these settings: site/import_families.py fills it from the families salvo (/work/.salvo14/fam/<maker>/families.tsv), source = the file it came from; 'editorial 21 Oct' = not yet imported.",
+ "_families_doc": "Per catalogue key: its family, whether it is current (the latest model of its family: the price trend's couples, and always shown on the global page) and whether it is hidden by default on its maker's page (older models). The one place for these settings: site/import_families.py fills it from the families salvo (/work/.salvo14/fam/<maker>/families.tsv), source = the file it came from; 'editorial 21 Oct' = not yet imported. Claude's keys are not here: they follow the Claude page (site/duels.py CURRENT and LEGACY).",
  "families": {
-  "fable-5.1": {
-   "family": "",
-   "current": true,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "fable-5": {
-   "family": "",
-   "current": false,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "opus-5.5": {
-   "family": "",
-   "current": true,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "opus-5": {
-   "family": "",
-   "current": false,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "opus-4.8": {
-   "family": "",
-   "current": false,
-   "hidden": true,
-   "source": "editorial 21 Oct"
-  },
-  "sonnet-5.5": {
-   "family": "",
-   "current": true,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "sonnet-5": {
-   "family": "",
-   "current": false,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "opus-4.7": {
-   "family": "",
-   "current": false,
-   "hidden": true,
-   "source": "editorial 21 Oct"
-  },
-  "sonnet-4.6": {
-   "family": "",
-   "current": false,
-   "hidden": true,
-   "source": "editorial 21 Oct"
-  },
-  "haiku-5.5": {
-   "family": "",
-   "current": true,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
-  "haiku-4.5": {
-   "family": "",
-   "current": false,
-   "hidden": false,
-   "source": "editorial 21 Oct"
-  },
   "gpt-6.1-sol": {
    "family": "Sol line (flagship, unsuffixed tier)",
    "current": true,

@@ -8,14 +8,16 @@ The Claude page (python3 site/build.py, served at the repository root) is untouc
 body.html, style.css, the pre-render — and applies the per-site settings of site/makers.json as exact text
 replacements, each checked to apply exactly where expected, so a change to the page that breaks one stops this build
 instead of slipping through. Rules: docs/DISPLAY-METHODOLOGY.md § 16."""
-import datetime, hashlib, html as htmlmod, json, math, os, re, shutil, sys
+import argparse, datetime, hashlib, html as htmlmod, json, math, os, re, shutil, sys
 
-from config import HERE, ROOT, REPO_URL, EFFORT_ORDER
+from config import HERE, ROOT, REPO_URL, DATA_URL, EFFORT_ORDER, CAP
+from build import effort_columns
+import duels
 from grids import fused_grids, monotonicity_report
 from render import inject, prerender
 from sources import groups_data
 sys.path.insert(0, os.path.join(ROOT, "data"))
-from catalog import MODELS as CAT, MODEL_LINE, MODEL_ORDER
+from catalog import MODELS as CAT, MODEL_LINE, MODEL_ORDER, DISPLAY_ORDER
 
 SET  = json.load(open(os.path.join(HERE, "makers.json"), encoding="utf-8"))
 OUT  = os.path.join(ROOT, SET["out_dir"])
@@ -56,6 +58,8 @@ def maker_keys(mk):
     catalogue's dated builds, previews and modes), in catalogue order. Warns about a key of the maker's prefixes
     that the settings do not place."""
     M = SET["makers"][mk]
+    if M.get("from_claude_page"):                             # the Claude page's own models, in its legend order
+        return list(DISPLAY_ORDER)
     lines_of = {}
     for k in MODEL_ORDER:
         if k in MODEL_LINE: lines_of.setdefault(MODEL_LINE[k], []).append(k)
@@ -147,7 +151,8 @@ def sites():
     def labeller(prefix):
         def label(k):
             mk = maker_of.get(k)
-            name = SET["makers"][mk]["models"].get(k) if mk else None
+            M = SET["makers"][mk] if mk else {}
+            name = CAT[k]["label"] if M.get("from_claude_page") else M.get("models", {}).get(k)
             if name is None:
                 warn(f"no label for {k} in site/makers.json: the catalogue key is shown"); name = k
             return prefix.get(mk, "") + name
@@ -159,7 +164,12 @@ def sites():
         return t
     G = SET["global"]
     gkeys = [k for mk in SET["makers"] for k in maker_keys(mk)]
-    FAM = SET["families"]
+    FAM = dict(SET["families"])
+    for mk, M in SET["makers"].items():                       # Claude: the Claude page's CURRENT and LEGACY (site/duels.py)
+        if M.get("from_claude_page"):
+            for k in maker_keys(mk):
+                if k in FAM: sys.exit(f"!! {k}: a Claude key in the families of site/makers.json (it follows site/duels.py)")
+                FAM[k] = {"current": k in duels.CURRENT, "hidden": k in duels.LEGACY, "source": "site/duels.py"}
     for k in maker_of:
         if k not in FAM: warn(f"no family entry for {k} in site/makers.json: shown, not current")
     is_cur = lambda k: FAM.get(k, {}).get("current", False)
@@ -175,7 +185,8 @@ def sites():
                  lede=(f"What each recent {M['name']} model actually costs, at every effort level, and the quality it "
                        f"delivers — fused from public benchmark measurements for every (model, effort) pair, on the "
                        f"same scales as every other maker's on this site."),
-                 noun=M["name"], hide_landscape=[], hide_note="", generation=SET["global"]["generation"])
+                 noun=M["name"], hide_landscape=[], hide_note="",
+                 generation=None if M.get("from_claude_page") else SET["global"]["generation"])
         s.update({k: v for k, v in M.items() if k in s})
         mkeys = maker_keys(mk)
         s.update(id=mk, name=M["name"], path=M["path"], keys=mkeys, current=[k for k in mkeys if is_cur(k)],
@@ -229,8 +240,8 @@ const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title=
 def app_patches(S):
     j = lambda v: json.dumps(v, separators=(",", ":"), ensure_ascii=False)
     return [
-        ('const LEGACY=["opus-4.7","sonnet-4.6","opus-4.8"];', f"const LEGACY={j(S['legacy_keys'])};"),
-        ('const CURRENT=["fable-5.1","opus-5.5","sonnet-5.5","haiku-5.5"];',
+        (re.compile(r"const LEGACY=\[[^\]\n]*\];"), f"const LEGACY={j(S['legacy_keys'])};"),
+        (re.compile(r"const CURRENT=\[[^\]\n]*\];"),
          f"const CURRENT={j(S['current_keys'])};\nconst HIDE_B={j(S['hide_landscape'])}, LEGACY_HINT={j(S['legacy_hint'])}, "
          f"DASH={j(DASH)}, HIDE_C={j(S['hide_couples'])}, VARIANTS={j(S['variants'])};   // per-site settings (site/makers.json)"),
         ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); }'),
@@ -253,7 +264,7 @@ def app_patches(S):
          '${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${(VARIANTS[p.m+"@"+p.e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${vIndex(r-Math.log(v.cost_ratio))}</small>`).join("")}</div>`; };'),
         ('const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n',
          'const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n' + LEGEND_FN),
-        ('const legacy=id=>tgl(id,showLegacy,"Older models","Opus 4.7 · Sonnet 4.6","toggleLegacy");',
+        (re.compile(r'const legacy=id=>tgl\(id,showLegacy,"Older models","[^"\n]*","toggleLegacy"\);'),
          'const legacy=id=>LEGACY.length?tgl(id,showLegacy,"Older models",LEGACY_HINT,"toggleLegacy"):"";'),
         ('const pts=couples().filter(p=>p.m!=="haiku-4.5");', 'const pts=couples().filter(p=>!HIDE_B.includes(p.m));'),
         ('"stroke-width":2.2,"stroke-linejoin":"round"}));\n    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.4})));',
@@ -298,18 +309,16 @@ def body_patches(S, mc_sentence):
          "points, and each is labelled with what it is. They are separate couples, each with its own effort ladder.")),
         ("Best Claude model for the price — the Pareto frontier", f"Best {noun}model for the price — the Pareto frontier"),
         ("Normalized cost matrix — Claude effort levels compared", f"Normalized cost matrix — {noun}effort levels compared"),
-        (" <b>Haiku&nbsp;4.5</b> = a single merged cell (<b>single operating point</b>&nbsp;: no discrete effort parameter, see the measurement sources).",
-         " A model with a <b>single operating point</b> (no discrete effort parameter, <i>solo</i> in the data) fills a single merged cell."),
-        (re.compile(r"<p>Each release buys the same quality for less — .*?</p>"), f"<p>{S['generation']}</p>"),
-        ('<p class="sub"><b>Checks.</b> ',
-         '<p class="sub"><b>Checks</b>, on the fit of 29 September 2026, before the other makers\' couples joined the data<b>.</b> '),
+    ] + ([(re.compile(r"<p>Each release buys the same quality for less — .*?</p>"), f"<p>{S['generation']}</p>")]
+          if S.get("generation") else []) + [
+        ('<p class="sub"><b>Checks</b> (on the fit of 29 September 2026). ',
+         '<p class="sub"><b>Checks</b> (on the fit of 29 September 2026, before the other makers\' couples joined the data). '),
         ("The fit takes the other makers' couples measured in the same groups (OpenAI, Google, xAI, DeepSeek, Qwen, GLM, Kimi): "
          "they link more benchmarks; this page shows the Claude couples.",
          "The fit takes the couples of eight makers measured in the same groups (Anthropic, OpenAI, Google, xAI, DeepSeek, "
          f"Qwen, GLM, Kimi), on one scale; {shows}."),
         (re.compile(r"in this fit (?:every figure is stable to that digit|[^<]*?far inside their intervals)\."), mc_sentence),
         ("not affiliated with or endorsed by Anthropic", "not affiliated with or endorsed by any model maker"),
-        ('<a href="raw-data.csv">download the data (CSV)</a>', f'<a href="{REPO_URL}/blob/main/raw-data.csv">download the data (CSV)</a>'),
     ]
 
 
@@ -399,6 +408,7 @@ def build_page(S, css0, body0, app0):
     S["current_keys"] = [k for k in S["current"] if k in CG]
     for k in S["current"]:
         if k not in S["keys"]: warn(f"{S['id']}: current key {k} is not one of the page's keys")
+        elif k not in CG: warn(f"{S['id']}: current model {k} has no couple published on both axes")
     S["hide_couples"] = {}
     if S["legacy"] is None:                    # global page: current models, and the couples of older models that no
         maker, base = S["maker_of"], (lambda k: MODEL_LINE.get(k, k))   # other model of the same maker strictly beats
@@ -423,12 +433,18 @@ def build_page(S, css0, body0, app0):
     css = with_colours(css0, *mcss) + EXTRA_CSS
     app = patch(app0, app_patches(S), f"app.js ({S['id']})")
     app = app.replace("__MODELS__", json.dumps(models, separators=(",", ":"), ensure_ascii=False))
+    cols = effort_columns(CG)                                  # as site/build.py: low … max, and the others present
+    app = app.replace("__EFFORT_ORDER__", json.dumps(EFFORT_ORDER)).replace("__EFFORT_COLS__", json.dumps(cols))
+    app = app.replace("__CAPE__", json.dumps(CAP, separators=(",", ":")))
     app = app.replace("__COSTGRID__", json.dumps(CG, separators=(",", ":")))
     app = app.replace("__QUALGRID__", json.dumps(QG, separators=(",", ":")))
     app = app.replace("__PANEL__", json.dumps(PANEL, separators=(",", ":")))
     app = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",", ":"), ensure_ascii=False))
     body = patch(body0, body_patches(S, mc_text(CG, MCSE, models)), f"body.html ({S['id']})")
-    body = body.replace("__REPO__", REPO_URL)
+    body = body.replace("__REPO__", REPO_URL).replace("__DATA_URL__", DATA_URL)
+    body = body.replace("__EFFORT_HEAD__", "".join(f"<th>{CAP[e].lower() if e in ('nothink', 'think') else e}</th>" for e in cols))
+    span = math.exp(max(c[0] for v in CG.values() for c in v.values()) - min(c[0] for v in CG.values() for c in v.values()))
+    body = body.replace("__COSTSPAN__", str(round(span)))
     body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
     body = body.replace("__NTREND__", str(sum(len(CG[m]) for m in S["current_keys"])))
     pre = prerender(app, css)
@@ -440,6 +456,8 @@ def build_page(S, css0, body0, app0):
             '<meta name="viewport" content="width=device-width, initial-scale=1">\n'
             + head(S, date, plain(pre.get(".nsrc", ""))) +
             f"<style>\n{css}\n</style>\n</head>\n<body>\n{body}\n<script>\n{app}\n</script>\n</body>\n</html>\n")
+    if (left := sorted(set(re.findall(r"__[A-Z][A-Z_]*__", html)))):
+        sys.exit(f"!! {S['id']}: placeholders left in the page: {left}")
     d = os.path.join(OUT, S["path"]); os.makedirs(d, exist_ok=True)
     open(os.path.join(d, "index.html"), "w", encoding="utf-8").write(html)
     vis = [k for k in shown if k not in S["legacy_keys"]]
@@ -455,6 +473,20 @@ def build_page(S, css0, body0, app0):
 
 
 def main():
+    global DRAFT
+    ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--stale-fit", action="store_true",
+                    help="build from a model/fit-cache.json whose inputs have changed since the fit (local preview only: "
+                         "the couples and values are the last fit's, the sources table reads today's data; the banner says so)")
+    args = ap.parse_args()
+    if args.stale_fit:
+        import grids
+        cache = json.load(open(grids.FIT_CACHE))
+        if cache.get("fingerprint") != grids.inputs_fingerprint(cache["inputs"]):
+            warn("model/fit-cache.json does not match its inputs: built anyway (--stale-fit), banner added")
+            grids.inputs_fingerprint = lambda inputs: cache["fingerprint"]
+            DRAFT = (DRAFT + " " if DRAFT else "") + ("Stale fit: the figures are those of the last fit, whose inputs "
+                     "have changed since; the page is a preview of the layout, not of today's numbers.")
     css0 = open(os.path.join(HERE, "style.css")).read()
     body0 = open(os.path.join(HERE, "body.html")).read()
     app0 = open(os.path.join(HERE, "app.js")).read()
