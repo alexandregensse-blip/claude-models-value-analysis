@@ -2061,3 +2061,20 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   slot, no other source holds one naming either of them, `data/decisions.json` names neither, the setups (`arxiv-2611.16591-*` and
   `singularitygate-v2-1-*`) share no `run_set`, and nothing else links them (no snapshot, no copy, no version link): each is its own group. The notes on the
   paper's rows already say « not the same runs, so no same-runs-as is written ».
+- **CyberDual (arXiv 2610.34435), point 3** (the maintainer, 16 Nov 2026: « attaques réussies et détection entrent (plus haut = mieux), refus et écarts entre
+  conditions restent hors fit »): the 271 setups of the paper read one by one against the paper's text (decision and quote for each:
+  S/s10/integ16/CYBERDUAL.md). **Enter** (headline basis `run-share`, direction higher, written evidence = the paper's definitions: « The attack success rate (ASR)
+  is the share of slots that end with a working exploit after review », « The catch rate measures the reviewer on valid attacks. », the Figure 2 caption):
+  Figure 2's 16 attack-success-rate setups (`asr-*`: the attacker is the model measured) and 31 catch-rate setups (`catch-*`: the reviewer is the model
+  measured, pooled or per attacker), and the 9 `t6-attacker-gpt6sol-*-missed-pct` setups (Table 6's % = the share of the valid attacks of the GPT-6-Sol
+  attacker that a reviewer missed, an attack success rate among valid attacks, as the 18 `t6-*-claudecode/codex-*` setups of salvo s6 already were).
+  The slices of one cohort are one run (`run_set`): the 25 attacker setups share `run:arxiv-2610.34435-attacker-runs`, the 31 reviewer setups
+  `run:arxiv-2610.34435-reviewer-runs` (one cohort of 21 arms and 1,470 slots, « Seven attacker configurations … and three setups give 21 arms »): k measures
+  of an attacker (or a reviewer) weigh 1/k each. **Stay pending**: the refusal shares and counts (`refused-*`, `attacker-refusal-share`, Table 6 / 7 launches and
+  refusals: « Models can sandbag, so refusal rates describe the system under our prompt only »), the counts of gradeable and valid submissions
+  (« invalid shares do not measure capability »), the counts of missed attacks (Table 6 Missed, Table 7 missed / valid, Table 1 Approved / Wrong site),
+  the behaviours of the reviews (Table 2's failure catalogue, no test written, no planted line seen, approvals among misses), the reviewer-side survival and miss
+  rates (the complement of the catch rate of the same runs: « It equals one minus the catch rate minus the share of reviews that break the build … »: counted once,
+  through Figure 2), and the share missed by an unnamed « first reviewer column ». **Unchanged**: 23 setups the salvo s6 had already established (the
+  reviewer catch rate, the Table 6 attacker shares of GLM 5.3). **Back to pending**: the 21 established counts (`*-attacker-valid`, Table 7's missed / valid out of
+  ten), a count is not a rate of success. Counts: 56 setups enter, 23 stay established, 171 stay pending, 21 go back to pending (271).
