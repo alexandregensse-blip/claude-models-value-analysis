@@ -689,6 +689,7 @@ class Ctx:
         if all(k in reg for k in V.REQUIRED_REGISTRIES):
             V.check_registries(reg, rep, schemas, self.vocab, paths, False)   # no saved file read (4 Nov 2026)
         fatal += rep.errors[n0:]
+        self.open_counts = open_ended(reg)      # no date of end by a last capture (16 Nov 2026)
         self.reg, self.paths = reg, paths
         self.models = (reg.get("models") or {}).get("models", {})
         self.routes = (reg.get("routes") or {}).get("routes", {})
@@ -894,6 +895,67 @@ class Ctx:
     def name_bounds(self, key):
         return [t for n in self.models[key].get("names", []) for s in n.get("serves", [])
                 for t in (V.when(s["from"]), V.when(s["to"], True) if s.get("to") is not None else None) if t]
+
+
+# ---------------------------------------------------------------- records without an end date (16 Nov 2026)
+OPEN_SKIP = {"from", "to", "from_basis", "to_basis", "evidence", "note", "bridged", "decision", "served", "verified_to"}
+PRICE_SKIP = OPEN_SKIP | {"classes", "long_context", "factor", "base", "list_after"}
+
+
+def _open_identity(rec, skip, drop=()):
+    return json.dumps({k: v for k, v in rec.items() if k not in skip and k not in drop}, sort_keys=True, default=str)
+
+
+def _open_last(recs, skip, drop=()):
+    """The records of a list whose end is a last capture, that no later record of the same thing replaces, and that were read as
+    late as the latest record of their list: the price, route record or configuration is valid until a newer dated record replaces
+    it (the maintainer, 16 Nov 2026: « pourquoi tu veux mettre une date max aux prix.... »): their `to` becomes open and the date
+    written there is kept as `verified_to`, the day the page was last read to hold it. A record of the list that an older reading
+    ends (a later capture of the same page lists its siblings and no longer lists it: a level, an id or a price no longer offered)
+    stays closed; so does a record ending by a stated date."""
+    chains = {}
+    for r in recs:
+        chains.setdefault(_open_identity(r, skip, drop), []).append(r)
+    cand = []
+    for ch in chains.values():
+        last = max(ch, key=lambda r: V.when(r["from"]))
+        if last.get("to_basis") == "last-capture" and last.get("to") is not None:
+            cand.append(last)
+    if not cand:
+        return 0
+    latest = max(r["to"] for r in cand)
+    n = 0
+    for r in cand:
+        if r["to"] == latest:
+            r["verified_to"] = r["to"]
+            r["to"], r["to_basis"] = None, "open"
+            n += 1
+    return n
+
+
+def open_ended(reg):
+    """Prices, routes and model records end by a stated date or stay valid (no date of end by the last capture); the
+    records ending at a last capture of a chain are opened. Returns {"prices": n, "routes": n, "models": n}."""
+    out = {"prices": 0, "routes": 0, "models": 0}
+    recs = (reg.get("prices") or {}).get("prices") or []
+    groups = {}
+    for p in recs:
+        groups.setdefault((p.get("model"), p.get("route")), []).append(p)       # the list: one model on one route (every kind)
+    for g in groups.values():
+        out["prices"] += _open_last(g, PRICE_SKIP)
+    for r in ((reg.get("routes") or {}).get("routes") or {}).values():
+        for name in ("level_mapping", "accepts_maker", "mapping"):
+            out["routes"] += _open_last(r.get(name) or [], OPEN_SKIP)
+        for m in (r.get("models") or {}).values():
+            for name, lst in m.items():
+                if isinstance(lst, list) and lst and isinstance(lst[0], dict) and "from" in lst[0]:
+                    out["routes"] += _open_last(lst, OPEN_SKIP, ("configuration",) if name == "default" else ())
+    for m in ((reg.get("models") or {}).get("models") or {}).values():
+        for name in ("default", "conversions", "modes"):           # configurations: the closed ones were dropped, the open ones are served
+            lst = m.get(name) or []
+            if lst and isinstance(lst[0], dict) and "from" in lst[0]:
+                out["models"] += _open_last(lst, OPEN_SKIP, ("configuration",) if name == "default" else ())
+    return out
 
 
 def bridge(recs, bounds):
@@ -2197,7 +2259,7 @@ def prices_over(ctx, key, lo, hi, route="maker-api", currency=None, config=None)
         return [e["classes"] for e in es], False
     cur, covered = lo, True
     for e in es:
-        if V.when(e["from"]) > cur + dt.timedelta(microseconds=1):
+        if cur < dt.datetime.max and V.when(e["from"]) > cur + dt.timedelta(microseconds=1):    # an open end (to null) covers to the end
             covered = False
             break
         cur = max(cur, V.when(e["to"], True))

@@ -42,6 +42,13 @@
      posterior sd 0.5 in log against 0.03–0.09 for its neighbours, R̂ 1.03 after 6,300 draws). It names the couple; it
      does not stop the fit.
 
+  9. A price, route or model record not verified for more than STALE_DAYS (3) days (the maintainer, 16 Nov 2026: « si un
+     prix est pas a jour depuis longtemps, il faut verifier » ; « 3 jours »): a price has no end date (it is valid until a
+     newer dated record replaces it, build.open_ended), so the day its page was last read to hold it (`to` of a record
+     that ends at a last capture, kept as `verified_to`) is what says how fresh it is. The fit's models only
+     (data/catalog/models.json). A listed record is read again (the page cited, a new dated record when it changed);
+     it does not stop the fit.
+
 Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6, 7 and 8 run lqm.load
 on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
 
@@ -65,6 +72,7 @@ SMOKE_AXES = ("quality", "cost")
 DUP_REL = 0.01
 MEMORY_PEAKS = os.path.join(HERE, "memory-peaks.json")
 MEMORY_SHARE = 0.9
+STALE_DAYS = 3
 
 
 def in_fit(r):
@@ -381,6 +389,42 @@ def discordant_twins(data, order, notes=None):
     return out
 
 
+def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None):
+    """{"prices": [(model, n, oldest verified day)], "routes": [...], "models": [...]} for the fit's models: the records
+    that end at a last capture without a successor (open: build.open_ended) whose last verification is older than
+    `days` days before `today` (check 9)."""
+    import datetime as dt
+    import json
+    import build as B
+    from catalog import MODEL_ORDER
+    today = today or dt.date.today()
+    limit = (today - dt.timedelta(days=days)).isoformat()
+    if reg is None:
+        reg = {k: json.load(open(os.path.join(ROOT, "data", "registry", k + ".json"), encoding="utf-8")) for k in ("prices", "routes", "models")}
+    B.open_ended(reg)
+    fit = set(MODEL_ORDER if fit is None else fit)
+    out = {"prices": collections.defaultdict(list), "routes": collections.defaultdict(list), "models": collections.defaultdict(list)}
+
+    def walk(x, top, model):
+        if isinstance(x, dict):
+            v = x.get("verified_to")
+            if v and v < limit and model in fit:
+                out[top][model].append(v)
+            for y in x.values():
+                walk(y, top, model)
+        elif isinstance(x, list):
+            for y in x:
+                walk(y, top, model)
+    for p in reg["prices"]["prices"]:
+        walk(p, "prices", p["model"])
+    for rid, r in reg["routes"]["routes"].items():
+        for m, e in (r.get("models") or {}).items():
+            walk(e, "routes", m)
+    for k, m in reg["models"]["models"].items():
+        walk(m, "models", k)
+    return {top: sorted((m, len(v), min(v)) for m, v in d.items()) for top, d in out.items()}
+
+
 def smoke(axis, seed=11):
     """Short fit of one axis (SMOKE_CHAINS chains of SMOKE_WARMUP warm-up + SMOKE_DRAWS draws); returns (R̂ max, worst
     parameters)."""
@@ -471,6 +515,10 @@ def main(run_smoke=False):
         print("!! identical costs in two cost groups, not recognised as copies:", c)
     for c in isolated_couples(cost_groups):
         print("?? couple isolated on the cost axis (its level against the other models rests on the groups it shares):", c)
+    for top, label in (("prices", "price"), ("routes", "route"), ("models", "model sheet")):
+        for model, n, oldest in stale_verifications()[top]:
+            print(f"!! {label} of {model} not verified for more than {STALE_DAYS} days ({n} record(s), the oldest last read {oldest}): "
+                  "read the page cited again (a new dated record if it changed)")
     if errors or copies:
         return 1
     mc = memory_check()

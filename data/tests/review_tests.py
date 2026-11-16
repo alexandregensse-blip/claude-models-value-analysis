@@ -78,7 +78,7 @@ def router_default_known_unknown():
     r = sc.run()
     eq(r.cfg(m1), "max", "route known: the router's own documented default")
     eq(r.q(m2), "out:effort-not-established", "a route named but unresolved: maker high vs router max disagree")
-    eq(r.q(m3), "out:effort-not-established", "a single capture covers its own day only (21 Jul), run 23 Jul")
+    eq(r.cfg(m3), "max", "the router's default read on 21 Jul holds on 23 Jul: no newer record replaces it (16 Nov 2026: no end date by a last capture)")
 
 # 4. hybrid think
 @test

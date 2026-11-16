@@ -146,8 +146,11 @@ the release (release post, model card or API reference) unless a document dates 
 maker states a change or the model's shutdown (a capability is not bounded by the last capture); `default`,
 `conversions` and `modes` are dated by their evidence: `from` = the effective date the maker's document states, else
 its earliest capture; `to` = the change it states, else the last capture still showing it. Between two captures showing
-the same text the interval is covered; between a capture showing it and the next one not showing it, it is not; a single
-capture covers its own day only. Build
+the same text the interval is covered; between a capture showing it and the next one not showing it, it is not. **Since 16 Nov
+2026 (the maintainer: « pourquoi tu veux mettre une date max aux prix.... »; « si un prix est pas a jour depuis longtemps, il faut
+verifier », « 3 jours ») a record that ends at a last capture and that no later record of the same thing replaces is valid until a
+newer dated record replaces it: the build (`open_ended`, BUILD.md) opens its `to` and keeps the date as `verified_to`, the day
+the page was last read to hold it; the precheck lists the fit's records not verified for more than 3 days.** Build
 checks: two keys of one maker serving one API id over overlapping intervals, or with identical display names, fail the
 build until resolved.
 

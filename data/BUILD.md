@@ -1910,3 +1910,84 @@ corrections:
   `KEPT_TWINS` (kept on purpose: D57 on quality, D65 on cost; the aabriefcase costs with no later cost are the only ones
   known). Epoch's DeepSeek V4 Pro max pair and the aaautob « !! » resolve with D66 / D67.
 - Lists and scripts: the session's S/s8/integ14/ (RAPPORT.md, AVANT-APRES.txt, py/).
+
+## Added on 16 Nov 2026 (integration 15: salvos s9 and s10, the maintainer's decisions 1 to 13 of 16 Nov; a method change: prices without an end date)
+
+- **Salvos s9 and s10** (lots k10-a to k10-g and the k10-lm corrections; « 13 ben oui fait. une fois tout ok on decide du fit »):
+  120 sources (116 new files; 4 arXiv sources already held completed: 2610.34435, 2610.35616, 2611.04196, 2611.07667), 5,600
+  measures, 422 setups and 53 publishers added (k10-a 26 sources / 257 measures, k10-b 27 / 137, k10-c 29 / 318, k10-d 27 / 156, k10-e
+  16 / 1,215, k10-f 19 / 727, k10-g 8 / 2,468, merged by id when the lots wrote the same capture). A measure of a lot is added to an
+  already held source unless the same value for the same model is held there (2 + 24 + 2 + 8 rows not added). The k10-lm files
+  replace those of k10-c / k10-e of the same ids: 46 effort labels written with their parentheses (« (Max) » 26, « (High) »,
+  « (xHigh) », « (Medium) », « (Low) ») are written without them, one version is split off a model name; its report said 41, its
+  CORRECTIONS.md and its files say 46. LiveBench's output tokens per task (k10-g's patch file) are added to the `usage` of the
+  140 measures of k10-c. The LMArena extraction files of k10-c / k10-e are copied to /work/.salvo14/mig/s10/ev/integ15/lm-extracts/
+  (SHA256SUMS) and the facts point there. Headlines read by the integrator: 68 setups left pending (the 52 attack / refusal / catch
+  rates of CyberDual's Figure 2, differences between conditions (persona gaps, information-design deltas), behaviour or security
+  quantities (egress, QAOS violations, HarnessSecurity attack rates, CRF refusal), a judge's correlations): not capability scores, as
+  the same papers' setups already held; 62 setups got a run set (the 7 LiveBench suites and their 33 family scores, GDPx's 14
+  partners and its average, Zapier's overall and domain cells): one run, k measurements, 1/k each (rule same-run-weight).
+- **Verification conclusions applied**: Carbon's seven rows of Anthropic's announcement of 9 Nov take the footnote's
+  « highest-available effort » (the build reads the highest level of Carbon's registry: high); the Vals Index 70.45 and
+  Terminal-Bench 4 63.13 copies (dev.to, geotoolbox, kingy) are linked same-runs-as to the Vals boards (effort high); CTOL's
+  three pass rates to Zapier's report, Atomic Agent's three AA copies to AA's release page (same-runs-as, row by row; the
+  capitalandcompute, tokencost and dsebastien links of k10-a to the AA measures were checked, targets and values found).
+  Singularity-Bench (arXiv 2611.16591) was flagged by the research agent as the same evaluation as src-singularitygate-v2-1-2026-11-12:
+  checked, not the same runs (the paper does not name Singularity Gate; 6 tasks of 12 hours and an index of 0.2 to 1.3 at max effort
+  for Opus 5.5, against 80 tasks scoring 8 to 26 at xhigh): no same-runs-as written, a note on the paper's rows, a question for the
+  maintainer. Google's Carbon card: the rows attached to a setup by name only were read against the methodology page: CWE-bench
+  (Collinear, pass@1) kept; OSWorld-2.1, SEC-bench Pro (183-task JavaScript split, pass@1 over 3 attempts) and SWE-sweep
+  (self-computed, subtask-weighted reward) are not the held setups (OSWorld-2.0, 344 instances, the public board's resolved %): three
+  setups of their own (gdmc-*).
+- **GDPx (SemiAnalysis)**: the source gives no score per domain; for GPT-6.1 Terra, Haiku 5.5, Kimi K3 and Qwen 3.8 Max the 14 cells
+  per partner (score, cost, tokens, tasks counted) are written, one run of 14 measurements (run set `gdpx:v1-0`, 1/k each), no
+  average calculated by us; for the other models the displayed average is the measure (maintainer, 16 Nov 2026, decisions 2 and 5).
+- **New models** (decision 3: « cherche les prix, pourquoi tu veux laisser des modeles hors-fit c'est debile »): gemini-4-hydrogen
+  (GA 12 Nov; low, medium, high default, xhigh; $1.50 / 7.50 / cache 0.075, batch and flex at half, Vertex, OpenRouter default medium),
+  qwen4-max (general version, 16 Nov; low, high default, xhigh or off; $1.50 / 4.50 / cache 0.075, International list; the maker's own
+  thinking page of this version was not served: levels from OpenRouter and Unite.ai) and qwen4-max-preview (11 to 25 Nov, low, medium,
+  xhigh default; Token Plan only: **no per-token price exists anywhere**: Alibaba's price page of 16 Nov lists qwen4-max only,
+  OpenRouter lists qwen/qwen4-max only), all in the fit's catalogue, not displayed; every quote checked in its copy. A line naming
+  the model « Qwen4 Max » / « Qwen 4 Max » alone (AA, Kingy, Vals, LMArena xHigh: six lines) is attached to neither key (the name,
+  the id and the text do not tell; the date alone does not decide): it stays out of the fit. The preview's costs stay out of the fit
+  for want of a price (searched: Alibaba price page, the preview page, Token Plan pages, OpenRouter's catalogue and endpoints).
+- **Gemini promotions** (decision 4): the end of each promotion is the announced one (gemini-4-carbon and gemini-4-argon 30 Nov,
+  gemini-3.8-flash 31 Dec, `to_basis: stated`), the catalogue (list) entry is written from the next day (4 / 20 / 0.20 from 1 Dec;
+  1.50 / 7.50 / 0.15 from 1 Jan 2027, `to` open), batch and flex at half from that day; OpenRouter's 0.825 / 4.125 of
+  gemini-3.8-flash is the promotion + 10 %: kind promotion to 31 Dec. GPT-5.6 Sol's promotion (4 / 20) now has the end the OpenAI
+  page states (30 Nov). validate.py: a price may have no end (`to` null) and an announced end may lie after as_of. Test
+  `cost_base_list_price_after_the_promotion`: with as_of after the end the base is the catalogue price; negative control: without
+  the catalogue entry there is no base.
+- **Decisions**: D68 (decision 5: the seven other AA pairs, last capture only, both axes: aatb40 Opus 5 max, aagdppdf Opus 5 max,
+  aatb40 Fable 5.1 xhigh and high, aagdppdf Fable 5.1 high, aatbsci Opus 5.5 max and Haiku 5.5 xhigh: the Wayback of 27 Sep and
+  the model pages of 15 Oct go out, those of 12 Nov stay). SCBench (decisions 6 and 7): the column « % Checkpoints » of the board
+  is read as Iso Solve (setup `scbench-iso`), kept; the repeated runs of the board (the three GPT-5.4 and three GPT-5.3-Codex rows) stay
+  separate runs.
+- **Prices, routes and records without an end date** (decision 7; a method change, before / after of this rule alone in the session's
+  S/s10/integ15/AVANT-APRES-prix.txt; the maintainer, 16 Nov 2026: « pourquoi tu veux mettre une date max aux prix.... » then
+  « si un prix est pas a jour depuis longtemps, il faut verifier », « 3 jours »). A price is valid until a newer dated record
+  replaces it: `as_of` no longer bounds it and no measure goes out for « prices over the price date not registered » because its
+  date is after the capture; the promotions keep their announced end. build.py `open_ended` (after the registry checks): in each list
+  (the prices of one model on one route; a route's records of one model; a model's defaults, conversions, modes), the record at
+  the head of its chain (same kind and configurations for prices; same name, configuration, requested level… for the other
+  lists, `_open_identity`) that ends at a last capture (`to_basis: last-capture`) and that was read as late as the latest record of its
+  list becomes open (`to` null) and the date written there is kept as `verified_to`, the day the page was last read to hold it. A
+  record that a later capture of its list no longer shows (a level, an id or a price no longer offered) stays closed, and so does a
+  stated end. The registry files keep their dates (they are the dates of the last verification). Test `price_without_end_date`: a cost
+  dated after the last capture stays in; a newer dated record changes the price from its date; a stated end is not opened;
+  negative control: the old reading puts the cost out; `open_ended_latest_of_the_list`. Tests that encoded the old reading
+  (« a single capture covers its own day only », « after the default's last capture ») now state the new one, and where they
+  test an end they give it as stated. precheck.py check 9: a price, route record or model sheet of a model of the fit not verified
+  for more than 3 days is listed (« !! », not blocking; test `precheck_stale_verifications`).
+  **Verification of 16 Nov** (S/s10/integ15/py/ext15.py, s7_orprices.py, s8_openai_variants.py; copies and SHA256SUMS in
+  /work/.salvo14/mig/s10/ev/integ15/): 89 pages recaptured (HTTPS, all 200; the live page of a Wayback citation), every record of
+  the fit's models whose latest quotes are all found again is extended to 2026-11-16 with one evidence per quote (prices 205, routes 739,
+  model sheets 135); OpenAI's batch / flex / fast rows read one by one against the page's tables (19 extended; gpt-5.6-sol fast is now
+  8 / 40, a new dated record); six OpenRouter prices changed since 12 Nov (glm-4.7, kimi-k2.5, qwen3.5-397b, deepseek-v4-pro preview,
+  gpt-5.6-sol, qwen3.5-9b): new dated records from 16 Nov; prices.json `as_of` 2026-11-16. Not re-verified, listed by the precheck:
+  records whose quote is no longer on the live page (the page lists the model no longer or in another form: OpenAI's gpt-5.4 / 5.5
+  batch, flex and fast tables, Wayback-only pages of retired models), the git-pinned repository records (their commit does not change),
+  deepseek-v4.1-flash-1017 on OpenRouter (the catalogue now writes its schedule with the peak rate at the root).
+- Evidence of s10-carbon: /work/.salvo14/mig/s10/ev/s10-carbon/SHA256SUMS had 95 wrong paths (93 `epoch-zip/epoch-zip/…`,
+  `benchmark_data.zip`, `dm-evalsmeth.html`); the right lines are appended after a comment line (the old lines are kept),
+  `sha256sum -c` on them: 95 OK, 0 failed.

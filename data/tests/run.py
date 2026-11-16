@@ -559,7 +559,7 @@ def router_maker_levels():
     conv = [span(requested=c, served="budget-converted") for c in ("low", "medium", "high", "xhigh", "max")]
     orm = {"op55": {"ids": ids("op55"), "accepts": [span(configuration="nothink")]},  # /models lists no level
            "bud": {"ids": ids("bud"), "accepts": [span(configuration="nothink")], "mapping": conv},
-           "gap": {"ids": [dict(iv("2025-01-01", "2025-06-30", **win), name="or/gap")]},
+           "gap": {"ids": [dict(iv("2025-01-01", "2025-06-30", from_basis="earliest-capture", to_basis="stated"), name="or/gap")]},   # the route stopped listing it (a stated end: an end by a last capture is open since 16 Nov 2026)
            "s46": {"ids": ids("s46"), "mapping": [dict(iv("2026-03-01", "2026-12-31", **win), requested="high",
                                                         served="budget-converted")]}}
     sc.route("ork", "router", spellings=["ORK"], models=orm,
@@ -569,7 +569,7 @@ def router_maker_levels():
              level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
     sc.route("orp", "router", spellings=["ORP"], models={"op55": {"ids": ids("op55"), "accepts": [span(configuration="high")]}},
              level_mapping=[span(rule="nearest-supported", ties="ambiguous")])
-    sc.routes["orp"]["accepts_maker"] = [dict(iv("2025-01-01", "2025-06-30", **win), decision="dated before the run")]
+    sc.routes["orp"]["accepts_maker"] = [dict(iv("2025-01-01", "2025-06-30", from_basis="earliest-capture", to_basis="stated"), decision="dated before the run")]
     s = sc.source("a")
     mx = ("effort-setting", "max")
     m1 = sc.m(s, model="op55", effort=[mx], route=[("Unregistered Provider", None)])   # unknown: maker-api, ork, orn
@@ -698,17 +698,17 @@ def router_listed_thinking():
 def registry_openrouter_listing_copied():
     # the maintainer, 3 Nov 2026 (decision 2): supported_efforts copied from every saved /api/v1/models capture,
     # first to last capture of each run of identical lists (none → nothink)
-    # last capture: 12 Nov 2026 since integration 14 (the records of the fit's models extended from the 9 Nov capture, as
-    # integration 5 had taken them from 29 Oct to 9 Nov)
+    # last capture: 16 Nov 2026 since integration 15 (12 Nov since integration 14 (the records of the fit's models extended from the 9 Nov capture, as
+    # integration 5 had taken them from 29 Oct to 9 Nov); the records read again on 16 Nov are extended to it, the others end where they were last read
     om = json.load(open(os.path.join(DATA, "registry", "routes.json"), encoding="utf-8"))["routes"]["openrouter"]["models"]
     lst = lambda k, c: sorted((a["from"], a["to"]) for a in om[k].get("accepts", []) if a["configuration"] == c and   # noqa: E731
                               any("supported_efforts" in (x.get("quote") or "") for x in a["evidence"]))
-    eq(lst("deepseek-v4-flash-vision-exp", "low"), [("2026-08-21", "2026-10-14"), ("2026-10-15", "2026-11-12")],
+    eq(lst("deepseek-v4-flash-vision-exp", "low"), [("2026-08-21", "2026-10-14"), ("2026-10-15", "2026-11-16")],
        "a level every capture lists (low), copied to the last capture, cut where the list changes")
-    eq(lst("kimi-k3", "max"), [("2026-07-17", "2026-07-18"), ("2026-07-20", "2026-10-14"), ("2026-10-15", "2026-11-12")],
+    eq(lst("kimi-k3", "max"), [("2026-07-17", "2026-07-18"), ("2026-07-20", "2026-10-14"), ("2026-10-15", "2026-11-16")],
        "kimi-k3 max: one record per run of identical lists")
-    eq(lst("glm-5.2", "nothink"), [("2026-10-15", "2026-11-12")], "negative: glm-5.2 lists « none » only from 15 Oct")
-    eq(lst("gpt-5.5", "nothink"), [("2026-06-27", "2026-11-12")], "gpt-5.5 lists « none » from the first listing")
+    eq(lst("glm-5.2", "nothink"), [("2026-10-15", "2026-11-16")], "negative: glm-5.2 lists « none » only from 15 Oct")
+    eq(lst("gpt-5.5", "nothink"), [("2026-06-27", "2026-11-16")], "gpt-5.5 lists « none » from the first listing")
     eq(lst("gpt-5.1-codex", "high"), [("2026-06-27", "2026-07-22")],
        "negative: listed to 29 Oct, cut at the model's shutdown (its configurations end 22 Jul)")
     for k, e in om.items():
@@ -1172,7 +1172,7 @@ def cfg7_default_bridged_gap():
                                          rec("2026-07-01", "2026-12-31", "think")])
     sc.model("qd", configs=two, names=[name("qd", "2026-01-01"), name("qd-latest", "2026-05-01")],
              default=[rec("2026-01-01", "2026-03-31", "think"), rec("2026-07-01", "2026-12-31", "think")])
-    sc.model("qe", configs=two, default=[rec("2026-01-01", "2026-03-31", "think", setting="thinking"),
+    sc.model("qe", configs=two, default=[rec("2026-01-01", "2026-03-31", "think", setting="thinking", to_basis="stated"),
                                          rec("2026-07-01", "2026-12-31", "think")])
     s = sc.source("a", published="2026-12-31")
     nes = [("no-effort-sent", "default")]
@@ -1269,10 +1269,13 @@ def run_date_interval_and_default_upper():
     s2 = sc.source("b", commit="abcdef1", captures=[{"id": "G1", "kind": "commit", "commit": "abcdef1",
                                                      "captured": "2026-03-15T10:00:00Z"}])
     m5 = sc.m(s2, model="md", effort=nes, run_date=[st])
+    sc.model("ms", released="2026-03-01", default=[dict(iv("2026-03-03", "2026-03-31", from_basis="earliest-capture", to_basis="stated"), configuration="medium")])
+    m6 = sc.m(s, model="ms", effort=nes, run_date=[st])
     r = sc.run()
     eq(r.cfg(m1), "medium", "start and end inside the dated default")
     eq(r.cfg(m2), "default", "a lone end: the lower bound is the release")
-    eq(r.cfg(m3), "default", "upper bound = publication, after the default's last capture")
+    eq(r.cfg(m3), "medium", "a default with no successor holds after its last capture (16 Nov 2026: no end date by a last capture)")
+    eq(r.cfg(m6), "default", "upper bound = publication, after the default's stated end")
     eq(r.cfg(m4), "medium", "upper bound = the earliest capture carrying the value")
     eq(r.cfg(m5), "medium", "upper bound = the commit")
 
@@ -1437,6 +1440,101 @@ def cost_base_scheduled_list_price():
     b = r[m1]["fields"]["cost"]["base"]
     eq((b["rule"], b["value"]), ("cost-uniform-factor", 2.0), "× 2 to the stated list price")
     eq("base-scheduled-list-price" in r[m1]["flags"], True, "flagged")
+
+
+@test
+def cost_base_list_price_after_the_promotion():
+    # a promotion with an announced end and the catalogue (list) entry from the day after: with as_of after the end the
+    # base is the catalogue price (gemini-4-carbon, gemini-4-argon, gemini-3.8-flash; integration 15, 16 Nov 2026).
+    # Negative control: without the catalogue entry no standard price is in force after the end, and the cost is not
+    # brought to the catalogue price.
+    def build_sc(with_standard):
+        sc = base(as_of="2026-11-01")
+        for k in ("ma", "mb"):
+            sc.prices["prices"].append(price(k, "2026-05-01", "2026-10-01", {"input": 1, "output": 5}, kind="promotion",
+                                             to_basis="stated", list_after={"from": "2026-10-02", "classes": {"input": 2, "output": 10}}))
+            if with_standard:
+                sc.prices["prices"].append(dict(price(k, "2026-10-02", None, {"input": 2, "output": 10}), to=None, to_basis="open"))
+        s = sc.source("a")
+        m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-06-01")
+        sc.m(s, model="mb", effort=[LOW], cost="3.0", price_table="prices of 2026-06-01")
+        return sc, m1
+    sc, m1 = build_sc(True)
+    r = sc.run()
+    b = r[m1]["fields"]["cost"]["base"]
+    eq((b["rule"], b["value"]), ("cost-uniform-factor", 2.0), "× 2 to the catalogue price after the promotion")
+    eq("base-scheduled-list-price" in r[m1]["flags"], False, "the catalogue entry is in force: no scheduled list price")
+    sc, m1 = build_sc(False)
+    r = sc.run()
+    eq(r[m1]["fields"]["cost"].get("base"), None, "without the catalogue entry the cost is not brought to the catalogue price")
+
+
+@test
+def price_without_end_date():
+    # a price is valid until a newer dated record replaces it (the maintainer, 16 Nov 2026: « pourquoi tu veux mettre
+    # une date max aux prix.... »): a record that ends at a last capture and has no successor is open, the capture date
+    # is kept as `verified_to`. A cost dated after that capture stays in; a newer dated record changes the price from
+    # its date; a promotion keeps its announced end. Negative control: with the old reading (the end is the capture)
+    # the cost is out, « prices over the price date not registered ».
+    import build as B
+    def scenario():
+        sc = base(as_of="2026-10-01")
+        for k in ("ma", "mb"):
+            sc.prices["prices"].append(price(k, "2026-01-01", "2026-06-01", {"input": 2, "output": 10}, to_basis="last-capture"))
+        s = sc.source("a")
+        m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-09-15")
+        sc.m(s, model="mb", effort=[LOW], cost="3.0", price_table="prices of 2026-09-15")
+        return sc, m1
+    sc, m1 = scenario()
+    r = sc.run()
+    eq(r.c(m1), "in", "a cost dated after the last capture of its price stays in")
+    reg = {"prices": {"prices": [price("ma", "2026-01-01", "2026-06-01", {"input": 2, "output": 10}, to_basis="last-capture")]}}
+    eq(B.open_ended(reg)["prices"], 1, "the open record is counted")
+    eq((reg["prices"]["prices"][0]["to"], reg["prices"]["prices"][0]["verified_to"]), (None, "2026-06-01"), "open, verified date kept")
+    old = B.open_ended
+    B.open_ended = lambda reg: {"prices": 0, "routes": 0, "models": 0}
+    try:
+        sc, m1 = scenario()
+        r = sc.run()
+        eq(r.c(m1) == "in", False, "negative control: the old reading puts the cost out")
+    finally:
+        B.open_ended = old
+    # a newer dated record replaces the price from its date; the older record keeps its end
+    reg = {"prices": {"prices": [price("ma", "2026-01-01", "2026-06-01", {"input": 2, "output": 10}, to_basis="last-capture"),
+                                 price("ma", "2026-06-10", "2026-07-01", {"input": 3, "output": 15}, to_basis="last-capture")]}}
+    B.open_ended(reg)
+    a, b2 = reg["prices"]["prices"]
+    eq((a["to"], a["to_basis"], b2["to"], b2["to_basis"]), ("2026-06-01", "last-capture", None, "open"), "only the last record of a chain is opened")
+    # a promotion keeps its announced end
+    reg = {"prices": {"prices": [price("ma", "2026-05-01", "2026-10-01", {"input": 1, "output": 5}, kind="promotion", to_basis="stated")]}}
+    eq(B.open_ended(reg)["prices"], 0, "a stated end is not opened")
+    # an open record followed by a promotion inside it: the coverage walk reaches the end of time without overflowing
+    sc = base(as_of="2026-10-01")
+    for k in ("ma", "mb"):
+        sc.prices["prices"] += [price(k, "2026-01-01", "2026-06-01", {"input": 2, "output": 10}, to_basis="last-capture"),
+                                price(k, "2026-07-01", "2026-08-01", {"input": 1, "output": 5}, kind="promotion", to_basis="stated")]
+    s = sc.source("a")
+    m1 = sc.m(s, model="ma", effort=[LOW], cost="1.0", price_table="prices of 2026-07-15")
+    sc.m(s, model="mb", effort=[LOW], cost="3.0", price_table="prices of 2026-07-15")
+    r = sc.run()
+    eq(r[m1]["fields"]["cost"].get("price_covered"), True, "covered to the end by the open record, a promotion inside it")
+
+
+@test
+def open_ended_latest_of_the_list():
+    """A record that a later capture of its list no longer shows stays closed: only the records read as late as the latest of their
+    list are opened (a level OpenRouter stopped listing is not accepted for ever). Negative control: the older record keeps its end."""
+    import build as B
+    rec = lambda frm, to, **kw: dict(iv(frm, to, from_basis="earliest-capture", to_basis="last-capture"), **kw)     # noqa: E731
+    acc = [rec("2026-01-01", "2026-11-12", configuration="low"), rec("2026-01-01", "2026-10-01", configuration="xhigh")]
+    reg = {"routes": {"routes": {"orx": {"models": {"mx": {"accepts": acc}}}}}}
+    eq(B.open_ended(reg)["routes"], 1, "one record opened")
+    low, xhigh = reg["routes"]["routes"]["orx"]["models"]["mx"]["accepts"]
+    eq((low["to"], low["verified_to"], xhigh["to"], xhigh["to_basis"]), (None, "2026-11-12", "2026-10-01", "last-capture"),
+       "low (read on 12 Nov) is open, xhigh (last listed on 1 Oct) keeps its end")
+    pr = lambda to, **kw: price("ma", "2026-01-01", to, {"input": 1, "output": 2}, to_basis="last-capture", **kw)     # noqa: E731
+    reg = {"prices": {"prices": [pr("2026-11-12"), pr("2026-08-07", kind="batch")]}}
+    eq(B.open_ended({"prices": reg["prices"]})["prices"], 1, "prices: the batch price no later capture shows stays closed")
 
 
 @test
@@ -1707,6 +1805,26 @@ def cost_method_unstated_follows_page():
     eq(sorted({r[m]["fields"]["cost"]["part"][1] for m in ms}), sorted([f"unstated[{a}/facts]", f"unstated[{b}/facts]"]),
        "negative control: no snapshot_of, one method per source")
     eq(len({r[m]["cost_group"] for m in ms if r[m]["cost_group"]}), 2, "negative control: two subsets")
+
+
+@test
+def precheck_stale_verifications():
+    """precheck check 9 (the maintainer, 16 Nov 2026: « si un prix est pas a jour depuis longtemps, il faut verifier », « 3 jours »): a
+    price of a fit model whose last verification (the `to` of a record that ends at a last capture) is older than 3 days is listed.
+    Negative controls: exactly 3 days is not stale, a record replaced by a newer one is not listed, a model outside the fit is not."""
+    import datetime as dt
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    pr = lambda m, frm, to, **kw: dict(model=m, route="maker-api", kind="standard", currency="USD", per="MTok", classes={"input": 1, "output": 2},   # noqa: E731
+                                       **{"from": frm}, to=to, from_basis="stated", to_basis="last-capture", evidence=[], **kw)
+    reg = lambda *ps: {"prices": {"prices": list(ps)}, "routes": {"routes": {}}, "models": {"models": {}}}     # noqa: E731
+    today = dt.date(2026, 11, 16)
+    out = precheck.stale_verifications(today, reg=reg(pr("fit-a", "2026-01-01", "2026-11-12")), fit={"fit-a"})
+    eq(out["prices"], [("fit-a", 1, "2026-11-12")], "last read 12 Nov, today 16 Nov: listed")
+    eq(precheck.stale_verifications(dt.date(2026, 11, 15), reg=reg(pr("fit-a", "2026-01-01", "2026-11-12")), fit={"fit-a"})["prices"], [], "3 days exactly: not listed")
+    eq(precheck.stale_verifications(today, reg=reg(pr("fit-a", "2026-01-01", "2026-06-01"), pr("fit-a", "2026-06-10", "2026-11-16")), fit={"fit-a"})["prices"], [],
+       "the older record is replaced by a newer one, the newer was read today")
+    eq(precheck.stale_verifications(today, reg=reg(pr("other", "2026-01-01", "2026-11-12")), fit={"fit-a"})["prices"], [], "a model outside the fit is not listed")
 
 
 @test
