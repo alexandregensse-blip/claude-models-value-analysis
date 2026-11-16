@@ -32072,6 +32072,15 @@
   },
   "zcarbon-domain-support": {
    "label": "Zapier AutomationBench 1.0.6, domain Support: Gemini 4 Carbon pass rate by effort (Gemini 4 Carbon release report)"
+  },
+  "gdmc-swesweep-reward": {
+   "label": "SWE-sweep, subtask-weighted reward, self-computed with mini-swe-agent (Google model card of Gemini 4 Carbon)"
+  },
+  "gdmc-osworld21-offline": {
+   "label": "OSWorld-2.1 offline subset (Google model card of Gemini 4 Carbon)"
+  },
+  "gdmc-secbenchpro-js183": {
+   "label": "SEC-bench Pro, 183-task May 2026 JavaScript engine split, pass@1 over 3 attempts (Google model card of Gemini 4 Carbon)"
   }
  },
  "setups": {
@@ -402072,6 +402081,120 @@
    "legacy_groups": [],
    "label": "Zapier AutomationBench 1.0.6, domain Support: Gemini 4 Carbon pass rate by effort (Gemini 4 Carbon release report)",
    "note": "NEW setup (salvo s9, lot k10-a, 16 Nov 2026): \"Full matrix\" of the Gemini 4 Carbon release report: pass rate and passed/total tasks of the Support domain at each effort (Carbon only); the domain totals: Sales 117, Marketing 100, Operations 100, Support 100, Finance 120, HR 120 tasks | added by integration 15 of salvo s9/s10 (16 Nov 2026)"
+  },
+  "gdmc-swesweep-reward": {
+   "family": "gdmc-swesweep-reward",
+   "benchmark": "SWE-sweep, subtask-weighted reward, self-computed with mini-swe-agent (Google model card of Gemini 4 Carbon)",
+   "subset": null,
+   "harness": "mini-SWE-agent",
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "resolved%",
+   "headline": {
+    "metric": "resolved%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+      "captured": "2026-11-16",
+      "where": "model card, Results table",
+      "quote": "Agentic coding | SWE-sweep | | 9.6% | 4.3% | 9.5% | 3.6% | 2.9% |",
+      "file": "/work/.salvo14/mig/s10/ev/s10-carbon/dm-modelcard.txt",
+      "sha256": "788abd01f03c874a071da25edd39cc29aa5363c59da871308520ef67fa76c306"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "coding",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "swesweep-board"
+   ],
+   "label": "SWE-sweep, subtask-weighted reward, self-computed with mini-swe-agent (Google model card of Gemini 4 Carbon)",
+   "note": "NEW setup (integration 15 (16 Nov 2026)): the methodology page says « SWE-sweep results for Gemini 4 Carbon are self-computed using a mini-swe-agent harness (reporting the subtask-weighted reward) »; the held setup is the public board's resolved %: not the same. Copy of the setup swesweep-board otherwise."
+  },
+  "gdmc-osworld21-offline": {
+   "family": "gdmc-osworld21-offline",
+   "benchmark": "OSWorld-2.1 offline subset (Google model card of Gemini 4 Carbon)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+      "captured": "2026-11-16",
+      "where": "model card, Results table",
+      "quote": "OSWorld-2.1 | Offline subset | 81.5% | 74.7% | 80.9% | 87.2% | 76.8%",
+      "file": "/work/.salvo14/mig/s10/ev/s10-carbon/dm-modelcard.txt",
+      "sha256": "788abd01f03c874a071da25edd39cc29aa5363c59da871308520ef67fa76c306"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "computer-use",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "gs2-osworld2off"
+   ],
+   "label": "OSWorld-2.1 offline subset (Google model card of Gemini 4 Carbon)",
+   "note": "NEW setup (integration 15 (16 Nov 2026)): the card writes OSWorld-2.1 (Offline subset); the held setup is OSWorld-2.0: another version, not attached. Copy of the setup gs2-osworld2off otherwise."
+  },
+  "gdmc-secbenchpro-js183": {
+   "family": "gdmc-secbenchpro-js183",
+   "benchmark": "SEC-bench Pro, 183-task May 2026 JavaScript engine split, pass@1 over 3 attempts (Google model card of Gemini 4 Carbon)",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "score%",
+   "headline": {
+    "metric": "score%",
+    "basis": "only-metric",
+    "level": "written",
+    "evidence": [
+     {
+      "url": "https://deepmind.google/models/model-cards/gemini-4-carbon/",
+      "captured": "2026-11-16",
+      "where": "model card, Results table",
+      "quote": "SEC-bench Pro | | 88.2% | 83.4% | 85.4% | — | — |",
+      "file": "/work/.salvo14/mig/s10/ev/s10-carbon/dm-modelcard.txt",
+      "sha256": "788abd01f03c874a071da25edd39cc29aa5363c59da871308520ef67fa76c306"
+     }
+    ]
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [
+    "secbenchpro-overall"
+   ],
+   "label": "SEC-bench Pro, 183-task May 2026 JavaScript engine split, pass@1 over 3 attempts (Google model card of Gemini 4 Carbon)",
+   "note": "NEW setup (integration 15 (16 Nov 2026)): the methodology page says « We report Pass@1 on the 183-task May 2026 JavaScript engine split, averaged over 3 independent attempts per task »; the held setup is the 344-instance overall solve rate: not the same. Copy of the setup secbenchpro-overall otherwise."
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."

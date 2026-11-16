@@ -21,7 +21,8 @@ REGISTRY_FILES = {"models": "models.json", "routes": "routes.json", "benchmarks"
                   "publishers": "publishers.json", "prices": "prices.json", "rules": "rules.json", "flag-map": "flag-map.json",
                   "price-tables": "price-tables.json"}
 REQUIRED_REGISTRIES = ("models", "routes", "benchmarks", "publishers")
-OPEN_TO = ("configurations", "serves")          # interval lists where to = null (no end known) is allowed
+OPEN_TO = ("configurations", "serves", "prices")  # interval lists where to = null (no end known) is allowed; prices since 16 Nov 2026
+# (a price is valid until a newer dated record replaces it: the list price announced for a later date has no end)
 TEXT_EXT = (".txt", ".md", ".csv", ".json", ".yaml", ".yml", ".py", ".ts", ".js", ".mjs", ".toml", ".html", ".htm", ".xml", ".tsv")
 
 
@@ -918,7 +919,8 @@ def check_registries(reg, rep, schemas, vocab, paths, check_files):
             elif p["kind"] == "standard" and routes[p["route"]]["class"] == "maker-api":
                 if when(p["from"]) <= when(prices["as_of"]) <= when(p["to"], True):
                     base.add(p["model"])
-            if p.get("to") is not None and when(p["to"]) > when(prices["as_of"], True):
+            if (p.get("to") is not None and p.get("to_basis") != "stated"
+                    and when(p["to"]) > when(prices["as_of"], True)):       # an announced end (promotion) may lie after as_of
                 rep.err(L, f"to {p['to']} lies after as_of {prices['as_of']} (a price ends at its last capture)")
             if p["kind"] == "standard" and not p.get("classes"):
                 rep.err(L, "standard price without classes")
