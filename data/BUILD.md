@@ -1865,3 +1865,48 @@ corrections:
   Zapier, the Fable 5.2 announcement and its copies, llm-stats, Epoch) resolve to the key by name.
 - Lists and scripts: the session's S/s8/integ13/ (RAPPORT.md, AVANT-APRES.txt, AVANT-APRES-regle.txt, py/).
 
+## Added on 16 Nov 2026 (integration 14: the maintainer's decisions 15 and 16 of 12 Nov, SCBench, routes to 12 Nov, the cache key)
+
+- **D66, aaautob (decision 15), last capture only** (as D57 and D65): the Artificial Analysis model pages of 12 Nov
+  (Intelligence Index v5.0.1, group `aaautob#5.0.1`) repeat five runs already held from earlier captures without a
+  version (group `aaautob#none`), which did not replace each other: Opus 5.5 max (15 Oct M7, cost identical),
+  Opus 5 max (Wayback 22 Sep M10, identical), Haiku 5.5 xhigh (15 Oct M106, identical), Fable 5.1 xhigh and high
+  (Wayback 22 Sep M6 and M2: same score, cost re-estimated by AA, 2.2012 → 2.1772 $ and 1.7662 → 1.7536 $). The five older
+  measures go out on both axes. Searched: every aaautob measure of every AA source (225) against the 12 Nov ones (10): no
+  other repeat. The same pattern exists in seven other AA evaluations (aatb40 ×3, aagdppdf ×2, aatbsci ×2, both captures
+  kept): not extended, a question for the maintainer.
+- **D67, Epoch chess puzzles (decision 16)**: DeepSeek V4 Pro max appears twice (19 and 46), two runs of 13 Oct under
+  the alias « deepseek-v4-pro » (row DSyqeLiA9LLZF4iaxsTVHL, started 13:38:19, 0.19) and the dated id
+  « deepseek-v4-pro-0813 » (C56VHYLMeww2wXebeJh3gg, 13:13:34, 0.46). The alias line goes out (4 Nov M133 and the same row
+  of the 15 and 21 Oct captures). Target of the alias on 13 Oct, read in DeepSeek's docs by Wayback: the pricing page of
+  14 Oct lists « deepseek-v4-pro » against « DeepSeek-V4-Pro-0813 » and the update page of 12 Oct says « simply set the
+  model name to deepseek-v4-pro to use the latest version » with no later V4 Pro entry: the alias pointed to
+  deepseek-v4-pro-0813, no other model of the catalogue (the registry already says so since 13 Aug). Copies:
+  /work/.salvo14/mig/s8/ev/integ14/wb-ds-*.
+- **SCBench (decision 9)**: new capture of scbench.ai/leaderboard (16 Nov; footer « Last updated: October 26, 2026 »,
+  34 runs): the 28 rows of the fit's models read one by one into `src-scbench.ai-leaderboard-2026-10-26`
+  (`snapshot_of` the April source). Each row gives two measures of one run: Strict Solve (= CKPT Solved, setup `scbench`,
+  with the $/CKPT cost) and Iso Solve (setup `scbench-iso`), run set `run:scbench`, headline basis `run-share`, weight
+  1/k each, no principal. The table has no column named « % Checkpoints »: the old header said « Showing best version by %
+  Checkpoints » and the new description « ranked by percent of checkpoints solved in isolation », so the pending metric
+  is read as Iso Solve (question to the maintainer). Three GPT-5.4 and three GPT-5.3-Codex rows are separate runs of the
+  board (« Showing 34 of 34 runs »), kept as such. Not converted: Opus 4.6, Opus 4.5, Composer 2, MiniMax M2.7 (not in the fit).
+- **Routes to 12 Nov**: routes.json records ending at the 9 Nov capture are extended to 2026-11-12 for the fit's
+  models and the route-wide records (732 records: OpenRouter 521, Codex 57, Claude Code 40, mini-SWE-agent 39, Terminus-2 36,
+  Fireworks 30, Together 5, Groq 4), each when every quote of its 9 Nov capture is found again in a copy of the 12 Nov
+  (integration 13) or of 16 Nov (the eight pages not refetched on 12 Nov: Claude Code model-config, Codex models.json and
+  client.rs, Fireworks, Together, Groq, OpenRouter's reasoning page, the AI Studio thinking page; captured 16 Nov, their
+  records read as unchanged to 12 Nov by the bridging rule of the other intervals). All 732 quotes were found, no new
+  record was needed (no efforts list of a fit model changed in OpenRouter's catalogue). Not extended: the records of
+  models outside the fit (438 ending 9 Nov), those that end earlier by their own change, and the harness records read
+  from repository clones (Inspect AI 22 and 26 Oct, Gemini CLI, Kimi Code CLI, Goose, Hermes: HEAD of the clones, no
+  new clone). Effect: runs dated to 12 Nov see the candidate routes' records over their whole interval.
+- **Cache key of the build** (seen by integration 13): a measure's key after a block is the sha256 of its state, and its
+  `faults` (the checks' errors on its facts) are not in the state (STATE_SKIP): a fact whose quote no longer holds its
+  value changed the fields, but no key after the first blocks, so the cached later blocks kept the measure `in`. The
+  state key now holds the faults. Test `stage_cache_fault_change` (cached build equals the build without cache; without
+  the correction it fails: « got 'in', want 'out:no-proof' »).
+- **Precheck**: the AA-Briefcase pair (aa5-aa-briefcase / aabriefcase, same score on 41 couples) is declared in
+  `KEPT_TWINS` (kept on purpose: D57 on quality, D65 on cost; the aabriefcase costs with no later cost are the only ones
+  known). Epoch's DeepSeek V4 Pro max pair and the aaautob « !! » resolve with D66 / D67.
+- Lists and scripts: the session's S/s8/integ14/ (RAPPORT.md, AVANT-APRES.txt, py/).
