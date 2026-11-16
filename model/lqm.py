@@ -9,7 +9,8 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
            setup's direction, DIRECTION_OF; a legacy row's metric label, LOWER_IS_BETTER) is turned first, in its
            unit: B − y on a bounded scale [0, B] before the logit, −log y on a log scale, −y otherwise.
   θ_c      latent quality (quality axis) or log cost (cost axis) of the couple. θ sums to zero over the couples:
-           no couple is a reference; the page divides by its reference couple afterwards (a display choice).
+           no couple is a reference; the page counts cost from the cheapest couple and reads quality as an expected
+           panel score (site/grids.py, a display choice).
   o_b      group offset, flat. a_b group gain: quality log(a_b/σ_b) ~ N(0, s_g²) (discrimination, pooled; its zero
            mean sets the unit of θ); cost log a_b ~ N(0, s_g²) (elasticity around 1).
   σ_b      group noise, pooled: log σ_b ~ N(μ_σ, s_σ²) on the group's standardised scale (invariant to an affine change
