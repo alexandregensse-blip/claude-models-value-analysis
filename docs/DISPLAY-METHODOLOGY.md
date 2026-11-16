@@ -226,7 +226,9 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   the makers' pages as evidence): current = status `current`; an unknown status, or "not a model", is not current;
   shown on the maker's page = current, or followed by a current key (the latest model and the one before); a line
   that is not current follows its model. `family_overrides` holds a user decision the files do not carry (Gemini 3.1
-  Pro current beside Gemini 4 Argon). Claude keeps its settings.
+  Pro current beside Gemini 4 Argon). Claude's keys are not there: the Claude maker page follows the Claude page — its
+  models, labels and colours from the catalogue (`display_order`), current = `CURRENT` and hidden = `LEGACY` of
+  `site/duels.py`, and the page's own generation card. A catalogue key with no family entry is shown and not current.
 - **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
   each with its own effort ladder. They share the model's colour and its single legend entry; the first is drawn
   solid, the others dashed or dotted with hollow points, and the legend lists each with its stroke and what it is
@@ -243,5 +245,8 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   the trend, the tiers or the crown, and a variant whose `until` is past is dropped. Read from the first file of
   `price_variants` in `site/makers.json` that exists: `site/price_variants.json` (the repricing salvo's file), else
   `site/price_variants.mock.json`, a mock the draft banner then names.
-- **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set: the other
-  makers' costs are not yet put on today's prices. An empty `draft` removes both and writes the sitemap.
+- **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set (the pages
+  are not published). An empty `draft` removes both and writes the sitemap.
+- **A fit that no longer matches its inputs** stops the build, as on the Claude page. `--stale-fit` builds a local
+  preview from it anyway — the couples and values of the last fit, the sources table from today's data — and says so
+  in the banner; it is never the published build.

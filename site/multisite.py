@@ -426,7 +426,8 @@ def build_page(S, css0, body0, app0):
         S["legacy_keys"] = [k for k in shown if k in S["legacy"]]
         leg = [k for k in S["legacy_keys"] if not models[k].get("ls")]
         names = [models[k].get("bl", models[k]["label"]) for k in leg]
-        S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 else " · ".join(names[:2]) + f" and {len(names) - 2} more")
+        S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 or SET["makers"][S["id"]].get("from_claude_page")
+                            else " · ".join(names[:2]) + f" and {len(names) - 2} more")
     S["variants"] = {c: v for c, v in VARIANTS.items() if c.split("@")[0] in CG and c.split("@")[1] in CG[c.split("@")[0]]}
     couples = {f"{m}@{e}" for m, es in CG.items() for e in es}
     GD = groups_data(couples=couples, unverified="—")
