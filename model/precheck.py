@@ -120,8 +120,26 @@ DISTINCT_RUNS = [
      for a, b in (("de", "es"), ("de", "hi"), ("de", "pt"), ("es", "hi"), ("es", "it"), ("hi", "it"), ("hi", "pt"))]
 
 
+# Pairs of groups that are the same runs on purpose and kept (the maintainer, 12 Nov 2026, integration 14 point 6): the
+# AA-Briefcase of the model pages of 15 / 19 / 21 Oct (aabriefcase) and of the 9 Nov leaderboards and 12 Nov model pages
+# (aa5-aa-briefcase) share their scores on 41 couples (one board re-rated as games are added, the same rows seen at two
+# dates). Quality: D57 keeps the last capture only. Cost: D65 took out the 8 aabriefcase costs of runs also costed in
+# the later capture; the others are the only costs known for their couples (aa5-aa-briefcase of 9 Nov has no cost), so
+# they are kept. Reported, not flagged.
+KEPT_TWINS = [
+    dict(groups=("aa5-aa-briefcase@artificialanalysis", "aabriefcase"),
+         proof="the same AA-Briefcase runs at two dates (D57 keeps the last capture on quality, D65 the last on the cost "
+               "where both are costed); the aabriefcase costs of couples the aa5-aa-briefcase captures give no cost for "
+               "(leaderboards of 9 Nov) are the only costs known and are kept"),
+]
+
+
 def declared_distinct(g1, g2):
     return next((d for d in DISTINCT_RUNS if set(d["groups"]) == {g1, g2}), None)
+
+
+def declared_kept(g1, g2):
+    return next((d for d in KEPT_TWINS if set(d["groups"]) == {g1, g2}), None)
 
 
 def setup_run_sets():
@@ -179,11 +197,11 @@ def twin_metrics(data, notes=None):
         elif len(cost) < 3 and len(score) >= 3 and all(gap(a["score"][c], b["score"][c]) < DUP_REL for c in score):
             msg = f"{g1} / {g2} ({s1}): same score on {len(score)} shared couples, no cost to tell them apart"
         if msg:
-            d = declared_distinct(g1, g2)
-            if d is None:
+            d, k = declared_distinct(g1, g2), declared_kept(g1, g2)
+            if d is None and k is None:
                 out.append(msg)
             elif notes is not None:
-                notes.append(f"{msg}; declared distinct runs: {d['proof']}")
+                notes.append(f"{msg}; declared " + (f"distinct runs: {d['proof']}" if d else f"kept twins: {k['proof']}"))
     return out
 
 
