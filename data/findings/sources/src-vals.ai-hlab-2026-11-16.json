@@ -1,0 +1,303 @@
+{
+ "id": "src-vals.ai-hlab-2026-11-16",
+ "publisher": "vals.ai",
+ "urls": [
+  "https://www.vals.ai/benchmarks/hlab"
+ ],
+ "wayback": [],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html": "49571ce7e3d8ecf1d280bbb2e957b22761f9fec82cbec6c9f0f2dc6bcc55470d",
+  "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.txt": "f283df82940a46cc9c1b841e203e5feae58b5b80dfe773caf499b97a5f4e6e4d",
+  "/work/.salvo14/mig/s10/ev/s10-carbon/vals-model.html": "43892572a72a997e4aa409a9cdc3f2a23aafc9fe2ed1916d262d27bfcb7ddb6c",
+  "/work/.salvo14/mig/s10/ev/s10-carbon/vals-model.txt": "b4a26673d7bdca40d0d4d1d3b7514baf5ab2dedbd6a1d89b24817ed3096216eb",
+  "/work/.salvo14/mig/s10/ev/s10-carbon/vals-vals_index.html": "1baf3ed91be1473f928ffad2b2b1293d257ad68d0afb6f42b5ec222b251c46e2"
+ },
+ "harvested_at": "2026-11-16T12:00:00Z",
+ "published": {
+  "value": "2026-11-11",
+  "where": "métadonnées de la page du classement, champ updated (la page écrit aussi « Updated 11/11/2026 »)",
+  "quote": "\"updated\":[0,\"2026-11-11\"]",
+  "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html"
+ },
+ "salvo": "salvo14/mig/s10 (16 Nov 2026), lot k10-b (axe s10-carbon)",
+ "agent": "convertisseur k10-b (Sonnet 5.5), lecture ligne par ligne de la copie et des lignes de l'agent s10-carbon; merged by integration 15 of salvo s9/s10 (16 Nov 2026)",
+ "snapshot_of": "src-vals.ai-hlab-2026-11-09",
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "fetch",
+   "url": "https://www.vals.ai/benchmarks/hlab",
+   "captured": "2026-11-16",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "note": "page du classement enregistrée le 16 nov. 2026 par l'agent s10-carbon (vals-hlab.html et sa version texte vals-hlab.txt) ; seule la ligne de Gemini 4 Carbon est écrite ici (les autres lignes du tableau : voir la capture src-vals.ai-hlab-2026-11-09)"
+  },
+  {
+   "id": "S2",
+   "kind": "fetch",
+   "url": "https://www.vals.ai/benchmarks/vals_index",
+   "captured": "2026-11-16",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-vals_index.html",
+   "note": "page du Vals Index enregistrée le 16 nov. 2026 (vals-vals_index.html) : son payload contient, parmi les composantes de l'indice, le bloc de détail de cette même entrée (même exactitude, même coût), avec reasoning_effort et provider"
+  }
+ ],
+ "facts": [
+  {
+   "id": "F1",
+   "says": "model-api-id",
+   "about": "google/gemini-4-carbon",
+   "value": "google/gemini-4-carbon",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon (clé du modèle sur le classement)",
+   "quote": "\"google/gemini-4-carbon\":[0,{\"accuracy\"",
+   "namespace": "prefix"
+  },
+  {
+   "id": "F2",
+   "says": "model-name",
+   "about": "google/gemini-4-carbon",
+   "value": "Gemini 4 Carbon",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "tableau du classement, lien de la ligne vers /models/google_gemini-4-carbon",
+   "quote": "<a href=\"/models/google_gemini-4-carbon\">Gemini 4 Carbon</a>"
+  },
+  {
+   "id": "F3",
+   "says": "score",
+   "about": "google/gemini-4-carbon",
+   "value": "17.5",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / accuracy",
+   "quote": "\"accuracy\":[0,17.5]",
+   "term": "score%",
+   "scale": "percent"
+  },
+  {
+   "id": "F4",
+   "says": "effort-setting",
+   "about": "google/gemini-4-carbon",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-vals_index.html",
+   "where": "payload de la page du Vals Index, bloc de détail de la composante de même score et même coût que cette entrée / reasoning_effort",
+   "quote": "\"accuracy\":[0,17.5],\"latency\":[0,1720.841],\"stderr\":[0,2.997],\"cost_per_test\":[0,6.515809],\"token_totals\":[0,{\"input_tokens\":[0,881172654],\"output_tokens\":[0,16397005],\"reasoning_tokens\":[0,5863499],\"cache_read_tokens\":[0,808087804],\"cache_write_tokens\":[0,0]}],\"token_tasks_measured\":[0,120],\"turn_metrics\":[0,{\"tasks_measured\":[0,120],\"avg_turns\":[0,28.3],\"avg_query_seconds\":[0,58.1],\"median_query_seconds\":[0,14.2],\"avg_ttft_seconds\":[0,12.9],\"output_time_split\":[0,null]}],\"temperature\":[0,null],\"top_p\":[0,null],\"max_output_tokens\":[0,1048576],\"reasoning\":[0,null],\"reasoning_effort\":[0,\"high\"],\"verbosity\":[0,null],\"compute_effort\":[0,null],\"provider\":[0,\"Google\"]",
+   "note": "le payload de cette page-ci n'a pas ce champ ; le bloc de détail de l'entrée identique (mêmes \"accuracy\":[0,17.5],\"latency\":[0,1720.841],\"stderr\":[0,2.997]) est dans le payload de la page du Vals Index (capture S2) ; la page modèle Vals écrit aussi « Evaluations were run with reasoning effort set to “high” »"
+  },
+  {
+   "id": "F5",
+   "says": "route",
+   "about": "google/gemini-4-carbon",
+   "value": "Google",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-vals_index.html",
+   "where": "payload de la page du Vals Index, bloc de détail de la composante de même score / provider",
+   "quote": "\"accuracy\":[0,17.5],\"latency\":[0,1720.841],\"stderr\":[0,2.997],\"cost_per_test\":[0,6.515809],\"token_totals\":[0,{\"input_tokens\":[0,881172654],\"output_tokens\":[0,16397005],\"reasoning_tokens\":[0,5863499],\"cache_read_tokens\":[0,808087804],\"cache_write_tokens\":[0,0]}],\"token_tasks_measured\":[0,120],\"turn_metrics\":[0,{\"tasks_measured\":[0,120],\"avg_turns\":[0,28.3],\"avg_query_seconds\":[0,58.1],\"median_query_seconds\":[0,14.2],\"avg_ttft_seconds\":[0,12.9],\"output_time_split\":[0,null]}],\"temperature\":[0,null],\"top_p\":[0,null],\"max_output_tokens\":[0,1048576],\"reasoning\":[0,null],\"reasoning_effort\":[0,\"high\"],\"verbosity\":[0,null],\"compute_effort\":[0,null],\"provider\":[0,\"Google\"]",
+   "term": "maker-api",
+   "note": "« provider » : Google ; la page modèle écrit « Default Provider : Google Some benchmarks may use different provider and parameters. »"
+  },
+  {
+   "id": "F6",
+   "says": "cost",
+   "about": "google/gemini-4-carbon",
+   "value": "6.515809",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / cost_per_test",
+   "quote": "\"cost_per_test\":[0,6.515809]"
+  },
+  {
+   "id": "F7",
+   "says": "currency",
+   "about": null,
+   "value": "$",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.txt",
+   "where": "tableau du classement : un coût écrit avec le signe $",
+   "quote": "$6.52",
+   "term": "USD"
+  },
+  {
+   "id": "F8",
+   "says": "unit",
+   "about": null,
+   "value": "cost_per_test",
+   "level": "written",
+   "form": "label",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "clé cost_per_test de chaque entrée de tasks.overall",
+   "quote": "\"cost_per_test\"",
+   "term": "per-test"
+  },
+  {
+   "id": "F9",
+   "says": "price-table",
+   "about": "google/gemini-4-carbon",
+   "value": "4.00",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-model.txt",
+   "where": "page modèle Vals de Gemini 4 Carbon, prix d'entrée (par million de jetons)",
+   "quote": "$4.00 per million input tokens",
+   "term": "input",
+   "note": "prix de calcul des coûts Vals : 4 / 20 par million de jetons (page modèle), pas le prix promotionnel 2 / 10 ; la page du classement n'écrit pas ses prix"
+  },
+  {
+   "id": "F10",
+   "says": "price-table",
+   "about": "google/gemini-4-carbon",
+   "value": "20.00",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-model.txt",
+   "where": "page modèle Vals de Gemini 4 Carbon, prix de sortie (par million de jetons)",
+   "quote": "$20.00 per million output tokens",
+   "term": "output"
+  },
+  {
+   "id": "F11",
+   "says": "version",
+   "about": null,
+   "value": "1.1",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "métadonnées de la page du classement (benchmarkView.metadata.version)",
+   "quote": "\"version\":[0,\"1.1\"]"
+  },
+  {
+   "id": "F12",
+   "says": "note",
+   "about": "google/gemini-4-carbon",
+   "value": "2.997",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / stderr",
+   "quote": "\"stderr\":[0,2.997]"
+  },
+  {
+   "id": "F13",
+   "says": "note",
+   "about": "google/gemini-4-carbon",
+   "value": "1720.841",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / latency",
+   "quote": "\"latency\":[0,1720.841]",
+   "note": "latence cumulée de la page (unité non écrite par la page)"
+  },
+  {
+   "id": "F14",
+   "says": "tokens-in",
+   "about": "google/gemini-4-carbon",
+   "value": "881172654",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / token_totals.input_tokens (total sur les tests du classement)",
+   "quote": "\"input_tokens\":[0,881172654]"
+  },
+  {
+   "id": "F15",
+   "says": "tokens-out",
+   "about": "google/gemini-4-carbon",
+   "value": "16397005",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / token_totals.output_tokens",
+   "quote": "\"output_tokens\":[0,16397005]"
+  },
+  {
+   "id": "F16",
+   "says": "tokens-reasoning",
+   "about": "google/gemini-4-carbon",
+   "value": "5863499",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / token_totals.reasoning_tokens",
+   "quote": "\"reasoning_tokens\":[0,5863499]"
+  },
+  {
+   "id": "F17",
+   "says": "tokens-cache-read",
+   "about": "google/gemini-4-carbon",
+   "value": "808087804",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / token_totals.cache_read_tokens",
+   "quote": "\"cache_read_tokens\":[0,808087804]"
+  },
+  {
+   "id": "F18",
+   "says": "tokens-cache-write-5m",
+   "about": "google/gemini-4-carbon",
+   "value": "0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / token_totals.cache_write_tokens",
+   "quote": "\"cache_write_tokens\":[0,0]",
+   "note": "la page écrit « cache_write_tokens » sans durée ; 0 : rien à classer"
+  },
+  {
+   "id": "F19",
+   "says": "tokens-total",
+   "about": "google/gemini-4-carbon",
+   "value": "7480000",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.txt",
+   "where": "tableau du classement, colonne des jetons par test (en millions : « 7.48m »)",
+   "quote": "9 | Gemini 4 Carbon | 17.50% | $6.52 | 7.48m | 28m41s |",
+   "written": "7.48m",
+   "note": "« 7.48m » = 7480000 jetons par test ; colonne du tableau, sans séparation entrée / sortie"
+  },
+  {
+   "id": "F20",
+   "says": "items",
+   "about": "google/gemini-4-carbon",
+   "value": "120",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / turn_metrics.tasks_measured",
+   "quote": "\"tasks_measured\":[0,120]"
+  },
+  {
+   "id": "F21",
+   "says": "note",
+   "about": "google/gemini-4-carbon",
+   "value": "28.3",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.html",
+   "where": "payload tasks.overall / google/gemini-4-carbon / turn_metrics.avg_turns",
+   "quote": "\"avg_turns\":[0,28.3]"
+  },
+  {
+   "id": "F22",
+   "says": "note",
+   "about": "google/gemini-4-carbon",
+   "value": "9",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s10/ev/s10-carbon/vals-hlab.txt",
+   "where": "tableau du classement, première colonne : le rang",
+   "quote": "9 | Gemini 4 Carbon | 17.50% | $6.52 | 7.48m | 28m41s |"
+  }
+ ]
+}
