@@ -2134,3 +2134,35 @@ against 0d7f5d2 the effects are in S/s10/integ16/AVANT-APRES.txt.)
   qwen4-max-20261115 and Vals, 16 Nov per Alibaba's release log and Artificial Analysis), kingy.ai's alone in its group (`out:single-couple`), Hunyuan Vision 1.5 Thinking (mode not established).
   validate 0 error, 220 tests, the sealed build gives identical tables. Precheck without smoke: no blocking; 16 `!!` of check 9 (the 15 retired items and glm-5.2, whose OpenRouter price is no
   longer recorded) and the declared coincidence `??`; the two `??` of Vals (CyberBench, Terminal-Bench 4 of GPT-5.6 Sol) are gone.
+
+## Integration 17 (17 Nov 2026): the salvo s11 converted, then the maintainer's decisions of the end (« 1 oui 2 oui 3 pourquoi sortir plutot que verifier ? »)
+
+(Salvo s11: six outputs in S/s11/out/, proofs in /work/.salvo14/mig/s11/ev/ checked against SHA256SUMS; no fit, no smoke, no tag, no change of model/lqm.py or of the .stan; each point in its own
+commit; against 00212a8 the effects are in S/s11/integ17/AVANT-APRES.txt and RAPPORT.md. The final build is the sealed one: `sealed.py -- --fit-models catalog --out data/build --jobs 4`, no refusal.)
+
+- **Conversion (points 1 to 7 of the first pass)**: 76 sources and 381 measures added against 00212a8 (GitHub boards and repositories, arXiv papers, Zenodo, Research Square; the 12 target couples and
+  the other models the salvo found, each with its flags: effort not written, behaviour or safety, whole system, selected subset, copy, direction reversed). **ctala** (46054c02 of 16 Nov): gpt-6-luna-pro
+  covered by the OpenRouter default `medium` (copy of 10 Nov) and OpenAI's guide, gpt-5.6-luna-pro (12 Aug to 1 Sep) not covered: out; the source's `published` carries the full `generated_at` stamp.
+  **taisp-control-budgets** (CyberDual rule: a detection rate is a capability, higher is better; refusal shares, counts and gaps stay pending). **OpenConjecture** (selected subset, LLM verification, cost not matching the
+  catalogue price): nothing enters. **glm-5-turbo@nothink**: see the third decision below.
+- **BullshitBench V1, all the CSV (decision 1)**: the 204 rows of `data/latest/leaderboard_with_launch.csv` (commit a3983ce0, 27 Sep) are read, one by one, in the source of b6cd260 (14 measures, now 204; same setup
+  `bsb-v1-green`, column `green_rate`, 55 questions, three judges). Each row's name, effort and value typed by the converter and checked against the CSV line (a mismatch stops the conversion). Flags kept, nothing
+  filtered: `reasoning=default` rows are written with the label `default` and the collector's rule « no reasoning parameter sent » (the script of the V2 clone, a later commit: not proven for V1); stealth and anonymous OpenRouter
+  models, `:free` and `:thinking` variants, rows with errors or refusals (they stay in the denominator, README). No route fact is written (only the launch URL names openrouter for the gpt-6 rows). **No double count**:
+  the V2 (`bullshitbench`, 100 questions) and the issue 83510 (`bullshitbench-v1-strict`, 7 couples, lower or equal values) are other series of the same questions: no `same-runs-as` is written, the 7 Claude
+  couples carry the strict value in their note. Effect of the build: of the 204 rows, 70 kept, 71 `out:effort-not-established` (the `none` or `high` of a model whose registry holds no such
+  configuration, and the `default` rows), 32 `out:model-not-established` (names without a key, flagged), 31 `out:single-couple`.
+- **Display names of the GPT-6 Pro models (decision 2)**: `gpt-6-luna-pro` « GPT-6 Luna Pro », `gpt-6-sol-pro` « GPT-6 Sol Pro », `gpt-6.1-sol-pro` « GPT-6.1 Sol Pro », each written by the OpenRouter catalogue
+  (`name`: « OpenAI: GPT-6 Luna Pro » …, capture of 16 Nov 2026, quote, URL, sha256), interval from the key's release. Not « GPT-6 Pro »: in ChatGPT that is GPT-6 Astra (OpenAI's Enterprise grid). Effect: the rows named this
+  way find their key (e.g. Keygen gpt-6-luna-pro@max ×3 and gpt-6.1-sol-pro@max ×3; the build adds the couple gpt-6.1-sol-pro@max in quality, gpt-6-luna-pro@max and gpt-6-sol-pro@max in cost).
+- **glm-5-turbo@nothink via OpenRouter: checked, not dropped (decision 3)** (the doubt: only /api/paas/v4 honours `thinking: disabled`, issue HyperNeo 5753 and PR 9router 4656, 6 to 12 percent of calls elsewhere). The
+  three sources, searched for `usage.reasoning_tokens` or a thinking block; each result is a dated fact in the findings, the proofs are in /work/.salvo14/mig/s11/ev/integ17-glm/ (SHA256SUMS):
+  (a) **BullshitBench V2, row glm-5-turbo@none**: the repository publishes every call (data/v2/latest/responses, 23,600 rows): the 100 rows of the variant carry
+  `completion_tokens_details.reasoning_tokens = 0` (100 of 100; `collection_stats.json`: `reasoning_tokens_total: 0`), `model_provider openrouter`, no think tag, run of 7 Apr 2026; control, same file, same model at
+  @high: 100 of 100 above 0, 135,995 in all. **Zero on every call: the switch-off is proven, the row stays in the fit** with the fact cited (the issue is dated 6 Oct, after the run).
+  (b) **arXiv 2610.19048**: the paper keeps « the time of each API call » and « the samples, prompts, scripts, and output reasoning » in « the replication materials » without giving a location; the author's
+  GitHub (10 repositories) and Harvard Dataverse searched: nothing. **Nothing published, the doubt stays, rows out.** (c) **AGC-Bench 2607.01152**: the released data (Hugging Face
+  agcbench-2026/AGC-Bench, `generations/z-ai/glm-5-turbo/`, 66 files, 3,066 completions) hold completions and scores only: no usage field, no reasoning_tokens (0 think tag in 3,066 completions); the released
+  client sends `reasoning: {enabled: False}`. **Field absent, the doubt stays, rows out.**
+- **Effect (against 00212a8; S/s11/integ17/AVANT-APRES.txt)**: see RAPPORT.md. validate 0 error, 220 tests (201 passed, 19 skipped), sealed build without refusal. Precheck without smoke: no blocking; 2 `??` (Keygen gpt-6-luna-pro@max
+  ×3 attempts, discordant 28 to 72.7; the declared coincidence of gpt-6-luna) and 16 `!!` (prices, routes and model sheets not read for more than 3 days).
