@@ -18294,9 +18294,52 @@
         }
        ],
        "via": "maker-api"
+      },
+      {
+       "configuration": "think",
+       "from": "2026-11-17",
+       "to": "2026-11-17",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/agents/terminus_2/terminus_2.py",
+         "captured": "2026-10-23",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_terminus_2.py.txt",
+         "sha256": "34ab46005280c50dd63fc075a3fdbb224421d88751bff6f514d23f5e4b2eaf35",
+         "where": "src/harbor/agents/terminus_2/terminus_2.py L375 (HEAD bfc6c005, 23 Oct 2026), docstring of the reasoning_effort argument",
+         "quote": "reasoning_effort: Qualitative or quantitative measure of effort (default: None)"
+        },
+        {
+         "url": "https://github.com/harbor-framework/harbor/blob/bfc6c005/src/harbor/llms/lite_llm.py",
+         "captured": "2026-10-23",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor_lite_llm.py.txt",
+         "sha256": "bc39378dcd31ec7e386bc34948901fb6884b00281e861e421bc6dceb60c07d49",
+         "where": "src/harbor/llms/lite_llm.py L71-72 (HEAD): both options default to None; the thinking budget is sent only when max_thinking_tokens is set (L356-368), the effort only when not None (L729) and as a None argument it is dropped by LiteLLM (drop_params)",
+         "quote": "reasoning_effort: str | None = None,"
+        },
+        {
+         "url": "https://github.com/harbor-framework/harbor/commits/main",
+         "captured": "2026-10-23",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/harbor-dating.txt",
+         "sha256": "7b0749364ebeca48e57b55f97e6ee7df10b0613e6963a4ff59a83dd954bdf7d1",
+         "where": "git log -S '] = \"default\"' on terminus_2.py: the option was \"default\" in 3960cf6c (16 Nov 2025 13:29 PST) and became None in 7548bdef (17 Nov 2025 20:46 PST)",
+         "quote": "7548bdef 2025-11-17T20:46:27-08:00 Fix reasoning effort."
+        },
+        {
+         "url": "https://platform.kimi.ai/docs/api/models-overview.md",
+         "captured": "2026-11-17",
+         "file": "/work/.salvo14/mig/s12/ev/integ18b/kimi_models_overview_20261117.md",
+         "sha256": "47cd877cdb628b5d77d6703936bf03376ae7fac4f9219a490c4348f4f23f0faf",
+         "where": "Model Parameter Reference (Kimi API Platform), table row `thinking`, column `kimi-k2.6` (live page read on 17 Nov 2026, integration 18b; it replaces the K2.6 quickstart, which now serves the Model List)",
+         "quote": "Optional. Thinking is on by default; reasoning from previous turns is not preserved by default.",
+         "note": "the maker's documented default for kimi-k2.6 on 17 Nov 2026: thinking on unless thinking.type is \"disabled\", unchanged since the quickstart of 20 Oct and its capture of 4 Nov (« Default to be {\"type\": \"enabled\"} »)"
+        }
+       ],
+       "via": "maker-api"
       }
      ],
-     "note": "Re-read 16 Nov 2026: the K2.6 quickstart page cited (platform.kimi.ai/docs/guide/kimi-k2-6-quickstart) now serves the Model List page, which gives kimi-k2.6 as \"No longer available to newly registered users; users registered before November 1 can continue using it. Deprecation expected in late December 2026\" and no longer carries the thinking-parameter default; the Thinking Models and Reasoning Effort pages give no K2.x statement. Not re-verified."
+     "note": "Re-read 16 Nov 2026: the K2.6 quickstart page cited (platform.kimi.ai/docs/guide/kimi-k2-6-quickstart) now serves the Model List page, which gives kimi-k2.6 as \"No longer available to newly registered users; users registered before November 1 can continue using it. Deprecation expected in late December 2026\" and no longer carries the thinking-parameter default; the Thinking Models and Reasoning Effort pages give no K2.x statement. Not re-verified. | Re-read 17 Nov 2026 (integration 18b): Kimi's Model Parameter Reference (platform.kimi.ai/docs/api/models-overview.md, saved copy /work/.salvo14/mig/s12/ev/integ18b/kimi_models_overview_20261117.md, sha256 47cd877cdb628b5d77d6703936bf03376ae7fac4f9219a490c4348f4f23f0faf) writes for kimi-k2.6 « Optional. Thinking is on by default »: the default think is unchanged, a new record dated 17 Nov 2026 holds it; the record of 20 Oct to 4 Nov stays."
     },
     "kimi-k3": {
      "default": [
@@ -24533,9 +24576,52 @@
         }
        ],
        "via": "maker-api"
+      },
+      {
+       "configuration": "think",
+       "from": "2026-11-17",
+       "to": "2026-11-17",
+       "from_basis": "earliest-capture",
+       "to_basis": "last-capture",
+       "evidence": [
+        {
+         "url": "https://github.com/SWE-agent/mini-swe-agent/commits/main",
+         "captured": "2026-10-27",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/miniswe-dating-bare.txt",
+         "sha256": "235329b0b91167d72c41b563e544be166f2204168419e1dbb95f72241aa96278",
+         "where": "git log of the bare clone: the first commit (28 Jun 2025); `-S reasoning_effort` over the whole history finds only two documentation commits (24029bc0, 00b5267e), `-S thinking` only commits about thinking-block ordering of the messages",
+         "quote": "first 6d50ab1c 2025-06-28T16:18:36-04:00 Initial commit"
+        },
+        {
+         "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ce/src/minisweagent/models/litellm_model.py",
+         "captured": "2026-10-27",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/miniswe_litellm_model_HEAD.py.txt",
+         "sha256": "6df4483bcdc9620b2f9d7f8bb1027a7fb9729b739976cbcf1a9d18fb58c48227",
+         "where": "src/minisweagent/models/litellm_model.py L66-70 (HEAD 04d809ce, 3 Sep 2026, unchanged on 27 Oct): the call carries only the operator's model_kwargs, no effort or thinking argument of its own",
+         "quote": "**(self.config.model_kwargs | kwargs),"
+        },
+        {
+         "url": "https://github.com/SWE-agent/mini-swe-agent/blob/04d809ce/src/minisweagent/config/mini.yaml",
+         "captured": "2026-10-27",
+         "file": "/work/.salvo14/mig/gaps9-routes/ev/harness/miniswe_mini_HEAD.yaml.txt",
+         "sha256": "b539a8965f5bf41dd0f32daafa5d2db22581923d13812fa378fd09569b9d6b0c",
+         "where": "src/minisweagent/config/mini.yaml L150-151 (HEAD): the default configuration's model_kwargs is drop_params alone",
+         "quote": "model_kwargs: drop_params: true"
+        },
+        {
+         "url": "https://platform.kimi.ai/docs/api/models-overview.md",
+         "captured": "2026-11-17",
+         "file": "/work/.salvo14/mig/s12/ev/integ18b/kimi_models_overview_20261117.md",
+         "sha256": "47cd877cdb628b5d77d6703936bf03376ae7fac4f9219a490c4348f4f23f0faf",
+         "where": "Model Parameter Reference (Kimi API Platform), table row `thinking`, column `kimi-k2.6` (live page read on 17 Nov 2026, integration 18b; it replaces the K2.6 quickstart, which now serves the Model List)",
+         "quote": "Optional. Thinking is on by default; reasoning from previous turns is not preserved by default.",
+         "note": "the maker's documented default for kimi-k2.6 on 17 Nov 2026: thinking on unless thinking.type is \"disabled\", unchanged since the quickstart of 20 Oct and its capture of 4 Nov (« Default to be {\"type\": \"enabled\"} »)"
+        }
+       ],
+       "via": "maker-api"
       }
      ],
-     "note": "Re-read 16 Nov 2026: the K2.6 quickstart page cited (platform.kimi.ai/docs/guide/kimi-k2-6-quickstart) now serves the Model List page, which gives kimi-k2.6 as \"No longer available to newly registered users; users registered before November 1 can continue using it. Deprecation expected in late December 2026\" and no longer carries the thinking-parameter default; the Thinking Models and Reasoning Effort pages give no K2.x statement. Not re-verified."
+     "note": "Re-read 16 Nov 2026: the K2.6 quickstart page cited (platform.kimi.ai/docs/guide/kimi-k2-6-quickstart) now serves the Model List page, which gives kimi-k2.6 as \"No longer available to newly registered users; users registered before November 1 can continue using it. Deprecation expected in late December 2026\" and no longer carries the thinking-parameter default; the Thinking Models and Reasoning Effort pages give no K2.x statement. Not re-verified. | Re-read 17 Nov 2026 (integration 18b): Kimi's Model Parameter Reference (platform.kimi.ai/docs/api/models-overview.md, saved copy /work/.salvo14/mig/s12/ev/integ18b/kimi_models_overview_20261117.md, sha256 47cd877cdb628b5d77d6703936bf03376ae7fac4f9219a490c4348f4f23f0faf) writes for kimi-k2.6 « Optional. Thinking is on by default »: the default think is unchanged, a new record dated 17 Nov 2026 holds it; the record of 20 Oct to 4 Nov stays."
     },
     "kimi-k3": {
      "default": [
