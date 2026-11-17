@@ -25823,7 +25823,84 @@
    },
    "line": null,
    "open_weights": false,
-   "configurations": [],
+   "configurations": [
+    {
+     "id": "low",
+     "served": "itself",
+     "from": "2026-03-13",
+     "to": null,
+     "from_basis": "earliest-capture",
+     "to_basis": "open",
+     "evidence": [
+      {
+       "url": "https://docs.x.ai/developers/model-capabilities/text/multi-agent",
+       "captured": "2026-03-13",
+       "file": "/work/.salvo14/mig/s12/ev/s12-bsbv1-effort/docs/xai_multiagent_guide_20260313.txt",
+       "sha256": "5404f417c3d9c4d9b8e48bf859e07d5dc2a82c8a7bb66e557ee89b393e2aa886",
+       "where": "Multi Agent guide (beta), Configuration: the table of the two setups, 4 agents and 16 agents (integration 18b, 17 Nov 2026; a capture of the guide of 13 Mar 2026, three days after the release)",
+       "quote": "OpenAI SDK reasoning.effort \"low\" or \"medium\" \"high\" or \"xhigh\"",
+       "note": "the level low selects the 4-agent setup: \"low\" or \"medium\" = 4 agents, \"high\" or \"xhigh\" = 16 agents. The registry's earlier note (the xAI model page of June lists no reasoning_effort) concerns the model page, not this guide. Valid from the capture of the guide: the run of 12 Mar of BullshitBench V1 is a day before it and stays not established"
+      }
+     ]
+    },
+    {
+     "id": "medium",
+     "served": "itself",
+     "from": "2026-03-13",
+     "to": null,
+     "from_basis": "earliest-capture",
+     "to_basis": "open",
+     "evidence": [
+      {
+       "url": "https://docs.x.ai/developers/model-capabilities/text/multi-agent",
+       "captured": "2026-03-13",
+       "file": "/work/.salvo14/mig/s12/ev/s12-bsbv1-effort/docs/xai_multiagent_guide_20260313.txt",
+       "sha256": "5404f417c3d9c4d9b8e48bf859e07d5dc2a82c8a7bb66e557ee89b393e2aa886",
+       "where": "Multi Agent guide (beta), Configuration: the table of the two setups, 4 agents and 16 agents (integration 18b, 17 Nov 2026; a capture of the guide of 13 Mar 2026, three days after the release)",
+       "quote": "OpenAI SDK reasoning.effort \"low\" or \"medium\" \"high\" or \"xhigh\"",
+       "note": "the level medium selects the 4-agent setup: \"low\" or \"medium\" = 4 agents, \"high\" or \"xhigh\" = 16 agents. The registry's earlier note (the xAI model page of June lists no reasoning_effort) concerns the model page, not this guide. Valid from the capture of the guide: the run of 12 Mar of BullshitBench V1 is a day before it and stays not established"
+      }
+     ]
+    },
+    {
+     "id": "high",
+     "served": "itself",
+     "from": "2026-03-13",
+     "to": null,
+     "from_basis": "earliest-capture",
+     "to_basis": "open",
+     "evidence": [
+      {
+       "url": "https://docs.x.ai/developers/model-capabilities/text/multi-agent",
+       "captured": "2026-03-13",
+       "file": "/work/.salvo14/mig/s12/ev/s12-bsbv1-effort/docs/xai_multiagent_guide_20260313.txt",
+       "sha256": "5404f417c3d9c4d9b8e48bf859e07d5dc2a82c8a7bb66e557ee89b393e2aa886",
+       "where": "Multi Agent guide (beta), Configuration: the table of the two setups, 4 agents and 16 agents (integration 18b, 17 Nov 2026; a capture of the guide of 13 Mar 2026, three days after the release)",
+       "quote": "OpenAI SDK reasoning.effort \"low\" or \"medium\" \"high\" or \"xhigh\"",
+       "note": "the level high selects the 16-agent setup: \"low\" or \"medium\" = 4 agents, \"high\" or \"xhigh\" = 16 agents. The registry's earlier note (the xAI model page of June lists no reasoning_effort) concerns the model page, not this guide. Valid from the capture of the guide: the run of 12 Mar of BullshitBench V1 is a day before it and stays not established"
+      }
+     ]
+    },
+    {
+     "id": "xhigh",
+     "served": "itself",
+     "from": "2026-03-13",
+     "to": null,
+     "from_basis": "earliest-capture",
+     "to_basis": "open",
+     "evidence": [
+      {
+       "url": "https://docs.x.ai/developers/model-capabilities/text/multi-agent",
+       "captured": "2026-03-13",
+       "file": "/work/.salvo14/mig/s12/ev/s12-bsbv1-effort/docs/xai_multiagent_guide_20260313.txt",
+       "sha256": "5404f417c3d9c4d9b8e48bf859e07d5dc2a82c8a7bb66e557ee89b393e2aa886",
+       "where": "Multi Agent guide (beta), Configuration: the table of the two setups, 4 agents and 16 agents (integration 18b, 17 Nov 2026; a capture of the guide of 13 Mar 2026, three days after the release)",
+       "quote": "OpenAI SDK reasoning.effort \"low\" or \"medium\" \"high\" or \"xhigh\"",
+       "note": "the level xhigh selects the 16-agent setup: \"low\" or \"medium\" = 4 agents, \"high\" or \"xhigh\" = 16 agents. The registry's earlier note (the xAI model page of June lists no reasoning_effort) concerns the model page, not this guide. Valid from the capture of the guide: the run of 12 Mar of BullshitBench V1 is a day before it and stays not established"
+      }
+     ]
+    }
+   ],
    "names": [
     {
      "name": "grok-4.20-multi-agent-0309",
@@ -26207,7 +26284,7 @@
    "default": [],
    "conversions": [],
    "modes": [],
-   "note": "Configurations not established (empty list: every measure is out:effort-not-established). The xAI model page lists no reasoning_effort, while OpenRouter's entry for x-ai/grok-4.20-multi-agent says 'mandatory':true with supported_efforts xhigh, high, medium, low (default medium): [solo] rested on an absence that a route contradicts (doubt → out; registry review, 26 Oct 2026)."
+   "note": "Configurations low, medium, high, xhigh written on 17 Nov 2026 (integration 18b) from xAI's Multi Agent guide captured on 13 Mar 2026: reasoning.effort \"low\" or \"medium\" = 4 agents, \"high\" or \"xhigh\" = 16 agents, and OpenRouter's entry for x-ai/grok-4.20-multi-agent says 'mandatory':true with supported_efforts xhigh, high, medium, low (default medium). Before that the list was empty (every measure out:effort-not-established: the xAI model page of June lists no reasoning_effort; [solo] rested on an absence that a route contradicts, registry review, 26 Oct 2026). The configurations start at the capture of the guide (13 Mar): a run before it is not established."
   },
   "grok-4.3": {
    "label": "Grok 4.3",
