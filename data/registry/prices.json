@@ -18735,6 +18735,33 @@
   {
    "model": "gemini-3.8-flash",
    "route": "openrouter",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.825,
+    "output": 4.125,
+    "cache-read": 0.0825
+   },
+   "from": "2026-11-17",
+   "from_basis": "earliest-capture",
+   "to": "2026-11-17",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://openrouter.ai/api/v1/models",
+     "captured": "2026-11-17",
+     "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
+     "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
+     "where": "data[id=google/gemini-3.8-flash].pricing (live capture 17 Nov, relecture of integration 18c)",
+     "quote": "\"pricing\":{\"prompt\":\"0.000000825\",\"completion\":\"0.000004125\",\"image\":\"0.000000825\",\"audio\":\"0.000000825\",\"input_audio_cache\":\"0.0000000825\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.000004125\",\"input_cache_read\":\"0.0000000825\",\"input_cache_write\":\"0.0000000416666666666667\"}"
+    }
+   ],
+   "note": "OpenRouter catalogue price of google/gemini-3.8-flash read on 17 Nov 2026 (1 capture); a router's own price, not the maker's; not mapped: input_cache_write=0.0000000416666666666667, web_search=0.014, internal_reasoning=0.000004125, image=0.000000825, audio=0.000000825; input_cache_write=0.0000000416666666666667 (TTL not stated, not a class). The entry price is the one the promotion record (20 Oct to the maker's announced 31 Dec 2026) already holds: the reading of 17 Nov is written as the current entry price of the standard chain (integration 18c), the record of 5 to 23 Sep (0.75 / 3.75 / 0.075) stays with no end date added."
+  },
+  {
+   "model": "gemini-3.8-flash",
+   "route": "openrouter",
    "kind": "promotion",
    "currency": "USD",
    "per": "MTok",
