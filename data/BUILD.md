@@ -1979,6 +1979,21 @@ corrections:
   (« a single capture covers its own day only », « after the default's last capture ») now state the new one, and where they
   test an end they give it as stated. precheck.py check 9: a price, route record or model sheet of a model of the fit not verified
   for more than 3 days is listed (« !! », not blocking; test `precheck_stale_verifications`).
+- **Records whose page no longer lists the model** (the maintainer, 17 Nov 2026: « integre et fais au mieux »). A reading of the
+  page cited that finds the model gone is written on the record as a dated fact, `rereads: [{on, listed: false, evidence,
+  replacement?, note}]` (common.schema.json, on every dated interval): the day read, the saved copy (file and sha256), the locator
+  saying what the page lists instead and an exact quote of it; `replacement` holds the id the page shows in the model's place, as
+  the page's words only (nothing is attached to another key). Nothing is deleted and no end date is added: the record keeps its
+  dates and its last listed value. precheck.py check 9: a record whose latest reading says `listed: false` (and is not older than
+  its last verification) is not « !! » but an information line « -- … retired from the page on D »; a record nobody read again
+  stays « !! »; a model back on the page gets a newer reading (`listed: true`, and the record extended or a new dated record),
+  which wins. The build does not read the field (`rereads` is in `OPEN_SKIP`, so `open_ended` chains as before; no rule of the
+  fit changes). Test `precheck_retired_from_page` (negative controls: the same record without the reading stays « !! »; a newer
+  `listed: true` wins; a reading without `listed` is refused by the schema). Applied to the 22 records of the 17 Nov reading
+  (integration 18a, copies in /work/.salvo14/mig/s12/ev/relecture/, SHA256SUMS): prices glm-5-turbo, glm-5v-turbo (z.ai),
+  qwen3-8b ×2, qwen3-coder-next, qwen3.6-max-preview (Alibaba), qwen3-8b and qwen3.8-max (OpenRouter; replacement
+  qwen/qwen3.8-max-0902, the id its record page now answers with); OpenRouter routes qwen3-8b ×4, qwen3.8-max ×7,
+  gpt-5.3-chat-latest, gemini-3-pro, grok-4.1-fast.
   **Verification of 16 Nov** (S/s10/integ15/py/ext15.py, s7_orprices.py, s8_openai_variants.py; copies and SHA256SUMS in
   /work/.salvo14/mig/s10/ev/integ15/): 89 pages recaptured (HTTPS, all 200; the live page of a Wayback citation), every record of
   the fit's models whose latest quotes are all found again is extended to 2026-11-16 with one evidence per quote (prices 205, routes 739,

@@ -898,7 +898,7 @@ class Ctx:
 
 
 # ---------------------------------------------------------------- records without an end date (16 Nov 2026)
-OPEN_SKIP = {"from", "to", "from_basis", "to_basis", "evidence", "note", "bridged", "decision", "served", "verified_to"}
+OPEN_SKIP = {"from", "to", "from_basis", "to_basis", "evidence", "note", "bridged", "decision", "served", "verified_to", "rereads"}
 PRICE_SKIP = OPEN_SKIP | {"classes", "long_context", "factor", "base", "list_after"}
 
 

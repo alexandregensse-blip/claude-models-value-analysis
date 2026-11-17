@@ -47,7 +47,11 @@
      newer dated record replaces it, build.open_ended), so the day its page was last read to hold it (`to` of a record
      that ends at a last capture, kept as `verified_to`) is what says how fresh it is. The fit's models only
      (data/catalog/models.json). A listed record is read again (the page cited, a new dated record when it changed);
-     it does not stop the fit.
+     it does not stop the fit. A record whose latest reading (`rereads`, common.schema.json, the maintainer, 17 Nov
+     2026: « integre et fais au mieux ») says the page cited, read again on D, no longer lists the model (`listed:
+     false`, the saved copy and its sha256 as evidence) has nothing left to read: it is not « !! » but an information
+     line « -- … retired from the page on D »; its last listed value is kept. A record nobody read again stays « !! »;
+     a model back on the page gets a newer reading (`listed: true`), which wins.
 
 Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6, 7 and 8 run lqm.load
 on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
@@ -389,10 +393,23 @@ def discordant_twins(data, order, notes=None):
     return out
 
 
-def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None):
+def retired_on(rec):
+    """The day the page cited, read again, no longer listed the model of this record (its latest reading, `rereads`,
+    says `listed: false` and is not older than the record's last verification); None otherwise: never read again, or
+    read again later and listed (a model back on the page: the newer reading wins)."""
+    rs = [r for r in rec.get("rereads") or [] if isinstance(r, dict) and r.get("on")]
+    if not rs:
+        return None
+    last = max(rs, key=lambda r: (r["on"], not r.get("listed")))
+    v = rec.get("verified_to") or rec.get("to") or ""
+    return last["on"] if last.get("listed") is False and last["on"] >= v else None
+
+
+def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None, retired=None):
     """{"prices": [(model, n, oldest verified day)], "routes": [...], "models": [...]} for the fit's models: the records
     that end at a last capture without a successor (open: build.open_ended) whose last verification is older than
-    `days` days before `today` (check 9)."""
+    `days` days before `today` (check 9). A record whose latest reading again says the page no longer lists the model
+    (retired_on) is not stale: it goes to `retired` when given, {top: [(model, n, latest such day)]}."""
     import datetime as dt
     import json
     import build as B
@@ -404,12 +421,17 @@ def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None):
     B.open_ended(reg)
     fit = set(MODEL_ORDER if fit is None else fit)
     out = {"prices": collections.defaultdict(list), "routes": collections.defaultdict(list), "models": collections.defaultdict(list)}
+    gone = {top: collections.defaultdict(list) for top in out}
 
     def walk(x, top, model):
         if isinstance(x, dict):
             v = x.get("verified_to")
-            if v and v < limit and model in fit:
-                out[top][model].append(v)
+            if v and model in fit:
+                r = retired_on(x)
+                if r:
+                    gone[top][model].append(r)
+                elif v < limit:
+                    out[top][model].append(v)
             for y in x.values():
                 walk(y, top, model)
         elif isinstance(x, list):
@@ -422,6 +444,8 @@ def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None):
             walk(e, "routes", m)
     for k, m in reg["models"]["models"].items():
         walk(m, "models", k)
+    if retired is not None:
+        retired.update({top: sorted((m, len(v), max(v)) for m, v in d.items()) for top, d in gone.items()})
     return {top: sorted((m, len(v), min(v)) for m, v in d.items()) for top, d in out.items()}
 
 
@@ -515,10 +539,16 @@ def main(run_smoke=False):
         print("!! identical costs in two cost groups, not recognised as copies:", c)
     for c in isolated_couples(cost_groups):
         print("?? couple isolated on the cost axis (its level against the other models rests on the groups it shares):", c)
+    retired = {}
+    stale = stale_verifications(retired=retired)
     for top, label in (("prices", "price"), ("routes", "route"), ("models", "model sheet")):
-        for model, n, oldest in stale_verifications()[top]:
+        for model, n, oldest in stale[top]:
             print(f"!! {label} of {model} not verified for more than {STALE_DAYS} days ({n} record(s), the oldest last read {oldest}): "
                   "read the page cited again (a new dated record if it changed)")
+    for top, label in (("prices", "price"), ("routes", "route"), ("models", "model sheet")):
+        for model, n, day in retired.get(top, []):
+            print(f"-- {label} of {model}: retired from the page on {day} ({n} record(s); the page cited, read again, no longer "
+                  "lists the model; last listed value kept)")
     if errors or copies:
         return 1
     mc = memory_check()

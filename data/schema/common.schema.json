@@ -165,6 +165,41 @@
     },
     "evidence": {
      "$ref": "common.schema.json#/$defs/evidence_list"
+    },
+    "rereads": {
+     "type": "array",
+     "description": "Later readings of the page cited that did not extend the record (precheck check 9, the maintainer, 17 Nov 2026). `listed: false`: the page cited, read again on `on`, no longer lists this model; the record keeps its dates and its last listed value (no end date is added, nothing is deleted). The latest reading wins: a model back on the page gets a new reading (`listed: true`, and the record is extended or a new dated record written).",
+     "items": {
+      "type": "object",
+      "properties": {
+       "on": {
+        "$ref": "common.schema.json#/$defs/date",
+        "description": "The day the page was read again."
+       },
+       "listed": {
+        "type": "boolean",
+        "description": "Whether the page read that day still lists the model."
+       },
+       "replacement": {
+        "type": "string",
+        "description": "An id the page now shows in the model's place (the page's own words: a note, nothing is attached to another key).",
+        "minLength": 1
+       },
+       "evidence": {
+        "$ref": "common.schema.json#/$defs/evidence_list",
+        "description": "The saved copy of the page read that day (sha256), its locator saying what it lists instead, its exact text."
+       },
+       "note": {
+        "type": "string"
+       }
+      },
+      "required": [
+       "on",
+       "listed",
+       "evidence"
+      ],
+      "unevaluatedProperties": false
+     }
     }
    },
    "required": [

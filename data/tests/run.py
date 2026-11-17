@@ -1852,6 +1852,42 @@ def precheck_stale_verifications():
 
 
 @test
+def precheck_retired_from_page():
+    """precheck check 9 (the maintainer, 17 Nov 2026: « integre et fais au mieux »): a record whose latest reading again (`rereads`)
+    says the page cited no longer lists the model is not « !! » but retired (« retired from the page on D »). Negative controls: the
+    same record without the reading stays « !! »; a newer reading that lists the model again wins (« !! » again)."""
+    import datetime as dt
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    ev = [{"url": "https://example.org/pricing", "captured": "2026-11-17", "where": "pricing table: no row", "quote": "other-model $1"}]
+    rd = lambda on, listed: {"on": on, "listed": listed, "evidence": ev}     # noqa: E731
+    pr = lambda **kw: dict(model="fit-a", route="maker-api", kind="standard", currency="USD", per="MTok", classes={"input": 1, "output": 2},   # noqa: E731
+                           **{"from": "2026-01-01"}, to="2026-10-10", from_basis="stated", to_basis="last-capture", evidence=[], **kw)
+    reg = lambda p: {"prices": {"prices": [p]}, "routes": {"routes": {}}, "models": {"models": {}}}     # noqa: E731
+    today = dt.date(2026, 11, 17)
+    retired = {}
+    out = precheck.stale_verifications(today, reg=reg(pr(rereads=[rd("2026-11-17", False)])), fit={"fit-a"}, retired=retired)
+    eq((out["prices"], retired["prices"]), ([], [("fit-a", 1, "2026-11-17")]), "read again 17 Nov, no longer listed: retired, not « !! »")
+    retired = {}
+    out = precheck.stale_verifications(today, reg=reg(pr()), fit={"fit-a"}, retired=retired)
+    eq((out["prices"], retired["prices"]), ([("fit-a", 1, "2026-10-10")], []), "negative control: the same record without the reading stays « !! »")
+    retired = {}
+    out = precheck.stale_verifications(today, reg=reg(pr(rereads=[rd("2026-11-12", False), rd("2026-11-17", True)])), fit={"fit-a"}, retired=retired)
+    eq((out["prices"], retired["prices"]), ([("fit-a", 1, "2026-10-10")], []), "back on the page 17 Nov: the newer reading wins, « !! » again")
+    sys.path.insert(0, os.path.join(DATA, "schema"))
+    import validate as V
+    sch = V.Schemas(os.path.join(DATA, "schema"))
+    item = sch.doc("prices.schema.json")["properties"]["prices"]["items"]
+
+    def faults(rec):
+        out = []
+        sch.check(dict(rec, evidence=ev), item, "prices.schema.json", "$", out)
+        return out
+    eq(faults(pr(rereads=[{"on": "2026-11-17", "listed": False, "evidence": ev, "replacement": "x/y"}])), [], "the reading is a valid registry field")
+    eq(bool(faults(pr(rereads=[{"on": "2026-11-17", "evidence": ev}]))), True, "negative control: a reading without `listed` is refused")
+
+
+@test
 def precheck_isolated_couples():
     """precheck R5 (the maintainer, 11 Nov 2026): a couple more than 90 % of whose cost groups hold no other model is
     named as a warning (Fable 5.2: 29 of 30). Negative controls: 9 of 10 (exactly 90 %) is not named, nor a couple whose
