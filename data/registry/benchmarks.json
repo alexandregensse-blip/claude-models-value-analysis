@@ -402464,6 +402464,42 @@
    ],
    "label": "SEC-bench Pro, 183-task May 2026 JavaScript engine split, pass@1 over 3 attempts (Google model card of Gemini 4 Carbon)",
    "note": "NEW setup (integration 15 (16 Nov 2026)): the methodology page says « We report Pass@1 on the 183-task May 2026 JavaScript engine split, averaged over 3 independent attempts per task »; the held setup is the 344-instance overall solve rate: not the same. Copy of the setup secbenchpro-overall otherwise."
+  },
+  "bsb-v1-green": {
+   "family": "bullshitbench-v1",
+   "benchmark": "bsb-v1-green",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "detect-strict%",
+   "headline": {
+    "metric": "detect-strict%",
+    "basis": "only-metric",
+    "evidence": [
+     {
+      "url": "https://github.com/petergpt/bullshit-benchmark/blob/main/data/latest/leaderboard_with_launch.csv",
+      "captured": "2026-09-27T14:02:44Z",
+      "where": "row rank 62, column green_rate (the source gives this one metric for this benchmark)",
+      "quote": "62,openai/gpt-6-luna-pro@reasoning=max,openai,max,1.103,0.3818,0.2364,0.0,21,21,13,0,55,55,0,openai/gpt-6-luna-pro,2026-09-22,3,https://openrouter.ai/openai/gpt-6-luna-pro",
+      "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/bsb/v1_leaderboard_with_launch_a3983ce0.csv",
+      "sha256": "a3c62793229f8a7ffa826321e796d18ca7e96a650245c1a20c7dce7d09bc49e5"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "mid",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "BullshitBench V1 (55 questions): green_rate = share of answers graded clear pushback (all attempts in the denominator)",
+   "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026): headline: the repo's leaderboard ranks by clear pushback (README: sort by clear pushback); CSV column green_rate; three judges (Claude Sonnet 4.6, GPT-5.2, Gemini 3.1 Pro Preview); not the strict-detection series of issue 83510 | added by integration 17 of salvo s11 (17 Nov 2026)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
