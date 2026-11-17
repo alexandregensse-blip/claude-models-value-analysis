@@ -32108,6 +32108,9 @@
   },
   "taisp-control-budgets": {
    "label": "Trusted monitoring on 500 honest + 500 backdoored APPS samples (Qwen 3.8 Omni Flash as monitor): safety = share of backdoors caught at an audit budget of 0.5 %"
+  },
+  "openconjecture": {
+   "label": "OpenConjecture: conjectures solved at pass 2 by GPT-5.6 Sol Pro among those GPT-5.6 Sol did not solve at pass 1 (counts of counterexamples and of proofs)"
   }
  },
  "setups": {
@@ -402883,6 +402886,54 @@
    "label": "Trusted monitoring on 500 honest + 500 backdoored APPS samples (Qwen 3.8 Omni Flash as monitor): safety = share of backdoors caught at an audit budget of 1 %",
    "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026): decision (point 6, integration 17, the CyberDual rule: a detection rate is a capability, higher is better): \"how often backdoors are caught\" (README); the slices of one monitor run at the audit budgets are one run (run_set), k measures of a couple weigh 1/k | added by integration 17 of salvo s11 (17 Nov 2026)",
    "run_set": "run:taisp-control-budgets"
+  },
+  "openconjecture-pass2-found": {
+   "family": "openconjecture",
+   "benchmark": "openconjecture-pass2-found",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "counterexamples / proofs found at pass 2",
+   "headline": {
+    "metric": "counterexamples / proofs found at pass 2",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "OpenConjecture: conjectures solved at pass 2 by GPT-5.6 Sol Pro among those GPT-5.6 Sol did not solve at pass 1 (counts of counterexamples and of proofs)",
+   "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026): PENDING (point 7): a count over a subset chosen by the failures of the first pass, LLM-verified; not a capability rate | added by integration 17 of salvo s11 (17 Nov 2026)"
+  },
+  "openconjecture-pass2-cost": {
+   "family": "openconjecture",
+   "benchmark": "openconjecture-pass2-cost",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "median cost pass 2",
+   "headline": {
+    "metric": "median cost pass 2",
+    "basis": "decision",
+    "decision": null,
+    "level": "not-established:assumed"
+   },
+   "bounds": null,
+   "direction": "higher",
+   "task_type": "reasoning-math",
+   "complexity": "frontier",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "OpenConjecture: median cost per conjecture at pass 2 (USD)",
+   "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026):  | added by integration 17 of salvo s11 (17 Nov 2026)"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
