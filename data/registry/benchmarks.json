@@ -32105,6 +32105,9 @@
   },
   "2610.19048-q24-accuracy-nc": {
    "label": "Ethnicity from names: accuracy %, North Carolina (Qwen3.8-2.4T)"
+  },
+  "taisp-control-budgets": {
+   "label": "Trusted monitoring on 500 honest + 500 backdoored APPS samples (Qwen 3.8 Omni Flash as monitor): safety = share of backdoors caught at an audit budget of 0.5 %"
   }
  },
  "setups": {
@@ -402806,6 +402809,80 @@
    "legacy_groups": [],
    "label": "Ethnicity from names: accuracy %, North Carolina (Qwen3.8-2.4T)",
    "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026):  | added by integration 17 of salvo s11 (17 Nov 2026)"
+  },
+  "taisp-safety-0p5pct": {
+   "family": "taisp-control-budgets",
+   "benchmark": "taisp-safety-0p5pct",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "safety (share of backdoors caught) %",
+   "headline": {
+    "metric": "safety (share of backdoors caught) %",
+    "basis": "run-share",
+    "evidence": [
+     {
+      "url": "https://github.com/pwick15/taisp-control-budgets",
+      "captured": "2026-11-17",
+      "where": "README, first paragraph on ControlArena: safety is how often backdoors are caught (the source gives this one metric for this benchmark)",
+      "quote": "Each one trades **safety** (how often backdoors are caught) against **usefulness** (how many tasks still get solved)",
+      "file": "/work/.salvo14/mig/s11/ev/s11-qwglm/taisp/README.md",
+      "sha256": "16713037a57fb00e4b05e7bc1e6ece9ec9257ffb11a62721e9d6f4cb62f67d89"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Trusted monitoring on 500 honest + 500 backdoored APPS samples (Qwen 3.8 Omni Flash as monitor): safety = share of backdoors caught at an audit budget of 0.5 %",
+   "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026): decision (point 6, integration 17, the CyberDual rule: a detection rate is a capability, higher is better): \"how often backdoors are caught\" (README); the slices of one monitor run at the audit budgets are one run (run_set), k measures of a couple weigh 1/k | added by integration 17 of salvo s11 (17 Nov 2026)",
+   "run_set": "run:taisp-control-budgets"
+  },
+  "taisp-safety-1pct": {
+   "family": "taisp-control-budgets",
+   "benchmark": "taisp-safety-1pct",
+   "subset": null,
+   "harness": null,
+   "tools_regime": null,
+   "judge_panel": null,
+   "metric": "safety (share of backdoors caught) %",
+   "headline": {
+    "metric": "safety (share of backdoors caught) %",
+    "basis": "run-share",
+    "evidence": [
+     {
+      "url": "https://github.com/pwick15/taisp-control-budgets",
+      "captured": "2026-11-17",
+      "where": "README, first paragraph on ControlArena: safety is how often backdoors are caught (the source gives this one metric for this benchmark)",
+      "quote": "Each one trades **safety** (how often backdoors are caught) against **usefulness** (how many tasks still get solved)",
+      "file": "/work/.salvo14/mig/s11/ev/s11-qwglm/taisp/README.md",
+      "sha256": "16713037a57fb00e4b05e7bc1e6ece9ec9257ffb11a62721e9d6f4cb62f67d89"
+     }
+    ],
+    "level": "written"
+   },
+   "bounds": [
+    0,
+    100
+   ],
+   "direction": "higher",
+   "task_type": "agentic-tool",
+   "complexity": "hard",
+   "kind": "runs",
+   "composite": null,
+   "legacy_groups": [],
+   "label": "Trusted monitoring on 500 honest + 500 backdoored APPS samples (Qwen 3.8 Omni Flash as monitor): safety = share of backdoors caught at an audit budget of 1 %",
+   "note": "NEW setup (salvo s11, integration 17, 17 Nov 2026): decision (point 6, integration 17, the CyberDual rule: a detection rate is a capability, higher is better): \"how often backdoors are caught\" (README); the slices of one monitor run at the audit budgets are one run (run_set), k measures of a couple weigh 1/k | added by integration 17 of salvo s11 (17 Nov 2026)",
+   "run_set": "run:taisp-control-budgets"
   }
  },
  "note": "converted from today's catalog by /work/.salvo14/mig/benchmarks/convert.py (wave 2, benchmarks). Setup id = today's group (merged groups folded in as legacy_groups). Families: families.json, else the group itself. Headlines: only obvbench is source-designated; the others are pending (see setup notes). Merged 23 Oct 2026: headline levels as fields."
