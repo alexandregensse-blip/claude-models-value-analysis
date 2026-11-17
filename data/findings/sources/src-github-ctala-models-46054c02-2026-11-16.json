@@ -1,0 +1,310 @@
+{
+ "id": "src-github-ctala-models-46054c02-2026-11-16",
+ "publisher": "github-ctala",
+ "urls": [
+  "https://github.com/ctala/ai-benchmarks-alternativos/blob/46054c02/docs/data/models.json"
+ ],
+ "wayback": [],
+ "captures": [
+  {
+   "id": "S1",
+   "kind": "commit",
+   "url": "https://github.com/ctala/ai-benchmarks-alternativos/blob/46054c02/docs/data/models.json",
+   "captured": "2026-11-16T20:03:09Z",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "note": "commit 46054c02 of 2026-11-16T20:03:09Z (the research agent's reading; generated_at 2026-11-16T19:57:52 is in the file) | saved 17 Nov 2026 by the research agent (salvo s11); sha256 of the copy checked against SHA256SUMS | NEW VERSION of src-github-ctala-models-c536259a-2026-10-11 (snapshot_of): only the two luna-pro rows the salvo s11 read (gpt-6-luna-pro 8.27, was 8.28; gpt-5.6-luna-pro 8.44). Point 2 of integration 17: the effort is written as a cited and dated fact. The route is OpenRouter (provider openrouter, id openai/gpt-6-luna-pro, served by OpenAI at 100 %). The runner sends no effort (\"Sin pedido explícito no se manda effort.\", effort.py); OpenRouter's own copy of 2026-11-10 (\"tomada\") says default_effort medium for both ids, and OpenAI's reasoning guide (copy of 17 Nov) says \"GPT-6 Luna also default to medium reasoning effort\". RESERVES: (1) the runs of gpt-6-luna-pro are the v5 window (\"ventana v5 (4-nov-2026)\", up to \"hasta\": \"2026-11-09\"): covered by the 10 Nov copy; the model is also flagged \"thinking\": false with \"presupuesto_thinking\": true and a decision of 4 Nov measures the first rungs with thinking off when the model has a switch: part of the runs may have run at none; (2) the runs of gpt-5.6-luna-pro are the E1 window (\"12-ago a 1-sep-2026\", \"hasta\": \"2026-08-18\"): 84 to 100 days BEFORE the 10 Nov copy and before the guide copy: NOT covered by what the sources say of the default: effort written not-established:ambiguous, out of the fit. The pro mode comes from the sole text \"servido con `reasoning.mode: pro`\" (no code call shows it).",
+   "commit": "46054c02"
+  }
+ ],
+ "commit": null,
+ "sha256": {
+  "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json": "7302bd7ec305da59a7a19f079053d9002a0462455429f801d3a270c17b88f399",
+  "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/reasoning_openrouter.json": "420ac0afc956fa237bba33b9f5d10bc2fbd33c8ef47783febb9b10951cdbb021",
+  "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/effort.py": "77c2904cc5b78da56b632593e09041f0a46f73319a863137f49e21a8e6a35949",
+  "/work/.salvo14/mig/s11/ev/s11-pro-suite/oai_reasoning_guide.html.txt": "074ffba402e9c2e7f5a800b73c2fc90c5fd9ca463b2d5fde35f7d82af62eb202"
+ },
+ "harvested_at": "2026-11-17T12:00:00Z",
+ "published": {
+  "value": "2026-11-16",
+  "where": "top of docs/data/models.json (commit 46054c02 of 2026-11-16T20:03:09Z, the research agent's reading)",
+  "quote": "\"generated_at\": \"2026-11-16T19:57:52\"",
+  "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json"
+ },
+ "salvo": "salvo14/mig/s11 (17 Nov 2026), integration 17",
+ "agent": "integration 17 (Claude Sonnet 5.5), row-by-row reading of the saved copies",
+ "snapshot_of": "src-github-ctala-models-c536259a-2026-10-11",
+ "facts": [
+  {
+   "id": "F1",
+   "says": "cost-basis",
+   "about": null,
+   "value": "tokens_per_call_assumption",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.tokens_per_call_assumption (input 300, output 1500 tokens per call) with each entry's cost_input_per_M / cost_output_per_M: cost_per_1k_calls_usd is assumed tokens at list price, not measured",
+   "quote": "\"tokens_per_call_assumption\": {",
+   "term": "list-estimate"
+  },
+  {
+   "id": "F2",
+   "says": "cost-method",
+   "about": null,
+   "value": "tokens_per_call_assumption",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "same: cost_per_1k_calls_usd = 1000 x (300 x cost_input_per_M + 1500 x cost_output_per_M) / 1e6",
+   "quote": "\"tokens_per_call_assumption\": {",
+   "term": "tokens×list"
+  },
+  {
+   "id": "F3",
+   "says": "currency",
+   "about": null,
+   "value": "USD",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "field name carries the currency",
+   "quote": "\"cost_per_1k_calls_usd\"",
+   "term": "USD",
+   "written": "usd"
+  },
+  {
+   "id": "F4",
+   "says": "unit",
+   "about": null,
+   "value": "cost_per_1k_calls_usd",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "field name carries the unit",
+   "quote": "\"cost_per_1k_calls_usd\"",
+   "term": "per-1k-calls"
+  },
+  {
+   "id": "F5",
+   "says": "no-effort-sent",
+   "about": null,
+   "value": "Sin pedido explícito no se manda effort.",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/effort.py",
+   "where": "effort.py, header comment (the runner sends no effort unless BENCH_REASONING_EFFORT is set for experiments)",
+   "quote": "Sin pedido explícito no se manda effort."
+  },
+  {
+   "id": "F6",
+   "says": "note",
+   "about": null,
+   "value": "GPT-6.1 Sol, GPT-6 Sol, and GPT-6 Luna also default to medium reasoning effort.",
+   "level": "written",
+   "form": "prose",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/oai_reasoning_guide.html.txt",
+   "where": "OpenAI reasoning guide (copy of 17 Nov 2026), Reasoning effort",
+   "quote": "GPT-6.1 Sol, GPT-6 Sol, and GPT-6 Luna also default to medium reasoning effort."
+  },
+  {
+   "id": "F7",
+   "says": "note",
+   "about": null,
+   "value": "2026-11-10",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/reasoning_openrouter.json",
+   "where": "reasoning_openrouter.json, last field: the date of OpenRouter's copy of the defaults",
+   "quote": "\"tomada\": \"2026-11-10\""
+  },
+  {
+   "id": "F8",
+   "says": "model-api-id",
+   "about": "gpt-6-luna-pro",
+   "value": "openai/gpt-6-luna-pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, field id",
+   "quote": "\"id\": \"openai/gpt-6-luna-pro\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F9",
+   "says": "route",
+   "about": "gpt-6-luna-pro",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, field provider (key gpt-6-luna-pro)",
+   "quote": "\"provider\": \"openrouter\"",
+   "term": "openrouter"
+  },
+  {
+   "id": "F10",
+   "says": "effort-setting",
+   "about": "gpt-6-luna-pro",
+   "value": "medium",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/reasoning_openrouter.json",
+   "where": "reasoning_openrouter.json: OpenRouter's declared default_effort for openai/gpt-6-luna-pro, copy taken 2026-11-10 (\"tomada\")",
+   "quote": "\"openai/gpt-6-luna-pro\": { \"default_effort\": \"medium\",",
+   "note": "OpenRouter default_effort medium as of the copy of 2026-11-10 (tomada) and the registry's captures of 29 Oct, 9 Nov, 12 Nov; the runs of the v5 window (4 to 9 Nov 2026) are covered"
+  },
+  {
+   "id": "F11",
+   "says": "run-end",
+   "about": "gpt-6-luna-pro",
+   "value": "2026-11-09",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, medido_en.hasta (key gpt-6-luna-pro): the last day of the runs counted",
+   "quote": "\"hasta\": \"2026-11-09\"",
+   "written": "\"hasta\": \"2026-11-09\""
+  },
+  {
+   "id": "F12",
+   "says": "items",
+   "about": "gpt-6-luna-pro",
+   "value": "ventana v5 (4-nov-2026)",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, era (key gpt-6-luna-pro): the window of the runs counted",
+   "quote": "\"etiqueta\": \"ventana v5 (4-nov-2026)\""
+  },
+  {
+   "id": "F13",
+   "says": "mode",
+   "about": "gpt-6-luna-pro",
+   "value": "pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, notes (key gpt-6-luna-pro)",
+   "quote": "servido con `reasoning.mode: pro`",
+   "written": "pro"
+  },
+  {
+   "id": "F14",
+   "says": "cost",
+   "about": "gpt-6-luna-pro",
+   "value": "0.78",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, cost_per_1k_calls_usd (key gpt-6-luna-pro)",
+   "quote": "\"cost_per_1k_calls_usd\": 0.78"
+  },
+  {
+   "id": "F15",
+   "says": "score",
+   "about": "gpt-6-luna-pro",
+   "value": "8.27",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, quality_avg (key gpt-6-luna-pro)",
+   "quote": "\"quality_avg\": 8.27, \"quality_ci95\": 0.356",
+   "term": "quality",
+   "scale": "raw"
+  },
+  {
+   "id": "F16",
+   "says": "model-api-id",
+   "about": "gpt-5.6-luna-pro",
+   "value": "openai/gpt-5.6-luna-pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, field id",
+   "quote": "\"id\": \"openai/gpt-5.6-luna-pro\"",
+   "namespace": "openrouter"
+  },
+  {
+   "id": "F17",
+   "says": "route",
+   "about": "gpt-5.6-luna-pro",
+   "value": "openrouter",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, field provider (key gpt-5.6-luna-pro)",
+   "quote": "\"provider\": \"openrouter\"",
+   "term": "openrouter"
+  },
+  {
+   "id": "F18",
+   "says": "effort-setting",
+   "about": "gpt-5.6-luna-pro",
+   "value": "medium",
+   "level": "not-established:ambiguous",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro-suite/ctala/reasoning_openrouter.json",
+   "where": "reasoning_openrouter.json: OpenRouter's declared default_effort for openai/gpt-5.6-luna-pro, copy taken 2026-11-10 (\"tomada\")",
+   "quote": "\"openai/gpt-5.6-luna-pro\": { \"default_effort\": \"medium\",",
+   "note": "OpenRouter default_effort medium as of 2026-11-10: the runs (window 12 Aug to 1 Sep 2026, up to 18 Aug) are 84 days and more BEFORE that copy and before the guide: not covered"
+  },
+  {
+   "id": "F19",
+   "says": "run-end",
+   "about": "gpt-5.6-luna-pro",
+   "value": "2026-08-18",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, medido_en.hasta (key gpt-5.6-luna-pro): the last day of the runs counted",
+   "quote": "\"hasta\": \"2026-08-18\"",
+   "written": "\"hasta\": \"2026-08-18\""
+  },
+  {
+   "id": "F20",
+   "says": "items",
+   "about": "gpt-5.6-luna-pro",
+   "value": "12-ago a 1-sep-2026",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, era (key gpt-5.6-luna-pro): the window of the runs counted",
+   "quote": "\"etiqueta\": \"12-ago a 1-sep-2026\""
+  },
+  {
+   "id": "F21",
+   "says": "mode",
+   "about": "gpt-5.6-luna-pro",
+   "value": "pro",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, notes (key gpt-5.6-luna-pro)",
+   "quote": "servido con `reasoning.mode: pro`",
+   "written": "pro"
+  },
+  {
+   "id": "F22",
+   "says": "cost",
+   "about": "gpt-5.6-luna-pro",
+   "value": "1.86",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, cost_per_1k_calls_usd (key gpt-5.6-luna-pro)",
+   "quote": "\"cost_per_1k_calls_usd\": 1.86"
+  },
+  {
+   "id": "F23",
+   "says": "score",
+   "about": "gpt-5.6-luna-pro",
+   "value": "8.44",
+   "level": "written",
+   "form": "table-cell",
+   "file": "/work/.salvo14/mig/s11/ev/s11-pro6/ctala_models_46054c02.json",
+   "where": "$.models, quality_avg (key gpt-5.6-luna-pro)",
+   "quote": "\"quality_avg\": 8.44, \"quality_ci95\": 0.369",
+   "term": "quality",
+   "scale": "raw"
+  }
+ ]
+}
