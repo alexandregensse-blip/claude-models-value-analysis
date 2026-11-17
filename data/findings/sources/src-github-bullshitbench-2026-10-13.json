@@ -40066,6 +40066,28 @@
    "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json",
    "where": "collection_stats.json, same entry, field reasoning_tokens_total (the sum of the 100 calls reasoning tokens, each read 0 in the responses part)",
    "quote": "\"model\": \"z-ai/glm-5-turbo@reasoning=none\", \"rows\": 100, \"success_rows\": 100, \"error_rows\": 0, \"rows_with_usage\": 100, \"rows_with_total_tokens\": 100, \"rows_with_cost\": 100, \"rows_with_latency\": 100, \"rows_with_tokens_per_second\": 100, \"rows_with_byok_true\": 0, \"prompt_tokens_total\": 5384, \"completion_tokens_total\": 112983, \"total_tokens_total\": 118367, \"reasoning_tokens_total\": 0"
+  },
+  {
+   "id": "F2814",
+   "about": "z-ai/glm-5-turbo@reasoning=high",
+   "says": "note",
+   "value": "135995",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json",
+   "where": "collection_stats.json, usage_summary.by_model, entry z-ai/glm-5-turbo@reasoning=high (read 2026-11-17): 100 rows, 100 with usage, reasoning_tokens_total = 135995. PROOF OF THE SETTING THROUGH OPENROUTER (model_provider openrouter in every row): read row by row in the responses part sha256-718c08ea (data/v2/latest/responses), the 100 rows of this variant carry response_usage.completion_tokens_details.reasoning_tokens above 0 in 100 of 100 calls (smallest 863, largest 3500, sum 135995), response_reasoning_effort \"high\" in 100 of 100, finish_reason stop, provider snapshot z-ai/glm-5-turbo-20260315, run of 7 Apr 2026 (started 16:18 to finished 17:31 UTC). Control, same file, same model at @reasoning=none: 0 reasoning token in 100 of 100 calls (F2812, F2813). So thinking is ON on every call of this row (the registry's configuration `think` of glm-5-turbo, the maker's thinking enabled), the level asked (high) not being a level the model has (thinking on or off only).",
+   "quote": "\"model\": \"z-ai/glm-5-turbo@reasoning=high\", \"rows\": 100, \"success_rows\": 100, \"error_rows\": 0, \"rows_with_usage\": 100, \"rows_with_total_tokens\": 100, \"rows_with_cost\": 100, \"rows_with_latency\": 100, \"rows_with_tokens_per_second\": 100, \"rows_with_byok_true\": 0, \"prompt_tokens_total\": 5384, \"completion_tokens_total\": 248065, \"total_tokens_total\": 253449, \"reasoning_tokens_total\": 135995"
+  },
+  {
+   "id": "F2815",
+   "about": "z-ai/glm-5-turbo@reasoning=high",
+   "says": "note",
+   "value": "high",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/responses-part-718c08ea.jsonl",
+   "where": "responses part sha256-718c08ea, line 336 (sample_id recent_missing_models_v2_20260407__fin_af_01__z-ai_glm-5-turbo_reasoning_high_fbda32b5df__run1): the row's stored request parameter; the collector script (scripts/openrouter_benchmark.py of the clone at 92793d4, lines 1323-1327, a later commit than the run: not proven for 7 Apr) sets `reasoning_override[\"effort\"] = effort` in the request overrides of an OpenRouter variant, i.e. the call sent reasoning.effort = high to OpenRouter (no `enabled`, no max_tokens)",
+   "quote": "\"model_provider\":\"openrouter\",\"model_reasoning_level\":\"high\",\"model_row\":\"glm-5-turbo@reasoning=high\",\"response_reasoning_effort\":\"high\""
   }
  ]
 }
