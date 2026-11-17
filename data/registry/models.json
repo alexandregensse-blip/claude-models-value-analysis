@@ -14594,37 +14594,12 @@
        ]
       }
      ]
-    },
-    {
-     "name": "openai/gpt-5.1-chat",
-     "kind": "api-id",
-     "selects": null,
-     "route": "openrouter",
-     "serves": [
-      {
-       "from": "2025-11-13",
-       "to": "2026-11-17",
-       "from_basis": "stated",
-       "to_basis": "last-capture",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/api/v1/models/openai/gpt-5.1-chat/endpoints",
-         "captured": "2026-11-17",
-         "file": "/work/.salvo14/mig/s12/ev/noms/ep-openai_gpt-5.1-chat.json",
-         "sha256": "7fea6bab67b5c72f51ba58201f0f28f7b08d316c5898a80af61d60408720a835",
-         "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/openai/gpt-5.1-chat/endpoints (id openai/gpt-5.1-chat, name 'OpenAI: GPT-5.1 Chat', created 2025-11-13)",
-         "quote": "\"id\":\"openai/gpt-5.1-chat\",\"name\":\"OpenAI: GPT-5.1 Chat\",\"created\":1763060302",
-         "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «OpenAI: GPT-5.1 Chat» which is the display name «GPT-5.1 Chat» of this key, created on 2025-11-13. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
-        }
-       ]
-      }
-     ]
     }
    ],
    "default": [],
    "conversions": [],
    "modes": [],
-   "note": "Solo: the page states no reasoning parameter; its Model details list carries no 'Reasoning token support' line (the reasoning models' pages do). Name ends with the maker's shutdown."
+   "note": "Solo: the page states no reasoning parameter; its Model details list carries no 'Reasoning token support' line (the reasoning models' pages do). Name ends with the maker's shutdown. DOUBT (integration 18b, 17 Nov 2026): the OpenRouter id openai/gpt-5.1-chat was linked to this key on 17 Nov by integration 18a on the display name alone (« \"id\":\"openai/gpt-5.1-chat\",\"name\":\"OpenAI: GPT-5.1 Chat\",\"created\":1763060302 », https://openrouter.ai/api/v1/models/openai/gpt-5.1-chat/endpoints, capture of 17 Nov, sha256 7fea6bab67b5c72f51ba58201f0f28f7b08d316c5898a80af61d60408720a835); same displayed name « GPT-5.1 Chat », link not written. The OpenRouter record (description « GPT-5.1 Chat (AKA Instant) is the fast, lightweight member of the 5.1 family … », no endpoint) names no OpenAI id; gpt-5.1-chat-latest is an alias that moves with ChatGPT. Not linked: the rows of this OpenRouter id stay without key (out:model-not-established)."
   },
   "gpt-5.1-codex": {
    "label": "GPT-5.1-Codex",
@@ -15905,37 +15880,12 @@
        ]
       }
      ]
-    },
-    {
-     "name": "openai/gpt-5.2-chat",
-     "kind": "api-id",
-     "selects": null,
-     "route": "openrouter",
-     "serves": [
-      {
-       "from": "2025-12-10",
-       "to": "2026-11-17",
-       "from_basis": "stated",
-       "to_basis": "last-capture",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/api/v1/models/openai/gpt-5.2-chat/endpoints",
-         "captured": "2026-11-17",
-         "file": "/work/.salvo14/mig/s12/ev/noms/ep-openai_gpt-5.2-chat.json",
-         "sha256": "35a3f1a0cb74d2008497fa2b9981ea612d5b0dc90a541148c9716188d4b16a06",
-         "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/openai/gpt-5.2-chat/endpoints (id openai/gpt-5.2-chat, name 'OpenAI: GPT-5.2 Chat', created 2025-12-10)",
-         "quote": "\"id\":\"openai/gpt-5.2-chat\",\"name\":\"OpenAI: GPT-5.2 Chat\",\"created\":1765389783",
-         "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «OpenAI: GPT-5.2 Chat» which is the display name «GPT-5.2 Chat» of this key, created on 2025-12-10. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
-        }
-       ]
-      }
-     ]
     }
    ],
    "default": [],
    "conversions": [],
    "modes": [],
-   "note": "Solo: the page states no reasoning parameter; its Model details list carries no 'Reasoning token support' line (the reasoning models' pages do). Name ends with the maker's shutdown."
+   "note": "Solo: the page states no reasoning parameter; its Model details list carries no 'Reasoning token support' line (the reasoning models' pages do). Name ends with the maker's shutdown. DOUBT (integration 18b, 17 Nov 2026): the OpenRouter id openai/gpt-5.2-chat was linked to this key on 17 Nov by integration 18a on the display name alone (« \"id\":\"openai/gpt-5.2-chat\",\"name\":\"OpenAI: GPT-5.2 Chat\",\"created\":1765389783 », https://openrouter.ai/api/v1/models/openai/gpt-5.2-chat/endpoints, capture of 17 Nov, sha256 35a3f1a0cb74d2008497fa2b9981ea612d5b0dc90a541148c9716188d4b16a06); same displayed name « GPT-5.2 Chat », link not written. The OpenRouter record carries only OpenRouter's own dated slug openai/gpt-5.2-chat-20251211 (Azure endpoint), not an OpenAI id of the key, and OpenAI wrote on 10 Feb 2026 « Updated the gpt-5.2-chat-latest slug to point to the latest model currently used in ChatGPT »: after that date the alias is no longer the build of 11 Dec. Not linked: the rows of this OpenRouter id stay without key (out:model-not-established)."
   },
   "gpt-5.2-codex": {
    "label": "GPT-5.2-Codex",
@@ -25794,6 +25744,24 @@
          "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/x-ai/grok-4.20-beta/endpoints (id x-ai/grok-4.20, name 'SpaceXAI: Grok 4.20', created 2026-03-31)",
          "quote": "\"id\":\"x-ai/grok-4.20\",\"name\":\"SpaceXAI: Grok 4.20\",\"created\":1774979019",
          "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «SpaceXAI: Grok 4.20» which is the display name «Grok 4.20» of this key, created on 2026-03-31, and the record asked under the beta id answers with the id x-ai/grok-4.20 that this key already carries. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
+        },
+        {
+         "url": "https://web.archive.org/web/20260601014350/https://docs.x.ai/developers/models/grok-4.20-0309-reasoning",
+         "captured": "2026-06-01",
+         "file": "/work/.salvo14/mig/models-google-xai/src/wb-x-grok-4.20-0309-reasoning/x_20260601014350.html",
+         "sha256": "9731cff53bedd6b61bcf348762f8474d331ee3dc7dae4d91214f8f21c7c16d00",
+         "where": "model page: alias list",
+         "quote": "Aliases grok-4.20-reasoning-latest grok-4.20 grok-4.20-reasoning grok-4.20-0309 grok-4.20-beta-0309-reasoning grok-4.20-beta grok-4.20-beta-0309 grok-4.20-beta-latest grok-4.20-beta-latest-reasoning grok-4.20-beta-reasoning grok-4.20-experimental-beta-0304-reasoning grok-4.20-experimental-beta-0304 grok-4.20-experimental-beta-reasoning-latest grok-4.20-experimental-beta-latest grok-4.20-reasoning-gv2",
+         "note": "Integration 18b, what founds the link: xAI's own model page writes grok-4.20-beta as an alias of grok-4.20-0309-reasoning (the key's model), and OpenRouter's record under the beta id answers the id x-ai/grok-4.20 whose canonical slug is x-ai/grok-4.20-20260309, the 0309 snapshot of this page (next item). The alias list is a capture of 1 Jun 2026; the key's own beta id starts there, the OpenRouter name from the creation of its record (31 Mar)."
+        },
+        {
+         "url": "https://openrouter.ai/api/v1/models",
+         "captured": "2026-11-17",
+         "file": "/work/.salvo14/mig/s12/ev/noms/or-models.json",
+         "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
+         "where": "data[id=x-ai/grok-4.20], canonical_slug (the record answered under the beta id)",
+         "quote": "\"id\":\"x-ai/grok-4.20\",\"canonical_slug\":\"x-ai/grok-4.20-20260309\"",
+         "note": "the 0309 snapshot of the key, written by OpenRouter's record"
         }
        ]
       }
@@ -59918,6 +59886,15 @@
          "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/meta/muse-spark-1.2/endpoints (id meta/muse-spark-1.2, name 'Meta: Muse Spark 1.2', created 2026-08-05)",
          "quote": "\"id\":\"meta/muse-spark-1.2\",\"name\":\"Meta: Muse Spark 1.2\",\"created\":1785959287",
          "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «Meta: Muse Spark 1.2» which is the display name «Muse Spark 1.2» of this key, created on 2026-08-05. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
+        },
+        {
+         "url": "https://dev.meta.ai/docs/models",
+         "captured": "2026-10-26T12:13:57Z",
+         "file": "/work/.salvo14/mig/gaps2-other-makers/ev/meta/dev-models.txt",
+         "sha256": "bbc63d8171afa2b9b1f38828dc68d5230985742d9f1398cd67d2084f91f140ac",
+         "where": "Models page (live): muse-spark-1.2",
+         "quote": "Muse Spark 1.2 ( muse-spark-1.2 ): the previous version.",
+         "note": "Integration 18b, what founds the link: Meta's models page writes the id muse-spark-1.2 for Muse Spark 1.2, OpenRouter's id is meta/muse-spark-1.2 (canonical slug meta/muse-spark-1.2-20260805) and its description reads « Muse Spark 1.2 is a reasoning model from Meta »; a pinned version, not an alias. Judgement: the slug carries the maker's id verbatim."
         }
        ]
       }
@@ -60315,6 +60292,15 @@
          "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/nvidia/nemotron-3-nano-30b-a3b:free/endpoints (id nvidia/nemotron-3-nano-30b-a3b:free, name 'NVIDIA: Nemotron 3 Nano 30B A3B', created 2025-12-14)",
          "quote": "\"id\":\"nvidia/nemotron-3-nano-30b-a3b:free\",\"name\":\"NVIDIA: Nemotron 3 Nano 30B A3B\",\"created\":1765731275",
          "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «NVIDIA: Nemotron 3 Nano 30B A3B» which is the display name «Nemotron 3 Nano 30B A3B» of this key, created on 2025-12-14 (the :free variant is the same model under another endpoint: same name, same description, same creation date as the key's own OpenRouter name). from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
+        },
+        {
+         "url": "https://openrouter.ai/docs/guides/routing/model-variants",
+         "captured": "2026-11-17",
+         "file": "/work/.salvo14/mig/s12/ev/integ18b/or_model_variants_20261117.txt",
+         "sha256": "fdcc66047e62bf947bbc7ff862909876dc2f237bad003bde4b8e561b8b5b4d40",
+         "where": "Model variants, Catalog variants table, suffix :free",
+         "quote": "A free-tier version of the model with its own rate limits and endpoints.",
+         "note": "Integration 18b, what founds the link: OpenRouter writes that the :free suffix is a free-tier version of the model, and the record of nvidia/nemotron-3-nano-30b-a3b:free carries the same description and the same created stamp as the base record nvidia/nemotron-3-nano-30b-a3b, which the key already links (hugging_face_id of the maker's repository in the base record)."
         }
        ]
       }
@@ -60474,6 +60460,15 @@
          "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/nvidia/nemotron-3-super-120b-a12b:free/endpoints (id nvidia/nemotron-3-super-120b-a12b:free, name 'NVIDIA: Nemotron 3 Super', created 2026-03-11)",
          "quote": "\"id\":\"nvidia/nemotron-3-super-120b-a12b:free\",\"name\":\"NVIDIA: Nemotron 3 Super\",\"created\":1773245239",
          "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «NVIDIA: Nemotron 3 Super» which is the display name «Nemotron 3 Super» of this key, created on 2026-03-11 (the :free variant is the same model under another endpoint: same name, same description, same creation date as the key's own OpenRouter name). from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
+        },
+        {
+         "url": "https://openrouter.ai/docs/guides/routing/model-variants",
+         "captured": "2026-11-17",
+         "file": "/work/.salvo14/mig/s12/ev/integ18b/or_model_variants_20261117.txt",
+         "sha256": "fdcc66047e62bf947bbc7ff862909876dc2f237bad003bde4b8e561b8b5b4d40",
+         "where": "Model variants, Catalog variants table, suffix :free",
+         "quote": "A free-tier version of the model with its own rate limits and endpoints.",
+         "note": "Integration 18b, what founds the link: OpenRouter writes that the :free suffix is a free-tier version of the model, and the record of nvidia/nemotron-3-super-120b-a12b:free carries the same description and the same created stamp as the base record nvidia/nemotron-3-super-120b-a12b, which the key already links (hugging_face_id of the maker's repository in the base record)."
         }
        ]
       }
@@ -85296,6 +85291,15 @@
          "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/google/gemini-2.0-flash-001/endpoints (id google/gemini-2.0-flash-001, name 'Google: Gemini 2.0 Flash', created 2025-02-05)",
          "quote": "\"id\":\"google/gemini-2.0-flash-001\",\"name\":\"Google: Gemini 2.0 Flash\",\"created\":1738769413",
          "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «Google: Gemini 2.0 Flash» which is the display name «Gemini 2.0 Flash» of this key, created on 2025-02-05. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
+        },
+        {
+         "url": "https://ai.google.dev/gemini-api/docs/changelog",
+         "captured": "2026-10-20T06:38:39Z",
+         "file": "/work/.salvo14/mk/google/src/https___ai_google_dev_gemini-api_docs_changelog.txt",
+         "sha256": "2612b48fabcca6eb3a828d2ffb84505e46cda04669917d68f291f1da438e9d20",
+         "where": "changelog 5 Feb 2025: gemini-2.0-flash-001 GA",
+         "quote": "February 5, 2025 Model updates: Released gemini-2.0-flash-001 , a generally available (GA) version of Gemini 2.0 Flash that supports text-only output.",
+         "note": "Integration 18b, what founds the link: Google writes the model code gemini-2.0-flash-001 (the pinned GA version of Gemini 2.0 Flash, not an alias) and OpenRouter's id is google/ followed by that code, created on the same day (5 Feb 2025). Judgement: the record itself states no maker id (no endpoint left); the slug carrying the maker's pinned code verbatim is what is kept."
         }
        ]
       }
@@ -89191,7 +89195,8 @@
          "file": "/work/.salvo14/mig/s12/ev/noms/or-models.json",
          "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
          "where": "data[id=moonshotai/kimi-k2].hugging_face_id",
-         "quote": "\"id\":\"moonshotai/kimi-k2\",\"canonical_slug\":\"moonshotai/kimi-k2\",\"hugging_face_id\":\"moonshotai/Kimi-K2-Instruct\",\"name\":\"MoonshotAI: Kimi K2 0711\""
+         "quote": "\"id\":\"moonshotai/kimi-k2\",\"canonical_slug\":\"moonshotai/kimi-k2\",\"hugging_face_id\":\"moonshotai/Kimi-K2-Instruct\",\"name\":\"MoonshotAI: Kimi K2 0711\"",
+         "note": "Integration 18b, what founds the link: OpenRouter's record writes hugging_face_id moonshotai/Kimi-K2-Instruct, the maker's own repository, which is the name of this key (api-id moonshotai/Kimi-K2-Instruct, huggingface route)."
         }
        ]
       }
@@ -99633,37 +99638,12 @@
        ]
       }
      ]
-    },
-    {
-     "name": "openai/gpt-5-chat",
-     "kind": "api-id",
-     "selects": null,
-     "route": "openrouter",
-     "serves": [
-      {
-       "from": "2025-08-07",
-       "to": "2026-11-17",
-       "from_basis": "stated",
-       "to_basis": "last-capture",
-       "evidence": [
-        {
-         "url": "https://openrouter.ai/api/v1/models/openai/gpt-5-chat/endpoints",
-         "captured": "2026-11-17",
-         "file": "/work/.salvo14/mig/s12/ev/noms/ep-openai_gpt-5-chat.json",
-         "sha256": "73811e878de21136fdcb150561eb1f40990dab32ad55336eb97a9e6cff9b80e7",
-         "where": "OpenRouter model record returned for https://openrouter.ai/api/v1/models/openai/gpt-5-chat/endpoints (id openai/gpt-5-chat, name 'OpenAI: GPT-5 Chat', created 2025-08-07)",
-         "quote": "\"id\":\"openai/gpt-5-chat\",\"name\":\"OpenAI: GPT-5 Chat\",\"created\":1754587837",
-         "note": "Added by integration 18a (17 Nov 2026, the maintainer's « ok » to question 2 of integration 17): the OpenRouter record of this name prints the name «OpenAI: GPT-5 Chat» which is the display name «GPT-5 Chat» of this key, created on 2025-08-07. from = the creation date written by OpenRouter; to = the capture that still shows the record (a retired model keeps its record with no endpoint)."
-        }
-       ]
-      }
-     ]
     }
    ],
    "default": [],
    "conversions": [],
    "modes": [],
-   "note": "added by integration 16 (16 Nov 2026), the maintainer: « fais au mieux » on the conclusions of the verification agent (S/s10/verif/CONCLUSIONS.md): not the reasoning GPT-5: its own id gpt-5-chat-latest, its own page (« GPT-5 Chat points to the GPT-5 snapshot previously used in ChatGPT »), price 1.25 / 10, shut down on 23 Jul 2026 (as gpt-5.1 / 5.2 / 5.3-chat-latest, already keys). Solo: the page has no reasoning line (negative evidence). Reserve: Arena's log of 15 Aug 2025 names « gpt-5-chat » in a sentence on models « configured with the highest reasoning setting » (text run together with gpt-5-mini-high and gpt-5-nano-high); the OpenAI page shows no reasoning setting. Release date: the GPT-5 family of 7 Aug 2025 (the id was in the family; the page of 16 Nov gives no date)."
+   "note": "added by integration 16 (16 Nov 2026), the maintainer: « fais au mieux » on the conclusions of the verification agent (S/s10/verif/CONCLUSIONS.md): not the reasoning GPT-5: its own id gpt-5-chat-latest, its own page (« GPT-5 Chat points to the GPT-5 snapshot previously used in ChatGPT »), price 1.25 / 10, shut down on 23 Jul 2026 (as gpt-5.1 / 5.2 / 5.3-chat-latest, already keys). Solo: the page has no reasoning line (negative evidence). Reserve: Arena's log of 15 Aug 2025 names « gpt-5-chat » in a sentence on models « configured with the highest reasoning setting » (text run together with gpt-5-mini-high and gpt-5-nano-high); the OpenAI page shows no reasoning setting. Release date: the GPT-5 family of 7 Aug 2025 (the id was in the family; the page of 16 Nov gives no date). DOUBT (integration 18b, 17 Nov 2026): the OpenRouter id openai/gpt-5-chat was linked to this key on 17 Nov by integration 18a on the display name alone (« \"id\":\"openai/gpt-5-chat\",\"name\":\"OpenAI: GPT-5 Chat\",\"created\":1754587837 », https://openrouter.ai/api/v1/models/openai/gpt-5-chat/endpoints, capture of 17 Nov, sha256 73811e878de21136fdcb150561eb1f40990dab32ad55336eb97a9e6cff9b80e7); same displayed name « GPT-5 Chat », link not written. The OpenRouter record (description « GPT-5 Chat is designed for advanced, natural, multimodal, and context-aware conversations for enterprise applications. », no endpoint) names no OpenAI id; OpenAI's page says the id gpt-5-chat-latest « points to the GPT-5 snapshot previously used in ChatGPT » (a pointer that moves). Not linked: the rows of this OpenRouter id stay without key (out:model-not-established)."
   },
   "olmo-3-32b-think": {
    "label": "Olmo 3 32B Think",
