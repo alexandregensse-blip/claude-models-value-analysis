@@ -19,7 +19,9 @@
  "sha256": {
   "/work/.salvo14/mig/s11/ev/s11-papiers-qwglm/pap/2607.01152.html": "589c4668968f3bf67ae4965d51c3fd9db9e029f01fd5b71bcbd645cb77ec436a",
   "/work/.salvo14/mig/s11/ev/s11-qwglm/issues/hyperneo5753.txt": "85875b6bf8ffb3713e7c50fb35281139d287c85697250b6f27a69801459fbb06",
-  "/work/.salvo14/mig/s11/ev/s11-qwglm/issues/9router4656.txt": "57a7c08c39da0cbe82aea1487dcb8dcfc0397cf8dd2c1a416713f31c39da7ee0"
+  "/work/.salvo14/mig/s11/ev/s11-qwglm/issues/9router4656.txt": "57a7c08c39da0cbe82aea1487dcb8dcfc0397cf8dd2c1a416713f31c39da7ee0",
+  "/work/.salvo14/mig/s11/ev/integ17-glm/agc_schema_and_count.txt": "726c85e34af9d1db68c0896cdb460e774c77ff4fad3f47519080706349a00c89",
+  "/work/.salvo14/mig/s11/ev/integ17-glm/agc_reasoning_off_openrouter_client.py": "ca865e3c901cd42ae3279473b793f8a9163dccf9016b5199de1530f42b86eea2"
  },
  "harvested_at": "2026-11-17T12:00:00Z",
  "published": {
@@ -104,6 +106,28 @@
    "written": "+ 0.783",
    "term": "z median",
    "scale": "raw"
+  },
+  {
+   "id": "F7",
+   "about": "glm-5-turbo",
+   "says": "note",
+   "value": "completion",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/agc_schema_and_count.txt",
+   "where": "Hugging Face agcbench-2026/AGC-Bench (revision 30918045), generations/z-ai/glm-5-turbo/: 66 parquet files, 3066 completions read on 2026-11-17, no usage field, no reasoning_tokens, no raw API response; 0 of 3066 completions carry a think tag. The paper says the responses are released there. Verdict of the check (consigne point 3): the field is absent, nothing proves that OpenRouter honoured reasoning.enabled=false, the doubt stays, the rows stay out of the fit. The client code released with the data (clients/reasoning_off_openrouter_client.py) injects {\"reasoning\": {\"enabled\": False}} (see the next fact), which is the OpenRouter parameter the issue HyperNeo 5753 doubts outside /api/paas/v4.",
+   "quote": "columns of every file: ['instance_id', 'completion', 'canonical_metric', 'canonical_score', 'agc_judge_score', 'jrt_gold', 'model', 'benchmark', 'source_run_dir', 'dataset_z', 'score_source', 'n_raters', 'dq_masked']"
+  },
+  {
+   "id": "F8",
+   "about": "glm-5-turbo",
+   "says": "note",
+   "value": "False",
+   "level": "written",
+   "form": "code",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/agc_reasoning_off_openrouter_client.py",
+   "where": "clients/reasoning_off_openrouter_client.py of the same dataset, the parameter sent for the models run with reasoning off (read 2026-11-17)",
+   "quote": "existing[\"reasoning\"] = {\"enabled\": False}"
   }
  ]
 }

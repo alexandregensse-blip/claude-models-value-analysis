@@ -45,6 +45,14 @@
    "url": "https://github.com/petergpt/bullshit-benchmark",
    "captured": "2026-10-22T07:08:01Z",
    "note": "clone at HEAD 92793d4 (22 Oct) used only for the README, docs/TECHNICAL.md, scripts/openrouter_benchmark.py and config.v2.json (what the columns and the reasoning labels mean)"
+  },
+  {
+   "id": "G6",
+   "kind": "fetch",
+   "url": "https://github.com/petergpt/bullshit-benchmark/blob/main/data/v2/latest/collection_stats.json",
+   "captured": "2026-10-22T07:08:01Z",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json",
+   "note": "collection_stats.json and the responses part sha256-718c08ea... of the clone at HEAD 92793d4 (22 Oct), copied on 2026-11-17 into /work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/ (integration 17, check of the thinking switch-off of glm-5-turbo through OpenRouter); the leaderboard row z-ai/glm-5-turbo@reasoning=none of that clone reads green_rate 0.23, the value of this source"
   }
  ],
  "commit": null,
@@ -84,7 +92,9 @@
   "/work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark/data/v2/latest/responses/sha256-4ad00d6eff703c4d6956232e3fcb4219fc17744e56a6c920feef4fd0a6a29a3b.jsonl": "4ad00d6eff703c4d6956232e3fcb4219fc17744e56a6c920feef4fd0a6a29a3b",
   "/work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark/data/v2/latest/responses/sha256-111bda2857be643df7eee9a87996a372859a7cd656248656d9b60510c68f2800.jsonl": "111bda2857be643df7eee9a87996a372859a7cd656248656d9b60510c68f2800",
   "/work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark/data/v2/latest/responses/sha256-0b49b63a8b67bd55c2545878ff7232071ca85df31f1446123b6da639ab28bed1.jsonl": "0b49b63a8b67bd55c2545878ff7232071ca85df31f1446123b6da639ab28bed1",
-  "/work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark/data/v2/latest/manifest.json": "51d51f8a90ddf1331969d5e28d7bf401f119b67e0f633cdcfe9bc445fd3febb1"
+  "/work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark/data/v2/latest/manifest.json": "51d51f8a90ddf1331969d5e28d7bf401f119b67e0f633cdcfe9bc445fd3febb1",
+  "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json": "aafdd5f23b5e7c92a250cc98ffd2f61c0b94a51ec3d99d252d501ec9d055dac3",
+  "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/responses-part-718c08ea.jsonl": "718c08eabd67804e1cff1c49f6aff539e6cfcd6d19f0c79f22afe1c751a3f0b0"
  },
  "harvested_at": "2026-10-15T15:50:08Z",
  "published": null,
@@ -40034,6 +40044,28 @@
    "where": "https://github.com/petergpt/bullshit-benchmark/blob/92793d458f1bed8d6937610eb459978496afed07/data/v2/latest/data/v2/latest/responses/sha256-21a05c1179f0d6f4b99006b86f21be796a02d6962c37ea6b198d12c0ae3fb50d.jsonl, line 432 (sample_id run_v2_latest146_claude_only_20260301_015128__med_af_01__google_gemma-3-27b-it_reasoning_default_ca90c3834f__run1, model google/gemma-3-27b-it@reasoning=default): the latest finished_at_utc of the model row's responses, in the response parts that data/v2/latest/manifest.json (generated 2026-10-13T17:37:22Z) lists for the leaderboard_with_launch.csv we hold (its sha256 44e39847b85dfbcf02565510f25608cfab514abc56f1466e7d50e71327c89e4b in the manifest): an upper bound of the run",
    "quote": "\"started_at_utc\":\"2026-03-01T02:35:33.817865+00:00\",\"finished_at_utc\":\"2026-03-01T02:36:22.009032+00:00\",\"response_prompt_tokens\":42,\"response_completion_tokens\":1845,\"response_total_tokens\":1887,\"response_reasoning_tokens\":0,\"response_cached_prompt_tokens\":0,\"response_cache_write_tokens\":null,\"response_cost_usd\":0.00029856,\"response_tokens_per_second\":39.1575,\"collect_attempt\":1,\"status\":\"ok\",\"response_refusal\":false,\"response_outcome\":\"response\"}",
    "note": "the maintainer's decision 7 of 4 Nov 2026 (bullshitbench, one date per row); clone of /work/.salvo14/arb/apidefault/evidence/open39/clones/petergpt_bullshit-benchmark at 92793d458f1bed8d6937610eb459978496afed07"
+  },
+  {
+   "id": "F2812",
+   "about": "z-ai/glm-5-turbo@reasoning=none",
+   "says": "note",
+   "value": "100",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json",
+   "where": "collection_stats.json, usage_summary.by_model, entry z-ai/glm-5-turbo@reasoning=none (read 2026-11-17): 100 rows, 100 with usage; PROOF OF THE SWITCH-OFF through OpenRouter (the route of this row, model_provider openrouter in every row): reasoning_tokens_total = 0. Read row by row in the responses part sha256-718c08ea (data/v2/latest/responses): the 100 rows of this variant carry response_usage.completion_tokens_details.reasoning_tokens = 0 (100 of 100), response_reasoning_effort \"none\", no think tag in response_text (0 of 100), finish_reason stop, provider snapshot z-ai/glm-5-turbo-20260315, run of 7 Apr 2026 (started 16:18 to finished 17:24 UTC). Control, same file, same model at @reasoning=high: 100 of 100 rows above 0, total 135995 reasoning tokens (the counter works on this route). Verdict of the check (consigne point 3): 0 reasoning token on every call, the switch-off is proven for these 100 calls; the doubt of issue HyperNeo 5753 (6 to 12 percent of calls outside /api/paas/v4, issue dated 6 Oct) concerns calls made after this run of 7 Apr and is not seen here.",
+   "quote": "\"model\": \"z-ai/glm-5-turbo@reasoning=none\", \"rows\": 100, \"success_rows\": 100, \"error_rows\": 0, \"rows_with_usage\": 100"
+  },
+  {
+   "id": "F2813",
+   "about": "z-ai/glm-5-turbo@reasoning=none",
+   "says": "note",
+   "value": "0",
+   "level": "written",
+   "form": "data-file",
+   "file": "/work/.salvo14/mig/s11/ev/integ17-glm/bsbv2/collection_stats.json",
+   "where": "collection_stats.json, same entry, field reasoning_tokens_total (the sum of the 100 calls reasoning tokens, each read 0 in the responses part)",
+   "quote": "\"model\": \"z-ai/glm-5-turbo@reasoning=none\", \"rows\": 100, \"success_rows\": 100, \"error_rows\": 0, \"rows_with_usage\": 100, \"rows_with_total_tokens\": 100, \"rows_with_cost\": 100, \"rows_with_latency\": 100, \"rows_with_tokens_per_second\": 100, \"rows_with_byok_true\": 0, \"prompt_tokens_total\": 5384, \"completion_tokens_total\": 112983, \"total_tokens_total\": 118367, \"reasoning_tokens_total\": 0"
   }
  ]
 }
