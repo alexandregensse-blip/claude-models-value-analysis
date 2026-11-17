@@ -1,5 +1,5 @@
 {
- "as_of": "2026-11-16",
+ "as_of": "2026-11-17",
  "prices": [
   {
    "model": "claude-2.0",
@@ -18716,19 +18716,19 @@
    "rereads": [
     {
      "on": "2026-11-17",
-     "listed": false,
-     "replacement": "google/gemini-3.8-flash now prints 0.825 / 4.125 / 0.0825 (the promotion record that follows, from 20 Oct)",
+     "listed": true,
+     "replacement": "google/gemini-3.8-flash is listed; its entry now prints 0.825 / 4.125 / 0.0825 (the promotion record that follows, from 20 Oct): this record's 0.75 / 3.75 / 0.075 is the price of an earlier period",
      "evidence": [
       {
        "url": "https://openrouter.ai/api/v1/models",
        "captured": "2026-11-17",
        "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
        "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
-       "where": "live catalogue of 17 Nov 2026, data[id=google/gemini-3.8-flash].pricing: the entry lists 0.825 / 4.125 / 0.0825 (input / output / cache read), not the 0.75 / 3.75 / 0.075 of this record (relecture of 17 Nov, integration 18b)",
+       "where": "live catalogue of 17 Nov 2026, data[id=google/gemini-3.8-flash].pricing: the model is listed and its entry prints 0.825 / 4.125 / 0.0825 (input / output / cache read), not the 0.75 / 3.75 / 0.075 of this record (relecture of 17 Nov, integration 18c)",
        "quote": "\"pricing\":{\"prompt\":\"0.000000825\",\"completion\":\"0.000004125\",\"image\":\"0.000000825\",\"audio\":\"0.000000825\",\"input_audio_cache\":\"0.0000000825\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.000004125\",\"input_cache_read\":\"0.0000000825\",\"input_cache_write\":\"0.0000000416666666666667\"}"
       }
      ],
-     "note": "The model is still listed; the price of this record (0.75 / 3.75 / 0.075) no longer is: the page prints the price of the promotion record that follows (kind promotion, from 20 Oct, to the maker's announced 31 Dec). Two of the entry's endpoints still print 0.75 (the entry price is the one of another endpoint). The record keeps its dates and its last listed value; its end, between 23 Sep and 20 Oct, is not stated by any source."
+     "note": "The model is still listed (listed true): its entry prints the price of the promotion record that follows (kind promotion, from 20 Oct, to the maker's announced 31 Dec), not this record's. Two of the entry's endpoints still print 0.75. The record keeps its dates and its last captured value; its end, between 23 Sep and 20 Oct, is not stated by any source."
     }
    ]
   },
@@ -18794,6 +18794,14 @@
      "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
      "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
      "where": "data[id=google/gemini-3.8-flash].pricing (live capture 17 Nov 2026, integration 18a)",
+     "quote": "\"pricing\":{\"prompt\":\"0.000000825\",\"completion\":\"0.000004125\",\"image\":\"0.000000825\",\"audio\":\"0.000000825\",\"input_audio_cache\":\"0.0000000825\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.000004125\",\"input_cache_read\":\"0.0000000825\",\"input_cache_write\":\"0.0000000416666666666667\"}"
+    },
+    {
+     "url": "https://openrouter.ai/api/v1/models",
+     "captured": "2026-11-17",
+     "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
+     "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
+     "where": "data[id=google/gemini-3.8-flash].pricing (live capture 17 Nov, relecture of integration 18c)",
      "quote": "\"pricing\":{\"prompt\":\"0.000000825\",\"completion\":\"0.000004125\",\"image\":\"0.000000825\",\"audio\":\"0.000000825\",\"input_audio_cache\":\"0.0000000825\",\"web_search\":\"0.014\",\"internal_reasoning\":\"0.000004125\",\"input_cache_read\":\"0.0000000825\",\"input_cache_write\":\"0.0000000416666666666667\"}"
     }
    ],
@@ -19795,25 +19803,52 @@
      "quote": "\"pricing\":{\"prompt\":\"0.0000006496\",\"completion\":\"0.0000020416\",\"input_cache_read\":\"0.00000012064\"}"
     }
    ],
-   "note": "OpenRouter catalogue price of z-ai/glm-5.2 (2 captures show it: 2026-09-20 to 2026-09-23); a router's own price, not the maker's | Re-read 16 Nov 2026: the OpenRouter catalogue of 16 Nov lists 0.007 / 6.8 / 0.006 (an input / output ratio of about 1,000: a probable error of the page), a doubt fact: not recorded as a price (integration 16 (16 Nov 2026), the maintainer: « 2 ok » on the recheck question about glm-5.2); this record ends at its last capture | Re-read 17 Nov 2026: the live catalogue (/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json, sha256 aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797) still lists z-ai/glm-5.2 at 0.007 / 6.8 / 0.006 (unchanged since 16 Nov; its endpoints print from 0.0000000066 to 0.00000231 per token for the prompt, the entry price is the one of a Wafer fp4 endpoint): the doubt of 16 Nov stays, no price recorded; this record ends at its last capture.",
+   "note": "OpenRouter catalogue price of z-ai/glm-5.2 (2 captures show it: 2026-09-20 to 2026-09-23); a router's own price, not the maker's | Re-read 16 Nov 2026: the OpenRouter catalogue of 16 Nov lists 0.007 / 6.8 / 0.006 (an input / output ratio of about 1,000: a probable error of the page), a doubt fact: not recorded as a price (integration 16 (16 Nov 2026), the maintainer: « 2 ok » on the recheck question about glm-5.2); this record ends at its last capture | Re-read 17 Nov 2026: the live catalogue (/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json, sha256 aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797) still lists z-ai/glm-5.2 at 0.007 / 6.8 / 0.006 (unchanged since 16 Nov; its endpoints print from 0.0000000066 to 0.00000231 per token for the prompt, the entry price is the one of a Wafer fp4 endpoint): superseded on 17 Nov 2026 (integration 18c, the maintainer: « integre et fais au mieux »): the value is written as a record of its own, see the record from 17 Nov; this record ends at its last capture.",
    "rereads": [
     {
      "on": "2026-11-17",
-     "listed": false,
-     "replacement": "z-ai/glm-5.2 now prints 0.007 / 6.8 / 0.006, a doubt fact (an input / output ratio of about 1,000: a probable error of the page), not recorded as a price",
+     "listed": true,
+     "replacement": "z-ai/glm-5.2 is listed; its entry now prints 0.007 / 6.8 / 0.006 (the entry price of 17 Nov, the price of a Wafer fp4 endpoint)",
      "evidence": [
       {
        "url": "https://openrouter.ai/api/v1/models",
        "captured": "2026-11-17",
        "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
        "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
-       "where": "live catalogue of 17 Nov 2026, data[id=z-ai/glm-5.2].pricing: prompt 0.000000007, completion 0.0000068 per token (0.007 / 6.8 per MTok), not the 0.6496 / 2.0416 / 0.12064 of this record (relecture of 17 Nov, integration 18b)",
+       "where": "live catalogue of 17 Nov 2026, data[id=z-ai/glm-5.2].pricing: the model is listed; prompt 0.000000007, completion 0.0000068, cache read 0.000000006 per token (0.007 / 6.8 / 0.006 per MTok), not the 0.6496 / 2.0416 / 0.12064 of this record (relecture of 17 Nov, integration 18c)",
        "quote": "\"pricing\":{\"prompt\":\"0.000000007\",\"completion\":\"0.0000068\",\"input_cache_read\":\"0.000000006\"}"
       }
      ],
-     "note": "The model is still listed; the price of this record no longer is: the entry now prints a value of 0.007 / 6.8 (unchanged since 16 Nov) which the registry holds as a doubt, not as a price (integration 16, « 2 ok »). The record keeps its dates and its last listed value."
+     "note": "The model is still listed (listed true): its entry prints another price, written as the new record of 17 Nov that follows. This record keeps its dates and its last captured value."
     }
    ]
+  },
+  {
+   "model": "glm-5.2",
+   "route": "openrouter",
+   "kind": "standard",
+   "currency": "USD",
+   "per": "MTok",
+   "classes": {
+    "input": 0.007,
+    "output": 6.8,
+    "cache-read": 0.006
+   },
+   "from": "2026-11-17",
+   "from_basis": "earliest-capture",
+   "to": "2026-11-17",
+   "to_basis": "last-capture",
+   "evidence": [
+    {
+     "url": "https://openrouter.ai/api/v1/models",
+     "captured": "2026-11-17",
+     "file": "/work/.salvo14/mig/s12/ev/relecture/or-models-20261117.json",
+     "sha256": "aa581fea1b70deaf9f400bd7bc0bd450d548d718f6fc5cd52c6ad68d99d7a797",
+     "where": "data[id=z-ai/glm-5.2].pricing",
+     "quote": "\"pricing\":{\"prompt\":\"0.000000007\",\"completion\":\"0.0000068\",\"input_cache_read\":\"0.000000006\"}"
+    }
+   ],
+   "note": "OpenRouter catalogue price of z-ai/glm-5.2 read on 17 Nov 2026 (1 capture); a router's own price, not the maker's. The entry price is the one of a Wafer fp4 endpoint (its other endpoints print from 0.0000000066 to 0.00000231 per token for the prompt); the input / output ratio is about 1,000. Written as read (integration 18c): the records of 16 Sep to 23 Sep stay, with no end date added."
   },
   {
    "model": "glm-5.3",
