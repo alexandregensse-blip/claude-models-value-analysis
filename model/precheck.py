@@ -348,6 +348,13 @@ REPLICATES = [
     dict(setup="nurb-pole-rest", couple="gpt-5.6-terra@medium",
          rows=(("1.000", "0.675"), ("0.828", "0.747")),
          proof="two rows of one benchmark revision (0.22.2/0.1.0@de974b4cb0c3), Codex 0.149.1 and 0.149.0 (patch release)"),
+    dict(setup="keygen-bench-score", couple="gpt-6-luna-pro@max",
+         rows=(("28.0", ""), ("72.7", ""), ("47.5", "")),
+         proof="three attempts of one configuration: the benchmark's README (the copy of 17 Nov 2026, sha256 0e30e8c6…) writes "
+               "« every model runs the same prompt (prompt v2) at the highest reasoning tier its route accepts, with the same "
+               "frozen limits » and « each model gets three independent attempts. the leaderboard ranks the best of the three »; "
+               "the three ATTEMPT.json (gpt-6-luna-pro-rep-1, -rep-2, -rep-3) carry one campaign_id "
+               "(gpt-6-luna-pro-openai-20261111) and one route (openai), each campaign.json « effort »: « max », « mode »: « pro »"),
     dict(setup="nurb-leg-cup", couple="gpt-5.6-luna@max",
          rows=(("1.000", "0.030000000000000002"), ("1.000", "0.066")),
          proof="two rows of one benchmark revision (0.23.0/0.1.0@6817426c8779), Codex 0.150.0 and 0.149.1 (harness "
