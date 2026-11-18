@@ -8,7 +8,9 @@
 //   delta_f[k] ~ N(0, 10²)                                        independently (the prior δ_0 had)
 // Everything else is lqm_ext3's: theta, o, a, sigma, ν, κ, tau_raw, the data block, the read-outs and every name lqm.py
 // and the site read (theta, level, tau, tau_raw, z1–z3, s_tau_f, psi_f, omega_f, psi2, omega3, psiC, omegaC, delta_f,
-// deltaC). delta_f is now a parameter (a transformed parameter before).
+// deltaC). delta_f is now a parameter (a transformed parameter before). Since 18 Nov 2026 level, sigma, a, z1–z3,
+// psi2, omega3, psiC, omegaC and deltaC are computed by lqm.py from the draws (the model block's comment), not
+// written by this program.
 //
 // Magnitude and direction (kept from lqm_ext3, which mixed faster than lqm_ext2's coordinates on 30 Oct). Maker k's
 // effects of one family are e = s_k · z_k with z_k ~ N(0, I_{n_k}), n_k its number of effects in that family. For every
@@ -76,8 +78,9 @@
 // θ sums to zero: no couple is a reference; the page divides by its reference couple afterwards. h_r is the noise
 // shape of an empirical logit, 1/(2√(q(1−q))) at the observed proportion (1 on other scales); κ_r the estimated
 // variance multiplier of an early-access run; d_r the known reading precision of the value (rounding of a printed
-// number, resolution of a digitised chart, propagated through a computation). `level` (generated quantities) is the
-// read-out published by the page; what one new source would report (`level_new`) is computed from the draws in lqm.py.
+// number, resolution of a digitised chart, propagated through a computation). `level` (a generated quantity until 18
+// Nov 2026, computed by lqm.py from the draws since) is the read-out published by the page; what one new source would
+// report (`level_new`) is computed from the draws in lqm.py.
 //
 // Writing (the model is unchanged by any of it; see model/validation and the fit diagnostics):
 //  * log σ_b centred in every group and log a_b centred in groups of ≥ 20 rows (non-centred elsewhere): the
@@ -225,23 +228,9 @@ transformed data {
     for (s in 1:S3) { uA3[s] = p; for (i in 1:L3) if (set3[i] == s) { vA3[p] = i; p += 1; n3[s] += 1; } }
     uA3[S3 + 1] = p;
   }
-  // panel read-out maps, pair (p, c) at position (c − 1)·P + p; index L + 1 = the padded zero (unknown effect)
-  int PC = P * C;
-  array[PC] int cPC; array[PC] int gPC;
-  array[PC] int j1PC; array[PC] int j2PC; array[PC] int j3PC;
-  vector[PC] q1PC; vector[PC] q2PC; vector[PC] q3PC;           // 1 = effect unknown for this pair: integrated over
-  vector[PC] muPC; vector[PC] sdPC;
-  for (c in 1:C) for (p in 1:P) {
-    int i = (c - 1) * P + p;
-    cPC[i] = c; gPC[i] = pg[p]; muPC[i] = mu[pg[p]]; sdPC[i] = sd[pg[p]];
-    j1PC[i] = r1[p, c] > 0 ? r1[p, c] : L1 + 1;  q1PC[i] = r1[p, c] == 0;
-    j2PC[i] = r2[p, c] > 0 ? r2[p, c] : L2 + 1;  q2PC[i] = r2[p, c] == 0;
-    j3PC[i] = has_v[p] && r3[p, c] > 0 ? r3[p, c] : L3 + 1;  q3PC[i] = has_v[p] && r3[p, c] == 0;
-  }
-  vector[P] muP = mu[pg];
-  vector[P] sdP = sd[pg];
+  // the panel read-out's maps (pairs of panel group and couple) are lqm.py's since 18 Nov 2026 (Derived._panel):
+  // the data block keeps P, pg, pw, r1–r3, has_v, ptype, K, ghx, ghw, which this program no longer reads
   real theta_scale = 10 / sqrt(1 - 1.0 / C);
-  real W = sum(pw);
   real qual = 1 - cost;
   // the makers' blocks of effects (header): maker of each level, effects per maker, the makers with a polar block
   // (their r), and the sum-by-maker maps
@@ -310,15 +299,28 @@ parameters {
   vector[G] log_sigma;
 }
 transformed parameters {
+  // written with the draws: the scales and the couples' τ, which lqm.py reads (the rest is local to the model block
+  // and computed in lqm.py from the draws: see below)
   real<lower=0> s_g = exp(log_s_g);
-  vector[G] sigma = exp(log_sigma);
-  vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
   // the makers' scales s_k = A_k / r_k (log s_k = la_k − log r_k; la_k for a maker without a polar block, whose row
   // of the map is empty): each maker's own (header)
   vector[F] s_tau_f = exp(la_tau - csr_matrix_times_vector(F, F_tau, wS_tau, vS_tau, uS_tau, log(r_tau)));
   vector[F] psi_f = exp(la_psi - csr_matrix_times_vector(F, F_psi, wS_psi, vS_psi, uS_psi, log(r_psi)));
   vector[F] omega_f = exp(la_omega - csr_matrix_times_vector(F, F_omega, wS_omega, vS_omega, uS_omega, log(r_omega)));
   vector[C] tau = s_tau_f[prov_c] .* tau_raw;
+}
+model {
+  // Since 18 Nov 2026 (the maintainer's decision, proposal P5 of that day's study) σ, a, z1–z3 and the makers' scales
+  // per level are local variables here, no longer transformed parameters, and the read-out `level` (and psiC, omegaC,
+  // deltaC) is no longer a generated quantity: nutpie evaluated and stored them at every iteration, warm-up included.
+  // lqm.py (Derived) computes sigma, a, z1–z3, psi2, omega3, psiC, omegaC, deltaC and level from the kept draws with
+  // these formulas and the former generated quantities':
+  //   level = θ (cost); level_c = log(Σ_p pw_p · Σ_k ghw_k · inv_logit(mu_p + sd_p · (o_p + a_p · (x_pc + sV_pc · ghx_k)))
+  //   / Σ pw) (quality), x_pc = θ_c + u + w + v of the panel group's publisher and task type (a zero when unknown),
+  //   sV_pc² = the variances τ_c², ψ_k², ω_k² of the unknown ones (no ω for a composite).
+  // The log density is unchanged (the same expressions, evaluated in the same order).
+  vector[G] sigma = exp(log_sigma);
+  vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
   // z_k = r_k · y_k / ‖y_k‖ for a polar block (‖y_k‖ by the sum-by-maker map), z_k = y_k for a block of 1 or 2
   // effects (p_* = 0, e_* = 1: the factor is 1 / √1, exactly 1); a maker without effects: never used, no NaN
   vector[L1] z1 = ((csr_matrix_times_vector(F, F_tau, wS_tau, vS_tau, uS_tau, r_tau) + e_tau)
@@ -327,20 +329,14 @@ transformed parameters {
                    ./ sqrt(p_psi .* csr_matrix_times_vector(F, L2, wM_psi, vM_psi, uM_psi, square(y2)) + e_psi))[prov2] .* y2;
   vector[L3] z3 = ((csr_matrix_times_vector(F, F_omega, wS_omega, vS_omega, uS_omega, r_omega) + e_omega)
                    ./ sqrt(p_omega .* csr_matrix_times_vector(F, L3, wM_omega, vM_omega, uM_omega, square(y3)) + e_omega))[prov3] .* y3;
-  vector[L2] psi2 = psi_f[prov2];
-  vector[L3] omega3 = omega_f[prov3];
-  vector[C] psiC = psi_f[prov_c];
-  vector[C] omegaC = omega_f[prov_c];
-  vector[C] deltaC = delta_f[prov_c];
-}
-model {
   {
     vector[L1] e1 = z1 .* tau[own1];
-    vector[L2] e2 = z2 .* psi2;
-    vector[L3] e3 = z3 .* omega3;
+    vector[L2] e2 = z2 .* psi_f[prov2];
+    vector[L3] e3 = z3 .* omega_f[prov3];
     vector[S1] m1 = csr_matrix_times_vector(S1, L1, wA1, vA1, uA1, e1) ./ n1;
     vector[S2] m2 = csr_matrix_times_vector(S2, L2, wA2, vA2, uA2, e2) ./ n2;
     vector[S3] m3 = csr_matrix_times_vector(S3, L3, wA3, vA3, uA3, e3) ./ n3;
+    vector[C] deltaC = delta_f[prov_c];
     vector[N] x = theta[cpl] + deltaC[cpl] .* home
                   + csr_matrix_times_vector(N, L1, wB1, vB1, uB1, e1 - m1[set1])
                   + csr_matrix_times_vector(N, L2, wB2, vB2, uB2, e2 - m2[set2])
@@ -372,29 +368,4 @@ model {
   if (has_ea) log_kappa[1] ~ normal(0, 1);
   s_sig ~ student_t(3, 0, 2.5);
   log_sigma ~ normal(mu_sig, s_sig);
-}
-generated quantities {
-  // same read-outs as recommended.stan; the panel read-out is evaluated for all (panel group, couple) pairs at once,
-  // one Gauss–Hermite node at a time (vectorised inv_logit), summing the nodes in the same order as before
-  vector[C] level;
-  if (cost) {
-    level = theta;
-  } else {
-    vector[L1] e1 = z1 .* tau[own1];
-    vector[L2] e2 = z2 .* psi2;
-    vector[L3] e3 = z3 .* omega3;
-    vector[S1] m1 = csr_matrix_times_vector(S1, L1, wA1, vA1, uA1, e1) ./ n1;
-    vector[S2] m2 = csr_matrix_times_vector(S2, L2, wA2, vA2, uA2, e2) ./ n2;
-    vector[S3] m3 = csr_matrix_times_vector(S3, L3, wA3, vA3, uA3, e3) ./ n3;
-    vector[L1 + 1] u = append_row(e1 - m1[set1], 0);
-    vector[L2 + 1] w = append_row(e2 - m2[set2], 0);
-    vector[L3 + 1] v = append_row(e3 - m3[set3], 0);
-    vector[PC] x = theta[cPC] + u[j1PC] + w[j2PC] + v[j3PC];
-    vector[PC] sV = sqrt(q1PC .* square(tau[cPC]) + q2PC .* square(psiC[cPC]) + q3PC .* square(omegaC[cPC]));
-    vector[PC] oPC = o[gPC];
-    vector[PC] aPC = a[gPC];
-    vector[PC] e = rep_vector(0, PC);
-    for (k in 1:K) e += ghw[k] * inv_logit(muPC + sdPC .* (oPC + aPC .* (x + sV * ghx[k])));
-    level = log((to_matrix(e, P, C)' * pw) / W);
-  }
 }

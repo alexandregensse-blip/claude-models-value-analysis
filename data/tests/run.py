@@ -1958,6 +1958,114 @@ def precheck_maker_blocks_from_stan_data():
 
 
 @test
+def derived_quantities_as_stan_wrote_them():
+    """P5 (the maintainer, 18 Nov 2026): lqm.Derived computes from the parameters what lqm_ext4.stan no longer writes —
+    σ, a, z1–z3 (polar blocks of ≥ 3 effects, plain ones of 1 or 2: P1), the scales per level, and the panel read-out
+    `level` — as the program's formulas say, checked here against a literal, element-by-element transcription of the
+    former transformed parameters and generated quantities on a small quality data set (makers with blocks of 1, 2 and
+    many effects, known and unknown effects, a composite). Negative control: the same draws read with every block polar
+    (POLAR_MIN = 1, the program before P1) give other z (a block of 1 becomes a sign times its radius)."""
+    try:
+        import numpy as np
+    except ImportError:
+        raise AssertionError("SKIP: needs numpy")
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import lqm, math as m_
+    rng = np.random.default_rng(3)
+    rows = []
+    for g, (pub, task) in enumerate([("p", "code"), ("p", "math"), ("q", "code"), ("q", "mixed"), ("r", "code")]):
+        for c in ("opus-5@low", "opus-5@high", "opus-4@high", "sonnet-5@high", "gpt-6@high", "gpt-6@low", "gemini-3@high"):
+            if c.startswith("gemini") and g > 1:
+                continue
+            for k in range(2):
+                rows.append((f"g{g}", dict(couple=c, model=c.split("@")[0], publisher=pub, task=task, z=float(rng.normal()),
+                                         h=1.0, d=0.05, ea=0, home=int(pub == "p" and c.startswith("opus")))))
+    groups = {}
+    for g, x in rows:
+        G = groups.setdefault(g, dict(rows=[], mu=0.2, sd=0.9, kind="logit", family="", publisher=x["publisher"],
+                                      task=x["task"]))
+        G["rows"].append(x)
+    data, maps = lqm.stan_data(groups, "quality")
+    n = {k: collections.Counter(data[k] if k != "own1" else [data["prov_c"][i - 1] for i in data["own1"]])
+         for k in ("own1", "prov2", "prov3")}
+    eq(min(min(v.values()) for v in n.values()) <= 2 and max(max(v.values()) for v in n.values()) >= 3, True,
+       f"the data have blocks of 1 or 2 effects and polar ones: {[dict(v) for v in n.values()]}")
+    F, C, G, D = data["F"], data["C"], data["G"], 5
+    mk1 = [data["prov_c"][i - 1] for i in data["own1"]]
+    pol = {f: [k for k in range(1, F + 1) if collections.Counter(mk)[k] >= 3] for f, mk in
+           (("tau", mk1), ("psi", data["prov2"]), ("omega", data["prov3"]))}
+    par = dict(theta=rng.normal(size=(D, C)), o=rng.normal(size=(D, G)), lg_raw=rng.normal(0, .3, (D, G)),
+               log_s_g=rng.normal(-.5, .2, D), y1=rng.normal(size=(D, data["L1"])), y2=rng.normal(size=(D, data["L2"])),
+               y3=rng.normal(size=(D, data["L3"])), tau_raw=np.abs(rng.normal(size=(D, C))),
+               la_tau=rng.normal(-1, .3, (D, F)), la_psi=rng.normal(-1, .3, (D, F)), la_omega=rng.normal(-1, .3, (D, F)),
+               r_tau=np.abs(rng.normal(2, .3, (D, len(pol["tau"])))), r_psi=np.abs(rng.normal(2, .3, (D, len(pol["psi"])))),
+               r_omega=np.abs(rng.normal(2, .3, (D, len(pol["omega"])))), delta_f=rng.normal(size=(D, F)),
+               nu=rng.uniform(3, 9, D), log_sigma=rng.normal(-1, .3, (D, G)))
+    par["s_g"] = np.exp(par["log_s_g"])
+    for f in ("tau", "psi", "omega"):                                # the program's transformed parameters it keeps
+        lr = np.zeros((D, F))
+        for j, k in enumerate(pol[f]):
+            lr[:, k - 1] = np.log(par["r_" + f][:, j])
+        par[dict(tau="s_tau_f", psi="psi_f", omega="omega_f")[f]] = np.exp(par["la_" + f] - lr)
+    par["tau"] = par["s_tau_f"][:, np.asarray(data["prov_c"]) - 1] * par["tau_raw"]
+    post = lqm.Posterior({k: [v.reshape(D, 1, *v.shape[1:])] for k, v in par.items()}, dict(divergences=0))
+    got = lqm.derived(post, data)
+    eq(sorted(got.new), sorted(lqm.DERIVED), "every derived variable is computed")
+
+    def literal(d, polar_min=3):
+        """One draw, the former program's lines one element at a time."""
+        P = {k: v[d] for k, v in par.items()}
+        n_rows = collections.Counter(data["grp"])
+        a = [m_.exp(P["lg_raw"][b] if n_rows[b + 1] >= 20 else P["s_g"] * P["lg_raw"][b] + P["log_sigma"][b]) for b in range(G)]
+        z = {}
+        for zn, f, mk in (("z1", "tau", mk1), ("z2", "psi", data["prov2"]), ("z3", "omega", data["prov3"])):
+            cnt = collections.Counter(mk)
+            pl = [k for k in range(1, F + 1) if cnt[k] >= polar_min]
+            y = P["y" + zn[1]]
+            ss = {k: sum(y[i] ** 2 for i in range(len(mk)) if mk[i] == k) for k in range(1, F + 1)}
+            r = {k: P["r_" + f][pol[f].index(k)] if k in pol[f] else 1.0 for k in range(1, F + 1)}
+            z[zn] = [r[mk[i]] / m_.sqrt(ss[mk[i]]) * y[i] if mk[i] in pl else y[i] for i in range(len(mk))]
+        psi_f, omega_f, tau = P["psi_f"], P["omega_f"], P["tau"]
+        e = {"1": [z["z1"][i] * tau[data["own1"][i] - 1] for i in range(data["L1"])],
+             "2": [z["z2"][i] * psi_f[data["prov2"][i] - 1] for i in range(data["L2"])],
+             "3": [z["z3"][i] * omega_f[data["prov3"][i] - 1] for i in range(data["L3"])]}
+        cen = {}
+        for k in ("1", "2", "3"):
+            sets = data["set" + k]
+            mean = {s_: sum(e[k][i] for i in range(len(sets)) if sets[i] == s_) / sets.count(s_) for s_ in set(sets)}
+            cen[k] = [e[k][i] - mean[sets[i]] for i in range(len(sets))]
+        level = []
+        for c in range(C):
+            tot = 0.0
+            for p in range(data["P"]):
+                b = data["pg"][p] - 1
+                r1, r2, r3 = data["r1"][p][c], data["r2"][p][c], data["r3"][p][c]
+                hv = data["has_v"][p]
+                x = P["theta"][c] + (cen["1"][r1 - 1] if r1 else 0) + (cen["2"][r2 - 1] if r2 else 0) + \
+                    (cen["3"][r3 - 1] if hv and r3 else 0)
+                pc = data["prov_c"][c] - 1
+                sV = m_.sqrt((r1 == 0) * tau[c] ** 2 + (r2 == 0) * psi_f[pc] ** 2 + (hv and r3 == 0) * omega_f[pc] ** 2)
+                E = sum(w * (1 / (1 + m_.exp(-(data["mu"][b] + data["sd"][b] * (P["o"][b] + a[b] * (x + sV * g))))))
+                        for g, w in zip(data["ghx"], data["ghw"]))
+                tot += data["pw"][p] * E
+            level.append(m_.log(tot / sum(data["pw"])))
+        return dict(sigma=np.exp(P["log_sigma"]), a=np.array(a), z1=np.array(z["z1"]), z2=np.array(z["z2"]),
+                    z3=np.array(z["z3"]), psi2=psi_f[np.asarray(data["prov2"]) - 1],
+                    omega3=omega_f[np.asarray(data["prov3"]) - 1], psiC=psi_f[np.asarray(data["prov_c"]) - 1],
+                    omegaC=omega_f[np.asarray(data["prov_c"]) - 1], deltaC=P["delta_f"][np.asarray(data["prov_c"]) - 1],
+                    level=np.array(level))
+    worst = 0.0
+    for d in range(D):
+        ref = literal(d)
+        for v in lqm.DERIVED:
+            worst = max(worst, float(np.max(np.abs(got.var(v)[d] - ref[v]), initial=0)))
+    eq(worst < 1e-12, True, f"Derived against the program's formulas (largest difference {worst:.1e})")
+    ref1 = [literal(d, polar_min=1) for d in range(D)]
+    off = max(float(np.max(np.abs(got.var(v)[d] - ref1[d][v]), initial=0)) for d in range(D) for v in ("z1", "z2", "z3"))
+    eq(off > 1e-3, True, "negative control: every block polar (before P1) gives other z")
+
+
+@test
 def reason_value_not_established():
     sc = base()
     s = sc.source("a")

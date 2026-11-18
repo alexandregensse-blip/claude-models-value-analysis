@@ -308,7 +308,13 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   rows, non-centred otherwise (Papaspiliopoulos, Roberts & Sköld 2007; Betancourt & Girolami 2015). Effects are
   centred and mapped to rows by sparse matrix products, so that Stan's optimiser (`stanc --O1`) keeps every vector in
   its fast memory layout. These choices were made one at a time against the simplest form, and each was checked to
-  leave the log density and its gradient unchanged.
+  leave the log density and its gradient unchanged. Since 18 Nov 2026 (the maintainer's decision, proposal P5 of
+  that day's study) the program writes with each draw only the parameters and the makers' scales: the panel read-out
+  `level` (§5, below) and the quantities that are functions of the parameters (σ_b, a_b, the effects z, the scales
+  per level) are computed in NumPy from the kept draws with the program's formulas, not by Stan at every iteration,
+  warm-up included (the read-out cost 44.6 ms a draw on the quality axis, about 20 gradients); a draw is half as
+  large. The criteria are read on the same variables as before; from the stored draws of 12 Nov 2026 the summary is
+  the same (the read-out equal to 10⁻¹⁴).
 - **Makers' scales: magnitude and direction** (the maintainer's decision of 30 Oct 2026, kept in `lqm_ext4.stan`; the
   same model, only the sampling geometry changes). Each maker's effects of one family were written as its scale times standard-normal
   effects, e = s_k · z_k. The data see only the products, so a maker's scale and all its effects moved together

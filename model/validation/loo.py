@@ -25,7 +25,7 @@ def pointwise(axis, thin=None, max_draws=2000):
     store = lqm.RunStore(path, key)                                  # the fit's own key: nothing is wiped
     if not store.parts:
         sys.exit(f"!! no stored draws for this data and model at {path}: fit the axis first")
-    post = store.posterior()
+    post = lqm.derived(store.posterior(), data)                      # z1–z3, a, σ computed from the draws (P5)
     if thin is None:                                                 # memory: (chains × kept draws × rows) floats
         n = np.asarray(post.chains("nu")).shape                       # per array; keep about max_draws draws
         thin = max(1, (n[0] * n[1]) // max_draws)

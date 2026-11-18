@@ -41,8 +41,10 @@ For every measured row r (group b, couple c of model m, publisher s, task type t
 
 Estimation: Hamiltonian Monte Carlo (NUTS) on lqm_ext4.stan — nutpie on both axes, its chains continued in the
 sampling process until the criteria are met; CmdStan (CmdStanPy) continues chains from their last draws after a stop,
-and restarts a chain left in a far region from a good chain's last draw (SAMPLER, FAR). The read-out `level` is
-computed in Stan for every draw; `summarise` turns it into a centre and a per-couple interval (quasi-variances).
+and restarts a chain left in a far region from a good chain's last draw (SAMPLER, FAR). The read-out `level` and
+the transformed parameters that are functions of the parameters are computed here from the kept draws (Derived,
+since 18 Nov 2026; in Stan for every iteration before); `summarise` turns `level` into a centre and a per-couple
+interval (quasi-variances).
 """
 import collections, csv, itertools, math, os, re, sys
 
@@ -1177,6 +1179,7 @@ def fit(groups, axis="quality", seed=None, settings=None, keep=False, save_inits
         post = _run(store, data, axis, st, seed, say)
         if not keep:
             post = post.in_memory()
+        post = derived(post, data)                                   # the quantities computed from the draws (P5)
     finally:
         if not keep:
             shutil.rmtree(store.path, ignore_errors=True)
@@ -1276,7 +1279,7 @@ def _run(store, data, axis, st, seed, say):
             continue
         extra = p["draws"] - st["samples"]                           # draws beyond the planned ones
         if extra >= 0 and extra % st["extend"] == 0 or extra >= st["extend_max"]:     # a slice: the criteria
-            diag, _ = diagnostics(post)
+            diag, _ = diagnostics(derived(post, data))
             say(f"{axis}: {p['draws']} draws/chain {time.time() - t0:.0f} s, R̂ {diag['rhat_max']}, ESS "
                 f"{diag['ess_bulk_min']}/{diag['ess_tail_min']}, divergences {diag['divergences']}")
             if converged(diag) or diag["divergences"] > DIVERGENT_SHARE * diag["draws"]:
@@ -1324,7 +1327,8 @@ def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None, gro
         stop, far, at = top, [], None
         if grow:
             try:
-                stop, far, at = _grow(run, os.path.join(seg, "store"), st["warmup"], planned, top, st["extend"], say)
+                stop, far, at = _grow(run, os.path.join(seg, "store"), st["warmup"], planned, top, st["extend"], say,
+                                      data=data)
             except BaseException:
                 run.cancel()                                         # no sampler left running behind the error
                 raise
@@ -1352,16 +1356,19 @@ def _sample(data, axis, st, seed, seg, inits=None, adapted=None, draws=None, gro
                  iter_sampling=draws or st["samples"], adapt_delta=st["adapt_delta"])
 
 
-def _grow(run, root, warmup, planned, top, extend, say=None):
+def _grow(run, root, warmup, planned, top, extend, say=None, data=None):
     """A nutpie run in progress (non-blocking) checked at the points of _checks — every FAR["every"] iterations,
     warm-up included, at the end of warm-up and at planned, planned + extend, …, top draws per chain — each once every
     chain has written up to it, on what was written up to it. A chain in a far region (far_chains, whatever R̂: rule of
     30 Oct 2026) stops the run, for _run to restart it — from the end of warm-up on; within warm-up it is reported (no
     clean restart before the adaptation ends: FAR). At a slice the run also stops when the criteria are met or too many
     draws diverged; an R̂ above the criteria alone runs on. Returns (draws per chain kept, the far chains that stopped
-    the run, where they were found)."""
+    the run, where they were found). data: the run's data, from which the quantities the draws do not store are
+    computed for the criteria (derived; the read-out of the draws already checked kept from one check to the next, in
+    one thread beside the chains)."""
     import time, numpy as np, zarr
     say = say or (lambda *a: None)
+    cache = dict(threads=1)
 
     def finished():
         try:
@@ -1405,7 +1412,7 @@ def _grow(run, root, warmup, planned, top, extend, say=None):
                 if d >= top:
                     run.wait()
                     return top, [], None
-                diag, _ = diagnostics(draws)
+                diag, _ = diagnostics(derived(draws, data, cache))
                 if converged(diag) or diag["divergences"] > DIVERGENT_SHARE * diag["draws"]:
                     if not finished():
                         run.abort()
@@ -1427,9 +1434,295 @@ def sample_once(data, axis, st, seed):
                           adapted=None, max_treedepth=st.get("max_treedepth", 10))
         _sample(data, axis, st, seed, seg)
         store.commit()
-        return store.posterior().in_memory()
+        return derived(store.posterior().in_memory(), data)
     finally:
         shutil.rmtree(store.path, ignore_errors=True)
+
+
+# ---------------------------------------------------------------- quantities computed from the draws
+# The transformed parameters that are copies or simple functions of the parameters, and the read-out `level`, are no
+# longer written by Stan (the maintainer's decision of 18 Nov 2026, proposal P5 of that day's study of the model):
+# nutpie evaluated them at every iteration, warm-up included — the panel read-out `level` cost 44.6 ms a draw on the
+# quality axis, 20 to 26 gradients — and stored them with the draws (16,669 values a draw for 7,610 parameters on the
+# cost axis: 9.7 GB for the run of 12 Nov 2026). They are computed here, from the kept draws only, with the formulas
+# of lqm_ext4.stan (its header, and its model block, where they are local variables): Derived shows them as variables
+# of the posterior beside the stored ones, to every reader — the criteria (diagnostics) are read on the same variables
+# as before, and summarise, level_new, predict and validation/loo.py read the same names. A store written by the
+# former program, which holds them, is read as it is (nothing is computed for a variable it stores).
+DERIVED = ("sigma", "a", "z1", "z2", "z3", "psi2", "omega3", "psiC", "omegaC", "deltaC", "level")
+POLAR_MIN = 3                     # a maker's block of fewer effects is not polar (lqm_ext4.stan, 18 Nov 2026)
+LEVEL_CHUNK = 2.5e6               # (panel group, couple) pairs × draws of a block of draws of the panel read-out
+LEVEL_PAIRS = 16384               # (panel group, couple) pairs at a time within a block (arrays of ≈ 0.5 MB)
+LEVEL_THREADS = 4                 # threads computing it once the sampling is over (1 while a run goes on: _grow)
+
+
+def derived(post, data, cache=None):
+    """post with the variables of DERIVED it does not store, computed from its draws (Derived); post itself when it is
+    one already, or when data are not a model's data (the sampler tests' stubs). cache: a dict kept by the caller
+    across calls on growing draws of the same chains (the checks of a run in progress, _grow): the read-out `level`
+    of the draws already computed is not computed again."""
+    if isinstance(post, Derived) or not data or "N" not in data:
+        return post
+    return Derived(post, data, cache)
+
+
+class Derived(Posterior):
+    """A posterior (Posterior, or _NutpieDraws while a run goes on) and the variables of DERIVED it does not store,
+    computed from its draws when read: by blocks of scalars (blocks, as diagnostics reads them), whole (chains, var).
+    The read-out `level` of the quality axis is computed once, chain by chain and block of draws by block of draws,
+    and kept (chains × draws × couples)."""
+
+    NEEDS = dict(sigma={"log_sigma"}, a={"lg_raw", "log_sigma", "log_s_g"}, z1={"y1", "la_tau"}, z2={"y2", "la_psi"},
+                 z3={"y3", "la_omega"}, psi2={"psi_f"}, omega3={"omega_f"}, psiC={"psi_f"}, omegaC={"omega_f"},
+                 deltaC={"delta_f"}, level={"theta"})
+
+    def __init__(self, base, data, cache=None):
+        self.base, self.data = base, data
+        self.stats, self.adapted = base.stats, base.adapted
+        self.cache = {} if cache is None else cache
+        have = set(base.names)
+        ext = "prov_c" in data
+        self.new = [v for v in DERIVED if v not in have and self.NEEDS[v] <= have
+                    and (ext or v in ("sigma", "a"))
+                    and (v != "level" or data["cost"] or ext and {"o", "tau", "psi_f", "omega_f"} <= have)]
+        self._maps = None
+
+    # ---- the posterior's interface
+    @property
+    def names(self):
+        return list(self.base.names) + self.new
+
+    @property
+    def parts(self):
+        return self.base.parts
+
+    def _dim(self, name):
+        D = self.data
+        return dict(sigma=D["G"], a=D["G"], z1=D["L1"], z2=D["L2"], z3=D["L3"], psi2=D["L2"], omega3=D["L3"],
+                    psiC=D["C"], omegaC=D["C"], deltaC=D["C"], level=D["C"])[name]
+
+    def shape(self, name):
+        if name not in self.new:
+            return self.base.shape(name)
+        C, n = self.base.shape("lp__" if "lp__" in self.base.names else "theta")[:2]
+        return (C, n, self._dim(name))
+
+    def lp(self):
+        return self.base.lp()
+
+    def chains(self, name):
+        import numpy as np
+        if name not in self.new:
+            return self.base.chains(name) if not isinstance(self.base, _NutpieDraws) else self._whole(name)
+        return np.concatenate([x for _, x in self.blocks(name)], axis=2)
+
+    def var(self, name):
+        a = self.chains(name)
+        return a.reshape(a.shape[0] * a.shape[1], *a.shape[2:])
+
+    def last(self, name):
+        return self.base.last(name) if name not in self.new else self.chains(name)[:, -1]
+
+    def in_memory(self):
+        return Derived(self.base.in_memory(), self.data, self.cache)
+
+    def blocks(self, name, size=256):
+        import numpy as np
+        if name not in self.new:
+            yield from self.base.blocks(name, size)
+            return
+        m = self._index()
+        if name == "sigma":
+            for s0, x in self.base.blocks("log_sigma", size):
+                yield s0, np.exp(x)
+        elif name == "a":
+            sg = self._whole("s_g") if "s_g" in self.base.names else np.exp(self._whole("log_s_g"))
+            for (s0, lg), (_, ls) in zip(self.base.blocks("lg_raw", size), self.base.blocks("log_sigma", size)):
+                cg = m["cgv"][s0:s0 + lg.shape[2]]
+                yield s0, np.exp(cg * lg + (1 - cg) * (sg * lg + m["qual"] * ls))
+        elif name in ("z1", "z2", "z3"):
+            f, y, mk = self._factor(name), "y" + name[1], m["mk"][name]
+            for s0, x in self.base.blocks(y, size):
+                yield s0, f[:, :, mk[s0:s0 + x.shape[2]]] * x
+        elif name in ("psi2", "omega3", "psiC", "omegaC", "deltaC"):
+            src, idx = dict(psi2=("psi_f", "prov2"), omega3=("omega_f", "prov3"), psiC=("psi_f", "prov_c"),
+                            omegaC=("omega_f", "prov_c"), deltaC=("delta_f", "prov_c"))[name]
+            full = self._whole(src)[:, :, m[idx]]
+            for s0 in range(0, full.shape[2], size):
+                yield s0, full[:, :, s0:s0 + size]
+        elif name == "level":
+            if self.data["cost"]:                                    # the cost axis: the latent log cost itself
+                yield from self.base.blocks("theta", size)
+                return
+            L = self._level()
+            for s0 in range(0, L.shape[2], size):
+                yield s0, L[:, :, s0:s0 + size]
+
+    # ---- the formulas (lqm_ext4.stan)
+    def _whole(self, name):
+        """A stored variable, all its scalars: (chains, draws, k); a scalar → (chains, draws, 1)."""
+        import numpy as np
+        return np.concatenate([x for _, x in self.base.blocks(name, 1 << 30)], axis=2)
+
+    def _index(self):
+        """The data's index maps, 0-based: the makers' levels, the polar blocks, the gains' centring."""
+        import numpy as np
+        if self._maps is not None:
+            return self._maps
+        D = self.data
+        n_rows = np.bincount(np.asarray(D["grp"]) - 1, minlength=D["G"])
+        m = dict(cgv=(n_rows >= 20).astype(float), qual=1.0 - D["cost"])
+        if "prov_c" in D:
+            F = D["F"]
+            prov_c = np.asarray(D["prov_c"], int) - 1
+            m.update(prov_c=prov_c, prov2=np.asarray(D["prov2"], int) - 1, prov3=np.asarray(D["prov3"], int) - 1, F=F)
+            m["mk"] = dict(z1=prov_c[np.asarray(D["own1"], int) - 1] if D["L1"] else np.zeros(0, int),
+                           z2=m["prov2"], z3=m["prov3"])
+        self._maps = m
+        return m
+
+    def _factor(self, name):
+        """z_k = r_k · y_k / ‖y_k‖ for a polar block (n_k ≥ POLAR_MIN), y_k otherwise: the factor per maker
+        (chains, draws, F), (r_k + e_k) / √(p_k · ‖y_k‖² + e_k), e_k = 1 − p_k = 1 for a block that is not polar."""
+        import numpy as np
+        m = self._index()
+        F, mk = m["F"], m["mk"][name]
+        n = np.bincount(mk, minlength=F)
+        pol = n >= POLAR_MIN
+        e, p = (~pol).astype(float), pol.astype(float)
+        fam = dict(z1="tau", z2="psi", z3="omega")[name]
+        C, D = self.shape("theta")[:2]
+        ss = np.zeros((C, D, F))
+        for s0, x in self.base.blocks("y" + name[1], 256):
+            k = mk[s0:s0 + x.shape[2]]
+            for j in np.unique(k):
+                ss[:, :, j] += np.sum(np.square(x[:, :, k == j]), axis=2)
+        r = np.zeros((C, D, F))
+        if pol.any():
+            r[:, :, np.flatnonzero(pol)] = self._whole("r_" + fam)
+        return (r + e) / np.sqrt(p * ss + e)
+
+    def _rows(self, name, c, d0, d1):
+        """Draws d0 … d1 − 1 of chain c of a stored variable: (draws, *shape)."""
+        import numpy as np
+        b = self.base
+        if isinstance(b, _NutpieDraws):
+            return np.asarray(b.g["posterior"][name][c, d0:d1], dtype=np.float64)
+        for x in b.parts[name]:
+            if c < x.shape[1]:
+                return np.asarray(x[d0:d1, c], dtype=np.float64)
+            c -= x.shape[1]
+        raise IndexError(c)
+
+    def _panel(self):
+        """The panel read-out's maps (lqm_ext4.stan, transformed data): pair i = c · P + p of couple c and panel group
+        p; index L of an effect = the padded zero (effect unknown for the pair, integrated over)."""
+        import numpy as np
+        D = self.data
+        P, C = D["P"], D["C"]
+        pg = np.asarray(D["pg"], int) - 1
+        c = np.repeat(np.arange(C), P); p = np.tile(np.arange(P), C)
+        r = {k: np.asarray(D[k], int)[p, c] for k in ("r1", "r2", "r3")}
+        hv = np.asarray(D["has_v"], int)[p] == 1
+        j3 = np.where(hv & (r["r3"] > 0), r["r3"] - 1, D["L3"])
+        mu, sd = np.asarray(D["mu"], float), np.asarray(D["sd"], float)
+        out = dict(c=c, g=pg[p], j1=np.where(r["r1"] > 0, r["r1"] - 1, D["L1"]),
+                   j2=np.where(r["r2"] > 0, r["r2"] - 1, D["L2"]), j3=j3,
+                   q1=(r["r1"] == 0).astype(float), q2=(r["r2"] == 0).astype(float), q3=(hv & (r["r3"] == 0)).astype(float),
+                   mu=mu[pg[p]], sd=sd[pg[p]], pw=np.asarray(D["pw"], float), W=float(np.sum(D["pw"])),
+                   ghx=np.asarray(D["ghx"], float), ghw=np.asarray(D["ghw"], float))
+        import scipy.sparse as sp                                    # the set sums in Stan's order (compressed rows)
+        for k, L in (("1", D["L1"]), ("2", D["L2"]), ("3", D["L3"])):
+            s = np.asarray(D["set" + k], int) - 1
+            A = sp.csr_matrix((np.ones(L), (s, np.arange(L))), shape=(D["S" + k], L))
+            out["A" + k], out["n" + k], out["s" + k] = A, np.bincount(s, minlength=D["S" + k]).astype(float), s
+        return out
+
+    def _level(self):
+        """The panel read-out of every draw (chains, draws, C), lqm_ext4.stan's former generated quantities: the
+        expected score of every couple on every panel group as that group's publisher ran it, an unknown effect
+        integrated over its distribution by Gauss–Hermite quadrature, the panel-weighted mean, its log. Kept in
+        self.cache, where draws already computed are not computed again; blocks of draws run in LEVEL_THREADS threads
+        (NumPy releases the interpreter's lock in its array operations)."""
+        import numpy as np
+        from concurrent.futures import ThreadPoolExecutor
+        C, n = self.shape("theta")[:2]
+        have = self.cache.get("level")
+        if have is not None and have.shape[0] == C and have.shape[1] >= n:
+            return have[:, :n]
+        P = self._panel()
+        out = np.empty((C, n, self.data["C"]))
+        d_have = 0 if have is None or have.shape[0] != C else have.shape[1]
+        if d_have:
+            out[:, :d_have] = have
+        step = max(1, int(LEVEL_CHUNK // max(1, len(P["c"]))))
+        tasks = [(c, d0, min(n, d0 + step)) for c in range(C) for d0 in range(d_have, n, step)]
+
+        def one(t):
+            c, d0, d1 = t
+            out[c, d0:d1] = self._level_block(P, lambda v: self._rows(v, c, d0, d1))
+        with ThreadPoolExecutor(max(1, min(self.cache.get("threads", LEVEL_THREADS), len(tasks) or 1))) as ex:
+            list(ex.map(one, tasks))
+        self.cache["level"] = out
+        return out
+
+    def _level_block(self, P, R):
+        """The read-out of a block of draws of one chain, R(variable) → its draws (draws, *shape)."""
+        import numpy as np
+        m, D = self._index(), self.data
+        theta, o, tau = R("theta"), R("o"), R("tau")
+        lg, ls = R("lg_raw"), R("log_sigma")
+        sg = R("s_g")[:, None] if "s_g" in self.base.names else np.exp(R("log_s_g"))[:, None]
+        a = np.exp(m["cgv"] * lg + (1 - m["cgv"]) * (sg * lg + m["qual"] * ls))
+        psi_f, omega_f = R("psi_f"), R("omega_f")
+        d, F = theta.shape[0], m["F"]
+        z = {}
+        for zn, fam in (("z1", "tau"), ("z2", "psi"), ("z3", "omega")):
+            y, mk = R("y" + zn[1]), m["mk"][zn]
+            pol = np.bincount(mk, minlength=F) >= POLAR_MIN
+            e, p = (~pol).astype(float), pol.astype(float)
+            ss = np.zeros((d, F))
+            for j in np.unique(mk):
+                ss[:, j] = np.sum(np.square(y[:, mk == j]), axis=1)
+            r = np.zeros((d, F))
+            if pol.any():
+                r[:, np.flatnonzero(pol)] = R("r_" + fam)
+            z[zn] = ((r + e) / np.sqrt(p * ss + e))[:, mk] * y
+        e1 = z["z1"] * tau[:, np.asarray(D["own1"], int) - 1]
+        e2 = z["z2"] * psi_f[:, m["prov2"]]
+        e3 = z["z3"] * omega_f[:, m["prov3"]]
+
+        def centred(E, k):                                           # within its set, the padded zero appended
+            s = P["s" + k]
+            return np.concatenate([E - (P["A" + k] @ E.T).T[:, s] / P["n" + k][s], np.zeros((d, 1))], axis=1)
+        u, w, v = centred(e1, "1"), centred(e2, "2"), centred(e3, "3")
+        psiC, omegaC = psi_f[:, m["prov_c"]], omega_f[:, m["prov_c"]]
+        take = lambda X, i: np.take(X, i, axis=1)                    # noqa: E731
+        acc = np.empty((d, len(P["c"])))
+        B = LEVEL_PAIRS                                              # pairs at a time: arrays that stay in the cache
+        with np.errstate(over="ignore"):                             # exp(−t) = inf: inv_logit 0, as it is
+            for i0 in range(0, len(P["c"]), B):
+                sl = slice(i0, i0 + B)
+                c, g = P["c"][sl], P["g"][sl]
+                x = take(theta, c) + take(u, P["j1"][sl]) + take(w, P["j2"][sl]) + take(v, P["j3"][sl])
+                sV = np.sqrt(P["q1"][sl] * np.square(take(tau, c)) + P["q2"][sl] * np.square(take(psiC, c))
+                             + P["q3"][sl] * np.square(take(omegaC, c)))
+                aPC = take(a, g)
+                # mu + sd · (o + a · (x + sV · g_k)) = base + slope · g_k: the same argument to rounding, two
+                # operations a node
+                base = P["mu"][sl] + P["sd"][sl] * (take(o, g) + aPC * x)
+                slope = P["sd"][sl] * aPC * sV
+                ac = np.zeros_like(base)
+                t = np.empty_like(base)
+                for k in range(len(P["ghx"])):
+                    np.multiply(slope, -P["ghx"][k], out=t)
+                    t -= base                                        # −(base + slope · g_k)
+                    np.exp(t, out=t)
+                    t += 1
+                    np.divide(P["ghw"][k], t, out=t)                 # w_k · inv_logit(base + slope · g_k)
+                    ac += t
+                acc[:, sl] = ac
+        return np.log(acc.reshape(d, D["C"], -1) @ P["pw"] / P["W"])
 
 
 # ---------------------------------------------------------------- reading the posterior
@@ -1460,9 +1753,11 @@ def level_new(draws, data, rng, chunk=None):
     D, C = theta.shape
     psi = np.asarray(draws["psiC"]) if "psiC" in draws else np.asarray(draws["psi"])[:, None] * np.ones((1, C))
     om = np.asarray(draws["omegaC"]) if "omegaC" in draws else np.asarray(draws["omega"])[:, None] * np.ones((1, C))
-    if data["cost"]:
-        return (theta + rng.normal(size=(D, C)) * tau + rng.normal(size=(D, C)) * psi
-                + rng.normal(size=(D, C)) * om)
+    if data["cost"]:                                                 # θ + z·τ + z·ψ + z·ω, summed in place in this
+        out = theta + rng.normal(size=(D, C)) * tau                  # order (the same values, a third of the memory)
+        out += rng.normal(size=(D, C)) * psi
+        out += rng.normal(size=(D, C)) * om
+        return out
     pg = np.asarray(data["pg"], int) - 1
     pw = np.asarray(data["pw"], float)
     mu, sd = np.asarray(data["mu"])[pg], np.asarray(data["sd"])[pg]
@@ -1470,18 +1765,23 @@ def level_new(draws, data, rng, chunk=None):
     ptype = np.asarray(data["ptype"], int) - 1
     reps = np.unique(ptype)                                          # one fresh task-type effect per task type
     P = len(pw)
-    chunk = chunk or max(1, min(500, int(2.5e7 // (C * P))))     # draws per block: a few (draws, C, P) arrays of
-    out = np.empty((D, C))                                           # 200 MB each (500 on the published data)
-    for d0 in range(0, D, chunk):
-        sl = slice(d0, min(D, d0 + chunk))
+    chunk = chunk or max(1, min(500, int(2.5e7 // (C * P))))     # draws per block of deviates (the stream of
+    sub = max(1, int(2.5e6 // (C * P)))                              # deviates depends on it); the read-out by
+    out = np.empty((D, C))                                           # sub-blocks of a few draws: (draws, C, P) arrays
+    for d0 in range(0, D, chunk):                                    # of ≈ 20 MB (200 MB before 18 Nov 2026, the same
+        sl = slice(d0, min(D, d0 + chunk))                           # values)
         d = theta[sl].shape[0]
-        zv = np.zeros((d, C, P))
-        zv[:, :, reps] = rng.normal(size=(d, C, len(reps)))
+        zr = rng.normal(size=(d, C, len(reps)))
         zu, zw = rng.normal(size=(d, C)), rng.normal(size=(d, C))
-        vt = np.where(hv, zv * om[sl][:, :, None], 0.0)[:, :, ptype]               # (d, C, P)
-        o, a = np.asarray(draws["o"])[sl][:, pg], np.asarray(draws["a"])[sl][:, pg]
-        lat = (theta[sl] + zu * tau[sl] + zw * psi[sl])[:, :, None] + vt
-        out[sl] = np.log(_expit(mu + sd * (o[:, None, :] + a[:, None, :] * lat)) @ pw / pw.sum())
+        for j0 in range(0, d, sub):
+            j = slice(j0, min(d, j0 + sub))
+            s2 = slice(d0 + j0, d0 + min(d, j0 + sub))
+            zv = np.zeros((j.stop - j.start, C, P))
+            zv[:, :, reps] = zr[j]
+            vt = np.where(hv, zv * om[s2][:, :, None], 0.0)[:, :, ptype]           # (sub, C, P)
+            o, a = np.asarray(draws["o"][s2])[:, pg], np.asarray(draws["a"][s2])[:, pg]
+            lat = (theta[s2] + zu[j] * tau[s2] + zw[j] * psi[s2])[:, :, None] + vt
+            out[s2] = np.log(_expit(mu + sd * (o[:, None, :] + a[:, None, :] * lat)) @ pw / pw.sum())
     return out
 
 
@@ -1528,14 +1828,15 @@ def summarise(post, maps, groups, data, lo=0.16, hi=0.84, min_publishers=2, seed
     measured by at least `min_publishers` publishers. Ratios to a reference couple are exp(centre − centre_ref), each
     couple keeping its own interval. Also returns the convergence diagnostics."""
     import numpy as np
+    post = derived(post, data)                                       # the quantities the draws do not store (P5)
     L = post.var("level")                                            # draws × couples
     q, qv_max, qv_med = quasi_variances(L, lo, hi)
     pubs = collections.defaultdict(set)
     for g in groups.values():
         for x in g["rows"]:
             pubs[x["couple"]].add(x["publisher"])
-    Ln = level_new({k: post.var(k) for k in ("theta", "o", "a", "tau", "psi", "omega", "psiC", "omegaC") if k in post.names}, data,
-                   np.random.default_rng(seed))
+    read = ("theta", "tau", "psi", "omega", "psiC", "omegaC") + (() if data["cost"] else ("o", "a"))   # o, a: the panel's
+    Ln = level_new({k: post.var(k) for k in read if k in post.names}, data, np.random.default_rng(seed))
     diag, mcse_level = diagnostics(post)
     out = {c: dict(centre=float(np.median(L[:, i])), half=float(math.sqrt(q[i])),
                    new_source=[float(np.quantile(Ln[:, i], lo)), float(np.quantile(Ln[:, i], hi))],
@@ -1622,11 +1923,15 @@ def converged(diag):
             and diag["divergences"] == 0)
 
 
-def predict(post, maps, groups, rows, thin=4, seed=0):
+def predict(post, maps, groups, rows, thin=4, seed=0, data=None):
     """Posterior predictive of rows the fit did not see, in groups it did. Each row: dict(group, couple, publisher,
     task, h=1, d=reading precision on the group's scale). Returns per row (mean of the expected value f⁻¹ scale, list of predictive draws of f(y)) where known
-    effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h)."""
+    effects are used and unknown ones drawn from their distribution; the noise is Student-t_ν(σ_b·h). post: as
+    lqm.fit returns it (Derived), or a stored posterior with its data (the quantities the draws do not store)."""
     import numpy as np
+    post = derived(post, data) if data is not None else post
+    if "z1" not in post.names or "sigma" not in post.names:
+        raise ValueError("predict: the posterior lacks z1–z3 and σ; give the run's data (derived)")
     rng = np.random.default_rng(seed)
     V = {k: post.var(k)[::thin] for k in ("theta", "o", "a", "sigma", "z1", "z2", "z3", "tau", "psi", "omega", "nu",
                                            "psi2", "omega3", "psiC", "omegaC", "deltaC") if k in post.names}

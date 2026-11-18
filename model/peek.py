@@ -19,6 +19,11 @@ that cannot be read (a chunk being written) is read again a few times; if it sti
 it and the run says so. The draws per chain are those every chain has written: the finite log-densities (as before),
 and no more than the chunks of every variable present on disk.
 
+What it does not read: since 18 Nov 2026 (P5) the program no longer writes level, sigma, a, z1–z3, psi2, omega3, psiC,
+omegaC, deltaC, which lqm.py computes from the draws at each check and at the end (lqm.Derived); their R̂ follow the
+parameters they are computed from, and the fit's own diagnostics include them. A run of the former program still
+shows them, as it stored them.
+
 Indices: the store's are 0-based, Stan's 1-based; the output gives Stan's (theta[1] is the first couple). The names
 come from the build's fit tables (model/fit.py's load_axis, lqm.stan_data) and are checked against the run's key
 (lqm.sampling_key): when the data or code changed since the run began, the names are flagged as not guaranteed."""
