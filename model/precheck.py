@@ -53,8 +53,18 @@
      line « -- … retired from the page on D »; its last listed value is kept. A record nobody read again stays « !! »;
      a model back on the page gets a newer reading (`listed: true`), which wins.
 
+  10. The makers' blocks of effects (the maintainer, 18 Nov 2026, proposal P1 of the study of that day): a model of the
+     fit (data/catalog/models.json, or a model of a fit table) whose maker lqm.provider does not know, so that it would
+     fall into its fallback « other » (makers told apart nowhere else, fused in silence into one false maker with its
+     own scales and home effect: the quality fit of 16 Nov 2026, Olmo and StepFun), is blocking: the full fit is not
+     started. A maker × family block (τ publisher × couple, ψ publisher × model, ω couple × task type, on either axis)
+     of 1 or 2 effects is reported « !! » (not blocking): lqm_ext4.stan writes it in ordinary non-centred coordinates
+     since that day, but a maker with so few effects has a scale its prior alone sets (the « other » of 16 Nov had a
+     single ω effect, whose polar coordinates made the log density jump by 7.7 and the step size collapse).
+
 Checks 1, 2, 3 and 5 read the build's data.csv (data/build/, the rows in the fit on either axis); 2, 4, 6, 7 and 8 run lqm.load
-on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does.
+on the fit tables (fit-quality.csv, fit-cost.csv) through the build's group map, as model/fit.py does; 10 runs
+lqm.stan_data on both.
 
 Run from the repository root:  .stan/venv/bin/python model/precheck.py [--smoke]"""
 import collections, csv, itertools, os, re, sys
@@ -456,6 +466,30 @@ def stale_verifications(today=None, days=STALE_DAYS, reg=None, fit=None, retired
     return {top: sorted((m, len(v), min(v)) for m, v in d.items()) for top, d in out.items()}
 
 
+SMALL_BLOCK = 3                    # a maker × family block of fewer effects (and at least 1) is reported (check 10)
+FAMILIES = (("τ", "publisher × couple"), ("ψ", "publisher × model"), ("ω", "couple × task type"))
+
+
+def small_blocks(data, makers, axis=""):
+    """The maker × family blocks of 1 ≤ n_k < SMALL_BLOCK effects of one axis' Stan data (lqm.stan_data), makers =
+    the makers in the data's order (its maps' `makers`) → ['axis: maker, family: n effect(s)']."""
+    prov_c = data["prov_c"]
+    mk = dict(zip(FAMILIES, ([prov_c[i - 1] for i in data["own1"]], data["prov2"], data["prov3"])))
+    out = []
+    for (sym, name), levels in mk.items():
+        n = collections.Counter(levels)
+        for k in sorted(n):
+            if 1 <= n[k] < SMALL_BLOCK:
+                out.append(f"{axis}{': ' if axis else ''}{makers[k - 1]}, {sym} ({name}): {n[k]} effect(s)")
+    return out
+
+
+def other_makers(models):
+    """The models whose maker lqm.provider does not know (its fallback « other »), read through their line as lqm.stan_data
+    reads them (lqm.LINE) → sorted."""
+    return sorted(m for m in set(models) if lqm.provider(lqm.LINE.get(m, m)) == "other")
+
+
 def smoke(axis, seed=11):
     """Short fit of one axis (SMOKE_CHAINS chains of SMOKE_WARMUP warm-up + SMOKE_DRAWS draws); returns (R̂ max, worst
     parameters)."""
@@ -556,7 +590,20 @@ def main(run_smoke=False):
         for model, n, day in retired.get(top, []):
             print(f"-- {label} of {model}: retired from the page on {day} ({n} record(s); the page cited, read again, no longer "
                   "lists the model; last listed value kept)")
-    if errors or copies:
+    from catalog import MODEL_LINE
+    lqm.LINE = lqm.LINE or MODEL_LINE                                # as model/fit.py reads the models
+    axes = {"cost": cost_groups, "quality": load("quality")[0]}
+    others = other_makers(list(MODEL_ORDER) + [x["model"] for G in axes.values() for g in G.values() for x in g["rows"]])
+    for m in others:
+        print(f"!! model {m}: its maker is unknown to lqm.provider (fallback « other », which would fuse it with other "
+              "makers): add its maker to lqm.PROVIDERS / provider()")
+    small = []
+    for axis, G in axes.items():
+        d, maps = lqm.stan_data(G, axis)
+        small += small_blocks(d, maps["makers"], axis) if "makers" in maps else []
+    for b in small:
+        print(f"!! a maker's block of 1 or 2 effects (its scale rests on its prior; ordinary coordinates since 18 Nov 2026): {b}")
+    if errors or copies or others:
         return 1
     mc = memory_check()
     if mc is None:

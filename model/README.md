@@ -55,6 +55,13 @@ recovered from the makers' log scales. Per family: ψ (`la_psi`, `r_psi`, `y2`),
 explains it in prose. Checked by evaluating both programs at random points on both axes' data (BridgeStan): the log
 densities differ by exactly the Jacobian and auxiliary terms (residual below 10⁻⁹ over six points per axis). A run
 stores the directions y and the effects z both (2,855 more scalars per draw on cost, 5,320 on quality).
+Since 18 Nov 2026 (the maintainer's decision, proposal P1) only a block of 3 effects or more is polar in
+`lqm_ext4.stan`; a block of 1 or 2 effects is written in ordinary non-centred coordinates (`la_*` = log s_k, z = y, no
+`r_*`), the same model: with a single effect the direction is a sign, and the log density jumped where y crossed 0
+(7.7 on the quality data of 16 Nov 2026, the false maker « other »), which collapsed the step size of the whole
+axis. On the data of 18 Nov 2026 (every block of 10 effects or more) the program is identical to the polar one (log
+density and gradient, BridgeStan). `precheck.py` reports such a block, and stops the fit on a model of an unknown
+maker (`lqm.provider`'s fallback « other »).
 
 ## Input
 

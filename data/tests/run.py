@@ -1907,6 +1907,57 @@ def precheck_isolated_couples():
 
 
 @test
+def precheck_maker_blocks():
+    """precheck check 10 (the maintainer, 18 Nov 2026, P1): a model whose maker lqm.provider does not know (fallback
+    « other », Olmo and StepFun fused on 16 Nov 2026) is named, and blocks the fit; a maker × family block of 1 or 2
+    effects is named (« !! »). Negative controls: a model of a known maker is not named; blocks of 0 and 3 effects are
+    not named."""
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck
+    eq(precheck.other_makers(["olmo-3.1", "opus-5", "step-4", "gpt-6-luna", "qwen3.8-27b"]), ["olmo-3.1", "step-4"],
+       "olmo and step: no maker known, the fallback « other »")
+    eq(precheck.other_makers(["opus-5", "gpt-6-luna", "gemini-3.8-flash", "glm-5.2", "kimi-k3"]), [],
+       "negative control: known makers")
+    # makers 1 (a), 2 (b), 3 (c); τ blocks by the couples' makers: a 3, b 1; ψ: a 2, c 3; ω: c 1, b 0
+    data = dict(prov_c=[1, 2, 3], own1=[1, 1, 1, 2], prov2=[1, 1, 3, 3, 3], prov3=[3])
+    eq(precheck.small_blocks(data, ["a", "b", "c"], "cost"),
+       ["cost: b, τ (publisher × couple): 1 effect(s)", "cost: a, ψ (publisher × model): 2 effect(s)",
+        "cost: c, ω (couple × task type): 1 effect(s)"], "blocks of 1 and 2 named, by family")
+    data = dict(prov_c=[1, 2], own1=[1, 1, 1, 2, 2, 2], prov2=[1, 1, 1], prov3=[])
+    eq(precheck.small_blocks(data, ["a", "b"]), [], "negative control: blocks of 3 effects, and of none")
+
+
+@test
+def precheck_maker_blocks_from_stan_data():
+    """precheck check 10 on lqm.stan_data (needs numpy: .stan/venv/bin/python): two groups whose rows give the false
+    maker « other » a single couple × task-type effect (the case of 16 Nov 2026) → its ω block of 1 named, and the model
+    blocking; the same rows with that model's maker known (a qwen model) → nothing named for it."""
+    try:
+        import numpy  # noqa: F401
+    except ImportError:
+        raise AssertionError("SKIP: needs numpy")
+    sys.path[:0] = [os.path.join(DATA, "..", "model")]
+    import precheck, lqm
+
+    def groups(odd):
+        rows = lambda g: [dict(couple=c, model=c.split("@")[0], publisher=p, task="code", z=0.1 * i, h=1.0, d=0.0, ea=0,  # noqa: E731
+                               home=0) for i, (c, p) in enumerate(g)]
+        mk = lambda g: dict(rows=rows(g), mu=0.0, sd=1.0, kind="log", family="", publisher="p", task="code")  # noqa: E731
+        base = [(f"opus-5@{e}", "p") for e in ("low", "high")] + [(f"gpt-6@{e}", "p") for e in ("low", "high")]
+        return {"g1": mk(base + [(f"{odd}@high", "p")]), "g2": mk(base + [(f"{odd}@high", "p")])}
+    d, maps = lqm.stan_data(groups("olmo-3.1"), "cost")
+    eq(maps["makers"], ["anthropic", "openai", "other"], "the fallback is a maker of the data")
+    eq([b for b in precheck.small_blocks(d, maps["makers"]) if b.startswith("other")],
+       ["other, τ (publisher × couple): 1 effect(s)", "other, ψ (publisher × model): 1 effect(s)",
+        "other, ω (couple × task type): 1 effect(s)"], "the false maker's blocks of 1 named")
+    eq(precheck.other_makers([x["model"] for g in groups("olmo-3.1").values() for x in g["rows"]]), ["olmo-3.1"],
+       "its model blocking")
+    d, maps = lqm.stan_data(groups("qwen3.8-27b"), "cost")
+    eq((maps["makers"], precheck.other_makers(["qwen3.8-27b"])), (["anthropic", "openai", "qwen"], []),
+       "negative control: a known maker, no fallback")
+
+
+@test
 def reason_value_not_established():
     sc = base()
     s = sc.source("a")

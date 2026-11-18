@@ -455,7 +455,7 @@ def stan_data(groups, axis):
     if not P:                                                       # Stan wants a P × C array even when P = 0
         data.update(r1=np.zeros((0, len(couples)), int), r2=np.zeros((0, len(couples)), int),
                     r3=np.zeros((0, len(couples)), int))
-    return data, dict(names=names, couples=couples, ci=ci, levels=levels)
+    return data, dict(names=names, couples=couples, ci=ci, levels=levels, **(dict(makers=list(fi)) if EXT else {}))
 
 
 # ---------------------------------------------------------------- fit

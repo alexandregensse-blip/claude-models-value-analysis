@@ -22,7 +22,7 @@ and no more than the chunks of every variable present on disk.
 Indices: the store's are 0-based, Stan's 1-based; the output gives Stan's (theta[1] is the first couple). The names
 come from the build's fit tables (model/fit.py's load_axis, lqm.stan_data) and are checked against the run's key
 (lqm.sampling_key): when the data or code changed since the run began, the names are flagged as not guaranteed."""
-import glob, json, math, os, sys, time
+import collections, glob, json, math, os, sys, time
 for _k in ("OMP_NUM_THREADS", "OPENBLAS_NUM_THREADS", "MKL_NUM_THREADS", "NUMEXPR_NUM_THREADS"):
     os.environ[_k] = "1"                     # one thread: each thread's stack and malloc arena add to the address space
 import numpy as np
@@ -279,8 +279,9 @@ def labels(axis, run):
     makers = sorted(fi, key=fi.get)
     prov_c = [fi[lqm.provider(model_of[c])] for c in couples]
 
-    def with_effects(mk):                                            # the Stan model's with_effects (0-based)
-        return [makers[k] for k in sorted(set(mk))]
+    def with_effects(mk):                                            # the Stan model's polar_blocks (0-based): the
+        n = collections.Counter(mk)                                  # makers with 3 effects or more (18 Nov 2026)
+        return [makers[k] for k in sorted(n) if n[k] >= 3]
     by_dim = {}
     by_dim.update({v: couples for v in ("theta", "tau_raw", "tau", "psiC", "omegaC", "deltaC", "level")})
     by_dim.update({v: [f"group {g}" for g in names] for v in ("o", "lg_raw", "log_sigma", "sigma", "a")})

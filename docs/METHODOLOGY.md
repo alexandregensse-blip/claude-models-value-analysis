@@ -314,8 +314,8 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   effects, e = s_k · z_k. The data see only the products, so a maker's scale and all its effects moved together
   along a curved ridge (the scale up, every one of its effects' z down); on the cost axis of 29–30 Oct a maker with
   few data (Qwen) had a scale ψ at about 0.45 or about 1.0, which the chains took hundreds of draws to cross, and the
-  worst R̂ were on η_τ, τ, ψ. Now, for every maker and every family, whatever the number n_k of its effects (no
-  threshold): z_k = r_k · u_k, with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on the sphere. The sampler moves in the
+  worst R̂ were on η_τ, τ, ψ. Now, for every maker and every family with n_k ≥ 3 effects (a threshold since 18 Nov
+  2026, below): z_k = r_k · u_k, with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on the sphere. The sampler moves in the
   realised magnitude A_k = s_k · r_k (on its log scale), which the data inform, in the direction u_k (a free vector
   y_k ~ N(0, I) divided by its length, the length an auxiliary that nothing depends on) and in r_k, which carries its
   χ(n_k) density and which the likelihood does not see; s_k = A_k / r_k is recovered. Since 2 Nov 2026
@@ -329,8 +329,20 @@ the No-U-Turn sampler, a Hamiltonian Monte Carlo method (Hoffman & Gelman 2014; 
   maker's effects; for the publisher × couple effects, u = s_τ,k · τ̃_c · z with τ_c = s_τ,k · τ̃_c, the block is
   every z of the maker's couples, τ̃_c ~ N⁺(0, 1) kept as it was (its ridge with s_τ,k is already straight on the
   log scale, and splitting z couple by couple would turn the couples with a single publisher, 68 on cost, into a
-  sign). With one effect (n_k = 1) the direction is a sign, changed only where y_k crosses zero; every maker has at
-  least 14 effects of each family on the data of 30 Oct. Checked by evaluating both programs on the data of both
+  sign). With one effect (n_k = 1) the direction is a sign, changed only where y_k crosses zero; every maker had at
+  least 14 effects of each family on the data of 30 Oct, and nothing checked it. **Blocks of 1 or 2 effects** (the
+  maintainer's decision of 18 Nov 2026, proposal P1 of that day's study of the model) are written in ordinary
+  non-centred coordinates instead, log s_k and z_k = y_k ~ N(0, I), without r_k: the same model written otherwise
+  (the joint density of the effects and their scale is unchanged), as above. On the quality data of 16 Nov 2026 a
+  false maker « other » (two makers lqm.py did not know, fused by its fallback) had a single ω effect: the log
+  density jumped by 7.7 where its y crossed zero, with a zero gradient there, so that every trajectory crossing it
+  carried that energy error, the step size adapted for the whole axis collapsed and every draw reached the maximal
+  tree depth. With n_k = 2 the map is continuous but singular at y = 0. Checked with BridgeStan: on those data the new
+  program's log density is continuous through the former y = 0 (ext4: the jump of 7.7, the negative control), and at
+  corresponding points the two log densities differ by exactly log r_k − y_k²/2, the polar block's auxiliary terms
+  (to 10⁻¹²); on the data of 18 Nov 2026 (no block below 10 effects on either axis) the two programs are identical,
+  log density and gradient (difference 0 at random points). model/precheck.py reports a block of 1 or 2 effects and
+  stops the fit on a model whose maker lqm.py does not know. Checked by evaluating both programs on the data of both
   axes at random points: their log densities differ by exactly the Jacobian and auxiliary terms (to 10⁻⁹), and the
   recovered scales, offsets and effects satisfy the old definitions. `lqm_ext4.stan` was checked the same way against
   `lqm_ext3.stan` (the log densities differ by exactly the two models' priors on the makers' terms, to 10⁻⁹ on both

@@ -12,20 +12,32 @@
 //
 // Magnitude and direction (kept from lqm_ext3, which mixed faster than lqm_ext2's coordinates on 30 Oct). Maker k's
 // effects of one family are e = s_k · z_k with z_k ~ N(0, I_{n_k}), n_k its number of effects in that family. For every
-// family and every maker with n_k ≥ 1 (uniformly: no size threshold), z_k = r_k · u_k with r_k = ‖z_k‖ ~ χ(n_k) and
-// u_k uniform on S^{n_k−1}; the sampler moves in
+// family and every maker with n_k ≥ 3 (a polar block), z_k = r_k · u_k with r_k = ‖z_k‖ ~ χ(n_k) and u_k uniform on
+// S^{n_k−1}; the sampler moves in
 //   la_k = log A_k = log s_k + log r_k   (unconstrained; A_k = s_k · r_k the realised magnitude the data inform)
 //   r_k > 0                              with its χ(n_k) density (Stan samples log r_k)
 //   y_k ∈ R^{n_k}, y_k ~ N(0, I)         u_k = y_k / ‖y_k‖: u_k uniform, ‖y_k‖ ~ χ(n_k) an auxiliary radius that
 //                                         nothing else depends on
 // and recovers s_k = exp(la_k − log r_k), z_k = r_k · u_k (transformed parameters). For a maker with n_k = 0 in a
-// family there is no block and no r_k: la_k = log s_k. The three families (maker k of the level's model or couple):
+// family there is no block and no r_k: la_k = log s_k.
+// Blocks of 1 or 2 effects (the maintainer's decision of 18 Nov 2026, proposal P1 of the study of that day): ordinary
+// non-centred coordinates, la_k = log s_k and z_k = y_k ~ N(0, I_{n_k}), no r_k. The same model, written otherwise: the
+// joint density of (s_k, z_k), t(s_k) + N(z_k), is unchanged; only the coordinates the sampler moves in differ. Why:
+// for n_k = 1, y_k / ‖y_k‖ is a sign, so the effect jumps from −A_k to +A_k where y_k crosses 0, and the log density
+// with it, while its gradient there is 0: NUTS does not see the jump, every trajectory crossing it carries an energy
+// error of its size, and the step size adapted for the whole axis collapses (quality data of 16 Nov 2026, the false
+// maker « other » with a single ω effect: a jump of 7.7 in the log density at y = 0, measured with BridgeStan; the
+// fit reached the maximal tree depth on every draw). For n_k = 2 the map is continuous but singular at y = 0 (its
+// curvature grows as 1/‖y‖²). Blocks of 3 or more effects stay polar; on the data of 18 Nov 2026 every maker has at
+// least 10 effects of each family on both axes, so the program is then identical to the polar one of 2 Nov 2026.
+// The three families (maker k of the level's model or couple):
 //   ψ  publisher × model,   w = psi_f[k] · z2:   block z2 by prov2,          (la_psi, r_psi, y2);
 //   ω  couple × task type,  v = omega_f[k] · z3: block z3 by prov3,          (la_omega, r_omega, y3);
 //   τ  publisher × couple,  u = s_tau_f[k] · tau_raw[c] · z1, τ_c = s_tau_f[k] · tau_raw[c], tau_raw ~ N⁺(0, 1) kept
 //      as it is; block z1 by prov_c[own1] (every level of the maker's couples), (la_tau, r_tau, y1).
 //
-// Log density of one family, maker by maker (constants dropped). The target, in s_k and z_k ∈ R^{n_k}:
+// Log density of one family, maker by maker (constants dropped), for a polar block. The target, in s_k and
+// z_k ∈ R^{n_k}:
 //   t(s_k) + N(z_k),   t = half-Student-t(3, 0, 2.5)
 // Change of variables, term by term:
 //   (log s_k) → s_k                   + log s_k               (|ds/d log s| = s)
@@ -35,18 +47,21 @@
 //   log r_k → r_k (<lower=0>)         + log r_k               (added by Stan)
 //   u_k ← y_k / ‖y_k‖                 + N(y_k)                (y_k ~ N(0, I); ‖y_k‖ ~ χ(n_k) integrates out to 1)
 // so the model block writes, per family:
-//   Σ_k [t(s_k) + log s_k]                  over all F makers (log s_k = la_k − log r_k, or la_k when n_k = 0)
-// + Σ_{k: n_k ≥ 1} [(n_k − 1) · log r_k − r_k²/2]   (+ log r_k by Stan)
+//   Σ_k [t(s_k) + log s_k]                  over all F makers (log s_k = la_k − log r_k, or la_k when n_k ≤ 2)
+// + Σ_{k: n_k ≥ 3} [(n_k − 1) · log r_k − r_k²/2]   (+ log r_k by Stan)
 // + N(y)
+// For a block of 1 or 2 effects the first and last terms remain, t(s_k) + log s_k + N(z_k) with z_k = y_k: the
+// target in (log s_k, z_k) itself.
 // For a maker without effects in a family (n_k = 0) only the first term remains: its s_k is its prior,
 // half-Student-t(3, 0, 2.5), in the sampler's coordinates la_k = log s_k. Such an s_k enters no likelihood term; it
 // enters only the read-outs that integrate an unknown effect over its distribution (the panel read-out `level` on the
 // quality axis and lqm.py's level_new, through tau, psiC, omegaC for a couple of that maker without the effect). On
-// the data of 30 Oct 2026 every maker has at least 14 effects of each family (cost: ψ 14, ω 15, τ 16 at the fewest).
+// the data of 30 Oct 2026 every maker had at least 14 effects of each family (cost: ψ 14, ω 15, τ 16 at the fewest);
+// nothing checked it then (model/precheck.py reports a block of 1 or 2 effects since 18 Nov 2026).
 //
 // Compared with lqm_ext3: gone are t(s_0) + log s_0, N(ζ) − (F − 1) · log η and t(η) + log η per family, and
-// δ_0's N(0, 10²), τ_δ's half-t and zd's N(0, I); the r_k, y_k terms are unchanged. n_k = 1: S^0 = {−1, +1}, u_k is a
-// sign, r_k = |z_k| ~ N⁺(0, 1), (n_k − 1) log r_k = 0 (as in lqm_ext3).
+// δ_0's N(0, 10²), τ_δ's half-t and zd's N(0, I); the r_k, y_k terms are unchanged. In lqm_ext3 and in this program
+// until 18 Nov 2026, n_k = 1 was polar too: S^0 = {−1, +1}, u_k a sign, r_k = |z_k| ~ N⁺(0, 1), (n_k − 1) log r_k = 0.
 //
 // ——— lqm_ext2's header (the base model; its makers' paragraph is replaced by the above):
 // ENCOMPASSING VARIANT: lqm.stan plus the scales of the publisher × couple (s_tau), publisher × model (psi) and
@@ -82,14 +97,14 @@ functions {
     for (l in 1:size(mk)) n[mk[l]] += 1;
     return n;
   }
-  // the makers with at least one effect, in order
-  array[] int with_effects(array[] int mk, int F) {
+  // the makers with a polar block (at least 3 effects; header), in order
+  array[] int polar_blocks(array[] int mk, int F) {
     vector[F] n = maker_counts(mk, F);
     int m = 0;
-    for (k in 1:F) m += n[k] > 0;
+    for (k in 1:F) m += n[k] >= 3;
     array[m] int out;
     int p = 1;
-    for (k in 1:F) if (n[k] > 0) { out[p] = k; p += 1; }
+    for (k in 1:F) if (n[k] >= 3) { out[p] = k; p += 1; }
     return out;
   }
   // the F × L sum-by-maker map in compressed-row form: column indices (the levels, maker by maker) …
@@ -228,20 +243,20 @@ transformed data {
   real theta_scale = 10 / sqrt(1 - 1.0 / C);
   real W = sum(pw);
   real qual = 1 - cost;
-  // the makers' blocks of effects (header): maker of each level, effects per maker, the makers with effects (their
-  // r), and the sum-by-maker maps
+  // the makers' blocks of effects (header): maker of each level, effects per maker, the makers with a polar block
+  // (their r), and the sum-by-maker maps
   array[L1] int mk_tau = prov_c[own1];
   vector[F] cnt_tau = maker_counts(mk_tau, F);
   vector[F] cnt_psi = maker_counts(prov2, F);
   vector[F] cnt_omega = maker_counts(prov3, F);
-  int F_tau = size(with_effects(mk_tau, F));
-  int F_psi = size(with_effects(prov2, F));
-  int F_omega = size(with_effects(prov3, F));
-  array[F_tau] int i_tau = with_effects(mk_tau, F);
-  array[F_psi] int i_psi = with_effects(prov2, F);
-  array[F_omega] int i_omega = with_effects(prov3, F);
-  // the F × F_* map that puts the j-th maker with effects at its place i_*[j]: row i_*[j] holds column j,
-  // the rows of the makers without effects are empty (exact 0)
+  int F_tau = size(polar_blocks(mk_tau, F));
+  int F_psi = size(polar_blocks(prov2, F));
+  int F_omega = size(polar_blocks(prov3, F));
+  array[F_tau] int i_tau = polar_blocks(mk_tau, F);
+  array[F_psi] int i_psi = polar_blocks(prov2, F);
+  array[F_omega] int i_omega = polar_blocks(prov3, F);
+  // the F × F_* map that puts the j-th maker with a polar block at its place i_*[j]: row i_*[j] holds column j,
+  // the rows of the other makers are empty (exact 0)
   vector[F_tau] wS_tau = rep_vector(1, F_tau);
   vector[F_psi] wS_psi = rep_vector(1, F_psi);
   vector[F_omega] wS_omega = rep_vector(1, F_omega);
@@ -254,10 +269,14 @@ transformed data {
   vector[F_tau] n_tau = cnt_tau[i_tau];
   vector[F_psi] n_psi = cnt_psi[i_psi];
   vector[F_omega] n_omega = cnt_omega[i_omega];
+  // e_* = 1 for a maker without a polar block (n_k ≤ 2), p_* = 1 − e_* for a polar one
   vector[F] e_tau = rep_vector(0, F);
   vector[F] e_psi = rep_vector(0, F);
   vector[F] e_omega = rep_vector(0, F);
-  for (k in 1:F) { e_tau[k] = cnt_tau[k] == 0; e_psi[k] = cnt_psi[k] == 0; e_omega[k] = cnt_omega[k] == 0; }
+  for (k in 1:F) { e_tau[k] = cnt_tau[k] < 3; e_psi[k] = cnt_psi[k] < 3; e_omega[k] = cnt_omega[k] < 3; }
+  vector[F] p_tau = 1 - e_tau;
+  vector[F] p_psi = 1 - e_psi;
+  vector[F] p_omega = 1 - e_omega;
   vector[L1] wM_tau = rep_vector(1, L1);
   vector[L2] wM_psi = rep_vector(1, L2);
   vector[L3] wM_omega = rep_vector(1, L3);
@@ -280,7 +299,7 @@ parameters {
   vector[F] la_tau;                                  // log realised magnitude of each maker's block (header)
   vector[F] la_psi;
   vector[F] la_omega;
-  vector<lower=0>[F_tau] r_tau;                      // its radius, χ(n_k), for the makers with effects
+  vector<lower=0>[F_tau] r_tau;                      // its radius, χ(n_k), for the makers with a polar block
   vector<lower=0>[F_psi] r_psi;
   vector<lower=0>[F_omega] r_omega;
   vector[F] delta_f;                                 // each maker's home effect, independent (header)
@@ -294,19 +313,20 @@ transformed parameters {
   real<lower=0> s_g = exp(log_s_g);
   vector[G] sigma = exp(log_sigma);
   vector[G] a = exp(cgv .* lg_raw + (1 - cgv) .* (s_g * lg_raw + qual * log_sigma));   // qual = 1 − cost (0·x = 0 exactly)
-  // the makers' scales s_k = A_k / r_k (log s_k = la_k − log r_k; la_k for a maker without effects, whose row of the
-  // map is empty): each maker's own (header)
+  // the makers' scales s_k = A_k / r_k (log s_k = la_k − log r_k; la_k for a maker without a polar block, whose row
+  // of the map is empty): each maker's own (header)
   vector[F] s_tau_f = exp(la_tau - csr_matrix_times_vector(F, F_tau, wS_tau, vS_tau, uS_tau, log(r_tau)));
   vector[F] psi_f = exp(la_psi - csr_matrix_times_vector(F, F_psi, wS_psi, vS_psi, uS_psi, log(r_psi)));
   vector[F] omega_f = exp(la_omega - csr_matrix_times_vector(F, F_omega, wS_omega, vS_omega, uS_omega, log(r_omega)));
   vector[C] tau = s_tau_f[prov_c] .* tau_raw;
-  // z_k = r_k · y_k / ‖y_k‖ (‖y_k‖ by the sum-by-maker map; e_* = 1 for a maker without effects: never used, no NaN)
+  // z_k = r_k · y_k / ‖y_k‖ for a polar block (‖y_k‖ by the sum-by-maker map), z_k = y_k for a block of 1 or 2
+  // effects (p_* = 0, e_* = 1: the factor is 1 / √1, exactly 1); a maker without effects: never used, no NaN
   vector[L1] z1 = ((csr_matrix_times_vector(F, F_tau, wS_tau, vS_tau, uS_tau, r_tau) + e_tau)
-                   ./ sqrt(csr_matrix_times_vector(F, L1, wM_tau, vM_tau, uM_tau, square(y1)) + e_tau))[mk_tau] .* y1;
+                   ./ sqrt(p_tau .* csr_matrix_times_vector(F, L1, wM_tau, vM_tau, uM_tau, square(y1)) + e_tau))[mk_tau] .* y1;
   vector[L2] z2 = ((csr_matrix_times_vector(F, F_psi, wS_psi, vS_psi, uS_psi, r_psi) + e_psi)
-                   ./ sqrt(csr_matrix_times_vector(F, L2, wM_psi, vM_psi, uM_psi, square(y2)) + e_psi))[prov2] .* y2;
+                   ./ sqrt(p_psi .* csr_matrix_times_vector(F, L2, wM_psi, vM_psi, uM_psi, square(y2)) + e_psi))[prov2] .* y2;
   vector[L3] z3 = ((csr_matrix_times_vector(F, F_omega, wS_omega, vS_omega, uS_omega, r_omega) + e_omega)
-                   ./ sqrt(csr_matrix_times_vector(F, L3, wM_omega, vM_omega, uM_omega, square(y3)) + e_omega))[prov3] .* y3;
+                   ./ sqrt(p_omega .* csr_matrix_times_vector(F, L3, wM_omega, vM_omega, uM_omega, square(y3)) + e_omega))[prov3] .* y3;
   vector[L2] psi2 = psi_f[prov2];
   vector[L3] omega3 = omega_f[prov3];
   vector[C] psiC = psi_f[prov_c];
@@ -332,15 +352,15 @@ model {
   theta ~ normal(0, theta_scale);
   lg_raw[iNG] ~ std_normal();
   if (cost) lg_raw[iCG] ~ normal(0, s_g); else lg_raw[iCG] ~ normal(log_sigma[iCG], s_g);
-  y1 ~ std_normal();                                   // u_k uniform, ‖y_k‖ ~ χ(n_k) auxiliary (header)
+  y1 ~ std_normal();                                   // u_k uniform, ‖y_k‖ ~ χ(n_k) auxiliary; z_k (n_k ≤ 2) (header)
   y2 ~ std_normal();
   y3 ~ std_normal();
   s_g ~ student_t(3, 0, 2.5);
   target += log_s_g;                                   // Jacobian of s_g = exp(log_s_g)
   tau_raw ~ std_normal();
   // the makers' scales, each its own (header): s_k ~ half-Student-t(3, 0, 2.5) and the Jacobian log s_k of
-  // s_k → log s_k (Σ_k log s_k = Σ la − Σ log r, the makers without effects having no r); r_k ~ χ(n_k) (Stan adds
-  // log r_k for <lower=0>)
+  // s_k → log s_k (Σ_k log s_k = Σ la − Σ log r, the makers without a polar block having no r); r_k ~ χ(n_k) (Stan
+  // adds log r_k for <lower=0>)
   target += student_t_lupdf(s_tau_f | 3, 0, 2.5) + sum(la_tau) - sum(log(r_tau));
   target += student_t_lupdf(psi_f | 3, 0, 2.5) + sum(la_psi) - sum(log(r_psi));
   target += student_t_lupdf(omega_f | 3, 0, 2.5) + sum(la_omega) - sum(log(r_omega));
