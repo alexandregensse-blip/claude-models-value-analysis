@@ -495,6 +495,8 @@ HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0
 def app_patches(S):
     j = lambda v: json.dumps(v, separators=(",", ":"), ensure_ascii=False)
     return [
+        ('const yOf=t=>{ const t0=TIERQ.lo; return t>=t0?t:t0+(t-t0)/LOW_SQUEEZE; };',
+         'const yOf=t=>t;   // multi-site: a regular quality axis, no squeeze below the Grunt target (the maintainer, 19 Nov 2026)'),
         (re.compile(r"function hoverTip\(s,ells,pts,X,Y,mL,iw\)\{.*?\n(?=// Force-directed label layout)", re.S), HOVER_FN),
         (re.compile(r"const LEGACY=\[[^\]\n]*\];"), "const LEGACY=[];                 // multi-site: filled on load (PRICES_FN), at the prices in force"),
         ('function fitTrend(all){ const rows=all.filter(p=>CURRENT.includes(p.m)); let a=0, l=0;',

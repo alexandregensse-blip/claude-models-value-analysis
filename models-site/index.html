@@ -853,7 +853,7 @@ applyLegacy();
 // (couples short of today's level) θ is compressed LOW_SQUEEZE times, so older and weaker models sit together at the
 // bottom instead of stretching the axis; above it the scale is left as it is.
 const LOW_SQUEEZE=3;
-const yOf=t=>{ const t0=TIERQ.lo; return t>=t0?t:t0+(t-t0)/LOW_SQUEEZE; };
+const yOf=t=>t;   // multi-site: a regular quality axis, no squeeze below the Grunt target (the maintainer, 19 Nov 2026)
 // Zoom/pan work in the axes' SCREEN-LINEAR coordinates: X is linear in log10(cost), Y in yOf(θ).
 // A chart's "view" = [xlo,xhi (log-cost), ylo,yhi (yOf θ)]. Default = data bounds; a stored s.__view overrides it,
 // so zoom re-renders the chart (ticks + labels recompute at fixed size) instead of scaling the whole SVG.
