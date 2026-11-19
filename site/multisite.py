@@ -330,7 +330,7 @@ function renderFilterBar(){ const host=document.getElementById("filterbar"); if(
   const vis=visItems();
   const chip=i=>{ const on=!OFF.has(i.id), o=new Set(OFF); o.add(i.id); const lock=on&&!selValid(o);
     return `<button type="button" class="fchip" id="fchip-${i.id}" aria-pressed="${on}"${lock?` aria-disabled="true" title="${FILT.lock}"`:""} style="--fc:${cvar(i.c)}" onclick="selToggle('${i.id}')"><span class="fchip-dot" aria-hidden="true"></span>${i.label}</button>`; };
-  host.innerHTML=`<button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
+  host.innerHTML=`<span class="fbar-lbl">Filter by ${FILT.key==="makers"?"maker":"model"}</span><button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
     +vis.map(chip).join("")
     +(LEGACY.length?`<button type="button" class="fchip fchip-old" id="tgl-legacy-f" role="switch" aria-checked="${showLegacy}" title="${LEGACY_HINT}" onclick="toggleLegacy()"><span class="fchip-dot" aria-hidden="true"></span>Older models</button>`:""); }
 if(typeof addEventListener==="function") addEventListener("hashchange",()=>{ OFF=readSel(); applyLegacy(); tierDefaults(); renderAll(); });
@@ -583,6 +583,7 @@ EXTRA_CSS = """
 .fchip[aria-pressed="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
 .fchip[aria-disabled="true"]{cursor:not-allowed}
 .fchip-all{padding-left:10px}
+.fbar-lbl{font-size:12.5px;color:var(--muted);flex:none;white-space:nowrap;margin-right:2px}
 .fchip-old{--fc:var(--muted);margin-left:8px}
 .fchip-old[aria-checked="false"]{color:var(--muted)}
 .fchip-old[aria-checked="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
