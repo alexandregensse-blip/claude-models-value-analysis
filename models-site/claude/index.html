@@ -940,8 +940,8 @@ function placeLabels(s,labs,ppix,segs,W,mL,mT,ih){
 // Tier bands: the four usage tiers of the picker as translucent horizontal bands. A tier owns [its target θ*, the next
 // target): the qualities that clear its bar but not the next one's; the outer bands extend half a gap beyond the first
 // and last targets. They follow the sliders (TIERS is live).
-function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];
-  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }
+function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[-1e6];   // multi-site: Grunt reaches the floor of the chart
+  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(1e6); return e; }   // and Cutting-Edge its top (the maintainer, 19 Nov 2026)
 function drawTierBands(s,Y,mL,iw,mT,ih){                                  // translucent fills, drawn UNDER the grid
   const e=tierBandEdges(), n=TIERS.length, g=el("g",{"pointer-events":"none"});
   TIERS.forEach((t,i)=>{ const yA=Math.max(mT,Math.min(mT+ih,Y(e[i+1]))), yB=Math.max(mT,Math.min(mT+ih,Y(e[i])));

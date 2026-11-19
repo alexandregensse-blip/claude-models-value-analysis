@@ -513,6 +513,11 @@ def app_patches(S):
          '  const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;',
          '  // multi-site: the axis runs from the weakest couple shown to the strongest, so Grunt reaches the min and Cutting-Edge the max.\n'
          '  const th=couples().map(p=>p.t), Tmn=Math.min(TIERQ.lo,...th), Tmx=Math.max(TIERQ.hi,...th);'),
+        # The tier bands on the charts likewise: Grunt down to the chart's floor, Cutting-Edge up to its top (display only).
+        ('function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[Tc[0]-(Tc[1]-Tc[0])/2];\n'
+         '  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(Tc[n-1]+(Tc[n-1]-Tc[n-2])/2); return e; }',
+         'function tierBandEdges(){ const Tc=TIERS.map(t=>t.t), n=Tc.length, e=[-1e6];   // multi-site: Grunt reaches the floor of the chart\n'
+         '  for(let i=1;i<n;i++) e.push(Tc[i]); e.push(1e6); return e; }   // and Cutting-Edge its top (the maintainer, 19 Nov 2026)'),
         ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); applyFilter(); }'),
         ('const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)),',
          'const xmn=Math.min(...pts.map(p=>p.clo),...variantPts(pts).map(v=>v.c)), xmx=Math.max(...pts.map(p=>p.chi),...variantPts(pts).map(v=>v.c)),', 2),
