@@ -357,7 +357,8 @@ def body_patches(S, mc_sentence):
     nav = "".join(f'<a href="{S["up"]}{t["path"]}"{cur if t["id"] == S["id"] else ""}>{esc(t["name"])}</a>' for t in S["all"])
     banner = f'  <p class="draft-banner" role="note">{esc(DRAFT)}</p>\n' if DRAFT else ""
     noun = (S["noun"] + " ") if S["noun"] else ""
-    shows = ("this page shows the current models of every maker, and the older ones no other model of their maker beats"
+    shows = ("this page shows the current models of every maker, and the older couples no other model of their maker "
+             "beats, but no model that another model of the same maker entirely outclasses"
              if S["id"] == "global" else f"this page shows the {S['name']} couples")
     return [
         ('<div class="wrap">\n  <header class="hero">',
@@ -469,16 +470,36 @@ def mc_text(CG, MCSE, models):
             f"in that digit ({', '.join(loose)}), far inside their intervals.")
 
 
+# ---------------------------------------------------------------- models another model of their maker outclasses
+def outclassed(keys, CG, QG, maker_of):
+    """{A: [B, …]} for each model A of the page that another model B of the same maker entirely outclasses: every
+    couple of A shown on the page is dominated by at least one couple of B — B costs no more and scores no less, and
+    is strictly better on one of the two — on the values the page's frontier uses (ln cost and θ, the tolerance of
+    frontier() in site/app.js). Such a model goes into the older models, hidden by default, current or not (the
+    maintainer, 19 Nov 2026; docs/DISPLAY-METHODOLOGY.md § 16). No other threshold."""
+    E = 1e-9
+    dom = lambda o, p: o[0] <= p[0] + E and o[1] >= p[1] - E and (o[0] < p[0] - E or o[1] > p[1] + E)
+    pts = {k: [(CG[k][e][0], QG[k][e][0]) for e in CG[k]] for k in keys if k in CG}
+    out = {}
+    for a, pa in pts.items():
+        bs = [b for b, pb in pts.items() if b != a and maker_of[b] == maker_of[a]
+              and all(any(dom(o, p) for o in pb) for p in pa)]
+        if bs: out[a] = bs
+    return out
+
+
 # ---------------------------------------------------------------- one page
 def build_page(S, css0, body0, app0):
     CG, QG, PANEL, DIAG, MCSE = fused_grids(models=S["keys"], both_axes=True)
     models, mcss = page_models(S, S["keys"], CG)
     shown = list(models)
     S["has_lines"] = any("ls" in v for v in models.values())
-    S["current_keys"] = [k for k in S["current"] if k in CG]
+    S["outclassed"] = outclassed(shown, CG, QG, S["maker_of"])   # {A: [B, …]}: into the older models, current or not
+    S["current_keys"] = [k for k in S["current"] if k in CG and k not in S["outclassed"]]
     for k in S["current"]:
         if k not in S["keys"]: warn(f"{S['id']}: current key {k} is not one of the page's keys")
         elif k not in CG: warn(f"{S['id']}: current model {k} has no couple published on both axes")
+    if not S["current_keys"]: sys.exit(f"!! {S['id']}: no current model left for the price trend")
     S["hide_couples"] = {}
     if S["legacy"] is None:                    # global page: current models, and the couples of older models that no
         maker, base = S["maker_of"], (lambda k: MODEL_LINE.get(k, k))   # other model of the same maker strictly beats
@@ -488,12 +509,12 @@ def build_page(S, css0, body0, app0):
             if k in S["current_keys"]: continue
             out = [e for e in CG[k] if beaten(k, e)]
             if out: S["hide_couples"][k] = out
-        S["legacy_keys"] = [k for k, es in S["hide_couples"].items() if len(es) == len(CG[k])]
+        S["legacy_keys"] = [k for k in shown if k in S["outclassed"] or len(S["hide_couples"].get(k, [])) == len(CG[k])]
         S["hide_couples"] = {k: es for k, es in S["hide_couples"].items() if k not in S["legacy_keys"]}
         n = sum(len(CG[k]) for k in S["legacy_keys"]) + sum(map(len, S["hide_couples"].values()))
         S["legacy_hint"] = f"{n} couples that another model of the same maker beats"
     else:
-        S["legacy_keys"] = [k for k in shown if k in S["legacy"]]
+        S["legacy_keys"] = [k for k in shown if k in S["legacy"] or k in S["outclassed"]]
         leg = [k for k in S["legacy_keys"] if not models[k].get("ls")]
         names = [models[k].get("bl", models[k]["label"]) for k in leg]
         S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 or SET["makers"][S["id"]].get("from_claude_page")
@@ -536,7 +557,7 @@ def build_page(S, css0, body0, app0):
     info = dict(id=S["id"], path=S["path"], title=S["title"], bytes=len(html.encode()), date=date.isoformat(),
                 couples_default=sum(len(CG[k]) - len(hid(k)) for k in vis), models_default=len(vis),
                 variants={c: [x["label"] for x in v] for c, v in S["variants"].items()},
-                couples_all=sum(len(CG[k]) for k in shown), models_all=len(shown),
+                couples_all=sum(len(CG[k]) for k in shown), models_all=len(shown), outclassed=S["outclassed"],
                 counts=plain(pre.get(".nsrc", "")), answer=pre.get("answer-full", ""),
                 ladder=monotonicity_report({k: CG[k] for k in vis}, {k: QG[k] for k in vis}),
                 ladder_all=monotonicity_report(CG, QG))

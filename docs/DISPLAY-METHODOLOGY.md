@@ -216,11 +216,22 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   model of the same maker strictly beats** — no couple of another model of that maker (its own builds and modes do
   not count) both costs less and scores more, on the published centres. The frontier, the tiers and the crown are
   taken among these; *Older models* adds the beaten couples. The price trend is fitted on the current models. One hue
-  per maker, its models in steps of lightness; Claude's model names carry "Claude".
+  per maker, its models in steps of lightness; Claude's model names carry "Claude". A model that another model of its
+  maker entirely outclasses is hidden too, current or not (below).
 - **Maker pages**: the maker's models in its own colours (the Claude page keeps the catalogue's), its tiers and
   crown among its own couples, its price trend on its current models; the maker's older models are hidden by default,
   as on the Claude page (§ 4).
-- **Families** — one place, `families` in `site/makers.json`: per catalogue key its family, `current` (the latest
+- **Outclassed models go into the older models** (the maintainer, 19 Nov 2026: « ensuite tu places dans older models
+  tous les modeles qui sont entierement moins bons et plus cher qu'un autre modele du meme fabricant. genre quand un
+  modele est entierement surclasse par un autre fait par la meme boite, tu le mets en older models »). A model A is
+  **entirely outclassed** when one model B of the same maker dominates **every** couple of A shown on the page with
+  at least one of its own couples: B's couple costs no more and scores no less, and is strictly better on one of the
+  two, on the values the frontier uses (ln cost and θ, the tolerance of `frontier()`: 1e-9). No other threshold. A
+  is then hidden by default, as an older model, and the *Older models* switch shows it again — on every maker page
+  and on the global page (where B is a model of A's maker), whatever its family says, **a current model included**:
+  an outclassed current model also leaves the price trend's couples, so the trend does not move when the reader
+  shows the older models. The page's builder (`outclassed()` in `site/multisite.py`) writes the outclassed models of
+  each page, each with every model that outclasses it, in `out/models/summary.json`. `families` in `site/makers.json`: per catalogue key its family, `current` (the latest
   model of its family: the trend's couples, always shown on the global page) and `hidden` (hidden by default on its
   maker's page). `python3 site/import_families.py` fills it from the families salvo (`families.tsv` per maker, with
   the makers' pages as evidence): current = status `current`; an unknown status, or "not a model", is not current;
