@@ -256,7 +256,11 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   without background or frame. Each label goes to the first free spot beside its point, nearest first (12 positions
   around it, starting up-left — the side of the frontier no couple can occupy —, on 4 rings 4 px apart), whose box,
   with a 1.5 px margin, overlaps no other label, no point (the largest mark, 6.5 units, and the margin) and no line of
-  the chart (the frontier, a variant's dotted line), inside the plot. A label that finds no free spot is not shown:
+  the chart (the frontier, a variant's dotted line), inside the plot. A label set off its point — placed beyond the
+  first ring — is joined to it by a short leader line, thin (0.8 px) and muted, from the point's edge to 1 px short of
+  the label's box (the maintainer, 19 Nov 2026: « tu as enleve les petits traits »); a spot is then free only if that
+  line crosses no other leader line and passes over no other label, and no leader line already drawn crosses the
+  label. The placement is otherwise that of b704bd0. A label that finds no free spot is not shown:
   its point reads on hover. The width of a label is the browser's measure of its text (0.6 em a character where none
   is available, as in the pre-render). The landscape, the Pareto chart and the tier tuner (whose frontier marks name
   their couple on hover or tap, without number) follow the same rules. Hovering or tapping any point, or a label,
@@ -294,11 +298,8 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   are counted by publisher (`data/catalog/publishers.json`). A group without a verified configuration note shows "—".
   The Claude page at the repository root still lists every Claude couple a group measured, efforts outside the fit
   included, so its counts are larger.
-- **Price variants** (a promotion, an off-peak rate): the published cost is the list price without promotion
-  (DeepSeek at its peak rate). A variant is the same couple at another price: a hollow diamond at cost × its ratio,
-  joined to the couple by a dotted line and tagged (promo, off-peak); its label in the tooltip; under the couple's
-  cost in the matrix and the frontier table, and its value index in the value matrix. It never enters the frontier,
-  the trend, the tiers or the crown. Read from the registry's dated price records (`price_variants` in
+- **Price variants** (a promotion, an off-peak rate): the published cost (data/build.py) is the list price without
+  promotion (DeepSeek at its peak rate). Read from the registry's dated price records (`price_variants` in
   `site/makers.json`: `data/registry/prices.json`, kinds `promotion` and `off-peak`, the fit catalogue's models; the
   maintainer, 16 Nov 2026): a record is a variant of every couple of its model (of its configurations, when it lists
   them) when it is in force — an end the maker states not past, or seen at the model's last capture on its route and
@@ -307,6 +308,24 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   base price on the same classes (a record with no classes and a stated factor applies it to all). Any other record
   is not shown; `out/models/price-variants.json` lists every record read with its outcome. The mock
   `site/price_variants.mock.json` is no longer read.
+- **A promotion is the price in force** (the maintainer, 19 Nov 2026: « je vois que les promotion ne sont pas prises
+  en compte dans les annotations et les scores / pareto »). A promotion kept above (every tariff in one ratio, no
+  stated end past) is the price the couple sells at today, for everyone: on the multi-site pages it **replaces the
+  list price wherever the page decides** — the Pareto frontier and its labels, the "× cheaper than the trend", the
+  crown and the tiers, the price trend (its couples at their price in force), the outclassed models (above), the
+  beaten couples of the global page, the cost shown in the tables and what is ranked on it; the cost axis counts from
+  the cheapest couple at its price in force. Two promotions in force on one couple: the lower price. Display: the
+  couple's filled point is at the promotional price; its **list price** stays visible as a hollow diamond joined by
+  the dotted line (the other way round from an off-peak rate); its label, its tooltip, the tier cards, the crown, the
+  answer and the tables say the promotion and its end ("Gemini 4 Carbon · High · promo until 30 Nov"), or "promo,
+  seen 16 Nov" when no end is known (a record seen at the model's last capture), with the list price under the cost
+  and the value index at the list price in the value matrix. **The page checks the end itself**: it is static and
+  stays online after a promotion ends, so on load it compares the reader's date with the stated end; a promotion
+  past its end goes back to the list price, and every decision above — the outclassed models, the older models, the
+  trend's couples included — is taken again on that day (the pre-render is done at the build date;
+  `promotions_in_force` in `summary.json`). An **off-peak rate** holds at some hours only, not for everyone: it
+  changes nothing — a hollow diamond at the list price × its ratio, joined by a dotted line, in the tooltip and under
+  the cost and the value index, and never in the frontier, the trend, the tiers or the crown.
 - **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set (the pages
   are not published). An empty `draft` removes both and writes the sitemap.
 - **A fit that no longer matches its inputs** stops the build, as on the Claude page. `--stale-fit` builds a local

@@ -91,7 +91,7 @@ def load_variants():
         label = (("promotional price" if p["kind"] == "promotion" else "off-peak rate") + f" ({r:.3g}× the list price"
                  + (f", until {end}" if stated else f", last seen {end}" if p.get("to") else "") + ")")
         v = {"kind": "promo" if p["kind"] == "promotion" else "offpeak", "label": label, "cost_ratio": r,
-             "until": end if stated else None, "evidence": ev.get("url")}
+             "until": end if stated else None, "seen": None if stated else (end or p["from"][:10]), "evidence": ev.get("url")}
         effs = set(CAT_EFFORTS.get(m, []))
         for e in sorted(effs):
             if p.get("configurations") and e not in p["configurations"]: continue
@@ -270,23 +270,34 @@ LEGEND_FN = r'''
 // builds and modes (a dated build, a preview, a Pro mode) as hollow points, and the price variants.
 const lsty=m=>MODELS[m].ls||0;
 function legendSymbols(ms){
-  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
+  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), on=k=>ms.includes(k.split("@")[0]);
+  const pk=Object.keys(PROMO).some(on), ok=Object.keys(VARIANTS).some(k=>on(k)&&VARIANTS[k].some(v=>v.kind!=="promo"));
+  const dia=`<svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>`;
   return (hollow?`<span class="lg"><svg class="lgs" width="12" height="10" aria-hidden="true"><circle cx="6" cy="5" r="3.4" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.6"/></svg>hollow point: another build or mode of a model (a dated build, a preview, a Pro mode), named in its label</span>`:"")
-    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
+    +(pk?`<span class="lg">${dia}a couple on promotion: the filled point is its promotional price, the price in force (every pick reads it); the hollow diamond its list price</span>`:"")
+    +(ok?`<span class="lg">${dia}the same couple at an off-peak rate (some hours only) — shown, never used in a pick</span>`:""); }
 // Global page: the couples of older models that another model of the same maker strictly beats, hidden by default.
 function hideCouples(){ Object.keys(HIDE_C).forEach(m=>[[COSTGRID,GRID_ALL.cost],[QUALGRID,GRID_ALL.qual]].forEach(([G,A])=>{ if(!A[m]) return;
   G[m]=showLegacy?A[m]:Object.fromEntries(Object.entries(A[m]).filter(([e])=>!HIDE_C[m].includes(e))); })); }
-// Price variants (a promotion, an off-peak rate) of a couple: the same couple at another price. Drawn as a hollow
-// diamond joined to its couple by a dotted line, labelled in tooltips and tables; never a candidate of the frontier,
-// the trend, the tiers or the crown.
+// The other prices of a couple, each a hollow diamond joined to its couple by a dotted line, named in tooltips and
+// tables, never a candidate of the frontier, the trend, the tiers or the crown: the LIST price of a couple on
+// promotion (its point is at the promotional price, the price in force: PROMO), and an off-peak rate (some hours only).
 const VTAG={promo:"promo",offpeak:"off-peak"};
-function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[]).forEach(v=>o.push({m:p.m,e:p.e,c:p.c*v.cost_ratio,t:p.t,s:p.s,
-  base:p,front:p.front,vl:v.label,tag:VTAG[v.kind]||v.kind}))); return o; }
+const listOf=k=>PROMO[k]?1/PROMO[k].cost_ratio:1;            // list price ÷ the price shown
+function variantPts(pts){ const o=[]; pts.forEach(p=>{ const k=p.m+"@"+p.e, li=listOf(k), b={m:p.m,e:p.e,t:p.t,s:p.s,base:p,front:p.front};
+  if(PROMO[k]) o.push({...b,c:p.c*li,vl:`list price (${promoTag(k)})`,tag:"list"});
+  (VARIANTS[k]||[]).forEach(v=>{ if(v.kind!=="promo") o.push({...b,c:p.c*li*v.cost_ratio,vl:v.label,tag:VTAG[v.kind]||v.kind}); }); }); return o; }
 function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
   s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
   s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
 const vSegs=(pts,X,Y)=>variantPts(pts).map(v=>[X(v.base.c),Y(v.t),X(v.c),Y(v.t)]);   // a variant's dotted line
-const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
+// Under a cost or a value: the promotion in force and the list price; an off-peak rate. f(rel) writes the figure at
+// rel × the price shown.
+const vNotes=(m,e,f)=>{ const k=m+"@"+e, li=listOf(k);
+  return (PROMO[k]?`<small class="vnote" title="${PROMO[k].label}">${promoTag(k)} · list ${f(li)}</small>`:"")
+    +(VARIANTS[k]||[]).filter(v=>v.kind!=="promo").map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${f(li*v.cost_ratio)}</small>`).join(""); };
+const vNote=(m,e,c)=>vNotes(m,e,rel=>fmtC(c*rel)+"×");
+const pTag=p=>PROMO[p.m+"@"+p.e]?" · "+promoTag(p.m+"@"+p.e):"";   // after a couple's name: "· promo until 30 Nov"
 // Selection (the bar above the first chart): FILT.items are the page's makers (global page) or its models (a maker
 // page); OFF the items turned off. The page's grids are rebuilt from the full copy with only the couples shown — the
 // older-model switch, the beaten couples and the selection — so the charts, the tables, the frontier and its labels are
@@ -333,6 +344,7 @@ function renderFilterBar(){ const host=document.getElementById("filterbar"); if(
   host.innerHTML=`<span class="fbar-lbl">Filter by ${FILT.key==="makers"?"maker":"model"}</span><button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
     +vis.map(chip).join("")
     +(LEGACY.length?`<button type="button" class="fchip fchip-old" id="tgl-legacy-f" role="switch" aria-checked="${showLegacy}" title="${LEGACY_HINT}" onclick="toggleLegacy()"><span class="fchip-dot" aria-hidden="true"></span>Older models</button>`:""); }
+function fillNtrend(){ document.querySelectorAll(".ntrend").forEach(e=>e.textContent=String(trendRows().length)); }
 if(typeof addEventListener==="function") addEventListener("hashchange",()=>{ OFF=readSel(); applyLegacy(); tierDefaults(); renderAll(); });
 // The Pareto frontier's couples carry a label on the charts, "model · effort", small (11 px on screen, whatever the
 // width), muted, without background or frame; any other point is named by the tooltip. Labels keep their size on screen.
@@ -341,7 +353,7 @@ const HL={};                                                // owner (chart id) 
 function hlFront(k){ for(const o in HL) for(const kk in HL[o]) HL[o][kk].forEach(f=>f(kk===k)); }
 function frontRows(pts){ const fr=frontier(couples()).front, by={}; pts.forEach(p=>{ by[p.m+"@"+p.e]=p; });
   return fr.map(p=>by[p.m+"@"+p.e]).filter(Boolean); }
-const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`;
+const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}${pTag(p)}`;
 let MCTX=null;                                              // text width: the browser's own measure, else 0.6 em a character
 function textPx(s,t,fs){ try{ if(MCTX===null){ const c=document.createElement("canvas"); MCTX=c&&c.getContext?c.getContext("2d"):false; }
     if(MCTX){ MCTX.font=`${fs}px ${getComputedStyle(s).fontFamily||"sans-serif"}`; const w=MCTX.measureText(t).width; if(w>0) return w; } }catch(e){ MCTX=false; }
@@ -351,18 +363,30 @@ function segHits(x1,y1,x2,y2,b){ let t0=0,t1=1; const dx=x2-x1, dy=y2-y1;
   for(const [p,q] of [[-dx,x1-b.x0],[dx,b.x1-x1],[-dy,y1-b.y0],[dy,b.y1-y1]]){
     if(p===0){ if(q<0) return false; } else { const r=q/p; if(p<0){ if(r>t1) return false; if(r>t0) t0=r; } else { if(r<t0) return false; if(r<t1) t1=r; } } }
   return true; }
+// Segment × segment: do they cross (or touch)?
+function segX(a,b){ const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[1]-p[1])*(r[0]-p[0]));
+  const A=[a[0],a[1]],B=[a[2],a[3]],C=[b[0],b[1]],D=[b[2],b[3]];
+  return o(A,B,C)!==o(A,B,D)&&o(C,D,A)!==o(C,D,B); }
 // Placement: each label (cost order) goes to the first free spot around its point, nearest first — beside it, starting
 // up-left, the side of the frontier no couple can occupy — whose box, with a margin, overlaps no label already placed,
-// no point and no line of the chart (the frontier, a variant's dotted line). Never away from its point: no leader line.
-// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts both.
-function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[];
+// no point and no line of the chart (the frontier, a variant's dotted line). A label set off its point (beyond the
+// first ring) gets a short leader line, thin and muted, from the point's edge to the label's box; a spot is free only
+// if that line crosses no other leader line and no other label, and no leader line already drawn crosses the label.
+// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts them.
+function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[], leads=[];
   const pp=obst.map(p=>[X(p.c),Y(p.t)]), pr=6.5+m;           // a point: its largest mark (r 5.6, a diamond 4.6) and the margin
+  const grow=(b,g)=>({x0:b.x0-g,y0:b.y0-g,x1:b.x1+g,y1:b.y1+g});
   const free=b=>b.x0>=mL&&b.x1<=mL+iw&&b.y0>=mT&&b.y1<=mT+ih
     &&!placed.some(q=>b.x0<q.x1+m&&q.x0<b.x1+m&&b.y0<q.y1+m&&q.y0<b.y1+m)
     &&!pp.some(([px,py])=>{ const cx=Math.max(b.x0,Math.min(px,b.x1)), cy=Math.max(b.y0,Math.min(py,b.y1)); return Math.hypot(px-cx,py-cy)<pr; })
-    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],{x0:b.x0-m,y0:b.y0-m,x1:b.x1+m,y1:b.y1+m}));
+    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)))
+    &&!leads.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)));
+  // the leader line of a box set off its point: from the point's edge (5.6 + 1 units) to 1 px short of the box
+  const lead=(ax,ay,b)=>{ const cx=Math.max(b.x0,Math.min(ax,b.x1)), cy=Math.max(b.y0,Math.min(ay,b.y1)), d=Math.hypot(cx-ax,cy-ay);
+    if(!(d>6.6+2*u)) return null; const ux=(cx-ax)/d, uy=(cy-ay)/d; return [ax+ux*6.6,ay+uy*6.6,cx-ux*u,cy-uy*u]; };
+  const leadOK=g=>!leads.some(o=>segX(g,o))&&!placed.some(q=>segHits(g[0],g[1],g[2],g[3],grow(q,m)));
   let hidden=0;
-  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null;
+  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null, bl=null;
     if(ax<mL||ax>mL+iw||ay<mT||ay>mT+ih){ return; }
     for(let ring=0; ring<4&&!best; ring++){ const d=pr+ring*4*u, dd=d*0.7;
       const cand=[[ax-dd-w,ay-dd-h],[ax-d-w,ay-h/2]];          // up-left, left, then above and below sliding along, right, the corners
@@ -370,17 +394,55 @@ function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u,
       cand.push([ax+dd,ay+dd],[ax+d,ay-h/2]);
       for(const f of [0,0.25,0.5,0.75,1]) cand.push([ax-f*w,ay+d]);
       cand.push([ax+dd,ay-dd-h],[ax-dd-w,ay+dd]);
-      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(free(b)){ best=b; break; } } }
+      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(!free(b)) continue;
+        const g=ring?lead(ax,ay,b):null; if(g&&!leadOK(g)) continue;
+        best=b; bl=g; break; } }
     if(!best){ hidden++; return; }
     const col=cvar(MODELS[p.m].c), k=p.m+"@"+p.e;
+    let ln=null; if(bl){ ln=el("line",{class:"flead","data-k":k,x1:bl[0],y1:bl[1],x2:bl[2],y2:bl[3],stroke:cvar('--muted'),"stroke-width":0.8*u,"stroke-opacity":0.6}); s.appendChild(ln); leads.push(bl); }
     const tx=el("text",{class:"flabel","data-k":k,x:best.x0,y:best.y1-3*u,"font-size":fs,fill:cvar('--muted'),"text-anchor":"start"}); tx.textContent=t;
     s.appendChild(tx);
-    (reg[k]=reg[k]||[]).push(on=>tx.setAttribute("fill",on?col:cvar('--muted')));
+    (reg[k]=reg[k]||[]).push(on=>{ tx.setAttribute("fill",on?col:cvar('--muted')); if(ln) ln.setAttribute("stroke",on?col:cvar('--muted')); });
     placed.push({...best,x:(best.x0+best.x1)/2,y:(best.y0+best.y1)/2,w,h,p,k}); });
-  s.__labels={shown:placed.length,hidden,frontier:F.length};
+  s.__labels={shown:placed.length,hidden,frontier:F.length,leaders:leads.length};
   return placed; }
 if(typeof addEventListener==="function"){ let rw=0; addEventListener("resize",()=>{ const s=document.getElementById("chartB"), w=s?s.getBoundingClientRect().width:0;
   if(w&&Math.abs(w-rw)>1){ rw=w; drawB(); drawPareto(); } }); }   // the labels and the tooltip keep their size on screen
+'''
+
+PRICES_FN = r'''// PRICES IN FORCE (the maintainer, 19 Nov 2026: « les promotion ne sont pas prises en compte dans les annotations et
+// les scores / pareto »). A promotion kept (VARIANTS, kind promo: every tariff in one ratio, no stated end past) is the
+// price the couple sells at today, for everyone: it replaces the list price in every decision — the frontier and its
+// labels, the price trend, the value, the tiers and the crown, the outclassed models, the tables. The page is static:
+// it compares the reader's date with the promotion's stated end, so an ended promotion goes back to the list price and
+// everything below is taken again on load (the pre-render runs at the build date). An off-peak rate holds at some hours
+// only, not for everyone: it stays a variant, out of every decision.
+const TODAY=(d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`)(new Date());
+const PROMO={};                                             // "model@effort" → the promotion in force (the lowest price)
+for(const k in VARIANTS) VARIANTS[k].forEach(v=>{ if(v.kind!=="promo"||(v.until&&v.until<TODAY)) return;
+  if(!PROMO[k]||v.cost_ratio<PROMO[k].cost_ratio) PROMO[k]=v; });
+for(const k in PROMO){ const [m,e]=k.split("@"); if(!COSTGRID[m]||!COSTGRID[m][e]){ delete PROMO[k]; continue; }
+  COSTGRID[m]={...COSTGRID[m],[e]:[COSTGRID[m][e][0]+Math.log(PROMO[k].cost_ratio),COSTGRID[m][e][1]]}; }
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtD=d=>{ const [y,mo,da]=d.split("-").map(Number); return `${da} ${MON[mo-1]}${y!==+TODAY.slice(0,4)?" "+y:""}`; };
+const promoTag=k=>{ const v=PROMO[k]; return v?(v.until?`promo until ${fmtD(v.until)}`:`promo, seen ${fmtD(v.seen)}`):""; };
+// At these prices: the models another model of their maker entirely outclasses (site/multisite.py outclassed()), the
+// current models (the trend's couples), the older models and, on the global page, the beaten couples hidden by default.
+(function(){ const E=1e-9, dom=(o,p)=>o[0]<=p[0]+E&&o[1]>=p[1]-E&&(o[0]<p[0]-E||o[1]>p[1]+E);
+  const shown=Object.keys(MODELS).filter(k=>COSTGRID[k]), CG=COSTGRID, QG=QUALGRID, pts={};
+  shown.forEach(k=>{ pts[k]=Object.keys(CG[k]).map(e=>[CG[k][e][0],QG[k][e][0]]); });
+  shown.forEach(a=>{ const bs=shown.filter(b=>b!==a&&MAKER_OF[b]===MAKER_OF[a]&&pts[a].every(p=>pts[b].some(o=>dom(o,p)))); if(bs.length) OUTCLASSED[a]=bs; });
+  CUR_BASE.forEach(k=>{ if(CG[k]&&!OUTCLASSED[k]) CURRENT.push(k); });
+  if(LEG_BASE===null){ const base=k=>MODELS[k].base||k, hc={};      // global page: the couples another model of its maker strictly beats
+    const beaten=(k,e)=>shown.some(k2=>MAKER_OF[k2]===MAKER_OF[k]&&base(k2)!==base(k)&&Object.keys(CG[k2]).some(e2=>CG[k2][e2][0]<CG[k][e][0]&&QG[k2][e2][0]>QG[k][e][0]));
+    shown.forEach(k=>{ if(CURRENT.includes(k)) return; const out=Object.keys(CG[k]).filter(e=>beaten(k,e)); if(out.length) hc[k]=out; });
+    shown.forEach(k=>{ if(OUTCLASSED[k]||(hc[k]||[]).length===Object.keys(CG[k]).length) LEGACY.push(k); });
+    for(const k in hc) if(!LEGACY.includes(k)) HIDE_C[k]=hc[k];
+    const n=LEGACY.reduce((a,k)=>a+Object.keys(CG[k]).length,0)+Object.values(HIDE_C).reduce((a,v)=>a+v.length,0);
+    LEGACY_HINT=`${n} couples that another model of the same maker beats`; }
+  else { shown.forEach(k=>{ if(LEG_BASE.includes(k)||OUTCLASSED[k]) LEGACY.push(k); });
+    const names=LEGACY.filter(k=>!MODELS[k].ls).map(k=>MODELS[k].bl||MODELS[k].label);
+    LEGACY_HINT=names.length<=3||HINT_ALL?names.join(" · "):names.slice(0,2).join(" · ")+` and ${names.length-2} more`; } })();
 '''
 
 HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi-site: the frontier's labels, a tooltip of fixed size on screen
@@ -394,7 +456,7 @@ HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0
     if(hit&&(!best||hd===0||hd<bd)) best=hit.p; else hit=null;
     const k=best&&!best.vl?best.m+"@"+best.e:null; hlFront(k);
     if(best){ const fs=11.5*u, y0=hit?hit.y-hit.h/2-6*u:Y(best.t)-10*u;
-      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
+      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:pTag(best)}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       ttxt.setAttribute("font-size",fs); ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",X(best.c)); ttxt.setAttribute("y",y0);
       ttxt.textContent=`${name} — ${val}`; let bb=ttxt.getBBox(), sp=[];
       if(bb.width>iw-10*u){ ttxt.textContent=""; sp=[el("tspan",{dy:-fs*1.2}),el("tspan",{dy:fs*1.2})]; sp[0].textContent=name; sp[1].textContent=val;
@@ -413,12 +475,16 @@ def app_patches(S):
     j = lambda v: json.dumps(v, separators=(",", ":"), ensure_ascii=False)
     return [
         (re.compile(r"function hoverTip\(s,ells,pts,X,Y,mL,iw\)\{.*?\n(?=// Force-directed label layout)", re.S), HOVER_FN),
-        (re.compile(r"const LEGACY=\[[^\]\n]*\];"), f"const LEGACY={j(S['legacy_keys'])};"),
+        (re.compile(r"const LEGACY=\[[^\]\n]*\];"), "const LEGACY=[];                 // multi-site: filled on load (PRICES_FN), at the prices in force"),
         ('function fitTrend(all){ const rows=all.filter(p=>CURRENT.includes(p.m)); let a=0, l=0;',
          'function fitTrend(all){ const rows=trendRows(); let a=0, l=0;   // multi-site: the default view\'s couples, whatever the selection'),
         (re.compile(r"const CURRENT=\[[^\]\n]*\];"),
-         f"const CURRENT={j(S['current_keys'])};\nconst HIDE_B={j(S['hide_landscape'])}, LEGACY_HINT={j(S['legacy_hint'])}, "
-         f"DASH={j(DASH)}, HIDE_C={j(S['hide_couples'])}, VARIANTS={j(S['variants'])}, FILT={j(S['filt'])};   // per-site settings (site/makers.json)"),
+         f"const CURRENT=[];\nconst HIDE_B={j(S['hide_landscape'])}, "
+         f"DASH={j(DASH)}, HIDE_C={{}}, VARIANTS={j(S['variants'])}, FILT={j(S['filt'])};   // per-site settings (site/makers.json)\n"
+         f"const CUR_BASE={j(S['cur_base'])}, LEG_BASE={j(S['legacy'])}, MAKER_OF={j(S['page_maker_of'])}, HINT_ALL={j(S['hint_all'])};   "
+         "// before the prices in force: CURRENT, LEGACY, HIDE_C and LEGACY_HINT are taken from them on load\n"
+         "let LEGACY_HINT=\"\", OUTCLASSED={};"),
+        ('const PANEL=__PANEL__;\n', 'const PANEL=__PANEL__;\n' + PRICES_FN),
         ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); applyFilter(); }'),
         ('const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)),',
          'const xmn=Math.min(...pts.map(p=>p.clo),...variantPts(pts).map(v=>v.c)), xmx=Math.max(...pts.map(p=>p.chi),...variantPts(pts).map(v=>v.c)),', 2),
@@ -454,7 +520,12 @@ def app_patches(S):
         ('${fmtC(c[0])}<small>${c[1]}</small></div></td>`', '${fmtC(c[0])}<small>${c[1]}</small>${vNote(m,e,c[0])}</div></td>`'),
         ('<td class="num">${fmtC(p.c)}×</td><td class="num">${pct(p.s)}</td>', '<td class="num">${fmtC(p.c)}×${vNote(p.m,p.e,p.c)}</td><td class="num">${pct(p.s)}</td>'),
         ('${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small></div>`; };',
-         '${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${(VARIANTS[p.m+"@"+p.e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${vIndex(r-Math.log(v.cost_ratio))}</small>`).join("")}</div>`; };'),
+         '${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${vNotes(p.m,p.e,rel=>vIndex(r-Math.log(rel)))}</div>`; };'),
+        # the tier cards, the crown and the answer say a promotion
+        ('<span class="tier-nums">Cost <b>${fmtC(w.c)}×</b>', '<span class="tier-nums">Cost <b>${fmtC(w.c)}×</b>${pTag(w)}'),
+        ('<div class="crown-line">Cost <b>${fmtC(c.c)}×</b>', '<div class="crown-line">Cost <b>${fmtC(c.c)}×</b>${pTag(c)}'),
+        ('const nm=p=>`${MODELS[p.m].label}${atE(p.e)}`;', 'const nm=p=>`${MODELS[p.m].label}${atE(p.e)}${PROMO[p.m+"@"+p.e]?` (${promoTag(p.m+"@"+p.e)})`:""}`;'),
+        ('function renderAll(){renderControls();', 'function renderAll(){fillNtrend();renderControls();'),
         ('const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n',
          'const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n' + LEGEND_FN),
         ('+legacy("tgl-legacy-b")', ''), ('+legacy("tgl-legacy-p")+ovals("tgl-ovals-p")+bands("tgl-bands-p");\n}',
@@ -527,6 +598,8 @@ def body_patches(S, mc_sentence):
          S["lede"]),
         ('        <p class="lede">To compare two models directly — Fable, Opus, Sonnet or Haiku, effort by effort — see the <a href="claude-models-head-to-head.html">head-to-head page</a>.</p>\n', ""),
         ("Quality vs. cost of every Claude model, at each effort level", f"Quality vs. cost of every {noun}model, at each effort level"),
+        ("<b>__NTREND__ couples of the latest model of each family</b>",
+         '<b><span class="ntrend">__NTREND__</span> couples of the latest model of each family</b>'),   # the page fills it on load
         (" <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.",
          S["hide_note"] + ("" if not S["has_lines"] else " A model's <b>builds and modes</b> — a dated build, a preview, a Pro mode — share its colour: "
          "the first is drawn with <b>filled</b> points, the others with <b>hollow</b> points, and its label and tooltip say "
@@ -587,7 +660,7 @@ EXTRA_CSS = """
 .fchip-old{--fc:var(--muted);margin-left:8px}
 .fchip-old[aria-checked="false"]{color:var(--muted)}
 .fchip-old[aria-checked="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
-.flabel{pointer-events:none}
+.flabel,.flead{pointer-events:none}
 .tuner-tip{min-height:1.3em;margin:4px 0 0;font-size:12px;color:var(--muted);text-align:center}
 """
 
@@ -679,7 +752,21 @@ def build_page(S, css0, body0, app0):
     models, mcss = page_models(S, S["keys"], CG)
     shown = list(models)
     S["has_lines"] = any("ls" in v for v in models.values())
-    S["outclassed"] = outclassed(shown, CG, QG, S["maker_of"])   # {A: [B, …]}: into the older models, current or not
+    S["variants"] = {c: v for c, v in VARIANTS.items() if c.split("@")[0] in CG and c.split("@")[1] in CG[c.split("@")[0]]}
+    # The prices in force today (the build date; the page takes them again on the reader's date, PRICES_FN): a promotion
+    # kept replaces the list price in every decision. CG stays at the list price, the page applies the promotions.
+    S["promos"] = {}
+    for c, vs in S["variants"].items():
+        for v in vs:
+            if v["kind"] == "promo" and (not v["until"] or v["until"] >= datetime.date.today().isoformat()):
+                if c not in S["promos"] or v["cost_ratio"] < S["promos"][c]["cost_ratio"]: S["promos"][c] = v
+    CGe = {m: dict(es) for m, es in CG.items()}
+    for c, v in S["promos"].items():
+        m, e = c.split("@"); CGe[m][e] = [CG[m][e][0] + math.log(v["cost_ratio"]), CG[m][e][1]]
+    S["cur_base"] = [k for k in S["current"] if k in CG]
+    S["page_maker_of"] = {k: S["maker_of"][k] for k in models}
+    S["hint_all"] = bool(S["legacy"] is not None and SET["makers"][S["id"]].get("from_claude_page"))
+    S["outclassed"] = outclassed(shown, CGe, QG, S["maker_of"])   # {A: [B, …]}: into the older models, current or not
     S["current_keys"] = [k for k in S["current"] if k in CG and k not in S["outclassed"]]
     for k in S["current"]:
         if k not in S["keys"]: warn(f"{S['id']}: current key {k} is not one of the page's keys")
@@ -688,7 +775,7 @@ def build_page(S, css0, body0, app0):
     S["hide_couples"] = {}
     if S["legacy"] is None:                    # global page: current models, and the couples of older models that no
         maker, base = S["maker_of"], (lambda k: MODEL_LINE.get(k, k))   # other model of the same maker strictly beats
-        beaten = lambda k, e: any(maker[k2] == maker[k] and base(k2) != base(k) and CG[k2][e2][0] < CG[k][e][0]
+        beaten = lambda k, e: any(maker[k2] == maker[k] and base(k2) != base(k) and CGe[k2][e2][0] < CGe[k][e][0]
                                   and QG[k2][e2][0] > QG[k][e][0] for k2 in shown for e2 in CG[k2])
         for k in shown:
             if k in S["current_keys"]: continue
@@ -704,7 +791,6 @@ def build_page(S, css0, body0, app0):
         names = [models[k].get("bl", models[k]["label"]) for k in leg]
         S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 or SET["makers"][S["id"]].get("from_claude_page")
                             else " · ".join(names[:2]) + f" and {len(names) - 2} more")
-    S["variants"] = {c: v for c, v in VARIANTS.items() if c.split("@")[0] in CG and c.split("@")[1] in CG[c.split("@")[0]]}
     lock = "the tiers need two frontier couples"
     if S["id"] == "global":                    # the selection bar: one chip per maker, in its hue (the middle of its models')
         mks = [mk for mk in SET["makers"] if any(S["maker_of"][k] == mk for k in models)]
@@ -731,7 +817,7 @@ def build_page(S, css0, body0, app0):
     app = app.replace("__QUALGRID__", json.dumps(QG, separators=(",", ":")))
     app = app.replace("__PANEL__", json.dumps(PANEL, separators=(",", ":")))
     app = app.replace("__GROUPS_DATA__", json.dumps(GD, separators=(",", ":"), ensure_ascii=False))
-    body = patch(body0, body_patches(S, mc_text(CG, MCSE, models)), f"body.html ({S['id']})")
+    body = patch(body0, body_patches(S, mc_text(CGe, MCSE, models)), f"body.html ({S['id']})")
     body = body.replace("__REPO__", REPO_URL).replace("__DATA_URL__", DATA_URL)
     body = body.replace("__EFFORT_HEAD__", "".join(f"<th>{CAP[e].lower() if e in ('nothink', 'think') else e}</th>" for e in cols))
     span = math.exp(max(c[0] for v in CG.values() for c in v.values()) - min(c[0] for v in CG.values() for c in v.values()))
@@ -756,10 +842,12 @@ def build_page(S, css0, body0, app0):
     info = dict(id=S["id"], path=S["path"], title=S["title"], bytes=len(html.encode()), date=date.isoformat(),
                 couples_default=sum(len(CG[k]) - len(hid(k)) for k in vis), models_default=len(vis),
                 variants={c: [x["label"] for x in v] for c, v in S["variants"].items()},
+                promotions_in_force={c: dict(ratio=v["cost_ratio"], until=v["until"], seen=v["seen"]) for c, v in S["promos"].items()},
+                current_keys=S["current_keys"], legacy_keys=S["legacy_keys"], hide_couples=S["hide_couples"],
                 couples_all=sum(len(CG[k]) for k in shown), models_all=len(shown), outclassed=S["outclassed"],
                 counts=plain(pre.get(".nsrc", "")), answer=pre.get("answer-full", ""),
-                ladder=monotonicity_report({k: CG[k] for k in vis}, {k: QG[k] for k in vis}),
-                ladder_all=monotonicity_report(CG, QG))
+                ladder=monotonicity_report({k: CGe[k] for k in vis}, {k: QG[k] for k in vis}),
+                ladder_all=monotonicity_report(CGe, QG))
     return info
 
 

@@ -285,7 +285,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 .fchip-old{--fc:var(--muted);margin-left:8px}
 .fchip-old[aria-checked="false"]{color:var(--muted)}
 .fchip-old[aria-checked="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
-.flabel{pointer-events:none}
+.flabel,.flead{pointer-events:none}
 .tuner-tip{min-height:1.3em;margin:4px 0 0;font-size:12px;color:var(--muted);text-align:center}
 
 </style>
@@ -303,7 +303,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <div class="hero-row">
       <div class="lede-col">
         <p class="lede">What each recent Google model actually costs, at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair, on the same scales as every other maker's on this site.</p>
-        <p class="lede answer" id="answer">The best value today is <b>Gemini 4 Hydrogen at low effort</b> — 3.2× cheaper than the price trend for its quality (expected score 58.3 % on the benchmark panel).</p>
+        <p class="lede answer" id="answer">The best value today is <b>Gemini 3.1 Flash-Lite at minimal effort</b> — 2.6× cheaper than the price trend for its quality (expected score 43.4 % on the benchmark panel).</p>
         <p class="lede">Quality is the expected score across the whole benchmark panel, not one benchmark: the type of task can move it, <a href="#factors" onclick="document.getElementById('factors').open=true">see what moves everything</a>.</p>
       </div>
       <div class="meta meta-side">
@@ -321,10 +321,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-head"><span class="tier-name">👑 Best overall</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</span>
-          <span class="tier-nums">Cost <b>4.8×</b> · Score <b>58.3 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</span>
+          <span class="tier-nums">Cost <b>1.0×</b> · Score <b>43.4 %</b></span>
         </div>
-        <div class="tier-yield">324</div>
+        <div class="tier-yield">257</div>
       </div>
       
     </div></div>
@@ -335,7 +335,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</span>
           <span class="tier-nums">Cost <b>1.0×</b> · Score <b>43.4 %</b></span>
         </div>
-        <div class="tier-yield">229</div>
+        <div class="tier-yield">257</div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
@@ -345,17 +345,17 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</span>
           <span class="tier-nums">Cost <b>4.8×</b> · Score <b>58.3 %</b></span>
         </div>
-        <div class="tier-yield">324</div>
+        <div class="tier-yield">249</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Medium</span>
-          <span class="tier-nums">Cost <b>23×</b> · Score <b>67.9 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · Low</span>
+          <span class="tier-nums">Cost <b>15×</b> · promo until 30 Nov · Score <b>67.6 %</b></span>
         </div>
-        <div class="tier-yield">220</div>
+        <div class="tier-yield">194</div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
@@ -363,9 +363,9 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · High</span>
-          <span class="tier-nums">Cost <b>162×</b> · Score <b>75.3 %</b></span>
+          <span class="tier-nums">Cost <b>81×</b> · promo until 30 Nov · Score <b>75.3 %</b></span>
         </div>
-        <div class="tier-yield">93</div>
+        <div class="tier-yield">91</div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
@@ -391,10 +391,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <details class="fold">
         <summary>Value — distance to the price trend</summary>
         <div class="fold-body pad">
-          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality costs today across the <b>14 couples of the latest model of each family</b>, not just the frontier: it is the going rate of the models on sale. Earlier generations, dearer per point than their successors, would flatten it and make quality look cheap; it does not move when older models are shown (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.89</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
+          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality costs today across the <b><span class="ntrend">14</span> couples of the latest model of each family</b>, not just the frontier: it is the going rate of the models on sale. Earlier generations, dearer per point than their successors, would flatten it and make quality look cheap; it does not move when older models are shown (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.84</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
           <div class="chartbox"><table id="score-tbl">
             <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>expected score</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">trend = 100</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</td><td class="num">4.8×</td><td class="num">58.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 41%, transparent); color:var(--ink)">324</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Medium</td><td class="num">1.9×</td><td class="num">48.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 33%, transparent); color:var(--ink)">232</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</td><td class="num">1.0×</td><td class="num">43.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 33%, transparent); color:var(--ink)">229</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Medium</td><td class="num">23×</td><td class="num">67.9 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 32%, transparent); color:var(--ink)">220</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite · Minimal</td><td class="num">2.8×</td><td class="num">48.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 24%, transparent); color:var(--ink)">158</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · High</td><td class="num">59×</td><td class="num">71.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 21%, transparent); color:var(--ink)">138</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · Medium</td><td class="num">39×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 19×</small></td><td class="num">68.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 21%, transparent); color:var(--ink)">136</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · xHigh</td><td class="num">81×</td><td class="num">72.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 19%, transparent); color:var(--ink)">122</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · Medium</td><td class="num">126×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 63×</small></td><td class="num">74.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 16%, transparent); color:var(--ink)">108</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · High</td><td class="num">162×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 81×</small></td><td class="num">75.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 16%, transparent); color:var(--ink)">93</span></td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</td><td class="num">1.0×</td><td class="num">43.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 35%, transparent); color:var(--ink)">257</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</td><td class="num">4.8×</td><td class="num">58.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 35%, transparent); color:var(--ink)">249</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Medium</td><td class="num">1.9×</td><td class="num">48.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 33%, transparent); color:var(--ink)">229</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#8358b9"></span>Gemini 3.8 Flash · Low</td><td class="num">6.7×<small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 13×</small></td><td class="num">59.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 30%, transparent); color:var(--ink)">203</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · Low</td><td class="num">15×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 30×</small></td><td class="num">67.6 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 29%, transparent); color:var(--ink)">194</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · Medium</td><td class="num">19×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 39×</small></td><td class="num">68.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 25%, transparent); color:var(--ink)">164</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite · Minimal</td><td class="num">2.8×</td><td class="num">48.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 24%, transparent); color:var(--ink)">155</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · Medium</td><td class="num">63×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 126×</small></td><td class="num">74.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 16%, transparent); color:var(--ink)">108</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · High</td><td class="num">81×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 162×</small></td><td class="num">75.3 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 16%, transparent); color:var(--ink)">91</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · High</td><td class="num">54×<small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 108×</small></td><td class="num">70.9 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 19%, transparent); color:var(--ink)">79</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · High</td><td class="num">59×</td><td class="num">71.4 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 20%, transparent); color:var(--ink)">76</span></td></tr></tbody>
           </table></div>
           <p class="cap"><b>Value index</b> = 100 × how many times cheaper than the trend the couple is for its quality (100 = the trend). <b>Green</b> = above 100, <b>red</b> = below; intensity = distance to the trend in decades, capped at one. A couple on the Pareto frontier can still be red&nbsp;: being non-dominated does not mean being good value for what it delivers.</p>
         </div>
@@ -411,7 +411,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</span>
           <span class="tier-nums">Cost <b>1.0×</b> · Score <b>43.4 %</b></span>
         </div>
-        <div class="tier-yield">229</div>
+        <div class="tier-yield">257</div>
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
@@ -421,17 +421,17 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <span class="tier-pick"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</span>
           <span class="tier-nums">Cost <b>4.8×</b> · Score <b>58.3 %</b></span>
         </div>
-        <div class="tier-yield">324</div>
+        <div class="tier-yield">249</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
       <div class="tier-head"><span class="tier-name">Target 65.0 % – Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Medium</span>
-          <span class="tier-nums">Cost <b>23×</b> · Score <b>67.9 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon · Low</span>
+          <span class="tier-nums">Cost <b>15×</b> · promo until 30 Nov · Score <b>67.6 %</b></span>
         </div>
-        <div class="tier-yield">220</div>
+        <div class="tier-yield">194</div>
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
@@ -439,17 +439,17 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon · High</span>
-          <span class="tier-nums">Cost <b>162×</b> · Score <b>75.3 %</b></span>
+          <span class="tier-nums">Cost <b>81×</b> · promo until 30 Nov · Score <b>75.3 %</b></span>
         </div>
-        <div class="tier-yield">93</div>
+        <div class="tier-yield">91</div>
       </div>
       <span class="ex">Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium.</span>
     </div></div>
         <div id="tier-crown"><div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
-      <div class="crown-model"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen · Low</div>
-      <div class="crown-line">Cost <b>4.8×</b> · Score <b>58.3 %</b> · Value index <b>324</b></div>
-      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>3.2× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>9.5 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
+      <div class="crown-model"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite · Minimal</div>
+      <div class="crown-line">Cost <b>1.0×</b> · Score <b>43.4 %</b> · Value index <b>257</b></div>
+      <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>2.6× less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>7.2 points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div></div>
         <details class="fold">
           <summary>Tune the tiers (target, σ, price of quality β)</summary>
@@ -468,7 +468,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
         <div class="chartbox">
           <table id="matrix-tbl">
             <thead><tr><th style="text-align:left">Model</th><th>minimal</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th><th style="text-align:left">Expected score<br><span style="font-weight:400;text-transform:none;letter-spacing:0">top effort</span></th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 46%, transparent)">144<small>108–192</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 72×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 45%, transparent)">126<small>95–167</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 63×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">162<small>125–209</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 81×</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">75.3 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 19%, transparent)">4.8<small>3.1–7.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">23<small>18–29</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 39%, transparent)">59<small>48–73</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 42%, transparent)">81<small>61–108</small></div></td><td class="na">—</td><td class="mdl num">72.8 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 34%, transparent)">30<small>26–35</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 15×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 36%, transparent)">39<small>33–46</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 19×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 44%, transparent)">108<small>97–119</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 54×</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">70.9 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 15%, transparent)">2.8<small>2.1–3.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">2.3<small>1.9–2.7</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 20%, transparent)">5.6<small>4.6–6.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 26%, transparent)">11<small>9.1–13</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">51.3 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">1.0<small>0.74–1.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 25%, transparent)">10<small>7.1–15</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 12%, transparent)">1.9<small>1.4–2.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 22%, transparent)">6.7<small>5.1–8.9</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">45.5 %</td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 46%, transparent)">72<small>54–96</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 144×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 45%, transparent)">63<small>47–84</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 126×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">81<small>63–104</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 162×</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">75.3 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 21%, transparent)">4.8<small>3.1–7.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 35%, transparent)">23<small>18–29</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 44%, transparent)">59<small>48–73</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 47%, transparent)">81<small>61–108</small></div></td><td class="na">—</td><td class="mdl num">72.8 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">15<small>13–18</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 30×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 34%, transparent)">19<small>16–23</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 39×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 43%, transparent)">54<small>48–60</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 108×</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">70.9 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#8358b9"></span>Gemini 3.8 Flash</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">6.7<small>5.9–7.6</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 13×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 32%, transparent)">16<small>14–18</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 31×</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 40%, transparent)">39<small>35–44</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 78×</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">61.9 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 16%, transparent)">2.8<small>2.1–3.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 14%, transparent)">2.3<small>1.9–2.7</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 23%, transparent)">5.6<small>4.6–6.8</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 29%, transparent)">11<small>9.1–13</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">51.3 %</td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 7%, transparent)">1.0<small>0.74–1.4</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 28%, transparent)">10<small>7.1–15</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 13%, transparent)">1.9<small>1.4–2.5</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, var(--opus48) 24%, transparent)">6.7<small>5.1–8.9</small></div></td><td class="na">—</td><td class="na">—</td><td class="mdl num">45.5 %</td></tr></tbody>
           </table>
         </div>
         <p class="cap">"Expected score&nbsp;· top effort" = the score the model at its top effort is expected to reach on the benchmark panel, from the same fit as the landscape. A model measured at a <b>single setting</b> (<i>solo</i>&nbsp;: no effort parameter, see the measurement sources) fills one merged cell. A <b>thinking off</b> column appears when a model is measured with its thinking switched off, a <b>minimal</b> one for the lowest level some models have below low; each is a configuration of its own, read from its own measurements. n/a&nbsp;: effort not exposed, or measured by a single publisher (a couple is shown only once two publishers measured it).</p>
@@ -481,7 +481,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
         <div class="chartbox">
           <table id="value-tbl">
             <thead><tr><th style="text-align:left">Model</th><th>minimal</th><th>low</th><th>medium</th><th>high</th><th>xhigh</th><th>max</th></tr></thead>
-            <tbody><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 34%, transparent)">50<small>34–73</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 99</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 11%, transparent)">108<small>76–154</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 216</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 11%, transparent)">93<small>68–127</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 185</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 58%, transparent)">324<small>168–626</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 41%, transparent)">220<small>150–324</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 22%, transparent)">138<small>95–199</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 17%, transparent)">122<small>80–187</small></div></td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 27%, transparent)">158<small>124–201</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 315</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 21%, transparent)">136<small>108–171</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 272</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 21%, transparent)">70<small>60–82</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo 140</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 27%, transparent)">158<small>104–238</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 15%, transparent)">117<small>81–168</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 18%, transparent)">75<small>50–113</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 25%, transparent)">62<small>48–80</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 43%, transparent)">229<small>137–383</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 58%, transparent)">26<small>14–47</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 44%, transparent)">232<small>143–375</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 37%, transparent)">46<small>29–73</small></div></td><td class="na">—</td><td class="na">—</td></tr></tbody>
+            <tbody><tr><td class="mdl"><span class="dot" style="background:#b9473e"></span>Gemini 4 Carbon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 31%, transparent)">56<small>40–80</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 28</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 12%, transparent)">108<small>78–150</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 54</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 12%, transparent)">91<small>68–121</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 45</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#0e8661"></span>Gemini 4 Hydrogen</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 56%, transparent)">249<small>138–450</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 23%, transparent)">134<small>95–189</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 19%, transparent)">76<small>55–105</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 25%, transparent)">65<small>44–95</small></div></td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#0f74c5"></span>Gemini 4 Argon</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 43%, transparent)">194<small>156–239</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 97</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 34%, transparent)">164<small>133–202</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 82</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 17%, transparent)">79<small>68–90</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-11-30)">promo until 30 Nov · list 39</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#8358b9"></span>Gemini 3.8 Flash</td><td class="na">—</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 46%, transparent)">203<small>172–240</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 102</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 11%, transparent)">106<small>91–125</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 53</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 41%, transparent)">43<small>38–49</small><small class="vnote" title="promotional price (0.5× the list price, until 2026-12-31)">promo until 31 Dec · list 22</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Gemini 3.5 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 31%, transparent)">155<small>107–225</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 21%, transparent)">127<small>93–173</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 19%, transparent)">75<small>53–106</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 30%, transparent)">57<small>45–71</small></div></td><td class="na">—</td><td class="na">—</td></tr><tr><td class="mdl"><span class="dot" style="background:#b54f02"></span>Gemini 3.1 Flash-Lite</td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 58%, transparent)">257<small>164–404</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 58%, transparent)">28<small>16–48</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #3F8A78 52%, transparent)">229<small>150–349</small></div></td><td><div class="cell num" style="background:color-mix(in srgb, #C0563B 36%, transparent)">49<small>33–73</small></div></td><td class="na">—</td><td class="na">—</td></tr></tbody>
           </table>
         </div>
         <p class="cap"><b>Green</b> = above 100, cheaper than the trend for its quality&nbsp;; <b>red</b> = below&nbsp;; the deepest green is the best index shown, the deepest red the lowest, on a log scale. A high index does not make a couple a pick&nbsp;: the tiers weigh it against their target quality.</p>
@@ -538,7 +538,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
         <ul class="steps">
           <li><b>Set by hand, never tuned to the data:</b> weakly informative priors (half-Student-t(3,&nbsp;0,&nbsp;2.5) on every spread, Gamma(2,&nbsp;0.1) on the noise tails); a logit kept half a step inside 0 and 100&nbsp;%; a printed value's precision at its rounding (last digit&nbsp;/&nbsp;√12); an effect seen in a single measurement left out; a couple shown only when two publishers measured it; a reprint recognised by values that agree within their precisions, on two values at least and on all they share but one.</li>
           <li><b>Uncertainty.</b> Every interval is 16–84&nbsp;% (one standard deviation): the couple's own uncertainty.</li>
-          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit two figures on this page can move by one unit in that digit (the cost of Gemini 4 Carbon at high, the cost of Gemini 4 Carbon at low), far inside their intervals.</li>
+          <li><b>Published only when the fit is sound:</b> R̂&nbsp;≤&nbsp;1.01 and at least 400 effective draws on every parameter, no divergent transition. The Monte Carlo error of each value is checked against its last displayed digit; in this fit three figures on this page can move by one unit in that digit (the cost of Gemini 3.6 Flash at low, the cost of Gemini 4 Carbon at high, the cost of Gemini 4 Carbon at low), far inside their intervals.</li>
           <li><b>Display choices:</b> the quality axis is compressed below the weakest tier target; the frontier, the price trend and the four tiers use constants listed with their reasons in <a href="https://github.com/alexandregensse-blip/claude-models-value-analysis/blob/main/docs/DISPLAY-METHODOLOGY.md">DISPLAY-METHODOLOGY.md</a>.</li>
         </ul>
         <h3 class="blocktitle" style="margin-top:1.3em">Techniques and software</h3>
@@ -573,9 +573,11 @@ const capE=e=>e==="solo"?"solo":(CAPE[e]||e);                    // as a label: 
 const tagE=e=>e==="nothink"?"no think":e==="think"?"think":e;      // as a label on a chart point
 const atE=e=>e==="solo"?"":e==="nothink"?" with thinking off":e==="think"?" with thinking on":` at ${e==="xhigh"?"xHigh":e} effort`;   // in a sentence
 const TOP_FIRST=["max","xhigh","high","medium","low","minimal","think","nothink","solo"];   // the top effort of a model
-const LEGACY=["gemini-3.8-flash","gemini-3.7-flash","gemini-3.6-flash","gemini-3.5-flash","gemini-3.1-pro","gemini-3-pro","gemini-3-flash"];              // older models: hidden unless the reader turns them on
-const CURRENT=["gemini-4-argon","gemini-4-carbon","gemini-4-hydrogen","gemini-3.5-flash-lite"];
-const HIDE_B=[], LEGACY_HINT="Gemini 3.8 Flash · Gemini 3.7 Flash and 5 more", DASH=["","6 4","1.5 3.5"], HIDE_C={}, VARIANTS={"gemini-3.6-flash@high":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@low":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@minimal":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-4-argon@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-argon@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-argon@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","evidence":"https://ai.google.dev/gemini-api/docs/changelog"}]}, FILT={"key":"models","lock":"the tiers need two frontier couples","of":{"gemini-4-argon":"gemini-4-argon","gemini-4-carbon":"gemini-4-carbon","gemini-4-hydrogen":"gemini-4-hydrogen","gemini-3.8-flash":"gemini-3.8-flash","gemini-3.7-flash":"gemini-3.7-flash","gemini-3.6-flash":"gemini-3.6-flash","gemini-3.5-flash":"gemini-3.5-flash","gemini-3.5-flash-lite":"gemini-3.5-flash-lite","gemini-3.1-pro":"gemini-3.1-pro","gemini-3.1-flash-lite":"gemini-3.1-flash-lite","gemini-3-pro":"gemini-3-pro","gemini-3-flash":"gemini-3-flash"},"items":[{"id":"gemini-4-argon","label":"Gemini 4 Argon","c":"--mc0"},{"id":"gemini-4-carbon","label":"Gemini 4 Carbon","c":"--mc1"},{"id":"gemini-4-hydrogen","label":"Gemini 4 Hydrogen","c":"--mc2"},{"id":"gemini-3.8-flash","label":"Gemini 3.8 Flash","c":"--mc3"},{"id":"gemini-3.7-flash","label":"Gemini 3.7 Flash","c":"--mc4"},{"id":"gemini-3.6-flash","label":"Gemini 3.6 Flash","c":"--mc5"},{"id":"gemini-3.5-flash","label":"Gemini 3.5 Flash","c":"--mc6"},{"id":"gemini-3.5-flash-lite","label":"Gemini 3.5 Flash-Lite","c":"--mc7"},{"id":"gemini-3.1-pro","label":"Gemini 3.1 Pro","c":"--mc8"},{"id":"gemini-3.1-flash-lite","label":"Gemini 3.1 Flash-Lite","c":"--mc9"},{"id":"gemini-3-pro","label":"Gemini 3 Pro","c":"--mc10"},{"id":"gemini-3-flash","label":"Gemini 3 Flash","c":"--mc11"}]};   // per-site settings (site/makers.json)  // the latest model of each family: the price trend's couples
+const LEGACY=[];                 // multi-site: filled on load (PRICES_FN), at the prices in force              // older models: hidden unless the reader turns them on
+const CURRENT=[];
+const HIDE_B=[], DASH=["","6 4","1.5 3.5"], HIDE_C={}, VARIANTS={"gemini-3.6-flash@high":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"seen":"2026-11-16","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@low":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"seen":"2026-11-16","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"seen":"2026-11-16","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.6-flash@minimal":[{"kind":"promo","label":"promotional price (0.5× the list price, last seen 2026-11-16)","cost_ratio":0.5,"until":null,"seen":"2026-11-16","evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-3.8-flash@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-12-31)","cost_ratio":0.5,"until":"2026-12-31","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/pricing"}],"gemini-4-argon@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-argon@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-argon@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@high":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@low":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}],"gemini-4-carbon@medium":[{"kind":"promo","label":"promotional price (0.5× the list price, until 2026-11-30)","cost_ratio":0.5,"until":"2026-11-30","seen":null,"evidence":"https://ai.google.dev/gemini-api/docs/changelog"}]}, FILT={"key":"models","lock":"the tiers need two frontier couples","of":{"gemini-4-argon":"gemini-4-argon","gemini-4-carbon":"gemini-4-carbon","gemini-4-hydrogen":"gemini-4-hydrogen","gemini-3.8-flash":"gemini-3.8-flash","gemini-3.7-flash":"gemini-3.7-flash","gemini-3.6-flash":"gemini-3.6-flash","gemini-3.5-flash":"gemini-3.5-flash","gemini-3.5-flash-lite":"gemini-3.5-flash-lite","gemini-3.1-pro":"gemini-3.1-pro","gemini-3.1-flash-lite":"gemini-3.1-flash-lite","gemini-3-pro":"gemini-3-pro","gemini-3-flash":"gemini-3-flash"},"items":[{"id":"gemini-4-argon","label":"Gemini 4 Argon","c":"--mc0"},{"id":"gemini-4-carbon","label":"Gemini 4 Carbon","c":"--mc1"},{"id":"gemini-4-hydrogen","label":"Gemini 4 Hydrogen","c":"--mc2"},{"id":"gemini-3.8-flash","label":"Gemini 3.8 Flash","c":"--mc3"},{"id":"gemini-3.7-flash","label":"Gemini 3.7 Flash","c":"--mc4"},{"id":"gemini-3.6-flash","label":"Gemini 3.6 Flash","c":"--mc5"},{"id":"gemini-3.5-flash","label":"Gemini 3.5 Flash","c":"--mc6"},{"id":"gemini-3.5-flash-lite","label":"Gemini 3.5 Flash-Lite","c":"--mc7"},{"id":"gemini-3.1-pro","label":"Gemini 3.1 Pro","c":"--mc8"},{"id":"gemini-3.1-flash-lite","label":"Gemini 3.1 Flash-Lite","c":"--mc9"},{"id":"gemini-3-pro","label":"Gemini 3 Pro","c":"--mc10"},{"id":"gemini-3-flash","label":"Gemini 3 Flash","c":"--mc11"}]};   // per-site settings (site/makers.json)
+const CUR_BASE=["gemini-4-argon","gemini-4-carbon","gemini-4-hydrogen","gemini-3.5-flash-lite","gemini-3.1-pro"], LEG_BASE=["gemini-3.7-flash","gemini-3.6-flash","gemini-3.5-flash","gemini-3.5-flash-cyber","gemini-3-pro","gemini-3-flash","gemini-3-deepthink","gemini-3-deepthink-preview"], MAKER_OF={"gemini-4-argon":"google","gemini-4-carbon":"google","gemini-4-hydrogen":"google","gemini-3.8-flash":"google","gemini-3.7-flash":"google","gemini-3.6-flash":"google","gemini-3.5-flash":"google","gemini-3.5-flash-lite":"google","gemini-3.1-pro":"google","gemini-3.1-flash-lite":"google","gemini-3-pro":"google","gemini-3-flash":"google"}, HINT_ALL=false;   // before the prices in force: CURRENT, LEGACY, HIDE_C and LEGACY_HINT are taken from them on load
+let LEGACY_HINT="", OUTCLASSED={};  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -594,6 +596,39 @@ const QUALGRID={"gemini-4-argon":{"low":[6.3783,0.7732],"medium":[6.7515,0.616],
 // PANEL = [[θ, expected score]]: the expected score, averaged over the benchmark panel, of a couple of latent quality θ
 // (posterior median, no couple-specific effect). It only LABELS θ; read linearly in logit between its nodes.
 const PANEL=[[-39.4768,0.14605],[-37.398,0.15357],[-35.3192,0.16179],[-33.2404,0.17078],[-31.1616,0.18063],[-29.0827,0.19146],[-27.0039,0.20335],[-24.9251,0.21646],[-22.8463,0.23091],[-20.7675,0.24686],[-18.6887,0.2645],[-16.6099,0.28407],[-14.5311,0.30581],[-12.4523,0.32998],[-10.3735,0.35692],[-8.2946,0.38695],[-6.2158,0.42032],[-4.137,0.45715],[-2.0582,0.49726],[0.0206,0.54019],[2.0994,0.58498],[4.1782,0.63016],[6.257,0.6736],[8.3358,0.71325],[10.4146,0.74777],[12.4934,0.77698],[14.5723,0.80138],[16.6511,0.82174],[18.7299,0.83876],[20.8087,0.85309],[22.8875,0.86526],[24.9663,0.87565],[27.0451,0.88462],[29.1239,0.89242],[31.2027,0.89924],[33.2815,0.90525],[35.3604,0.91058],[37.4392,0.91533],[39.518,0.91959],[41.5968,0.92344],[43.6756,0.92692]];
+// PRICES IN FORCE (the maintainer, 19 Nov 2026: « les promotion ne sont pas prises en compte dans les annotations et
+// les scores / pareto »). A promotion kept (VARIANTS, kind promo: every tariff in one ratio, no stated end past) is the
+// price the couple sells at today, for everyone: it replaces the list price in every decision — the frontier and its
+// labels, the price trend, the value, the tiers and the crown, the outclassed models, the tables. The page is static:
+// it compares the reader's date with the promotion's stated end, so an ended promotion goes back to the list price and
+// everything below is taken again on load (the pre-render runs at the build date). An off-peak rate holds at some hours
+// only, not for everyone: it stays a variant, out of every decision.
+const TODAY=(d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`)(new Date());
+const PROMO={};                                             // "model@effort" → the promotion in force (the lowest price)
+for(const k in VARIANTS) VARIANTS[k].forEach(v=>{ if(v.kind!=="promo"||(v.until&&v.until<TODAY)) return;
+  if(!PROMO[k]||v.cost_ratio<PROMO[k].cost_ratio) PROMO[k]=v; });
+for(const k in PROMO){ const [m,e]=k.split("@"); if(!COSTGRID[m]||!COSTGRID[m][e]){ delete PROMO[k]; continue; }
+  COSTGRID[m]={...COSTGRID[m],[e]:[COSTGRID[m][e][0]+Math.log(PROMO[k].cost_ratio),COSTGRID[m][e][1]]}; }
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtD=d=>{ const [y,mo,da]=d.split("-").map(Number); return `${da} ${MON[mo-1]}${y!==+TODAY.slice(0,4)?" "+y:""}`; };
+const promoTag=k=>{ const v=PROMO[k]; return v?(v.until?`promo until ${fmtD(v.until)}`:`promo, seen ${fmtD(v.seen)}`):""; };
+// At these prices: the models another model of their maker entirely outclasses (site/multisite.py outclassed()), the
+// current models (the trend's couples), the older models and, on the global page, the beaten couples hidden by default.
+(function(){ const E=1e-9, dom=(o,p)=>o[0]<=p[0]+E&&o[1]>=p[1]-E&&(o[0]<p[0]-E||o[1]>p[1]+E);
+  const shown=Object.keys(MODELS).filter(k=>COSTGRID[k]), CG=COSTGRID, QG=QUALGRID, pts={};
+  shown.forEach(k=>{ pts[k]=Object.keys(CG[k]).map(e=>[CG[k][e][0],QG[k][e][0]]); });
+  shown.forEach(a=>{ const bs=shown.filter(b=>b!==a&&MAKER_OF[b]===MAKER_OF[a]&&pts[a].every(p=>pts[b].some(o=>dom(o,p)))); if(bs.length) OUTCLASSED[a]=bs; });
+  CUR_BASE.forEach(k=>{ if(CG[k]&&!OUTCLASSED[k]) CURRENT.push(k); });
+  if(LEG_BASE===null){ const base=k=>MODELS[k].base||k, hc={};      // global page: the couples another model of its maker strictly beats
+    const beaten=(k,e)=>shown.some(k2=>MAKER_OF[k2]===MAKER_OF[k]&&base(k2)!==base(k)&&Object.keys(CG[k2]).some(e2=>CG[k2][e2][0]<CG[k][e][0]&&QG[k2][e2][0]>QG[k][e][0]));
+    shown.forEach(k=>{ if(CURRENT.includes(k)) return; const out=Object.keys(CG[k]).filter(e=>beaten(k,e)); if(out.length) hc[k]=out; });
+    shown.forEach(k=>{ if(OUTCLASSED[k]||(hc[k]||[]).length===Object.keys(CG[k]).length) LEGACY.push(k); });
+    for(const k in hc) if(!LEGACY.includes(k)) HIDE_C[k]=hc[k];
+    const n=LEGACY.reduce((a,k)=>a+Object.keys(CG[k]).length,0)+Object.values(HIDE_C).reduce((a,v)=>a+v.length,0);
+    LEGACY_HINT=`${n} couples that another model of the same maker beats`; }
+  else { shown.forEach(k=>{ if(LEG_BASE.includes(k)||OUTCLASSED[k]) LEGACY.push(k); });
+    const names=LEGACY.filter(k=>!MODELS[k].ls).map(k=>MODELS[k].bl||MODELS[k].label);
+    LEGACY_HINT=names.length<=3||HINT_ALL?names.join(" · "):names.slice(0,2).join(" · ")+` and ${names.length-2} more`; } })();
 const lgt=s=>Math.log(s/(1-s)), expit=x=>1/(1+Math.exp(-x));
 function score(t){ let i=1; while(i<PANEL.length-1&&PANEL[i][0]<t) i++;
   const [t0,s0]=PANEL[i-1], [t1,s1]=PANEL[i]; return expit(lgt(s0)+(lgt(s1)-lgt(s0))*(t-t0)/(t1-t0)); }
@@ -648,23 +683,34 @@ const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includ
 // builds and modes (a dated build, a preview, a Pro mode) as hollow points, and the price variants.
 const lsty=m=>MODELS[m].ls||0;
 function legendSymbols(ms){
-  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
+  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), on=k=>ms.includes(k.split("@")[0]);
+  const pk=Object.keys(PROMO).some(on), ok=Object.keys(VARIANTS).some(k=>on(k)&&VARIANTS[k].some(v=>v.kind!=="promo"));
+  const dia=`<svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>`;
   return (hollow?`<span class="lg"><svg class="lgs" width="12" height="10" aria-hidden="true"><circle cx="6" cy="5" r="3.4" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.6"/></svg>hollow point: another build or mode of a model (a dated build, a preview, a Pro mode), named in its label</span>`:"")
-    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
+    +(pk?`<span class="lg">${dia}a couple on promotion: the filled point is its promotional price, the price in force (every pick reads it); the hollow diamond its list price</span>`:"")
+    +(ok?`<span class="lg">${dia}the same couple at an off-peak rate (some hours only) — shown, never used in a pick</span>`:""); }
 // Global page: the couples of older models that another model of the same maker strictly beats, hidden by default.
 function hideCouples(){ Object.keys(HIDE_C).forEach(m=>[[COSTGRID,GRID_ALL.cost],[QUALGRID,GRID_ALL.qual]].forEach(([G,A])=>{ if(!A[m]) return;
   G[m]=showLegacy?A[m]:Object.fromEntries(Object.entries(A[m]).filter(([e])=>!HIDE_C[m].includes(e))); })); }
-// Price variants (a promotion, an off-peak rate) of a couple: the same couple at another price. Drawn as a hollow
-// diamond joined to its couple by a dotted line, labelled in tooltips and tables; never a candidate of the frontier,
-// the trend, the tiers or the crown.
+// The other prices of a couple, each a hollow diamond joined to its couple by a dotted line, named in tooltips and
+// tables, never a candidate of the frontier, the trend, the tiers or the crown: the LIST price of a couple on
+// promotion (its point is at the promotional price, the price in force: PROMO), and an off-peak rate (some hours only).
 const VTAG={promo:"promo",offpeak:"off-peak"};
-function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[]).forEach(v=>o.push({m:p.m,e:p.e,c:p.c*v.cost_ratio,t:p.t,s:p.s,
-  base:p,front:p.front,vl:v.label,tag:VTAG[v.kind]||v.kind}))); return o; }
+const listOf=k=>PROMO[k]?1/PROMO[k].cost_ratio:1;            // list price ÷ the price shown
+function variantPts(pts){ const o=[]; pts.forEach(p=>{ const k=p.m+"@"+p.e, li=listOf(k), b={m:p.m,e:p.e,t:p.t,s:p.s,base:p,front:p.front};
+  if(PROMO[k]) o.push({...b,c:p.c*li,vl:`list price (${promoTag(k)})`,tag:"list"});
+  (VARIANTS[k]||[]).forEach(v=>{ if(v.kind!=="promo") o.push({...b,c:p.c*li*v.cost_ratio,vl:v.label,tag:VTAG[v.kind]||v.kind}); }); }); return o; }
 function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
   s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
   s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
 const vSegs=(pts,X,Y)=>variantPts(pts).map(v=>[X(v.base.c),Y(v.t),X(v.c),Y(v.t)]);   // a variant's dotted line
-const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
+// Under a cost or a value: the promotion in force and the list price; an off-peak rate. f(rel) writes the figure at
+// rel × the price shown.
+const vNotes=(m,e,f)=>{ const k=m+"@"+e, li=listOf(k);
+  return (PROMO[k]?`<small class="vnote" title="${PROMO[k].label}">${promoTag(k)} · list ${f(li)}</small>`:"")
+    +(VARIANTS[k]||[]).filter(v=>v.kind!=="promo").map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${f(li*v.cost_ratio)}</small>`).join(""); };
+const vNote=(m,e,c)=>vNotes(m,e,rel=>fmtC(c*rel)+"×");
+const pTag=p=>PROMO[p.m+"@"+p.e]?" · "+promoTag(p.m+"@"+p.e):"";   // after a couple's name: "· promo until 30 Nov"
 // Selection (the bar above the first chart): FILT.items are the page's makers (global page) or its models (a maker
 // page); OFF the items turned off. The page's grids are rebuilt from the full copy with only the couples shown — the
 // older-model switch, the beaten couples and the selection — so the charts, the tables, the frontier and its labels are
@@ -711,6 +757,7 @@ function renderFilterBar(){ const host=document.getElementById("filterbar"); if(
   host.innerHTML=`<span class="fbar-lbl">Filter by ${FILT.key==="makers"?"maker":"model"}</span><button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
     +vis.map(chip).join("")
     +(LEGACY.length?`<button type="button" class="fchip fchip-old" id="tgl-legacy-f" role="switch" aria-checked="${showLegacy}" title="${LEGACY_HINT}" onclick="toggleLegacy()"><span class="fchip-dot" aria-hidden="true"></span>Older models</button>`:""); }
+function fillNtrend(){ document.querySelectorAll(".ntrend").forEach(e=>e.textContent=String(trendRows().length)); }
 if(typeof addEventListener==="function") addEventListener("hashchange",()=>{ OFF=readSel(); applyLegacy(); tierDefaults(); renderAll(); });
 // The Pareto frontier's couples carry a label on the charts, "model · effort", small (11 px on screen, whatever the
 // width), muted, without background or frame; any other point is named by the tooltip. Labels keep their size on screen.
@@ -719,7 +766,7 @@ const HL={};                                                // owner (chart id) 
 function hlFront(k){ for(const o in HL) for(const kk in HL[o]) HL[o][kk].forEach(f=>f(kk===k)); }
 function frontRows(pts){ const fr=frontier(couples()).front, by={}; pts.forEach(p=>{ by[p.m+"@"+p.e]=p; });
   return fr.map(p=>by[p.m+"@"+p.e]).filter(Boolean); }
-const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`;
+const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}${pTag(p)}`;
 let MCTX=null;                                              // text width: the browser's own measure, else 0.6 em a character
 function textPx(s,t,fs){ try{ if(MCTX===null){ const c=document.createElement("canvas"); MCTX=c&&c.getContext?c.getContext("2d"):false; }
     if(MCTX){ MCTX.font=`${fs}px ${getComputedStyle(s).fontFamily||"sans-serif"}`; const w=MCTX.measureText(t).width; if(w>0) return w; } }catch(e){ MCTX=false; }
@@ -729,18 +776,30 @@ function segHits(x1,y1,x2,y2,b){ let t0=0,t1=1; const dx=x2-x1, dy=y2-y1;
   for(const [p,q] of [[-dx,x1-b.x0],[dx,b.x1-x1],[-dy,y1-b.y0],[dy,b.y1-y1]]){
     if(p===0){ if(q<0) return false; } else { const r=q/p; if(p<0){ if(r>t1) return false; if(r>t0) t0=r; } else { if(r<t0) return false; if(r<t1) t1=r; } } }
   return true; }
+// Segment × segment: do they cross (or touch)?
+function segX(a,b){ const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[1]-p[1])*(r[0]-p[0]));
+  const A=[a[0],a[1]],B=[a[2],a[3]],C=[b[0],b[1]],D=[b[2],b[3]];
+  return o(A,B,C)!==o(A,B,D)&&o(C,D,A)!==o(C,D,B); }
 // Placement: each label (cost order) goes to the first free spot around its point, nearest first — beside it, starting
 // up-left, the side of the frontier no couple can occupy — whose box, with a margin, overlaps no label already placed,
-// no point and no line of the chart (the frontier, a variant's dotted line). Never away from its point: no leader line.
-// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts both.
-function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[];
+// no point and no line of the chart (the frontier, a variant's dotted line). A label set off its point (beyond the
+// first ring) gets a short leader line, thin and muted, from the point's edge to the label's box; a spot is free only
+// if that line crosses no other leader line and no other label, and no leader line already drawn crosses the label.
+// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts them.
+function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[], leads=[];
   const pp=obst.map(p=>[X(p.c),Y(p.t)]), pr=6.5+m;           // a point: its largest mark (r 5.6, a diamond 4.6) and the margin
+  const grow=(b,g)=>({x0:b.x0-g,y0:b.y0-g,x1:b.x1+g,y1:b.y1+g});
   const free=b=>b.x0>=mL&&b.x1<=mL+iw&&b.y0>=mT&&b.y1<=mT+ih
     &&!placed.some(q=>b.x0<q.x1+m&&q.x0<b.x1+m&&b.y0<q.y1+m&&q.y0<b.y1+m)
     &&!pp.some(([px,py])=>{ const cx=Math.max(b.x0,Math.min(px,b.x1)), cy=Math.max(b.y0,Math.min(py,b.y1)); return Math.hypot(px-cx,py-cy)<pr; })
-    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],{x0:b.x0-m,y0:b.y0-m,x1:b.x1+m,y1:b.y1+m}));
+    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)))
+    &&!leads.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)));
+  // the leader line of a box set off its point: from the point's edge (5.6 + 1 units) to 1 px short of the box
+  const lead=(ax,ay,b)=>{ const cx=Math.max(b.x0,Math.min(ax,b.x1)), cy=Math.max(b.y0,Math.min(ay,b.y1)), d=Math.hypot(cx-ax,cy-ay);
+    if(!(d>6.6+2*u)) return null; const ux=(cx-ax)/d, uy=(cy-ay)/d; return [ax+ux*6.6,ay+uy*6.6,cx-ux*u,cy-uy*u]; };
+  const leadOK=g=>!leads.some(o=>segX(g,o))&&!placed.some(q=>segHits(g[0],g[1],g[2],g[3],grow(q,m)));
   let hidden=0;
-  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null;
+  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null, bl=null;
     if(ax<mL||ax>mL+iw||ay<mT||ay>mT+ih){ return; }
     for(let ring=0; ring<4&&!best; ring++){ const d=pr+ring*4*u, dd=d*0.7;
       const cand=[[ax-dd-w,ay-dd-h],[ax-d-w,ay-h/2]];          // up-left, left, then above and below sliding along, right, the corners
@@ -748,14 +807,17 @@ function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u,
       cand.push([ax+dd,ay+dd],[ax+d,ay-h/2]);
       for(const f of [0,0.25,0.5,0.75,1]) cand.push([ax-f*w,ay+d]);
       cand.push([ax+dd,ay-dd-h],[ax-dd-w,ay+dd]);
-      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(free(b)){ best=b; break; } } }
+      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(!free(b)) continue;
+        const g=ring?lead(ax,ay,b):null; if(g&&!leadOK(g)) continue;
+        best=b; bl=g; break; } }
     if(!best){ hidden++; return; }
     const col=cvar(MODELS[p.m].c), k=p.m+"@"+p.e;
+    let ln=null; if(bl){ ln=el("line",{class:"flead","data-k":k,x1:bl[0],y1:bl[1],x2:bl[2],y2:bl[3],stroke:cvar('--muted'),"stroke-width":0.8*u,"stroke-opacity":0.6}); s.appendChild(ln); leads.push(bl); }
     const tx=el("text",{class:"flabel","data-k":k,x:best.x0,y:best.y1-3*u,"font-size":fs,fill:cvar('--muted'),"text-anchor":"start"}); tx.textContent=t;
     s.appendChild(tx);
-    (reg[k]=reg[k]||[]).push(on=>tx.setAttribute("fill",on?col:cvar('--muted')));
+    (reg[k]=reg[k]||[]).push(on=>{ tx.setAttribute("fill",on?col:cvar('--muted')); if(ln) ln.setAttribute("stroke",on?col:cvar('--muted')); });
     placed.push({...best,x:(best.x0+best.x1)/2,y:(best.y0+best.y1)/2,w,h,p,k}); });
-  s.__labels={shown:placed.length,hidden,frontier:F.length};
+  s.__labels={shown:placed.length,hidden,frontier:F.length,leaders:leads.length};
   return placed; }
 if(typeof addEventListener==="function"){ let rw=0; addEventListener("resize",()=>{ const s=document.getElementById("chartB"), w=s?s.getBoundingClientRect().width:0;
   if(w&&Math.abs(w-rw)>1){ rw=w; drawB(); drawPareto(); } }); }   // the labels and the tooltip keep their size on screen
@@ -836,7 +898,7 @@ function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi
     if(hit&&(!best||hd===0||hd<bd)) best=hit.p; else hit=null;
     const k=best&&!best.vl?best.m+"@"+best.e:null; hlFront(k);
     if(best){ const fs=11.5*u, y0=hit?hit.y-hit.h/2-6*u:Y(best.t)-10*u;
-      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
+      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:pTag(best)}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       ttxt.setAttribute("font-size",fs); ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",X(best.c)); ttxt.setAttribute("y",y0);
       ttxt.textContent=`${name} — ${val}`; let bb=ttxt.getBBox(), sp=[];
       if(bb.width>iw-10*u){ ttxt.textContent=""; sp=[el("tspan",{dy:-fs*1.2}),el("tspan",{dy:fs*1.2})]; sp[0].textContent=name; sp[1].textContent=val;
@@ -1055,7 +1117,7 @@ function drawTiers(){
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
+          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b>${pTag(w)} · Score <b>${pct(w.s)}</b></span>
         </div>
         <div class="tier-yield">${vIndex(w.r)}</div>
       </div>
@@ -1071,7 +1133,7 @@ function drawTiers(){
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b>${pTag(c)} · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
       <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
@@ -1154,7 +1216,7 @@ function drawValueMatrix(){
   const rs=rows.map(p=>valueOf(tr,p)), rHi=Math.max(...rs,1e-9), rLo=Math.min(...rs,-1e-9);
   const cell=p=>{ const r=valueOf(tr,p), sd=Math.hypot(p.hx,tr.l*p.ht), al=Math.round((0.08+(r>=0?r/rHi:r/rLo)*0.50)*100),
       sc=r>=0?cvar('--good'):cvar('--crit');
-    return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${(VARIANTS[p.m+"@"+p.e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${vIndex(r-Math.log(v.cost_ratio))}</small>`).join("")}</div>`; };
+    return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${vNotes(p.m,p.e,rel=>vIndex(r-Math.log(rel)))}</div>`; };
   for(const m of Object.keys(by).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], row=document.createElement("tr");
     let h=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}</td>`;
     if(by[m].solo) h+=`<td colspan="${EFFORT_COLS.length}">${cell(by[m].solo)}</td>`;
@@ -1228,7 +1290,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
 function answerData(){
   const {picks,crown}=tierPicks();
   const top=couples().reduce((a,b)=>b.t>a.t?b:a);
-  const nm=p=>`${MODELS[p.m].label}${atE(p.e)}`;
+  const nm=p=>`${MODELS[p.m].label}${atE(p.e)}${PROMO[p.m+"@"+p.e]?` (${promoTag(p.m+"@"+p.e)})`:""}`;
   return {picks,crown,top,nm};
 }
 function fillAnswer(){
@@ -1242,7 +1304,7 @@ function answerFull(){
     +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
     +`Highest measured quality: ${nm(top)} (expected score ${pct(top.s)}, cost ${fmtC(top.c)}× the cheapest couple).`;
 }
-function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawValueMatrix();drawEdgeTable();fillMeta();fillAnswer();
+function renderAll(){fillNtrend();renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawValueMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);

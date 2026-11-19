@@ -285,7 +285,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
 .fchip-old{--fc:var(--muted);margin-left:8px}
 .fchip-old[aria-checked="false"]{color:var(--muted)}
 .fchip-old[aria-checked="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
-.flabel{pointer-events:none}
+.flabel,.flead{pointer-events:none}
 .tuner-tip{min-height:1.3em;margin:4px 0 0;font-size:12px;color:var(--muted);text-align:center}
 
 </style>
@@ -391,7 +391,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <details class="fold">
         <summary>Value — distance to the price trend</summary>
         <div class="fold-body pad">
-          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality costs today across the <b>9 couples of the latest model of each family</b>, not just the frontier: it is the going rate of the models on sale. Earlier generations, dearer per point than their successors, would flatten it and make quality look cheap; it does not move when older models are shown (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.64</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
+          <p class="sub">The <b>price trend</b> — <b>ln(cost) = a + λ·θ</b>, θ the latent quality — is what a given quality costs today across the <b><span class="ntrend">9</span> couples of the latest model of each family</b>, not just the frontier: it is the going rate of the models on sale. Earlier generations, dearer per point than their successors, would flatten it and make quality look cheap; it does not move when older models are shown (R²&nbsp;≈&nbsp;<span id="pareto-r2">0.64</span>, drawn faint grey above). Each couple weighs by its uncertainty across the line, both axes counted. On the latent scale the trend is a straight line: each step of quality costs the same <b>ratio</b> more, wherever it sits. A couple's <b>distance</b> to it says how many times <b>cheaper</b> or <b>dearer</b> it is than the trend charges <b>for its quality</b> — the same gap read on the other axis is how much more quality it gives than the trend at its cost. No couple serves as a reference. Only the <b>frontier</b> couples are listed.</p>
           <div class="chartbox"><table id="score-tbl">
             <thead><tr><th style="text-align:left">Model · effort</th><th>cost</th><th>expected score</th><th>value index<br><span style="font-weight:400;text-transform:none;letter-spacing:0">trend = 100</span></th></tr></thead>
             <tbody><tr><td class="mdl"><span class="dot" style="background:#057f97"></span>Qwen3.8 Flash · Thinking off</td><td class="num">1.3×</td><td class="num">43.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 61%, transparent); color:var(--ink)">787</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#4d830b"></span>Qwen3.7 Flash · Thinking off</td><td class="num">1.0×</td><td class="num">40.5 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 55%, transparent); color:var(--ink)">610</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#946905"></span>Qwen3.8 Max 0902 build · Medium</td><td class="num">79×</td><td class="num">64.7 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 31%, transparent); color:var(--ink)">212</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#946905"></span>Qwen3.8 Max · Low</td><td class="num">78×</td><td class="num">61.2 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 21%, transparent); color:var(--ink)">137</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#946905"></span>Qwen3.8 Max 0902 build · Low</td><td class="num">77×</td><td class="num">58.8 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #3F8A78 14%, transparent); color:var(--ink)">102</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#946905"></span>Qwen3.8 Max · xHigh</td><td class="num">251×</td><td class="num">66.7 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 17%, transparent); color:var(--ink)">87</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b14576"></span>Qwen3.8-27B · Medium</td><td class="num">39×</td><td class="num">52.0 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 18%, transparent); color:var(--ink)">85</span></td></tr><tr><td class="mdl"><span class="dot" style="background:#b14576"></span>Qwen3.8-27B · Low</td><td class="num">30×</td><td class="num">49.1 %</td><td style="min-width:96px"><span class="scorepill" style="background:color-mix(in srgb, #C0563B 21%, transparent); color:var(--ink)">74</span></td></tr></tbody>
@@ -573,9 +573,11 @@ const capE=e=>e==="solo"?"solo":(CAPE[e]||e);                    // as a label: 
 const tagE=e=>e==="nothink"?"no think":e==="think"?"think":e;      // as a label on a chart point
 const atE=e=>e==="solo"?"":e==="nothink"?" with thinking off":e==="think"?" with thinking on":` at ${e==="xhigh"?"xHigh":e} effort`;   // in a sentence
 const TOP_FIRST=["max","xhigh","high","medium","low","minimal","think","nothink","solo"];   // the top effort of a model
-const LEGACY=["qwen3.6-27b","qwen3.5-122b-a10b","qwen3.5-35b-a3b","qwen3.5-27b","qwen3-coder-next"];              // older models: hidden unless the reader turns them on
-const CURRENT=["qwen3.8-max","qwen3.8-max-0902","qwen3.8-flash","qwen3.8-27b"];
-const HIDE_B=[], LEGACY_HINT="Qwen3.6-27B · Qwen3.5-122B-A10B and 3 more", DASH=["","6 4","1.5 3.5"], HIDE_C={}, VARIANTS={}, FILT={"key":"models","lock":"the tiers need two frontier couples","of":{"qwen3.8-max":"qwen3.8-max","qwen3.8-max-0902":"qwen3.8-max","qwen3.8-flash":"qwen3.8-flash","qwen3.8-27b":"qwen3.8-27b","qwen3.7-flash":"qwen3.7-flash","qwen3.6-27b":"qwen3.6-27b","qwen3.5-122b-a10b":"qwen3.5-122b-a10b","qwen3.5-35b-a3b":"qwen3.5-35b-a3b","qwen3.5-27b":"qwen3.5-27b","qwen3-coder-next":"qwen3-coder-next"},"items":[{"id":"qwen3.8-max","label":"Qwen3.8 Max","c":"--mc0"},{"id":"qwen3.8-flash","label":"Qwen3.8 Flash","c":"--mc1"},{"id":"qwen3.8-27b","label":"Qwen3.8-27B","c":"--mc2"},{"id":"qwen3.7-flash","label":"Qwen3.7 Flash","c":"--mc3"},{"id":"qwen3.6-27b","label":"Qwen3.6-27B","c":"--mc4"},{"id":"qwen3.5-122b-a10b","label":"Qwen3.5-122B-A10B","c":"--mc5"},{"id":"qwen3.5-35b-a3b","label":"Qwen3.5-35B-A3B","c":"--mc6"},{"id":"qwen3.5-27b","label":"Qwen3.5-27B","c":"--mc7"},{"id":"qwen3-coder-next","label":"Qwen3-Coder-Next","c":"--mc8"}]};   // per-site settings (site/makers.json)  // the latest model of each family: the price trend's couples
+const LEGACY=[];                 // multi-site: filled on load (PRICES_FN), at the prices in force              // older models: hidden unless the reader turns them on
+const CURRENT=[];
+const HIDE_B=[], DASH=["","6 4","1.5 3.5"], HIDE_C={}, VARIANTS={}, FILT={"key":"models","lock":"the tiers need two frontier couples","of":{"qwen3.8-max":"qwen3.8-max","qwen3.8-max-0902":"qwen3.8-max","qwen3.8-flash":"qwen3.8-flash","qwen3.8-27b":"qwen3.8-27b","qwen3.7-flash":"qwen3.7-flash","qwen3.6-27b":"qwen3.6-27b","qwen3.5-122b-a10b":"qwen3.5-122b-a10b","qwen3.5-35b-a3b":"qwen3.5-35b-a3b","qwen3.5-27b":"qwen3.5-27b","qwen3-coder-next":"qwen3-coder-next"},"items":[{"id":"qwen3.8-max","label":"Qwen3.8 Max","c":"--mc0"},{"id":"qwen3.8-flash","label":"Qwen3.8 Flash","c":"--mc1"},{"id":"qwen3.8-27b","label":"Qwen3.8-27B","c":"--mc2"},{"id":"qwen3.7-flash","label":"Qwen3.7 Flash","c":"--mc3"},{"id":"qwen3.6-27b","label":"Qwen3.6-27B","c":"--mc4"},{"id":"qwen3.5-122b-a10b","label":"Qwen3.5-122B-A10B","c":"--mc5"},{"id":"qwen3.5-35b-a3b","label":"Qwen3.5-35B-A3B","c":"--mc6"},{"id":"qwen3.5-27b","label":"Qwen3.5-27B","c":"--mc7"},{"id":"qwen3-coder-next","label":"Qwen3-Coder-Next","c":"--mc8"}]};   // per-site settings (site/makers.json)
+const CUR_BASE=["qwen3.8-max","qwen3.8-max-0902","qwen3.8-flash","qwen3.8-27b","qwen3.5-122b-a10b"], LEG_BASE=["qwen3.6-max","qwen3.6-max-preview","qwen3.6-flash","qwen3.5-max","qwen3.5-max-preview","qwen3.5-plus","qwen3.5-plus-0420","qwen3.5-plus-02-15","qwen3.5-flash","qwen3.5-27b","qwen3.5-9b","qwen3.5-4b","qwen3.5-2b","qwen3.5-0.8b","qwen3-max-thinking","qwen3-max-thinking-preview","qwen3-coder-next","qwen3-8b"], MAKER_OF={"qwen3.8-max":"qwen","qwen3.8-max-0902":"qwen","qwen3.8-flash":"qwen","qwen3.8-27b":"qwen","qwen3.7-flash":"qwen","qwen3.6-27b":"qwen","qwen3.5-122b-a10b":"qwen","qwen3.5-35b-a3b":"qwen","qwen3.5-27b":"qwen","qwen3-coder-next":"qwen"}, HINT_ALL=false;   // before the prices in force: CURRENT, LEGACY, HIDE_C and LEGACY_HINT are taken from them on load
+let LEGACY_HINT="", OUTCLASSED={};  // the latest model of each family: the price trend's couples
 const cvar = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
 const NS="http://www.w3.org/2000/svg";
 const el=(n,a={})=>{const e=document.createElementNS(NS,n);for(const k in a)e.setAttribute(k,a[k]);return e;};
@@ -594,6 +596,39 @@ const QUALGRID={"qwen3.8-max":{"low":[3.315,1.3518],"xhigh":[5.9522,1.199]},"qwe
 // PANEL = [[θ, expected score]]: the expected score, averaged over the benchmark panel, of a couple of latent quality θ
 // (posterior median, no couple-specific effect). It only LABELS θ; read linearly in logit between its nodes.
 const PANEL=[[-39.4768,0.14605],[-37.398,0.15357],[-35.3192,0.16179],[-33.2404,0.17078],[-31.1616,0.18063],[-29.0827,0.19146],[-27.0039,0.20335],[-24.9251,0.21646],[-22.8463,0.23091],[-20.7675,0.24686],[-18.6887,0.2645],[-16.6099,0.28407],[-14.5311,0.30581],[-12.4523,0.32998],[-10.3735,0.35692],[-8.2946,0.38695],[-6.2158,0.42032],[-4.137,0.45715],[-2.0582,0.49726],[0.0206,0.54019],[2.0994,0.58498],[4.1782,0.63016],[6.257,0.6736],[8.3358,0.71325],[10.4146,0.74777],[12.4934,0.77698],[14.5723,0.80138],[16.6511,0.82174],[18.7299,0.83876],[20.8087,0.85309],[22.8875,0.86526],[24.9663,0.87565],[27.0451,0.88462],[29.1239,0.89242],[31.2027,0.89924],[33.2815,0.90525],[35.3604,0.91058],[37.4392,0.91533],[39.518,0.91959],[41.5968,0.92344],[43.6756,0.92692]];
+// PRICES IN FORCE (the maintainer, 19 Nov 2026: « les promotion ne sont pas prises en compte dans les annotations et
+// les scores / pareto »). A promotion kept (VARIANTS, kind promo: every tariff in one ratio, no stated end past) is the
+// price the couple sells at today, for everyone: it replaces the list price in every decision — the frontier and its
+// labels, the price trend, the value, the tiers and the crown, the outclassed models, the tables. The page is static:
+// it compares the reader's date with the promotion's stated end, so an ended promotion goes back to the list price and
+// everything below is taken again on load (the pre-render runs at the build date). An off-peak rate holds at some hours
+// only, not for everyone: it stays a variant, out of every decision.
+const TODAY=(d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,"0")}-${String(d.getDate()).padStart(2,"0")}`)(new Date());
+const PROMO={};                                             // "model@effort" → the promotion in force (the lowest price)
+for(const k in VARIANTS) VARIANTS[k].forEach(v=>{ if(v.kind!=="promo"||(v.until&&v.until<TODAY)) return;
+  if(!PROMO[k]||v.cost_ratio<PROMO[k].cost_ratio) PROMO[k]=v; });
+for(const k in PROMO){ const [m,e]=k.split("@"); if(!COSTGRID[m]||!COSTGRID[m][e]){ delete PROMO[k]; continue; }
+  COSTGRID[m]={...COSTGRID[m],[e]:[COSTGRID[m][e][0]+Math.log(PROMO[k].cost_ratio),COSTGRID[m][e][1]]}; }
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+const fmtD=d=>{ const [y,mo,da]=d.split("-").map(Number); return `${da} ${MON[mo-1]}${y!==+TODAY.slice(0,4)?" "+y:""}`; };
+const promoTag=k=>{ const v=PROMO[k]; return v?(v.until?`promo until ${fmtD(v.until)}`:`promo, seen ${fmtD(v.seen)}`):""; };
+// At these prices: the models another model of their maker entirely outclasses (site/multisite.py outclassed()), the
+// current models (the trend's couples), the older models and, on the global page, the beaten couples hidden by default.
+(function(){ const E=1e-9, dom=(o,p)=>o[0]<=p[0]+E&&o[1]>=p[1]-E&&(o[0]<p[0]-E||o[1]>p[1]+E);
+  const shown=Object.keys(MODELS).filter(k=>COSTGRID[k]), CG=COSTGRID, QG=QUALGRID, pts={};
+  shown.forEach(k=>{ pts[k]=Object.keys(CG[k]).map(e=>[CG[k][e][0],QG[k][e][0]]); });
+  shown.forEach(a=>{ const bs=shown.filter(b=>b!==a&&MAKER_OF[b]===MAKER_OF[a]&&pts[a].every(p=>pts[b].some(o=>dom(o,p)))); if(bs.length) OUTCLASSED[a]=bs; });
+  CUR_BASE.forEach(k=>{ if(CG[k]&&!OUTCLASSED[k]) CURRENT.push(k); });
+  if(LEG_BASE===null){ const base=k=>MODELS[k].base||k, hc={};      // global page: the couples another model of its maker strictly beats
+    const beaten=(k,e)=>shown.some(k2=>MAKER_OF[k2]===MAKER_OF[k]&&base(k2)!==base(k)&&Object.keys(CG[k2]).some(e2=>CG[k2][e2][0]<CG[k][e][0]&&QG[k2][e2][0]>QG[k][e][0]));
+    shown.forEach(k=>{ if(CURRENT.includes(k)) return; const out=Object.keys(CG[k]).filter(e=>beaten(k,e)); if(out.length) hc[k]=out; });
+    shown.forEach(k=>{ if(OUTCLASSED[k]||(hc[k]||[]).length===Object.keys(CG[k]).length) LEGACY.push(k); });
+    for(const k in hc) if(!LEGACY.includes(k)) HIDE_C[k]=hc[k];
+    const n=LEGACY.reduce((a,k)=>a+Object.keys(CG[k]).length,0)+Object.values(HIDE_C).reduce((a,v)=>a+v.length,0);
+    LEGACY_HINT=`${n} couples that another model of the same maker beats`; }
+  else { shown.forEach(k=>{ if(LEG_BASE.includes(k)||OUTCLASSED[k]) LEGACY.push(k); });
+    const names=LEGACY.filter(k=>!MODELS[k].ls).map(k=>MODELS[k].bl||MODELS[k].label);
+    LEGACY_HINT=names.length<=3||HINT_ALL?names.join(" · "):names.slice(0,2).join(" · ")+` and ${names.length-2} more`; } })();
 const lgt=s=>Math.log(s/(1-s)), expit=x=>1/(1+Math.exp(-x));
 function score(t){ let i=1; while(i<PANEL.length-1&&PANEL[i][0]<t) i++;
   const [t0,s0]=PANEL[i-1], [t1,s1]=PANEL[i]; return expit(lgt(s0)+(lgt(s1)-lgt(s0))*(t-t0)/(t1-t0)); }
@@ -648,23 +683,34 @@ const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includ
 // builds and modes (a dated build, a preview, a Pro mode) as hollow points, and the price variants.
 const lsty=m=>MODELS[m].ls||0;
 function legendSymbols(ms){
-  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
+  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), on=k=>ms.includes(k.split("@")[0]);
+  const pk=Object.keys(PROMO).some(on), ok=Object.keys(VARIANTS).some(k=>on(k)&&VARIANTS[k].some(v=>v.kind!=="promo"));
+  const dia=`<svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>`;
   return (hollow?`<span class="lg"><svg class="lgs" width="12" height="10" aria-hidden="true"><circle cx="6" cy="5" r="3.4" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.6"/></svg>hollow point: another build or mode of a model (a dated build, a preview, a Pro mode), named in its label</span>`:"")
-    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
+    +(pk?`<span class="lg">${dia}a couple on promotion: the filled point is its promotional price, the price in force (every pick reads it); the hollow diamond its list price</span>`:"")
+    +(ok?`<span class="lg">${dia}the same couple at an off-peak rate (some hours only) — shown, never used in a pick</span>`:""); }
 // Global page: the couples of older models that another model of the same maker strictly beats, hidden by default.
 function hideCouples(){ Object.keys(HIDE_C).forEach(m=>[[COSTGRID,GRID_ALL.cost],[QUALGRID,GRID_ALL.qual]].forEach(([G,A])=>{ if(!A[m]) return;
   G[m]=showLegacy?A[m]:Object.fromEntries(Object.entries(A[m]).filter(([e])=>!HIDE_C[m].includes(e))); })); }
-// Price variants (a promotion, an off-peak rate) of a couple: the same couple at another price. Drawn as a hollow
-// diamond joined to its couple by a dotted line, labelled in tooltips and tables; never a candidate of the frontier,
-// the trend, the tiers or the crown.
+// The other prices of a couple, each a hollow diamond joined to its couple by a dotted line, named in tooltips and
+// tables, never a candidate of the frontier, the trend, the tiers or the crown: the LIST price of a couple on
+// promotion (its point is at the promotional price, the price in force: PROMO), and an off-peak rate (some hours only).
 const VTAG={promo:"promo",offpeak:"off-peak"};
-function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[]).forEach(v=>o.push({m:p.m,e:p.e,c:p.c*v.cost_ratio,t:p.t,s:p.s,
-  base:p,front:p.front,vl:v.label,tag:VTAG[v.kind]||v.kind}))); return o; }
+const listOf=k=>PROMO[k]?1/PROMO[k].cost_ratio:1;            // list price ÷ the price shown
+function variantPts(pts){ const o=[]; pts.forEach(p=>{ const k=p.m+"@"+p.e, li=listOf(k), b={m:p.m,e:p.e,t:p.t,s:p.s,base:p,front:p.front};
+  if(PROMO[k]) o.push({...b,c:p.c*li,vl:`list price (${promoTag(k)})`,tag:"list"});
+  (VARIANTS[k]||[]).forEach(v=>{ if(v.kind!=="promo") o.push({...b,c:p.c*li*v.cost_ratio,vl:v.label,tag:VTAG[v.kind]||v.kind}); }); }); return o; }
 function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
   s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
   s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
 const vSegs=(pts,X,Y)=>variantPts(pts).map(v=>[X(v.base.c),Y(v.t),X(v.c),Y(v.t)]);   // a variant's dotted line
-const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
+// Under a cost or a value: the promotion in force and the list price; an off-peak rate. f(rel) writes the figure at
+// rel × the price shown.
+const vNotes=(m,e,f)=>{ const k=m+"@"+e, li=listOf(k);
+  return (PROMO[k]?`<small class="vnote" title="${PROMO[k].label}">${promoTag(k)} · list ${f(li)}</small>`:"")
+    +(VARIANTS[k]||[]).filter(v=>v.kind!=="promo").map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${f(li*v.cost_ratio)}</small>`).join(""); };
+const vNote=(m,e,c)=>vNotes(m,e,rel=>fmtC(c*rel)+"×");
+const pTag=p=>PROMO[p.m+"@"+p.e]?" · "+promoTag(p.m+"@"+p.e):"";   // after a couple's name: "· promo until 30 Nov"
 // Selection (the bar above the first chart): FILT.items are the page's makers (global page) or its models (a maker
 // page); OFF the items turned off. The page's grids are rebuilt from the full copy with only the couples shown — the
 // older-model switch, the beaten couples and the selection — so the charts, the tables, the frontier and its labels are
@@ -711,6 +757,7 @@ function renderFilterBar(){ const host=document.getElementById("filterbar"); if(
   host.innerHTML=`<span class="fbar-lbl">Filter by ${FILT.key==="makers"?"maker":"model"}</span><button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
     +vis.map(chip).join("")
     +(LEGACY.length?`<button type="button" class="fchip fchip-old" id="tgl-legacy-f" role="switch" aria-checked="${showLegacy}" title="${LEGACY_HINT}" onclick="toggleLegacy()"><span class="fchip-dot" aria-hidden="true"></span>Older models</button>`:""); }
+function fillNtrend(){ document.querySelectorAll(".ntrend").forEach(e=>e.textContent=String(trendRows().length)); }
 if(typeof addEventListener==="function") addEventListener("hashchange",()=>{ OFF=readSel(); applyLegacy(); tierDefaults(); renderAll(); });
 // The Pareto frontier's couples carry a label on the charts, "model · effort", small (11 px on screen, whatever the
 // width), muted, without background or frame; any other point is named by the tooltip. Labels keep their size on screen.
@@ -719,7 +766,7 @@ const HL={};                                                // owner (chart id) 
 function hlFront(k){ for(const o in HL) for(const kk in HL[o]) HL[o][kk].forEach(f=>f(kk===k)); }
 function frontRows(pts){ const fr=frontier(couples()).front, by={}; pts.forEach(p=>{ by[p.m+"@"+p.e]=p; });
   return fr.map(p=>by[p.m+"@"+p.e]).filter(Boolean); }
-const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`;
+const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}${pTag(p)}`;
 let MCTX=null;                                              // text width: the browser's own measure, else 0.6 em a character
 function textPx(s,t,fs){ try{ if(MCTX===null){ const c=document.createElement("canvas"); MCTX=c&&c.getContext?c.getContext("2d"):false; }
     if(MCTX){ MCTX.font=`${fs}px ${getComputedStyle(s).fontFamily||"sans-serif"}`; const w=MCTX.measureText(t).width; if(w>0) return w; } }catch(e){ MCTX=false; }
@@ -729,18 +776,30 @@ function segHits(x1,y1,x2,y2,b){ let t0=0,t1=1; const dx=x2-x1, dy=y2-y1;
   for(const [p,q] of [[-dx,x1-b.x0],[dx,b.x1-x1],[-dy,y1-b.y0],[dy,b.y1-y1]]){
     if(p===0){ if(q<0) return false; } else { const r=q/p; if(p<0){ if(r>t1) return false; if(r>t0) t0=r; } else { if(r<t0) return false; if(r<t1) t1=r; } } }
   return true; }
+// Segment × segment: do they cross (or touch)?
+function segX(a,b){ const o=(p,q,r)=>Math.sign((q[0]-p[0])*(r[1]-p[1])-(q[1]-p[1])*(r[0]-p[0]));
+  const A=[a[0],a[1]],B=[a[2],a[3]],C=[b[0],b[1]],D=[b[2],b[3]];
+  return o(A,B,C)!==o(A,B,D)&&o(C,D,A)!==o(C,D,B); }
 // Placement: each label (cost order) goes to the first free spot around its point, nearest first — beside it, starting
 // up-left, the side of the frontier no couple can occupy — whose box, with a margin, overlaps no label already placed,
-// no point and no line of the chart (the frontier, a variant's dotted line). Never away from its point: no leader line.
-// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts both.
-function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[];
+// no point and no line of the chart (the frontier, a variant's dotted line). A label set off its point (beyond the
+// first ring) gets a short leader line, thin and muted, from the point's edge to the label's box; a spot is free only
+// if that line crosses no other leader line and no other label, and no leader line already drawn crosses the label.
+// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts them.
+function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[], leads=[];
   const pp=obst.map(p=>[X(p.c),Y(p.t)]), pr=6.5+m;           // a point: its largest mark (r 5.6, a diamond 4.6) and the margin
+  const grow=(b,g)=>({x0:b.x0-g,y0:b.y0-g,x1:b.x1+g,y1:b.y1+g});
   const free=b=>b.x0>=mL&&b.x1<=mL+iw&&b.y0>=mT&&b.y1<=mT+ih
     &&!placed.some(q=>b.x0<q.x1+m&&q.x0<b.x1+m&&b.y0<q.y1+m&&q.y0<b.y1+m)
     &&!pp.some(([px,py])=>{ const cx=Math.max(b.x0,Math.min(px,b.x1)), cy=Math.max(b.y0,Math.min(py,b.y1)); return Math.hypot(px-cx,py-cy)<pr; })
-    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],{x0:b.x0-m,y0:b.y0-m,x1:b.x1+m,y1:b.y1+m}));
+    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)))
+    &&!leads.some(g=>segHits(g[0],g[1],g[2],g[3],grow(b,m)));
+  // the leader line of a box set off its point: from the point's edge (5.6 + 1 units) to 1 px short of the box
+  const lead=(ax,ay,b)=>{ const cx=Math.max(b.x0,Math.min(ax,b.x1)), cy=Math.max(b.y0,Math.min(ay,b.y1)), d=Math.hypot(cx-ax,cy-ay);
+    if(!(d>6.6+2*u)) return null; const ux=(cx-ax)/d, uy=(cy-ay)/d; return [ax+ux*6.6,ay+uy*6.6,cx-ux*u,cy-uy*u]; };
+  const leadOK=g=>!leads.some(o=>segX(g,o))&&!placed.some(q=>segHits(g[0],g[1],g[2],g[3],grow(q,m)));
   let hidden=0;
-  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null;
+  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null, bl=null;
     if(ax<mL||ax>mL+iw||ay<mT||ay>mT+ih){ return; }
     for(let ring=0; ring<4&&!best; ring++){ const d=pr+ring*4*u, dd=d*0.7;
       const cand=[[ax-dd-w,ay-dd-h],[ax-d-w,ay-h/2]];          // up-left, left, then above and below sliding along, right, the corners
@@ -748,14 +807,17 @@ function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u,
       cand.push([ax+dd,ay+dd],[ax+d,ay-h/2]);
       for(const f of [0,0.25,0.5,0.75,1]) cand.push([ax-f*w,ay+d]);
       cand.push([ax+dd,ay-dd-h],[ax-dd-w,ay+dd]);
-      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(free(b)){ best=b; break; } } }
+      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(!free(b)) continue;
+        const g=ring?lead(ax,ay,b):null; if(g&&!leadOK(g)) continue;
+        best=b; bl=g; break; } }
     if(!best){ hidden++; return; }
     const col=cvar(MODELS[p.m].c), k=p.m+"@"+p.e;
+    let ln=null; if(bl){ ln=el("line",{class:"flead","data-k":k,x1:bl[0],y1:bl[1],x2:bl[2],y2:bl[3],stroke:cvar('--muted'),"stroke-width":0.8*u,"stroke-opacity":0.6}); s.appendChild(ln); leads.push(bl); }
     const tx=el("text",{class:"flabel","data-k":k,x:best.x0,y:best.y1-3*u,"font-size":fs,fill:cvar('--muted'),"text-anchor":"start"}); tx.textContent=t;
     s.appendChild(tx);
-    (reg[k]=reg[k]||[]).push(on=>tx.setAttribute("fill",on?col:cvar('--muted')));
+    (reg[k]=reg[k]||[]).push(on=>{ tx.setAttribute("fill",on?col:cvar('--muted')); if(ln) ln.setAttribute("stroke",on?col:cvar('--muted')); });
     placed.push({...best,x:(best.x0+best.x1)/2,y:(best.y0+best.y1)/2,w,h,p,k}); });
-  s.__labels={shown:placed.length,hidden,frontier:F.length};
+  s.__labels={shown:placed.length,hidden,frontier:F.length,leaders:leads.length};
   return placed; }
 if(typeof addEventListener==="function"){ let rw=0; addEventListener("resize",()=>{ const s=document.getElementById("chartB"), w=s?s.getBoundingClientRect().width:0;
   if(w&&Math.abs(w-rw)>1){ rw=w; drawB(); drawPareto(); } }); }   // the labels and the tooltip keep their size on screen
@@ -836,7 +898,7 @@ function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi
     if(hit&&(!best||hd===0||hd<bd)) best=hit.p; else hit=null;
     const k=best&&!best.vl?best.m+"@"+best.e:null; hlFront(k);
     if(best){ const fs=11.5*u, y0=hit?hit.y-hit.h/2-6*u:Y(best.t)-10*u;
-      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
+      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:pTag(best)}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       ttxt.setAttribute("font-size",fs); ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",X(best.c)); ttxt.setAttribute("y",y0);
       ttxt.textContent=`${name} — ${val}`; let bb=ttxt.getBBox(), sp=[];
       if(bb.width>iw-10*u){ ttxt.textContent=""; sp=[el("tspan",{dy:-fs*1.2}),el("tspan",{dy:fs*1.2})]; sp[0].textContent=name; sp[1].textContent=val;
@@ -1055,7 +1117,7 @@ function drawTiers(){
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:${col}"></span>${MODELS[w.m].label}${w.e==="solo"?"":" · "+capE(w.e)}</span>
-          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b> · Score <b>${pct(w.s)}</b></span>
+          <span class="tier-nums">Cost <b>${fmtC(w.c)}×</b>${pTag(w)} · Score <b>${pct(w.s)}</b></span>
         </div>
         <div class="tier-yield">${vIndex(w.r)}</div>
       </div>
@@ -1071,7 +1133,7 @@ function drawTiers(){
   if(cr) cr.innerHTML=`<div class="card pad crown">
       <div class="tier-q">👑 Best overall</div>
       <div class="crown-model"><span class="dot" style="background:${col}"></span>${MODELS[c.m].label}${c.e==="solo"?"":" · "+capE(c.e)}</div>
-      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b> · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
+      <div class="crown-line">Cost <b>${fmtC(c.c)}×</b>${pTag(c)} · Score <b>${pct(c.s)}</b> · Value index <b>${vIndex(c.r)}</b></div>
       <p class="crown-note"><b>Picked</b> as the frontier couple that sits <b>furthest below the price trend</b>&nbsp;: it costs <b>${fmtX(Math.exp(c.r))} less</b> than the trend charges for its quality — or, read on the other axis, it scores <b>${c.qg.toFixed(1)} points</b> of expected score above what the trend gives for its cost. Its <b>value index</b> is that ratio times 100: <b>100 = the trend</b>, fitted on every couple of the latest model of each family, so today's going rate of the models, not the frontier; no couple serves as a reference.</p>
     </div>`;
 }
@@ -1154,7 +1216,7 @@ function drawValueMatrix(){
   const rs=rows.map(p=>valueOf(tr,p)), rHi=Math.max(...rs,1e-9), rLo=Math.min(...rs,-1e-9);
   const cell=p=>{ const r=valueOf(tr,p), sd=Math.hypot(p.hx,tr.l*p.ht), al=Math.round((0.08+(r>=0?r/rHi:r/rLo)*0.50)*100),
       sc=r>=0?cvar('--good'):cvar('--crit');
-    return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${(VARIANTS[p.m+"@"+p.e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${vIndex(r-Math.log(v.cost_ratio))}</small>`).join("")}</div>`; };
+    return `<div class="cell num" style="background:color-mix(in srgb, ${sc} ${al}%, transparent)">${vIndex(r)}<small>${vIndex(r-sd)}–${vIndex(r+sd)}</small>${vNotes(p.m,p.e,rel=>vIndex(r-Math.log(rel)))}</div>`; };
   for(const m of Object.keys(by).sort((a,b)=>topS(b)-topS(a))){ const md=MODELS[m], row=document.createElement("tr");
     let h=`<td class="mdl"><span class="dot" style="background:${cvar(md.c)}"></span>${md.label}</td>`;
     if(by[m].solo) h+=`<td colspan="${EFFORT_COLS.length}">${cell(by[m].solo)}</td>`;
@@ -1228,7 +1290,7 @@ function fillMeta(){   // all source counts + the footer source list derive from
 function answerData(){
   const {picks,crown}=tierPicks();
   const top=couples().reduce((a,b)=>b.t>a.t?b:a);
-  const nm=p=>`${MODELS[p.m].label}${atE(p.e)}`;
+  const nm=p=>`${MODELS[p.m].label}${atE(p.e)}${PROMO[p.m+"@"+p.e]?` (${promoTag(p.m+"@"+p.e)})`:""}`;
   return {picks,crown,top,nm};
 }
 function fillAnswer(){
@@ -1242,7 +1304,7 @@ function answerFull(){
     +`Best pick by task tier: ${picks.map(t=>`${t.name.toLowerCase()} → ${nm(t.win)}`).join("; ")}. `
     +`Highest measured quality: ${nm(top)} (expected score ${pct(top.s)}, cost ${fmtC(top.c)}× the cheapest couple).`;
 }
-function renderAll(){renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawValueMatrix();drawEdgeTable();fillMeta();fillAnswer();
+function renderAll(){fillNtrend();renderControls();drawB();drawPareto();drawTierTuner();drawTiers();drawMatrix();drawValueMatrix();drawEdgeTable();fillMeta();fillAnswer();
   ['chartB','chartP'].forEach(id=>{ const sv=document.getElementById(id); if(sv) zoomable(sv); });}
 renderAll();
 matchMedia('(prefers-color-scheme:dark)').addEventListener('change',renderAll);
