@@ -263,17 +263,13 @@ def patch(text, reps, what):
 
 
 LEGEND_FN = r'''
-// Legend: one entry per model; a model's builds and modes (a dated build, a preview, a Pro mode) are listed inside its
-// entry, each with the stroke it has on the charts (solid, dashed, dotted; hollow points for all but the first).
+// Legend: no model list (the frontier's labels and the tooltips name the couples); the symbols only: a model's
+// builds and modes (a dated build, a preview, a Pro mode) as hollow points, and the price variants.
 const lsty=m=>MODELS[m].ls||0;
-function legendModels(ms){ const groups=[], at={};
-  ms.forEach(m=>{ const b=MODELS[m].base||m; if(!(b in at)){ at[b]=groups.length; groups.push({b,ms:[]}); } groups[at[b]].ms.push(m); });
-  const smp=(m,col)=>`<svg class="lgs" width="24" height="10" aria-hidden="true"><line x1="1" y1="5" x2="23" y2="5" stroke="${col}" stroke-width="2.2"${lsty(m)?` stroke-dasharray="${DASH[lsty(m)]}"`:""}/><circle cx="12" cy="5" r="3.2" fill="${lsty(m)?cvar('--panel'):col}" stroke="${col}" stroke-width="1.6"/></svg>`;
-  const vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
-  return groups.map(g=>{ const m0=g.ms[0], col=cvar(MODELS[m0].c);
-    if(g.ms.length===1&&!MODELS[m0].lt) return `<span class="lg"><span class="sw" style="background:${col}"></span>${MODELS[m0].label}</span>`;
-    return `<span class="lg"><span class="sw" style="background:${col}"></span>${MODELS[m0].bl}<span class="lgl">${g.ms.map(m=>`<span class="lgi">${smp(m,col)}${MODELS[m].lt}</span>`).join("")}</span></span>`; }).join("")
-    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${cvar('--ink')}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${cvar('--ink')}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
+function legendSymbols(ms){
+  const ink=cvar('--ink'), hollow=ms.some(m=>lsty(m)), vk=Object.keys(VARIANTS).some(k=>ms.includes(k.split("@")[0]));
+  return (hollow?`<span class="lg"><svg class="lgs" width="12" height="10" aria-hidden="true"><circle cx="6" cy="5" r="3.4" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.6"/></svg>hollow point: another build or mode of a model (a dated build, a preview, a Pro mode), named in its label</span>`:"")
+    +(vk?`<span class="lg"><svg class="lgs" width="30" height="10" aria-hidden="true"><line x1="2" y1="5" x2="23" y2="5" stroke="${ink}" stroke-width="1.2" stroke-dasharray="1.5 3"/><path d="M 24 1 L 28 5 L 24 9 L 20 5 Z" fill="${cvar('--panel')}" stroke="${ink}" stroke-width="1.4"/></svg>the same couple at a promotional or off-peak price — shown, never used in a pick</span>`:""); }
 // Global page: the couples of older models that another model of the same maker strictly beats, hidden by default.
 function hideCouples(){ Object.keys(HIDE_C).forEach(m=>[[COSTGRID,GRID_ALL.cost],[QUALGRID,GRID_ALL.qual]].forEach(([G,A])=>{ if(!A[m]) return;
   G[m]=showLegacy?A[m]:Object.fromEntries(Object.entries(A[m]).filter(([e])=>!HIDE_C[m].includes(e))); })); }
@@ -286,8 +282,6 @@ function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[])
 function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
   s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
   s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
-function variantLabels(labs,ppix,vp,X,Y,fs){ vp.forEach(v=>{ ppix.push({x:X(v.c),y:Y(v.t)});
-  labs.push({ax:X(v.c),ay:Y(v.t),lx:X(v.c),ly:Y(v.t)-9,t:v.tag,col:cvar(MODELS[v.m].c),lead:cvar(MODELS[v.m].c),w:v.tag.length*fs*0.64+4,h:fs+3,fs,mdl:false}); }); }
 const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
 '''
 
@@ -305,9 +299,9 @@ def app_patches(S):
         ('  const segs=[];                                                          // curves + points on top',
          '  drawVariants(s,pts,X,Y,false);\n  const segs=[];                                                          // curves + points on top'),
         ('  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendB");',
-         '  variantLabels(labs,ppix,variantPts(pts),X,Y,8.5);\n  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendB");'),
+         '  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendB");'),
         ('  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendP");',
-         '  variantLabels(labs,ppix,variantPts(front),X,Y,10);\n  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendP");'),
+         '  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw);\n  const lg=document.getElementById("legendP");'),
         ('  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);\n    s.appendChild(el("circle",p.front?',
          '  drawVariants(s,pts,X,Y,true);\n  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);\n    s.appendChild(el("circle",p.front?'),
         ('ttxt.textContent=`${MODELS[best.m].label} · ${capE(best.e)} — cost ${fmtC(best.c)}× · score ${pct(best.s)}`;',
@@ -322,14 +316,31 @@ def app_patches(S):
         (re.compile(r'const legacy=id=>tgl\(id,showLegacy,"Older models","[^"\n]*","toggleLegacy"\);'),
          'const legacy=id=>LEGACY.length?tgl(id,showLegacy,"Older models",LEGACY_HINT,"toggleLegacy"):"";'),
         ('const pts=couples().filter(p=>p.m!=="haiku-4.5");', 'const pts=couples().filter(p=>!HIDE_B.includes(p.m));'),
-        ('"stroke-width":2.2,"stroke-linejoin":"round"}));\n    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.4})));',
-         '"stroke-width":2.2,"stroke-linejoin":"round",...(lsty(m)?{"stroke-dasharray":DASH[lsty(m)]}:{})}));\n'
+        # Charts of the multi-site pages: points only (no effort ladder joining a model's couples), labels on the
+        # Pareto frontier's couples only, the others named on hover or tap (hoverTip); no model list in the legends.
+        ('    s.appendChild(el("path",{d:mp.map((p,i)=>(i?"L":"M")+X(p.c)+" "+Y(p.t)).join(" "),fill:"none",stroke:col,"stroke-width":2.2,"stroke-linejoin":"round"}));\n'
+         '    mp.forEach(p=>s.appendChild(el("circle",{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.4})));\n'
+         '    for(let i=0;i<mp.length-1;i++) segs.push([X(mp[i].c),Y(mp[i].t),X(mp[i+1].c),Y(mp[i+1].t)]); }',
          '    mp.forEach(p=>s.appendChild(el("circle",lsty(m)?{cx:X(p.c),cy:Y(p.t),r:3.6,fill:cvar(\'--panel\'),stroke:col,"stroke-width":1.8}'
-         ':{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.4})));'),
+         ':{cx:X(p.c),cy:Y(p.t),r:3.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.4}))); }   // points only: no line joins a model\'s couples'),
+        ('  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.t)})), labs=[];                  // effort labels + model-name labels, force-directed together\n'
+         '  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:tagE(p.e),col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:tagE(p.e).length*5.4+4,h:11,fs:8.5,mdl:false}));\n'
+         '  for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>effRank(a.e)-effRank(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;\n'
+         '    labs.push({ax:X(last.c),ay:Y(last.t),lx:X(last.c)+16+w/2,ly:Y(last.t)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }\n',
+         '  const fk=new Set(frontier(couples()).front.map(p=>p.m+"@"+p.e)), front=pts.filter(p=>fk.has(p.m+"@"+p.e));   // the page\'s frontier\n'
+         '  const ppix=pts.map(p=>({x:X(p.c),y:Y(p.t)}));                          // labels: the frontier couples only (model · effort)\n'
+         '  const labs=front.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*6.4+8;\n'
+         '    return {ax:X(p.c),ay:Y(p.t),lx:X(p.c)+16+w/2,ly:Y(p.t),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:15,fs:11.5,mdl:true}; });\n'),
+        ('<b>hover a point</b> for its identity</span>',
+         'labels: the Pareto frontier\'s couples · <b>hover or tap a point</b> for any other (model · effort, cost, score)</span>', 2),
+        ('let best=null,bd=49;', 'let best=null,bd=ev.pointerType&&ev.pointerType!=="mouse"?(22/(s.getScreenCTM().a||1))**2:49;'),
+        ('  s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); }; }',
+         '  s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); };\n'
+         '  s.onpointerup=ev=>{ if(ev.pointerType!=="mouse") s.onmousemove(ev); }; }   // a tap (touch, pen) names the point under it, as a hover does'),
         ('visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")',
-         'legendModels(visibleModels().filter(m=>!HIDE_B.includes(m)))'),
+         'legendSymbols(visibleModels().filter(m=>!HIDE_B.includes(m)))'),
         ('visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")',
-         'legendModels(visibleModels())'),
+         'legendSymbols(visibleModels())'),
         ('s.appendChild(el("circle",p.front?{cx:X(p.c),cy:Y(p.t),r:5.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.3}\n      :{cx:X(p.c),cy:Y(p.t),r:3.4,fill:col,"fill-opacity":.25})); });',
          's.appendChild(el("circle",p.front?(lsty(p.m)?{cx:X(p.c),cy:Y(p.t),r:5.6,fill:cvar(\'--panel\'),stroke:col,"stroke-width":2.4}:{cx:X(p.c),cy:Y(p.t),r:5.6,fill:col,stroke:cvar(\'--panel\'),"stroke-width":1.3})\n'
          '      :(lsty(p.m)?{cx:X(p.c),cy:Y(p.t),r:3.4,fill:"none",stroke:col,"stroke-opacity":.35,"stroke-width":1.4}:{cx:X(p.c),cy:Y(p.t),r:3.4,fill:col,"fill-opacity":.25}))); });'),
@@ -357,9 +368,15 @@ def body_patches(S, mc_sentence):
         ('        <p class="lede">To compare two models directly — Fable, Opus, Sonnet or Haiku, effort by effort — see the <a href="claude-models-head-to-head.html">head-to-head page</a>.</p>\n', ""),
         ("Quality vs. cost of every Claude model, at each effort level", f"Quality vs. cost of every {noun}model, at each effort level"),
         (" <b>Haiku&nbsp;4.5</b> lives only in the matrix and Pareto.",
-         S["hide_note"] + ("" if not S["has_lines"] else " A model's <b>builds and modes</b> — a dated build, a preview, a Pro mode — share its colour and "
-         "its legend entry: the first is drawn <b>solid</b>, the others <b>dashed</b> or <b>dotted</b> with <b>hollow</b> "
-         "points, and each is labelled with what it is. They are separate couples, each with its own effort ladder.")),
+         S["hide_note"] + ("" if not S["has_lines"] else " A model's <b>builds and modes</b> — a dated build, a preview, a Pro mode — share its colour: "
+         "the first is drawn with <b>filled</b> points, the others with <b>hollow</b> points, and its label and tooltip say "
+         "what it is. They are separate couples, each with its own effort ladder.")),
+        ('aria-label="Quality vs cost, one curve per model, one point per effort"',
+         'aria-label="Quality vs cost, one point per model and effort"'),
+        ('<p class="cap">One curve per model, one point per configuration (thinking off, minimal, low → max, thinking on).',
+         '<p class="cap">One point per couple: a model at one configuration (thinking off, minimal, low → max, thinking on); '
+         'no line joins a model\'s couples. Only the couples of the <b>Pareto frontier</b> are labelled; <b>hover</b> or '
+         '<b>tap</b> any other point for its model, effort, cost and score.'),
         ("Best Claude model for the price — the Pareto frontier", f"Best {noun}model for the price — the Pareto frontier"),
         ("Normalized cost matrix — Claude effort levels compared", f"Normalized cost matrix — {noun}effort levels compared"),
     ] + ([(re.compile(r"<p>Each release buys the same quality for less — .*?</p>"), f"<p>{S['generation']}</p>")]

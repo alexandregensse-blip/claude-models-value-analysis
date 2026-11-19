@@ -232,11 +232,19 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   whose succession no source writes (Qwen4 Max) is shown and not current. Claude's keys are not there: the Claude maker page follows the Claude page — its
   models, labels and colours from the catalogue (`display_order`), current = `CURRENT` and hidden = `LEGACY` of
   `site/duels.py`, and the page's own generation card. A catalogue key with no family entry is shown and not current.
+- **Charts: points only** (the maintainer, 19 Nov 2026: « quand ya autant de modeles, on voit rien sur le graphique.
+  enleve les lignes pour ne laisser que le nuage de point et tu enleve les labels de point pour n'afficher que ceux de
+  la frontiere pareto ou au sruvol du point a la souris. enleve la liste des modeles de la legende. »). On every page
+  of the multi-site draft, the landscape and the Pareto chart place each couple as a point and draw no line between
+  couples (no effort ladder); the reading aids that join no two couples stay: the Pareto frontier, the price trend,
+  a price variant's dotted line to its own couple. Only the couples of the page's Pareto frontier carry a label
+  (model · effort); any other point, and a price variant, is named with its cost and score by the tooltip, on hover
+  or on a tap (touch, pen). The legends list no model: they keep the symbols (hollow points, price variants), the
+  frontier, the trend, the dominated couples. The Claude page at the repository root keeps its curves and legend.
 - **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
-  each with its own effort ladder. They share the model's colour and its single legend entry; the first is drawn
-  solid, the others dashed or dotted with hollow points, and the legend lists each with its stroke and what it is
-  ("0813 build", "preview", "Pro"; the undated build is "original release", the model beside its Pro mode
-  "standard"). Chart labels, tooltips and table rows give the full name ("DeepSeek V4.1 Flash 1017 build").
+  each with its own effort ladder. They share the model's colour; the first is drawn with filled points, the others
+  with hollow points. Chart labels, tooltips and table rows give the full name ("DeepSeek V4.1 Flash 1017 build",
+  "GPT-6 Astra Pro").
 - **Sources table**: the groups that measured at least one couple shown on the page, with those couples; sources
   are counted by publisher (`data/catalog/publishers.json`). A group without a verified configuration note shows "—".
   The Claude page at the repository root still lists every Claude couple a group measured, efforts outside the fit
