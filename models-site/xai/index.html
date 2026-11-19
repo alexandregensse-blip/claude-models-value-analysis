@@ -1144,8 +1144,8 @@ function drawTiers(){
 function drawTierWindows(){
   const host=document.getElementById("tier-windows"); if(!host) return;
   const {front}=frontier(couples());
-  // Axis spans the targets' range (from tierDefaults) plus half a gap of padding, so the end windows are not clipped.
-  const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;
+  // multi-site: the axis runs from the weakest couple shown to the strongest, so Grunt reaches the min and Cutting-Edge the max.
+  const th=couples().map(p=>p.t), Tmn=Math.min(TIERQ.lo,...th), Tmx=Math.max(TIERQ.hi,...th);
   const W=1100,H=140,mL=8,mR=8,mT=8,mB=24, iw=W-mL-mR, ih=H-mT-mB;
   const X=t=>mL+(t-Tmn)/(Tmx-Tmn)*iw;
   let svg=`<svg viewBox="0 0 ${W} ${H}" class="tuner-svg" role="img" aria-label="Tier windows over the quality axis">`;

@@ -507,6 +507,12 @@ def app_patches(S):
         # couples shown, in place of the even spread between the frontier's bounds (TIER_E) of the Claude page.
         (re.compile(r"// DATA-DERIVED targets\. .*?\nconst TIER_E=0\.05;\n", re.S), TIER_Q_HEAD),
         (re.compile(r"function tierDefaults\(\)\{\n.*?\n  TIERQ=\{lo,hi,gap,sig\};\n\}\n", re.S), TIER_Q_FN),
+        # The tier windows' axis runs from the weakest couple shown to the strongest (the maintainer, 19 Nov 2026: « le grunt
+        # qui va jusqu'au min et le cutting qui va jusqu'au max » ; display only, the windows and the picks are unchanged).
+        ('  // Axis spans the targets\' range (from tierDefaults) plus half a gap of padding, so the end windows are not clipped.\n'
+         '  const padT=0.5*TIERQ.gap, Tmn=TIERQ.lo-padT, Tmx=TIERQ.hi+padT;',
+         '  // multi-site: the axis runs from the weakest couple shown to the strongest, so Grunt reaches the min and Cutting-Edge the max.\n'
+         '  const th=couples().map(p=>p.t), Tmn=Math.min(TIERQ.lo,...th), Tmx=Math.max(TIERQ.hi,...th);'),
         ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); applyFilter(); }'),
         ('const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)),',
          'const xmn=Math.min(...pts.map(p=>p.clo),...variantPts(pts).map(v=>v.c)), xmx=Math.max(...pts.map(p=>p.chi),...variantPts(pts).map(v=>v.c)),', 2),
