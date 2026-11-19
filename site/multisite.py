@@ -27,29 +27,84 @@ DASH = ["", "6 4", "1.5 3.5"]           # a model's builds and modes: solid, das
 
 
 def load_variants():
-    """Price variants of a couple ({"model@effort": [{kind, label, cost_ratio, until, evidence}]}): the first file of
-    makers.json's `price_variants` that exists (the repricing salvo's file once copied in, else the mock). A variant
-    whose `until` is past is dropped."""
-    for path in SET["price_variants"]:
-        f = os.path.join(ROOT, path)
-        if not os.path.exists(f): continue
-        raw, today, out = json.load(open(f, encoding="utf-8")), datetime.date.today().isoformat(), {}
-        for c, vs in raw.items():
-            if c.startswith("_"): continue
-            for v in vs:
-                if v.get("kind") not in ("promo", "offpeak") or not v.get("cost_ratio", 0) > 0:
-                    warn(f"price variant of {c} not understood, left out: {v}"); continue
-                if v.get("until") and v["until"] < today:
-                    warn(f"price variant of {c} ended on {v['until']}, left out"); continue
-                out.setdefault(c, []).append({k: v.get(k) for k in ("kind", "label", "cost_ratio", "until", "evidence")})
-        return path, out
-    return None, {}
+    """Price variants of a couple ({"model@effort": [{kind, label, cost_ratio, until, evidence}]}) from the registry's
+    dated price records (makers.json `price_variants`: data/registry/prices.json), kinds `promotion` and `off-peak`, of
+    the fit catalogue's models. A record is a variant of every couple of its model (of its configurations, when it
+    lists them) when:
+    - it is in force: an end the maker states (`to_basis` stated) not past today, or a record seen at the model's last
+      capture on its route and currency (`to_basis` last-capture, no record of that route and currency seen later), or
+      no end;
+    - its route is the route of the model's base price (data/build.py's base_price, the price the published cost is at);
+    - every tariff (input, output, cache, long-context tiers) is in one ratio to the base price, on the same classes
+      (a record with no classes and a stated `factor` applies that factor to all of them).
+    Otherwise it is not shown; each record read is listed with its outcome in out/models/price-variants.json."""
+    import importlib.util, types
+    spec = importlib.util.spec_from_file_location("databuild", os.path.join(ROOT, "data", "build.py"))
+    DB = importlib.util.module_from_spec(spec); spec.loader.exec_module(DB)    # its price helpers (no build is run)
+    path = SET["price_variants"]
+    reg = json.load(open(os.path.join(ROOT, path), encoding="utf-8"))
+    ctx, today = types.SimpleNamespace(prices=reg), datetime.date.today().isoformat()
+    recs = reg["prices"]
+    last_seen = {}                                            # (model, route, currency) → latest end of any record
+    for p in recs:
+        if p.get("to"): k = (p["model"], p["route"], p["currency"]); last_seen[k] = max(last_seen.get(k, ""), p["to"])
+    out, log = {}, []
+    for p in recs:
+        if p["kind"] not in ("promotion", "off-peak") or p["model"] not in CAT: continue
+        m, ev = p["model"], (p.get("evidence") or [{}])[0]
+        row = dict(model=m, route=p["route"], kind=p["kind"], currency=p["currency"], classes=p.get("classes"),
+                   factor=p.get("factor"), configurations=p.get("configurations"), **{"from": p["from"], "to": p.get("to")},
+                   to_basis=p.get("to_basis"), url=ev.get("url"), quote=ev.get("quote"), note=p.get("note"))
+        log.append(row)
+        end = (p.get("to") or "")[:10]
+        if p.get("to") and p.get("to_basis") == "stated" and end < today:
+            row["outcome"] = f"ended {end} (stated end)"; continue
+        if p.get("to") and p.get("to_basis") != "stated" and p["to"] < last_seen[(m, p["route"], p["currency"])]:
+            row["outcome"] = f"last seen {end}, the model's prices seen later on that route without it"; continue
+        if p["from"][:10] > today:
+            row["outcome"] = "not yet in force"; continue
+        cfgs = p.get("configurations") or [None]
+        bases = [DB.base_price(ctx, m, currency=p["currency"], config=c) for c in cfgs]
+        if any(b is None for b in bases):
+            row["outcome"] = f"no base price in {p['currency']}"; continue
+        if any(b["route"] != p["route"] for b in bases):
+            row["outcome"] = f"route {p['route']} is not the base price's ({bases[0]['route']})"; continue
+        ratios = []
+        for b in bases:
+            bv, vv = DB.price_vector(b), DB.price_vector(p)
+            if not vv and p.get("factor"):
+                ratios.append(float(p["factor"])); continue
+            ratios.append(DB.uniform_ratio(vv, bv) if set(vv) == set(bv) else None)
+            if ratios[-1] is None:
+                row["outcome"] = ("tariffs not in one ratio to the base price " if set(vv) == set(bv) else
+                                  "not the base price's classes ") + json.dumps({k: [vv.get(k), bv.get(k)] for k in sorted(set(vv) | set(bv))})
+        if None in ratios or max(ratios) - min(ratios) > 1e-9:
+            row.setdefault("outcome", "ratio differs between configurations"); continue
+        r = ratios[0]
+        if not 0 < r < 1:
+            row["outcome"] = f"ratio {r:g} to the base price: not a reduction"; continue
+        row["outcome"], row["cost_ratio"] = "shown", r
+        stated = p.get("to_basis") == "stated" and p.get("to")
+        label = (("promotional price" if p["kind"] == "promotion" else "off-peak rate") + f" ({r:.3g}× the list price"
+                 + (f", until {end}" if stated else f", last seen {end}" if p.get("to") else "") + ")")
+        v = {"kind": "promo" if p["kind"] == "promotion" else "offpeak", "label": label, "cost_ratio": r,
+             "until": end if stated else None, "evidence": ev.get("url")}
+        effs = set(CAT_EFFORTS.get(m, []))
+        for e in sorted(effs):
+            if p.get("configurations") and e not in p["configurations"]: continue
+            lst = out.setdefault(f"{m}@{e}", [])
+            if not any(x["kind"] == v["kind"] and abs(x["cost_ratio"] - r) < 1e-9 for x in lst):   # one per kind and ratio
+                lst.append(v)
+    return path, out, log
 
 
 esc = lambda s: htmlmod.escape(s, quote=True)
 warn = lambda s: print("  !! " + s)
-VARIANTS_FILE, VARIANTS = load_variants()
-MOCK = bool(VARIANTS_FILE and "mock" in os.path.basename(VARIANTS_FILE))
+CAT_EFFORTS = {}                                              # model → efforts of its couples in the fit
+for _ax in ("cost", "quality"):
+    for _c in json.load(open(os.path.join(ROOT, "model", "fit-cache.json")))[_ax]:
+        _m, _e = _c.split("@"); CAT_EFFORTS.setdefault(_m, set()).add(_e)
+VARIANTS_FILE, VARIANTS, VARIANTS_LOG = load_variants()
 
 
 # ---------------------------------------------------------------- per-site models, labels, colours
@@ -289,9 +344,7 @@ def app_patches(S):
 def body_patches(S, mc_sentence):
     cur = ' aria-current="page"'
     nav = "".join(f'<a href="{S["up"]}{t["path"]}"{cur if t["id"] == S["id"] else ""}>{esc(t["name"])}</a>' for t in S["all"])
-    banner = (f'  <p class="draft-banner" role="note">{esc(DRAFT)}'
-              + (f' <b>The price variants shown are a mock</b> ({esc(VARIANTS_FILE)}), for testing the display.' if MOCK else "")
-              + '</p>\n') if DRAFT or MOCK else ""
+    banner = f'  <p class="draft-banner" role="note">{esc(DRAFT)}</p>\n' if DRAFT else ""
     noun = (S["noun"] + " ") if S["noun"] else ""
     shows = ("this page shows the current models of every maker, and the older ones no other model of their maker beats"
              if S["id"] == "global" else f"this page shows the {S['name']} couples")
@@ -517,13 +570,16 @@ def main():
                 f"({REPO_URL}). Data: raw-data.csv, CC BY 4.0.\n")
     open(os.path.join(OUT, "llms.txt"), "w", encoding="utf-8").write("\n".join(llms))
     json.dump(infos, open(os.path.join(OUT, "summary.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    json.dump(VARIANTS_LOG, open(os.path.join(OUT, "price-variants.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
+    for r in VARIANTS_LOG:
+        print(f"  price variant {r['model']} {r['route']} {r['kind']} {r['currency']} {r['from'][:10]}→{(r['to'] or '')[:10]}: {r['outcome']}")
     for i in infos:
         print(f"built {os.path.relpath(os.path.join(OUT, i['path'], 'index.html'), ROOT)}  ({i['bytes']} bytes) · "
               f"{i['couples_default']} couples of {i['models_default']} models shown by default "
               f"({i['couples_all']} of {i['models_all']} with older models) · {i['counts']}")
         for v in i["ladder"]:
             print("  effort ladder inverted (shown by default): " + v)
-    print(f"wrote {os.path.relpath(OUT, ROOT)}/llms.txt, robots.txt, summary.json, favicons"
+    print(f"wrote {os.path.relpath(OUT, ROOT)}/llms.txt, robots.txt, summary.json, price-variants.json, favicons"
           + (" — DRAFT: banner and noindex on every page" if DRAFT else ""))
 
 

@@ -3,10 +3,7 @@
  "base_url": "https://models.agensse.com/",
  "out_dir": "out/models",
  "draft": "Draft, not yet published: built locally for review; the figures and the layout may still change.",
- "price_variants": [
-  "site/price_variants.json",
-  "site/price_variants.mock.json"
- ],
+ "price_variants": "data/registry/prices.json",
  "global": {
   "path": "",
   "title": "AI models compared: cost vs quality across eight model makers",
@@ -91,7 +88,8 @@
     "gpt-5.1-chat": "GPT-5.1 Chat",
     "gpt-5.1-chat-latest": "GPT-5.1 Chat (latest)",
     "gpt-5.1-instant": "GPT-5.1 Instant",
-    "gpt-5.1-thinking": "GPT-5.1 Thinking"
+    "gpt-5.1-thinking": "GPT-5.1 Thinking",
+    "gpt-5-chat-latest": "GPT-5 Chat (latest)"
    },
    "lines": {
     "gpt-6.1-sol-pro": "Pro",
@@ -115,6 +113,7 @@
    "models": {
     "gemini-4-argon": "Gemini 4 Argon",
     "gemini-4-carbon": "Gemini 4 Carbon",
+    "gemini-4-hydrogen": "Gemini 4 Hydrogen",
     "gemini-3.8-flash": "Gemini 3.8 Flash",
     "gemini-3.8-flash-cyber": "Gemini 3.8 Flash Cyber",
     "gemini-3.7-flash": "Gemini 3.7 Flash",
@@ -195,6 +194,8 @@
    ],
    "hue": 80,
    "models": {
+    "qwen4-max": "Qwen4 Max",
+    "qwen4-max-preview": "Qwen4 Max preview",
     "qwen3.8-max": "Qwen3.8 Max",
     "qwen3.8-max-prime": "Qwen3.8 Max Prime",
     "qwen3.8-2.4t-a95b": "Qwen3.8-2.4T-A95B",
@@ -298,6 +299,14 @@
    "status": "current",
    "successor": ""
   },
+  "gpt-6.1-terra": {
+   "family": "Terra / mini tier",
+   "current": true,
+   "hidden": false,
+   "status": "current",
+   "successor": "",
+   "source": "maintainer's instruction of 19 Nov 2026 (site-local consigne): GPT-6.1 Terra replaces GPT-5.6 Terra as its family's current model (checked by integration 15)"
+  },
   "gpt-6-sol": {
    "family": "Sol line (flagship, unsuffixed tier)",
    "current": false,
@@ -364,18 +373,18 @@
   },
   "gpt-5.6-terra": {
    "family": "Terra / mini tier",
-   "current": true,
+   "current": false,
    "hidden": false,
-   "source": "openai/families.tsv",
-   "status": "current",
-   "successor": ""
+   "source": "override: maintainer's instruction of 19 Nov 2026 (site-local consigne): GPT-6.1 Terra replaces GPT-5.6 Terra as current (integration 15); 5.6 stays shown as the previous model",
+   "status": "superseded",
+   "successor": "gpt-6.1-terra"
   },
   "gpt-5.6-terra-pro": {
    "family": "Terra / mini tier (pro mode)",
-   "current": true,
+   "current": false,
    "hidden": false,
-   "source": "openai/families.tsv",
-   "status": "current",
+   "source": "override: maintainer's instruction of 19 Nov 2026 (site-local consigne): the Pro mode of GPT-5.6 Terra follows its model (a line that is not current follows its model); no GPT-6.1 Terra Pro in the catalogue",
+   "status": "superseded (follows its model gpt-5.6-terra)",
    "successor": ""
   },
   "gpt-5.6-luna": {
@@ -477,8 +486,8 @@
   "gpt-5.4-mini": {
    "family": "Terra / mini tier",
    "current": false,
-   "hidden": false,
-   "source": "openai/families.tsv",
+   "hidden": true,
+   "source": "override: follows the 19 Nov change: its successor gpt-5.6-terra is no longer current, so it is two models back (hidden by default, § 16 rule)",
    "status": "superseded",
    "successor": "gpt-5.6-terra"
   },
@@ -610,6 +619,14 @@
    "status": "retired",
    "successor": "gpt-5.2-chat-latest"
   },
+  "gpt-5-chat-latest": {
+   "family": "chat-latest / Instant (ChatGPT model served in API)",
+   "current": false,
+   "hidden": true,
+   "status": "retired (shut down 23 Jul 2026)",
+   "successor": "gpt-5.6-sol",
+   "source": "registry sheet (integration 16): OpenAI deprecations « gpt-5-chat-latest gpt-5.6-sol Apr 22, 2026 Jul 23, 2026 » (replacement gpt-5.6-sol, not current: hidden)"
+  },
   "gpt-5.1-instant": {
    "family": "chat-latest / Instant (ChatGPT model served in API)",
    "current": false,
@@ -634,13 +651,29 @@
    "status": "current",
    "successor": ""
   },
-  "gemini-3.8-flash": {
+  "gemini-4-carbon": {
+   "family": "Gemini Carbon (new line)",
+   "current": true,
+   "hidden": false,
+   "status": "current (new line beside Gemini 4 Argon; no predecessor stated)",
+   "successor": "",
+   "source": "registry sheet (released 2026-11-10) and Google's 'What's new in Gemini 4 Carbon' (« Choosing between Carbon, Argon, and other models »): a new model beside Argon, no predecessor written; same treatment as Gemini 4 Argon (new line, current)"
+  },
+  "gemini-4-hydrogen": {
    "family": "Gemini Flash",
    "current": true,
    "hidden": false,
-   "source": "google/families.tsv",
    "status": "current",
-   "successor": ""
+   "successor": "",
+   "source": "Gemini API changelog, 12 Nov 2026 (/work/.salvo14/mig/s9/ev/s9-recent/g-changelog.txt): « See What's new in Gemini 4 Hydrogen for API changes and migration guidance from Gemini 3.8 Flash »; registry sheet released 2026-11-12"
+  },
+  "gemini-3.8-flash": {
+   "family": "Gemini Flash",
+   "current": false,
+   "hidden": false,
+   "source": "override: Gemini API changelog 12 Nov 2026: « migration guidance from Gemini 3.8 Flash » to Gemini 4 Hydrogen (19 Nov 2026)",
+   "status": "superseded",
+   "successor": "gemini-4-hydrogen"
   },
   "gemini-3.8-flash-cyber": {
    "family": "Gemini Flash Cyber (restricted variant)",
@@ -653,16 +686,16 @@
   "gemini-3.7-flash": {
    "family": "Gemini Flash",
    "current": false,
-   "hidden": false,
-   "source": "google/families.tsv",
+   "hidden": true,
+   "source": "override: follows the 19 Nov change: its successor gemini-3.8-flash is no longer current (hidden by default, § 16 rule)",
    "status": "superseded",
    "successor": "gemini-3.8-flash"
   },
   "gemini-3.6-flash": {
    "family": "Gemini Flash",
    "current": false,
-   "hidden": false,
-   "source": "google/families.tsv",
+   "hidden": true,
+   "source": "override: follows the 19 Nov change: its successor gemini-3.8-flash is no longer current (hidden by default, § 16 rule)",
    "status": "superseded",
    "successor": "gemini-3.8-flash"
   },
@@ -961,6 +994,22 @@
    "source": "qwen/families.tsv",
    "status": "current",
    "successor": "qwen3.8-max-0902 (snapshot)"
+  },
+  "qwen4-max": {
+   "family": "Max",
+   "current": false,
+   "hidden": false,
+   "status": "unknown (no source writes that Qwen4 Max succeeds Qwen3.8 Max; no couple in the fit)",
+   "successor": "",
+   "source": "registry sheet (released 2026-11-16; Unite.ai: « a flagship multimodal model ... lower list prices than Qwen3.8-Max »): succession not written, left not current"
+  },
+  "qwen4-max-preview": {
+   "family": "Max",
+   "current": false,
+   "hidden": false,
+   "status": "preview (11-25 Nov 2026, « will be retired after the preview ends »)",
+   "successor": "qwen4-max",
+   "source": "registry sheet (Alibaba Model Studio page of the preview)"
   },
   "qwen3.8-max-preview": {
    "family": "Max",
@@ -1406,6 +1455,42 @@
    "current": true,
    "hidden": false,
    "why": "user decision 21 Oct: Gemini 4 Argon is a new flagship line, not proven to succeed 3.1 Pro, which is still sold; the families file leaves 3.1 Pro's status unknown"
+  },
+  "gpt-5.6-terra": {
+   "current": false,
+   "hidden": false,
+   "status": "superseded",
+   "successor": "gpt-6.1-terra",
+   "why": "maintainer's instruction of 19 Nov 2026 (site-local consigne): GPT-6.1 Terra replaces GPT-5.6 Terra as current (integration 15); 5.6 stays shown as the previous model"
+  },
+  "gpt-5.6-terra-pro": {
+   "current": false,
+   "hidden": false,
+   "status": "superseded (follows its model gpt-5.6-terra)",
+   "successor": "",
+   "why": "maintainer's instruction of 19 Nov 2026 (site-local consigne): the Pro mode of GPT-5.6 Terra follows its model (a line that is not current follows its model); no GPT-6.1 Terra Pro in the catalogue"
+  },
+  "gpt-5.4-mini": {
+   "current": false,
+   "hidden": true,
+   "why": "follows the 19 Nov change: its successor gpt-5.6-terra is no longer current, so it is two models back (hidden by default, § 16 rule)"
+  },
+  "gemini-3.8-flash": {
+   "current": false,
+   "hidden": false,
+   "status": "superseded",
+   "successor": "gemini-4-hydrogen",
+   "why": "Gemini API changelog 12 Nov 2026: « migration guidance from Gemini 3.8 Flash » to Gemini 4 Hydrogen (19 Nov 2026)"
+  },
+  "gemini-3.7-flash": {
+   "current": false,
+   "hidden": true,
+   "why": "follows the 19 Nov change: its successor gemini-3.8-flash is no longer current (hidden by default, § 16 rule)"
+  },
+  "gemini-3.6-flash": {
+   "current": false,
+   "hidden": true,
+   "why": "follows the 19 Nov change: its successor gemini-3.8-flash is no longer current (hidden by default, § 16 rule)"
   }
  }
 }

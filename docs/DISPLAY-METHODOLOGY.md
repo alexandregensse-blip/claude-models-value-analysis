@@ -226,7 +226,10 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   the makers' pages as evidence): current = status `current`; an unknown status, or "not a model", is not current;
   shown on the maker's page = current, or followed by a current key (the latest model and the one before); a line
   that is not current follows its model. `family_overrides` holds a user decision the files do not carry (Gemini 3.1
-  Pro current beside Gemini 4 Argon). Claude's keys are not there: the Claude maker page follows the Claude page — its
+  Pro current beside Gemini 4 Argon; 19 Nov 2026: GPT-6.1 Terra current in place of GPT-5.6 Terra, Gemini 4 Hydrogen
+  in place of Gemini 3.8 Flash, and the statuses that follow). The catalogue's later keys (GPT-6.1 Terra, Gemini 4
+  Carbon and Hydrogen, Qwen4 Max and its preview, GPT-5 Chat) have entries citing the registry's sheets; a model
+  whose succession no source writes (Qwen4 Max) is shown and not current. Claude's keys are not there: the Claude maker page follows the Claude page — its
   models, labels and colours from the catalogue (`display_order`), current = `CURRENT` and hidden = `LEGACY` of
   `site/duels.py`, and the page's own generation card. A catalogue key with no family entry is shown and not current.
 - **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
@@ -242,9 +245,15 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   (DeepSeek at its peak rate). A variant is the same couple at another price: a hollow diamond at cost × its ratio,
   joined to the couple by a dotted line and tagged (promo, off-peak); its label in the tooltip; under the couple's
   cost in the matrix and the frontier table, and its value index in the value matrix. It never enters the frontier,
-  the trend, the tiers or the crown, and a variant whose `until` is past is dropped. Read from the first file of
-  `price_variants` in `site/makers.json` that exists: `site/price_variants.json` (the repricing salvo's file), else
-  `site/price_variants.mock.json`, a mock the draft banner then names.
+  the trend, the tiers or the crown. Read from the registry's dated price records (`price_variants` in
+  `site/makers.json`: `data/registry/prices.json`, kinds `promotion` and `off-peak`, the fit catalogue's models; the
+  maintainer, 16 Nov 2026): a record is a variant of every couple of its model (of its configurations, when it lists
+  them) when it is in force — an end the maker states not past, or seen at the model's last capture on its route and
+  currency, or no end —, its route is that of the model's base price (`base_price` of `data/build.py`, the price the
+  published cost is at), and **every tariff** (input, output, cache, long-context tiers) is in **one ratio** to the
+  base price on the same classes (a record with no classes and a stated factor applies it to all). Any other record
+  is not shown; `out/models/price-variants.json` lists every record read with its outcome. The mock
+  `site/price_variants.mock.json` is no longer read.
 - **Draft**: every page carries a banner and a `noindex` tag while `draft` in `site/makers.json` is set (the pages
   are not published). An empty `draft` removes both and writes the sitemap.
 - **A fit that no longer matches its inputs** stops the build, as on the Claude page. `--stale-fit` builds a local
