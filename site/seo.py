@@ -50,7 +50,8 @@ def head_tags(date, counts):
                         "quote and URL, by a latent-quality model that estimates each benchmark's own scale. Aggregated from "
                         f"{counts}; cost at today's prices as a multiple of the cheapest couple, quality as the expected score on the benchmark panel."),
         "url": SITE_URL, "sameAs": REPO_URL,
-        "creator": {"@type": "Person", "name": "Alexandre Gensse", "url": "https://github.com/alexandregensse-blip"},
+        "creator": {"@type": "Person", "name": "Alexandre Gensse", "url": "https://agensse.com/",
+                    "sameAs": "https://github.com/alexandregensse-blip"},
         "dateModified": date.isoformat(),
         "license": "https://creativecommons.org/licenses/by/4.0/",
         "isAccessibleForFree": True,
