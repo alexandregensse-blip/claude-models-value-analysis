@@ -60,7 +60,7 @@ function rootVars(css) {
 }
 
 function main(input) {
-  const { app, css } = JSON.parse(input), vars = rootVars(css), store = new Map();
+  const { app, css, skip = [] } = JSON.parse(input), vars = rootVars(css), store = new Map();   // skip: blocks the page has not
   const ctx = vm.createContext({
     document: doc, console,
     getComputedStyle: () => ({ getPropertyValue: v => vars[v] ?? "" }),
@@ -72,7 +72,7 @@ function main(input) {
   ctx.window = ctx;
   vm.runInContext(app, ctx, { filename: "app.js" });
   const out = {};
-  for (const key of WANTED) {                  // a block app.js no longer fills would silently vanish for crawlers
+  for (const key of WANTED.filter(k => !skip.includes(k))) {                  // a block app.js no longer fills would silently vanish for crawlers
     const html = byKey.has(key) ? byKey.get(key).innerHTML : "";
     if (!html) throw new Error(`app.js wrote nothing into ${key}`);
     out[key] = html;

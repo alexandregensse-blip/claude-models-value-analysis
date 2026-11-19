@@ -210,7 +210,8 @@ the full answer, the effort-ladder inversions) and the icons. It reuses the Clau
 stop the build when one no longer applies. `python3 site/build.py` and the files it writes are unchanged.
 
 - **Same rules as §§ 1–14** on every page: publication by two publishers or more, the frontier, the price trend, the
-  value, the tiers and the crown, all computed **among the page's couples on screen**. A couple is shown when it is
+  value, the tiers and the crown, all computed **among the page's couples on screen** (the price trend excepted when
+  the reader turns chips off: it stays the default view's, below). A couple is shown when it is
   published on **both** axes (the ones a chart can place); on the Claude page every cost couple has its quality.
 - **Global page**: by default, the **current models of every maker, and the couples of older models that no other
   model of the same maker strictly beats** — no couple of another model of that maker (its own builds and modes do
@@ -248,30 +249,43 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
   la frontiere pareto ou au sruvol du point a la souris. enleve la liste des modeles de la legende. »). On every page
   of the multi-site draft, the landscape and the Pareto chart place each couple as a point and draw no line between
   couples (no effort ladder); the reading aids that join no two couples stay: the Pareto frontier, the price trend,
-  a price variant's dotted line to its own couple. Only the couples of the page's Pareto frontier are marked, by a
-  small **number** (the maintainer, 19 Nov 2026: « les annotations de points sur le graphique sont trop grosse et se
-  superposent, trouve un meilleur moyen pour les afficher »): 1 for the cheapest frontier couple, then in cost order,
-  the same numbers on the landscape, the Pareto chart and the tier tuner. A badge keeps its size on screen (16 px,
-  redrawn when the window is resized) and goes to the first spot around its point, nearest first and starting
-  up-left — the side of the frontier no couple can occupy — whose box overlaps no other badge and covers no point;
-  a leader line joins it to its point when it sits away. Under each chart a compact list gives, per number, the model
-  · effort, the cost and the score (under the Pareto chart it replaces the chained blocks); hovering or tapping a
-  badge, its point or its row highlights both. Any other point, and a price variant, is named with its cost and score
-  by the tooltip, on hover or on a tap (touch, pen), at a fixed size on screen. The legends list no model: they keep
-  the symbols (hollow points, price variants, the numbers), the frontier, the trend, the dominated couples. The
+  a price variant's dotted line to its own couple. Only the couples of the page's Pareto frontier are labelled, in
+  text on the chart, "model · effort" (the maintainer, 19 Nov 2026: « j'aime pas du tout les pastilles numerotees et
+  la liste een dessous du graphique »; the numbered badges, their leader lines and the lists under the charts of
+  3573edb are gone): small (11 px on screen at every width, redrawn when the window is resized), in the muted ink,
+  without background or frame. Each label goes to the first free spot beside its point, nearest first (12 positions
+  around it, starting up-left — the side of the frontier no couple can occupy —, on 4 rings 4 px apart), whose box,
+  with a 1.5 px margin, overlaps no other label, no point (the largest mark, 6.5 units, and the margin) and no line of
+  the chart (the frontier, a variant's dotted line), inside the plot. A label that finds no free spot is not shown:
+  its point reads on hover. The width of a label is the browser's measure of its text (0.6 em a character where none
+  is available, as in the pre-render). The landscape, the Pareto chart and the tier tuner (whose frontier marks name
+  their couple on hover or tap, without number) follow the same rules. Hovering or tapping any point, or a label,
+  shows the tooltip (model · effort, cost, score) at a fixed size on screen. The legends list no model: they keep
+  the symbols (hollow points, price variants, the labels), the frontier, the trend, the dominated couples. The
   Claude page at the repository root keeps its curves, labels and legend.
+- **Head of the page** (the maintainer, 19 Nov 2026: « maintenant en haut de page ya des boutons et des filtres ca fait
+  super moche. le titre doit etre en haut pourquoi il est en dessous des filtres ? »), top to bottom: a plain text
+  navigation (links to the global page and the eight maker pages, the current page in bold, no button); the title
+  and its subtitle, with nothing between the navigation and them; the line of sources, the introduction; the
+  draft banner; the crown and the tier cards; then the selection bar, just above the first chart.
 - **Selection bar** (the maintainer, 19 Nov 2026: « je voudrais pouvoir selectionner les fabricants pour choisir ce qui
-  s'affiche »): a bar that stays at the top of the window while scrolling (on a phone, one line that scrolls
-  sideways), on every page of the draft: on the global page one chip per maker in its hue, on a maker page one chip
-  per model shown (its builds and modes with it), and *All*; the *Older models* switch sits in it too. Everything
+  s'affiche »): one plain line just above the first chart, which sticks to the top of the window only once scrolled
+  past (never above the title on load); it scrolls sideways when it does not fit (on a phone). Fine chips with a light
+  outline and a small dot of the maker's (or model's) colour: on the global page one per maker, on a maker page one
+  per model shown (its builds and modes with it), *All* first and *Older models* last on the same line. Everything
   is on by default. A chip turned off removes its couples from every chart and every table (the sources table and
-  the counts included), and every decision — frontier, numbers, price trend, tier targets, tiers, crown — is taken
-  again on the couples shown, as the *Older models* switch does on the Claude page. A selection the page cannot draw
-  is refused (its last chip is locked): the price trend needs two couples of a current model, the tiers two frontier
-  couples. The selection is kept in the address (`#makers=openai,google`, `#models=…`: the chips shown that are on;
-  no address when all are), so a link shares it. The maker links above it point to each page's `index.html`: a
-  folder link (`openai/`) opens the page only through a web server, and shows the folder when the files are opened
-  from the disk.
+  the counts included); the frontier, its labels and the tier targets are taken again on the couples shown, as the
+  *Older models* switch does on the Claude page.
+  **The price trend does not move with the selection** (the maintainer, 19 Nov 2026: « desactiver un fabricant ne
+  doit pas recalculer la tendance des prix »): it stays the trend of the default view — every couple of the page's
+  current models that are not outclassed, all makers and models on —, whatever the chips; what reads against the
+  trend reads against that fixed trend: the crown, the "× cheaper than the trend", the value matrix and the tiers. A
+  selection the page cannot draw is refused (its last chip is locked): the tiers need two frontier couples. The
+  selection is kept in the address (`#makers=openai,google`, `#models=…`: the chips shown that are on; no address
+  when all are), so a link shares it.
+- **Links between the pages**: the published build links the clean addresses (`/`, `/openai/`, no `index.html`);
+  `python3 site/multisite.py --local-links` links each page's file (`../openai/index.html`), for a copy opened from the
+  disk, where a folder link shows the folder.
 - **Lines** (the catalogue's `line`: a dated build, a preview, OpenAI's Pro mode): separate couples of one model,
   each with its own effort ladder. They share the model's colour; the first is drawn with filled points, the others
   with hollow points. Chart labels, tooltips and table rows give the full name ("DeepSeek V4.1 Flash 1017 build",

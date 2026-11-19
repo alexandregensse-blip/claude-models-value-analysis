@@ -5,11 +5,13 @@ import json, os, re, subprocess, sys
 from config import HERE
 
 
-def prerender(app, css):
+def prerender(app, css, skip=()):
     """Runs app.js at build time (site/prerender.js, Node, fake DOM) and returns the HTML it writes into the text
-    blocks, so crawlers that do not run JavaScript read the conclusions. The browser redraws them on load."""
+    blocks, so crawlers that do not run JavaScript read the conclusions. The browser redraws them on load.
+    skip: blocks a page does not have (the multi-site pages have no list under the Pareto chart)."""
     try:
-        r = subprocess.run(["node", os.path.join(HERE, "prerender.js")], input=json.dumps({"app": app, "css": css}),
+        r = subprocess.run(["node", os.path.join(HERE, "prerender.js")],
+                           input=json.dumps({"app": app, "css": css, **({"skip": list(skip)} if skip else {})}),
                            capture_output=True, text=True, check=True)
     except (OSError, subprocess.CalledProcessError) as e:
         sys.exit(f"!! PRE-RENDER FAILED (Node is required to build): {getattr(e, 'stderr', '') or e}")

@@ -4,11 +4,12 @@ models on one chart, frontier, price trend, tiers and crown computed across make
 (/claude/, /openai/, …), each like the Claude page: its models, its effort ladders, its tiers and crown among its own
 couples, its sources table.
 Run: python3 site/multisite.py  →  out/models/ (index.html, <maker>/index.html, llms.txt, robots.txt, favicons).
+--local-links: links between the pages to each page's index.html, for a copy opened from the disk (default: /openai/).
 The Claude page (python3 site/build.py, served at the repository root) is untouched: this reuses its page — app.js,
 body.html, style.css, the pre-render — and applies the per-site settings of site/makers.json as exact text
 replacements, each checked to apply exactly where expected, so a change to the page that breaks one stops this build
 instead of slipping through. Rules: docs/DISPLAY-METHODOLOGY.md § 16."""
-import argparse, datetime, hashlib, html as htmlmod, json, math, os, re, shutil, sys
+import argparse, datetime, hashlib, html as htmlmod, json, math, os, re, shutil, sys, urllib.parse
 
 from config import HERE, ROOT, REPO_URL, DATA_URL, EFFORT_ORDER, CAP
 from build import effort_columns
@@ -23,6 +24,8 @@ SET  = json.load(open(os.path.join(HERE, "makers.json"), encoding="utf-8"))
 OUT  = os.path.join(ROOT, SET["out_dir"])
 BASE = SET["base_url"]
 DRAFT = SET.get("draft", "")            # one setting: "" removes the banner and the noindex tag on every page
+LOCAL_LINKS = False                     # --local-links: links between the pages to each page's index.html, for a copy
+                                        # opened from the disk; by default the published addresses (/openai/, no index.html)
 DASH = ["", "6 4", "1.5 3.5"]           # a model's builds and modes: solid, dashed, dotted (hollow points)
 
 
@@ -282,24 +285,34 @@ function variantPts(pts){ const o=[]; pts.forEach(p=>(VARIANTS[p.m+"@"+p.e]||[])
 function drawVariants(s,pts,X,Y,fade){ variantPts(pts).forEach(v=>{ const col=cvar(MODELS[v.m].c), op=fade&&!v.front?0.3:0.9, x=X(v.c), y=Y(v.t), r=4.6;
   s.appendChild(el("line",{x1:X(v.base.c),y1:y,x2:x,y2:y,stroke:col,"stroke-width":1.3,"stroke-dasharray":"1.5 3","stroke-opacity":op}));
   s.appendChild(el("path",{d:`M ${x} ${y-r} L ${x+r} ${y} L ${x} ${y+r} L ${x-r} ${y} Z`,fill:cvar('--panel'),stroke:col,"stroke-width":1.6,"stroke-opacity":op})); }); }
+const vSegs=(pts,X,Y)=>variantPts(pts).map(v=>[X(v.base.c),Y(v.t),X(v.c),Y(v.t)]);   // a variant's dotted line
 const vNote=(m,e,c)=>(VARIANTS[m+"@"+e]||[]).map(v=>`<small class="vnote" title="${v.label}">${VTAG[v.kind]||v.kind} ${fmtC(c*v.cost_ratio)}×</small>`).join("");
-// Selection (the bar at the top of the page): FILT.items are the page's makers (global page) or its models (a maker
+// Selection (the bar above the first chart): FILT.items are the page's makers (global page) or its models (a maker
 // page); OFF the items turned off. The page's grids are rebuilt from the full copy with only the couples shown — the
-// older-model switch, the beaten couples and the selection — so every chart, table and decision (frontier, numbers,
-// trend, tiers, crown) is taken on what is shown, exactly as the older-model switch does on the Claude page. The
+// older-model switch, the beaten couples and the selection — so the charts, the tables, the frontier and its labels are
+// taken on what is shown. The price trend is not: it stays the default view's (trendRows), so the crown, the
+// "× cheaper" and the tiers read against the same trend whatever the selection (the maintainer, 19 Nov 2026). The
 // selection is kept in the address (#makers=… or #models=…, the items shown turned on; none when all are on).
 const selOK=m=>!OFF.has(FILT.of[m]);
 const visItems=()=>{ const v=new Set(Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m)).map(m=>FILT.of[m])); return FILT.items.filter(i=>v.has(i.id)); };
-const LG_NUM=`<svg class="lgs" width="16" height="16" aria-hidden="true"><rect x="1" y="1" width="14" height="14" rx="7" fill="${cvar('--panel')}" stroke="${cvar('--ink')}" stroke-width="1.3"/><text x="8" y="11.5" font-size="9.5" font-weight="700" text-anchor="middle" fill="${cvar('--ink')}">1</text></svg>numbers: the Pareto frontier's couples, from the cheapest, named in the list under the chart`;
+const LG_LAB=`<span class="lgt">model · effort</span>the Pareto frontier's couples, labelled where there is room`;
+// The price trend's couples: those of the default view — every current model of the page, every maker and model on,
+// older models off — whatever the selection (the maintainer, 19 Nov 2026: « desactiver un fabricant ne doit pas
+// recalculer la tendance des prix »). Same rows, in the same order, as couples() gives fitTrend by default.
+var TREND_FIXED=null;
+function trendRows(){ if(TREND_FIXED) return TREND_FIXED; const rows=[];
+  Object.keys(GRID_ALL.cost).forEach(m=>{ if(!CURRENT.includes(m)||LEGACY.includes(m)) return; const cg=GRID_ALL.cost[m], qg=GRID_ALL.qual[m]||{};
+    for(const e in cg){ if(HIDE_C[m]&&HIDE_C[m].includes(e)) continue; const q=qg[e]; if(q) rows.push({m,e,x:cg[e][0],hx:cg[e][1],t:q[0],ht:q[1]}); } });
+  return TREND_FIXED=rows; }
 function shownGrid(o){ const C={},Q={}, keys=[...new Set([...Object.keys(GRID_ALL.cost),...Object.keys(GRID_ALL.qual)])];
   keys.forEach(m=>{ if(o.has(FILT.of[m])||(LEGACY.includes(m)&&!showLegacy)) return;
     const f=A=>HIDE_C[m]&&!showLegacy?Object.fromEntries(Object.entries(A).filter(([e])=>!HIDE_C[m].includes(e))):A;
     if(GRID_ALL.cost[m]) C[m]=f(GRID_ALL.cost[m]); if(GRID_ALL.qual[m]) Q[m]=f(GRID_ALL.qual[m]); });
   return {C,Q}; }
-// A selection the page can draw: the price trend needs two couples of a current model, the tiers two frontier couples.
+// A selection the page can draw: the tiers need two frontier couples (the price trend, the default view's, needs none).
 function selValid(o){ const {C,Q}=shownGrid(o), rows=[];
   for(const m in C) for(const e in C[m]) if(Q[m]&&Q[m][e]) rows.push({m,e,x:C[m][e][0],t:Q[m][e][0]});
-  return rows.filter(p=>CURRENT.includes(p.m)).length>=2&&frontier(rows).front.length>=2; }
+  return frontier(rows).front.length>=2; }
 function applyFilter(){ const {C,Q}=shownGrid(OFF); Object.keys(COSTGRID).forEach(m=>delete COSTGRID[m]); Object.keys(QUALGRID).forEach(m=>delete QUALGRID[m]);
   Object.assign(COSTGRID,C); Object.assign(QUALGRID,Q); }
 function readSel(){ let h=""; try{ h=typeof location!=="undefined"?decodeURIComponent(location.hash||""):""; }catch(e){}
@@ -313,71 +326,75 @@ let OFF=readSel();
 function setSel(o){ const fid=document.activeElement?.id; OFF=o; writeSel(); applyLegacy(); tierDefaults(); renderAll(); if(fid) document.getElementById(fid)?.focus(); }
 function selToggle(id){ const o=new Set(OFF); if(o.has(id)) o.delete(id); else o.add(id); if(selValid(o)) setSel(o); }
 function selAll(){ setSel(new Set()); }
-function renderFilterBar(leg){ const host=document.getElementById("filterbar"); if(!host) return;
+function renderFilterBar(){ const host=document.getElementById("filterbar"); if(!host) return;
   const vis=visItems();
   const chip=i=>{ const on=!OFF.has(i.id), o=new Set(OFF); o.add(i.id); const lock=on&&!selValid(o);
     return `<button type="button" class="fchip" id="fchip-${i.id}" aria-pressed="${on}"${lock?` aria-disabled="true" title="${FILT.lock}"`:""} style="--fc:${cvar(i.c)}" onclick="selToggle('${i.id}')"><span class="fchip-dot" aria-hidden="true"></span>${i.label}</button>`; };
-  host.innerHTML=`<span class="fbar-k">${FILT.key==="makers"?"Makers":"Models"}</span>`
-    +`<button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
-    +vis.map(chip).join("")+(leg?`<span class="fbar-sep" aria-hidden="true"></span>${leg}`:""); }
+  host.innerHTML=`<button type="button" class="fchip fchip-all" id="fchip-all" aria-pressed="${vis.every(i=>!OFF.has(i.id))}" onclick="selAll()">All</button>`
+    +vis.map(chip).join("")
+    +(LEGACY.length?`<button type="button" class="fchip fchip-old" id="tgl-legacy-f" role="switch" aria-checked="${showLegacy}" title="${LEGACY_HINT}" onclick="toggleLegacy()"><span class="fchip-dot" aria-hidden="true"></span>Older models</button>`:""); }
 if(typeof addEventListener==="function") addEventListener("hashchange",()=>{ OFF=readSel(); applyLegacy(); tierDefaults(); renderAll(); });
-// The Pareto frontier's couples carry a number on the charts (a small badge, from the cheapest), named in a list under
-// each chart; hovering or tapping a badge, its point or its row highlights both. Badges keep a fixed size on screen.
+// The Pareto frontier's couples carry a label on the charts, "model · effort", small (11 px on screen, whatever the
+// width), muted, without background or frame; any other point is named by the tooltip. Labels keep their size on screen.
 const pxu=s=>{ const w=typeof s.getBoundingClientRect==="function"?s.getBoundingClientRect().width:0; return w>0?1100/w:1; };   // SVG units per screen pixel
-const HL={};                                                // owner (chart or list id) → {couple key: [set(on)]}
+const HL={};                                                // owner (chart id) → {couple key: [set(on)]}
 function hlFront(k){ for(const o in HL) for(const kk in HL[o]) HL[o][kk].forEach(f=>f(kk===k)); }
-let FRONT_NO={};
 function frontRows(pts){ const fr=frontier(couples()).front, by={}; pts.forEach(p=>{ by[p.m+"@"+p.e]=p; });
-  FRONT_NO={}; fr.forEach((p,i)=>{ FRONT_NO[p.m+"@"+p.e]=i+1; });
-  return fr.map((p,i)=>({p:by[p.m+"@"+p.e],n:i+1})).filter(f=>f.p); }
-// Placement: each badge goes to the first spot, nearest first, around its point — starting up-left, the side of the
-// frontier no couple can occupy — whose box overlaps no badge already placed and covers no point; its leader line joins it to its point.
-function frontBadges(s,id,F,obst,X,Y,mL,mT,iw,ih){ const u=pxu(s), r=8*u, gap=3*u, reg=HL[id]={}, placed=[];
-  const pp=obst.map(p=>[X(p.c),Y(p.t)]), inPlot=(x,y,m)=>x>=mL+m&&x<=mL+iw-m&&y>=mT+m&&y<=mT+ih-m;
-  const ang=[]; for(let i=0;i<16;i++){ const k=(i+1)>>1; ang.push((135+(i%2?1:-1)*k*22.5)*Math.PI/180); }
-  F.forEach(({p,n})=>{ const ax=X(p.c), ay=Y(p.t); if(!inPlot(ax,ay,0)) return;
-    let best=null, bad0=1e9;
-    for(let ring=0; ring<12&&bad0>0; ring++){ const d=r+4*u+ring*(r+gap);
-      for(const a of ang){ const x=ax+d*Math.cos(a), y=ay-d*Math.sin(a); if(!inPlot(x,y,r)) continue;
-        let bad=0; placed.forEach(q=>{ if(Math.max(Math.abs(q.x-x),Math.abs(q.y-y))<2*r+gap) bad+=1000; });
-        pp.forEach(([px,py])=>{ if(Math.max(Math.abs(px-x),Math.abs(py-y))<r+2*u) bad+=1; });
-        if(bad<bad0){ bad0=bad; best={x,y}; if(!bad) break; } } }
-    if(!best) best={x:ax,y:ay};
-    const col=cvar(MODELS[p.m].c), g=el("g",{class:"fbadge","data-k":p.m+"@"+p.e}), dx=best.x-ax, dy=best.y-ay, dd=Math.hypot(dx,dy);
-    if(dd>r+6*u){ const k1=3*u/dd, k2=1-r/dd;            // from the point's edge to the badge's
-      g.appendChild(el("line",{x1:ax+dx*k1,y1:ay+dy*k1,x2:ax+dx*k2,y2:ay+dy*k2,stroke:col,"stroke-width":u,"stroke-opacity":0.6})); }
-    const c=el("rect",{x:best.x-r,y:best.y-r,width:2*r,height:2*r,rx:r,fill:cvar('--panel'),stroke:col,"stroke-width":1.5*u});
-    const t=el("text",{x:best.x,y:best.y+3.6*u,"font-size":(n<10?10:9)*u,"font-weight":700,"text-anchor":"middle",fill:cvar('--ink')}); t.textContent=n;
-    g.appendChild(c); g.appendChild(t); s.appendChild(g);
-    (reg[p.m+"@"+p.e]=reg[p.m+"@"+p.e]||[]).push(on=>{ c.setAttribute("fill",on?col:cvar('--panel')); t.setAttribute("fill",on?cvar('--panel'):cvar('--ink'));
-      c.setAttribute("stroke-width",(on?2.5:1.5)*u); });
-    placed.push({x:best.x,y:best.y,r,p,n,k:p.m+"@"+p.e}); });
+  return fr.map(p=>by[p.m+"@"+p.e]).filter(Boolean); }
+const flText=p=>`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`;
+let MCTX=null;                                              // text width: the browser's own measure, else 0.6 em a character
+function textPx(s,t,fs){ try{ if(MCTX===null){ const c=document.createElement("canvas"); MCTX=c&&c.getContext?c.getContext("2d"):false; }
+    if(MCTX){ MCTX.font=`${fs}px ${getComputedStyle(s).fontFamily||"sans-serif"}`; const w=MCTX.measureText(t).width; if(w>0) return w; } }catch(e){ MCTX=false; }
+  return 0.6*fs*t.length; }
+// Segment × box (Liang–Barsky): does the segment cross the box?
+function segHits(x1,y1,x2,y2,b){ let t0=0,t1=1; const dx=x2-x1, dy=y2-y1;
+  for(const [p,q] of [[-dx,x1-b.x0],[dx,b.x1-x1],[-dy,y1-b.y0],[dy,b.y1-y1]]){
+    if(p===0){ if(q<0) return false; } else { const r=q/p; if(p<0){ if(r>t1) return false; if(r>t0) t0=r; } else { if(r<t0) return false; if(r<t1) t1=r; } } }
+  return true; }
+// Placement: each label (cost order) goes to the first free spot around its point, nearest first — beside it, starting
+// up-left, the side of the frontier no couple can occupy — whose box, with a margin, overlaps no label already placed,
+// no point and no line of the chart (the frontier, a variant's dotted line). Never away from its point: no leader line.
+// A label with no free spot is left out; its point reads on hover or tap. s.__labels counts both.
+function frontLabels(s,id,F,obst,segs,X,Y,mL,mT,iw,ih){ const u=pxu(s), fs=11*u, h=13*u, m=1.5*u, reg=HL[id]={}, placed=[];
+  const pp=obst.map(p=>[X(p.c),Y(p.t)]), pr=6.5+m;           // a point: its largest mark (r 5.6, a diamond 4.6) and the margin
+  const free=b=>b.x0>=mL&&b.x1<=mL+iw&&b.y0>=mT&&b.y1<=mT+ih
+    &&!placed.some(q=>b.x0<q.x1+m&&q.x0<b.x1+m&&b.y0<q.y1+m&&q.y0<b.y1+m)
+    &&!pp.some(([px,py])=>{ const cx=Math.max(b.x0,Math.min(px,b.x1)), cy=Math.max(b.y0,Math.min(py,b.y1)); return Math.hypot(px-cx,py-cy)<pr; })
+    &&!segs.some(g=>segHits(g[0],g[1],g[2],g[3],{x0:b.x0-m,y0:b.y0-m,x1:b.x1+m,y1:b.y1+m}));
+  let hidden=0;
+  F.forEach(p=>{ const ax=X(p.c), ay=Y(p.t), t=flText(p), w=textPx(s,t,fs); let best=null;
+    if(ax<mL||ax>mL+iw||ay<mT||ay>mT+ih){ return; }
+    for(let ring=0; ring<4&&!best; ring++){ const d=pr+ring*4*u, dd=d*0.7;
+      const cand=[[ax-dd-w,ay-dd-h],[ax-d-w,ay-h/2]];          // up-left, left, then above and below sliding along, right, the corners
+      for(const f of [1,0.75,0.5,0.25,0]) cand.push([ax-f*w,ay-d-h]);
+      cand.push([ax+dd,ay+dd],[ax+d,ay-h/2]);
+      for(const f of [0,0.25,0.5,0.75,1]) cand.push([ax-f*w,ay+d]);
+      cand.push([ax+dd,ay-dd-h],[ax-dd-w,ay+dd]);
+      for(const [x0,y0] of cand){ const b={x0,y0,x1:x0+w,y1:y0+h}; if(free(b)){ best=b; break; } } }
+    if(!best){ hidden++; return; }
+    const col=cvar(MODELS[p.m].c), k=p.m+"@"+p.e;
+    const tx=el("text",{class:"flabel","data-k":k,x:best.x0,y:best.y1-3*u,"font-size":fs,fill:cvar('--muted'),"text-anchor":"start"}); tx.textContent=t;
+    s.appendChild(tx);
+    (reg[k]=reg[k]||[]).push(on=>tx.setAttribute("fill",on?col:cvar('--muted')));
+    placed.push({...best,x:(best.x0+best.x1)/2,y:(best.y0+best.y1)/2,w,h,p,k}); });
+  s.__labels={shown:placed.length,hidden,frontier:F.length};
   return placed; }
-function frontList(id,F){ const host=document.getElementById(id); if(!host) return; host.innerHTML=""; const reg=HL[id]={};
-  F.forEach(({p,n})=>{ const k=p.m+"@"+p.e, li=document.createElement("li");
-    li.setAttribute("data-k",k); li.setAttribute("tabindex","0"); li.setAttribute("style",`--fc:${cvar(MODELS[p.m].c)}`);
-    li.innerHTML=`<span class="fl-n">${n}</span><span class="fl-m">${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}</span><span class="fl-v">${fmtC(p.c)}× · ${pct(p.s)}</span>`;
-    (reg[k]=reg[k]||[]).push(on=>{ if(on) li.setAttribute("class","hl"); else li.removeAttribute("class"); });
-    li.onpointerenter=e=>{ if(e.pointerType==="mouse") hlFront(k); }; li.onpointerleave=e=>{ if(e.pointerType==="mouse") hlFront(null); };
-    li.onpointerup=e=>{ if(e.pointerType!=="mouse") hlFront(li.getAttribute("class")==="hl"?null:k); };   // a tap (touch, pen) toggles
-    li.onfocus=()=>hlFront(k); li.onblur=()=>hlFront(null);
-    host.appendChild(li); }); }
 if(typeof addEventListener==="function"){ let rw=0; addEventListener("resize",()=>{ const s=document.getElementById("chartB"), w=s?s.getBoundingClientRect().width:0;
-  if(w&&Math.abs(w-rw)>1){ rw=w; drawB(); drawPareto(); } }); }   // the badges and the tooltip keep their size on screen
+  if(w&&Math.abs(w-rw)>1){ rw=w; drawB(); drawPareto(); } }); }   // the labels and the tooltip keep their size on screen
 '''
 
-HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi-site: the frontier's badges, a tooltip of fixed size on screen
+HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi-site: the frontier's labels, a tooltip of fixed size on screen
   const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
   const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
   s.onmousemove=ev=>{ const P=new DOMPoint(ev.clientX,ev.clientY).matrixTransform(s.getScreenCTM().inverse()), u=pxu(s), touch=!!ev.pointerType&&ev.pointerType!=="mouse";
     ells.forEach(o=>{ const dx=P.x-o.cx, dy=P.y-o.cy, rx=dx>0?o.rxR:o.rxL, ry=dy>0?o.ryD:o.ryU; o.el.setAttribute("opacity",((dx/rx)**2+(dy/ry)**2<=1)?HOV:DEF); });
-    let hit=null, best=null, bd=(touch?22:7)*u, hd=touch?6*u:0;   // the nearest: a badge (from its edge, 0 inside) or a point (from its centre)
-    (bdg||[]).forEach(b=>{ const d=Math.max(0,Math.max(Math.abs(P.x-b.x),Math.abs(P.y-b.y))-b.r); if(d<=hd){ hd=d; hit=b; } });
+    let hit=null, best=null, bd=(touch?22:7)*u, hd=touch?6*u:0;   // the nearest: a label (from its box, 0 inside) or a point (from its centre)
+    (bdg||[]).forEach(b=>{ const d=Math.max(0,Math.abs(P.x-b.x)-b.w/2,Math.abs(P.y-b.y)-b.h/2); if(d<=hd){ hd=d; hit=b; } });
     pts.forEach(p=>{ const d=Math.hypot(P.x-X(p.c),P.y-Y(p.t)); if(d<bd){ bd=d; best=p; } });
     if(hit&&(!best||hd===0||hd<bd)) best=hit.p; else hit=null;
     const k=best&&!best.vl?best.m+"@"+best.e:null; hlFront(k);
-    if(best){ const fs=11.5*u, n=k&&FRONT_NO[k], y0=hit?hit.y-hit.r-6*u:Y(best.t)-10*u;
-      const name=`${n?n+". ":""}${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
+    if(best){ const fs=11.5*u, y0=hit?hit.y-hit.h/2-6*u:Y(best.t)-10*u;
+      const name=`${MODELS[best.m].label} · ${capE(best.e)}${best.vl?" · "+best.vl:""}`, val=`cost ${fmtC(best.c)}× · score ${pct(best.s)}`;
       ttxt.setAttribute("font-size",fs); ttxt.setAttribute("fill",cvar(MODELS[best.m].c)); ttxt.setAttribute("x",X(best.c)); ttxt.setAttribute("y",y0);
       ttxt.textContent=`${name} — ${val}`; let bb=ttxt.getBBox(), sp=[];
       if(bb.width>iw-10*u){ ttxt.textContent=""; sp=[el("tspan",{dy:-fs*1.2}),el("tspan",{dy:fs*1.2})]; sp[0].textContent=name; sp[1].textContent=val;
@@ -388,7 +405,7 @@ HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0
       trect.setAttribute("rx",3*u); trect.setAttribute("stroke-width",u); tip.setAttribute("opacity",1); }
     else tip.setAttribute("opacity",0); };
   s.onmouseleave=()=>{ ells.forEach(o=>o.el.setAttribute("opacity",DEF)); tip.setAttribute("opacity",0); hlFront(null); };
-  s.onpointerup=ev=>{ if(ev.pointerType!=="mouse") s.onmousemove(ev); }; }   // a tap (touch, pen) names the point or badge under it, as a hover does
+  s.onpointerup=ev=>{ if(ev.pointerType!=="mouse") s.onmousemove(ev); }; }   // a tap (touch, pen) names the point or label under it, as a hover does
 '''
 
 
@@ -397,6 +414,8 @@ def app_patches(S):
     return [
         (re.compile(r"function hoverTip\(s,ells,pts,X,Y,mL,iw\)\{.*?\n(?=// Force-directed label layout)", re.S), HOVER_FN),
         (re.compile(r"const LEGACY=\[[^\]\n]*\];"), f"const LEGACY={j(S['legacy_keys'])};"),
+        ('function fitTrend(all){ const rows=all.filter(p=>CURRENT.includes(p.m)); let a=0, l=0;',
+         'function fitTrend(all){ const rows=trendRows(); let a=0, l=0;   // multi-site: the default view\'s couples, whatever the selection'),
         (re.compile(r"const CURRENT=\[[^\]\n]*\];"),
          f"const CURRENT={j(S['current_keys'])};\nconst HIDE_B={j(S['hide_landscape'])}, LEGACY_HINT={j(S['legacy_hint'])}, "
          f"DASH={j(DASH)}, HIDE_C={j(S['hide_couples'])}, VARIANTS={j(S['variants'])}, FILT={j(S['filt'])};   // per-site settings (site/makers.json)"),
@@ -406,25 +425,27 @@ def app_patches(S):
         ('  const segs=[];                                                          // curves + points on top',
          '  drawVariants(s,pts,X,Y,false);\n  const segs=[];                                                          // curves + points on top'),
         ('  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendB");',
-         '  const bdg=frontBadges(s,"chartB",F,pts.concat(variantPts(pts)),X,Y,mL,mT,iw,ih);   // the frontier\'s numbers, listed under the chart\n'
-         '  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw,bdg);\n  frontList("flistB",F);\n  const lg=document.getElementById("legendB");'),
+         '  const bdg=frontLabels(s,"chartB",F,pts.concat(variantPts(pts)),vSegs(pts,X,Y),X,Y,mL,mT,iw,ih);   // the frontier\'s labels, where there is room\n'
+         '  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw,bdg);\n  const lg=document.getElementById("legendB");'),
         ('  // frontier labels (model · effort), force-directed to dodge overlaps and the frontier line\n'
          '  const ppix=front.map(p=>({x:X(p.c),y:Y(p.t)})), segs=[];\n'
          '  for(let i=0;i<front.length-1;i++) segs.push([X(front[i].c),Y(front[i].t),X(front[i+1].c),Y(front[i+1].t)]);\n'
          '  const labs=front.map(p=>{ const t=`${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)}`, w=t.length*7.2+8;\n'
          '    return {ax:X(p.c),ay:Y(p.t),lx:X(p.c)+18+w/2,ly:Y(p.t),t,col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w,h:17,fs:13,mdl:true}; });\n'
          '  placeLabels(s,labs,ppix,segs,W,mL,mT,ih);\n  hoverTip(s,ells,pts,X,Y,mL,iw);\n  const lg=document.getElementById("legendP");',
-         '  const F=frontRows(pts), bdg=frontBadges(s,"chartP",F,pts.concat(variantPts(pts)),X,Y,mL,mT,iw,ih);   // the frontier\'s numbers, from the cheapest\n'
+         '  const F=frontRows(pts), segs=vSegs(pts,X,Y);   // the frontier\'s labels avoid its line and the variants\' dotted lines\n'
+         '  for(let i=0;i<front.length-1;i++) segs.push([X(front[i].c),Y(front[i].t),X(front[i+1].c),Y(front[i+1].t)]);\n'
+         '  const bdg=frontLabels(s,"chartP",F,pts.concat(variantPts(pts)),segs,X,Y,mL,mT,iw,ih);\n'
          '  hoverTip(s,ells,pts.concat(variantPts(pts)),X,Y,mL,iw,bdg);\n  const lg=document.getElementById("legendP");'),
         ('  const pb=document.getElementById("pareto-blocks");   // chained mini-blocks (cost order), same style as the tier cards but small\n'
          '  if(pb) pb.innerHTML=front.map((p,i)=>`${i?\'<span class="pconn">→</span>\':\'\'}<span class="pblock" style="border-color:${cvar(MODELS[p.m].c)}"><b>${MODELS[p.m].label}</b><span class="pblock-e">${capE(p.e)}</span><span class="pblock-n">${pct(p.s)} · ${fmtC(p.c)}×</span></span>`).join("");',
-         '  frontList("pareto-blocks",F);                        // the frontier\'s couples by number (cost order): model · effort, cost, score'),
+         '  // no list under the chart: the frontier\'s couples are labelled on it, and listed in the frontier table'),
         ('+`<span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`',
-         '+`<span class="lg">${LG_NUM}</span><span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`'),
+         '+`<span class="lg">${LG_LAB}</span><span class="lg"><span class="sw" style="opacity:.25;background:var(--ink);border-radius:50%"></span>dominated</span>`'),
         ('front.forEach(p=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar(\'--panel\')}" stroke-width="1"/>`; });\n  host.innerHTML=svg+`</svg>`;',
          'front.forEach((p,i)=>{ if(p.t<Tmn||p.t>Tmx) return; svg+=`<circle cx="${X(p.t)}" cy="${mT+ih}" r="3.2" fill="${cvar(MODELS[p.m].c)}" stroke="${cvar(\'--panel\')}" stroke-width="1" data-k="${p.m}@${p.e}">`\n'
-         '    +`<title>${i+1}. ${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)} — cost ${fmtC(p.c)}× · score ${pct(p.s)}</title></circle>`; });\n'
-         '  host.innerHTML=svg+`</svg><p class="tuner-tip" aria-live="polite"></p>`;   // the frontier\'s couples: their number and identity on hover or tap\n'
+         '    +`<title>${MODELS[p.m].label}${p.e==="solo"?"":" · "+capE(p.e)} — cost ${fmtC(p.c)}× · score ${pct(p.s)}</title></circle>`; });\n'
+         '  host.innerHTML=svg+`</svg><p class="tuner-tip" aria-live="polite"></p>`;   // the frontier\'s couples: their identity on hover or tap\n'
          '  host.onmousemove=host.onpointerup=ev=>{ const c=ev.target&&ev.target.closest?ev.target.closest("circle[data-k]"):null, tt=host.querySelector(".tuner-tip");\n'
          '    hlFront(c?c.getAttribute("data-k"):null); if(tt) tt.textContent=c?c.querySelector("title").textContent:""; };'),
         ('  pts.forEach(p=>{ const col=cvar(MODELS[p.m].c);\n    s.appendChild(el("circle",p.front?',
@@ -437,7 +458,7 @@ def app_patches(S):
         ('const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n',
          'const visibleModels=()=>Object.keys(MODELS).filter(m=>showLegacy||!LEGACY.includes(m));\n' + LEGEND_FN),
         ('+legacy("tgl-legacy-b")', ''), ('+legacy("tgl-legacy-p")+ovals("tgl-ovals-p")+bands("tgl-bands-p");\n}',
-         '+ovals("tgl-ovals-p")+bands("tgl-bands-p");\n  renderFilterBar(legacy("tgl-legacy-f"));   // the selection bar, with the older-model switch\n}'),
+         '+ovals("tgl-ovals-p")+bands("tgl-bands-p");\n  renderFilterBar();   // the selection bar, with the older-model switch\n}'),
         (re.compile(r'const legacy=id=>tgl\(id,showLegacy,"Older models","[^"\n]*","toggleLegacy"\);'),
          'const legacy=id=>LEGACY.length?tgl(id,showLegacy,"Older models",LEGACY_HINT,"toggleLegacy"):"";'),
         ('const pts=couples().filter(p=>p.m!=="haiku-4.5");', 'const pts=couples().filter(p=>!HIDE_B.includes(p.m));'),
@@ -452,8 +473,8 @@ def app_patches(S):
          '  pts.forEach(p=>labs.push({ax:X(p.c),ay:Y(p.t),lx:X(p.c),ly:Y(p.t)-9,t:tagE(p.e),col:cvar(MODELS[p.m].c),lead:cvar(MODELS[p.m].c),w:tagE(p.e).length*5.4+4,h:11,fs:8.5,mdl:false}));\n'
          '  for(const m in byM){ const mp=byM[m].slice().sort((a,b)=>effRank(a.e)-effRank(b.e)), last=mp[mp.length-1], w=MODELS[m].label.length*7+6;\n'
          '    labs.push({ax:X(last.c),ay:Y(last.t),lx:X(last.c)+16+w/2,ly:Y(last.t)+4,t:MODELS[m].label,col:cvar(MODELS[m].c),lead:cvar(MODELS[m].c),w,h:15,fs:12.5,mdl:true}); }\n',
-         '  const F=frontRows(pts);                                   // the page\'s frontier: numbered badges, from the cheapest (no other label)\n'),
-        ('<b>hover a point</b> for its identity</span>', '<b>hover or tap a point</b> for any other (model · effort, cost, score)</span><span class="lg">${LG_NUM}</span>', 2),
+         '  const F=frontRows(pts);                                   // the page\'s frontier, labelled where there is room (no other label)\n'),
+        ('<b>hover a point</b> for its identity</span>', '<b>hover or tap a point</b> for any other (model · effort, cost, score)</span><span class="lg">${LG_LAB}</span>', 2),
         ('visibleModels().filter(m=>m!=="haiku-4.5").map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")',
          'legendSymbols(visibleModels().filter(m=>!HIDE_B.includes(m)&&selOK(m)))'),
         ('visibleModels().map(m=>`<span class="lg"><span class="sw" style="background:${cvar(MODELS[m].c)}"></span>${MODELS[m].label}</span>`).join("")',
@@ -471,20 +492,37 @@ def app_patches(S):
     ]
 
 
+def page_href(S, t):
+    """The link from page S to page t: its clean address on the site (/, /openai/), or with --local-links the file
+    itself (../openai/index.html), which opens from the disk too (a folder link shows the folder there)."""
+    if LOCAL_LINKS:
+        return f'{S["up"]}{t["path"]}index.html'
+    return urllib.parse.urlparse(BASE).path + t["path"]
+
+
 def body_patches(S, mc_sentence):
     cur = ' aria-current="page"'
-    nav = "".join(f'<a href="{S["up"]}{t["path"]}index.html"{cur if t["id"] == S["id"] else ""}>{esc(t["name"])}</a>' for t in S["all"])   # the page's file:
-    # a folder link (openai/) opens the page only through a web server; opened from the disk it shows the folder
+    nav = "".join(f'<a href="{page_href(S, t)}"{cur if t["id"] == S["id"] else ""}>{esc(t["name"])}</a>' for t in S["all"])
     banner = f'  <p class="draft-banner" role="note">{esc(DRAFT)}</p>\n' if DRAFT else ""
     noun = (S["noun"] + " ") if S["noun"] else ""
     shows = ("this page shows the current models of every maker, and the older couples no other model of their maker "
              "beats, but no model that another model of the same maker entirely outclasses"
              if S["id"] == "global" else f"this page shows the {S['name']} couples")
+    what = "makers" if S["id"] == "global" else "models"
     return [
-        ('<div class="wrap">\n  <header class="hero">',
-         f'<div class="wrap">\n  <nav class="sitenav" aria-label="Model makers">{nav}</nav>\n{banner}'
-         f'  <div class="filterbar" id="filterbar" role="toolbar" aria-label="Show or hide {"makers" if S["id"] == "global" else "models"}"></div>\n  <header class="hero">'),
-        ('<h1>Claude models compared <span class="h1-line">cost vs quality at every effort level</span></h1>', f"<h1>{S['h1']}</h1>"),
+        # The head, top to bottom (the maintainer, 19 Nov 2026): a plain text navigation, the title and its subtitle,
+        # the introduction; the filters sit just above the first chart, and stick to the top only once scrolled past.
+        ('<div class="wrap">\n  <header class="hero">\n    <div class="hero-corner">',
+         f'<div class="wrap">\n  <nav class="sitenav" aria-label="Model makers">{nav}</nav>\n  <header class="hero">\n'
+         f'    <h1>{S["h1"]}</h1>\n'
+         '    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span></div>\n'
+         '    <div class="hero-corner">'),
+        ('    <div class="eyebrow">Data analysis · aggregated from <span class="nsrc">…</span></div>\n'
+         '    <h1>Claude models compared <span class="h1-line">cost vs quality at every effort level</span></h1>\n', ""),
+        ('  </header>\n\n  <main>\n', f'  </header>\n{banner}\n  <main>\n'),
+        ('  <!-- ============ CHART : consolidated curves ============ -->\n  <section id="frontier">',
+         f'  <div class="filterbar" id="filterbar" role="toolbar" aria-label="Show or hide {what}"></div>\n\n'
+         '  <!-- ============ CHART : consolidated curves ============ -->\n  <section id="frontier">'),
         ('What each recent Claude model actually costs, at every effort level, and the quality it delivers — fused from public benchmark measurements for every (model, effort) pair.',
          S["lede"]),
         ('        <p class="lede">To compare two models directly — Fable, Opus, Sonnet or Haiku, effort by effort — see the <a href="claude-models-head-to-head.html">head-to-head page</a>.</p>\n', ""),
@@ -494,19 +532,16 @@ def body_patches(S, mc_sentence):
          "the first is drawn with <b>filled</b> points, the others with <b>hollow</b> points, and its label and tooltip say "
          "what it is. They are separate couples, each with its own effort ladder.")),
         ('aria-label="Quality vs cost, one curve per model, one point per effort"></svg></div>',
-         'aria-label="Quality vs cost, one point per model and effort"></svg></div>\n'
-         '      <ol id="flistB" class="flist" aria-label="The Pareto frontier\'s couples, numbered from the cheapest"></ol>'),
-        ('<div id="pareto-blocks" class="pareto-blocks"></div>',
-         '<ol id="pareto-blocks" class="flist" aria-label="The Pareto frontier\'s couples, numbered from the cheapest"></ol>'),
+         'aria-label="Quality vs cost, one point per model and effort"></svg></div>'),
+        ('      <div id="pareto-blocks" class="pareto-blocks"></div>\n', ""),
         ('<b>Solid</b> = frontier, <b>faded</b> = dominated.',
-         '<b>Solid</b> = frontier, <b>faded</b> = dominated; each frontier couple carries a <b>number</b>, from the cheapest, '
-         'named in the list under the chart — <b>hover</b> or <b>tap</b> a number, a point or a row to bring both forward. '
+         '<b>Solid</b> = frontier, <b>faded</b> = dominated; the frontier couples are <b>labelled</b> (model · effort) where '
+         'there is room — <b>hover</b> or <b>tap</b> any point for its model, effort, cost and score. '
          'No line joins a model\'s couples.'),
         ('<p class="cap">One curve per model, one point per configuration (thinking off, minimal, low → max, thinking on).',
          '<p class="cap">One point per couple: a model at one configuration (thinking off, minimal, low → max, thinking on); '
-         'no line joins a model\'s couples. Only the couples of the <b>Pareto frontier</b> are marked, by a <b>number</b> '
-         'from the cheapest, named in the list under the chart; <b>hover</b> or <b>tap</b> a number or a row to bring '
-         'both forward, and any other point for its model, effort, cost and score.'),
+         'no line joins a model\'s couples. Only the couples of the <b>Pareto frontier</b> are <b>labelled</b> (model · '
+         'effort), where there is room; <b>hover</b> or <b>tap</b> any point for its model, effort, cost and score.'),
         ("Best Claude model for the price — the Pareto frontier", f"Best {noun}model for the price — the Pareto frontier"),
         ("Normalized cost matrix — Claude effort levels compared", f"Normalized cost matrix — {noun}effort levels compared"),
     ] + ([(re.compile(r"<p>Each release buys the same quality for less — .*?</p>"), f"<p>{S['generation']}</p>")]
@@ -523,41 +558,35 @@ def body_patches(S, mc_sentence):
 
 
 EXTRA_CSS = """
-.sitenav{display:flex;flex-wrap:wrap;gap:6px 8px;margin:0 0 22px;font-size:13.5px}
-.sitenav a{color:var(--muted);text-decoration:none;border:1px solid var(--line2);border-radius:999px;padding:3px 12px;background:var(--panel)}
-.sitenav a:hover{color:var(--ink);border-color:var(--muted)}
-.sitenav a[aria-current="page"]{color:var(--paper);background:var(--ink);border-color:var(--ink);font-weight:600}
-.draft-banner{margin:0 0 26px;padding:11px 16px;border:1px solid var(--warn);border-left:5px solid var(--warn);border-radius:10px;
+.sitenav{display:flex;flex-wrap:wrap;gap:4px 18px;margin:0 0 20px;font-size:13.5px;line-height:1.5}
+.sitenav a{color:var(--muted);text-decoration:none}
+.sitenav a:hover{color:var(--ink);text-decoration:underline}
+.sitenav a[aria-current="page"]{color:var(--ink);font-weight:700}
+.hero h1{margin-top:0}
+.hero h1 + .eyebrow{margin-top:10px}
+.draft-banner{margin:4px 0 26px;padding:11px 16px;border:1px solid var(--warn);border-left:5px solid var(--warn);border-radius:10px;
   background:color-mix(in srgb,var(--warn) 12%,var(--panel));color:var(--ink);font-size:14.5px}
 .lgl{display:inline-flex;flex-wrap:wrap;gap:2px 9px;margin-left:4px;font-size:11.5px;color:var(--muted)}
 .lgi{display:inline-flex;align-items:center;gap:3px}
 .lgs{flex:none}
+.lgt{font-size:11px;color:var(--muted);margin-right:5px}
 .vnote{display:block;font-style:italic;color:var(--muted)}
-.filterbar{position:sticky;top:0;z-index:30;display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:-8px 0 22px;padding:9px 0;
-  background:var(--paper);border-bottom:1px solid var(--line);font-size:13px}
-.fbar-k{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);font-weight:700;margin-right:2px;flex:none}
-.fchip{font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 8px;border-radius:999px;flex:none;
-  border:1.5px solid var(--fc,var(--line2));background:color-mix(in srgb,var(--fc,var(--ink)) 13%,var(--panel));color:var(--ink);cursor:pointer;white-space:nowrap}
-.fchip:hover{border-color:var(--ink)}
+.filterbar{position:sticky;top:0;z-index:30;display:flex;flex-wrap:nowrap;align-items:center;gap:6px;margin:0 0 18px;padding:8px 0;
+  overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;background:var(--paper);border-bottom:1px solid var(--line);font-size:12.5px}
+.filterbar::-webkit-scrollbar{display:none}
+.fchip{font:inherit;font-size:12.5px;display:inline-flex;align-items:center;gap:6px;padding:3px 10px 3px 8px;border-radius:999px;flex:none;
+  border:1px solid var(--line2);background:transparent;color:var(--ink);cursor:pointer;white-space:nowrap;line-height:1.4}
+.fchip:hover{border-color:var(--muted)}
 .fchip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
-.fchip-dot{width:10px;height:10px;border-radius:50%;background:var(--fc);flex:none}
-.fchip[aria-pressed="false"]{background:var(--panel);border-color:var(--line2);color:var(--faint);text-decoration:line-through}
-.fchip[aria-pressed="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.5px var(--fc)}
+.fchip-dot{width:7px;height:7px;border-radius:50%;background:var(--fc);flex:none}
+.fchip[aria-pressed="false"]{color:var(--faint)}
+.fchip[aria-pressed="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
 .fchip[aria-disabled="true"]{cursor:not-allowed}
-.fchip-all{--fc:var(--ink);padding-left:11px}
-.fbar-sep{width:1px;align-self:stretch;background:var(--line2);margin:0 4px;flex:none}
-.filterbar .tgl{padding:4px 10px 4px 6px;flex:none;white-space:nowrap}
-@media (max-width:640px){.filterbar{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;-webkit-overflow-scrolling:touch}.filterbar .tgl-hint{display:none}}
-.flist{list-style:none;margin:14px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:2px 12px;font-size:12.5px}
-.flist li{display:flex;align-items:center;gap:7px;padding:3px 6px;border-radius:7px;min-width:0;cursor:default}
-.flist li.hl{background:color-mix(in srgb,var(--fc) 16%,transparent)}
-.flist li:focus-visible{outline:2px solid var(--fc);outline-offset:1px}
-.fl-n{flex:none;display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--fc);
-  background:var(--panel);font-size:10px;font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-.flist li.hl .fl-n{background:var(--fc);color:var(--panel)}
-.fl-m{flex:1 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:600}
-.fl-v{flex:none;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
-.fbadge{cursor:default}
+.fchip-all{padding-left:10px}
+.fchip-old{--fc:var(--muted);margin-left:8px}
+.fchip-old[aria-checked="false"]{color:var(--muted)}
+.fchip-old[aria-checked="false"] .fchip-dot{background:transparent;box-shadow:inset 0 0 0 1.2px var(--fc)}
+.flabel{pointer-events:none}
 .tuner-tip{min-height:1.3em;margin:4px 0 0;font-size:12px;color:var(--muted);text-align:center}
 """
 
@@ -675,7 +704,7 @@ def build_page(S, css0, body0, app0):
         S["legacy_hint"] = (" · ".join(names) if len(names) <= 3 or SET["makers"][S["id"]].get("from_claude_page")
                             else " · ".join(names[:2]) + f" and {len(names) - 2} more")
     S["variants"] = {c: v for c, v in VARIANTS.items() if c.split("@")[0] in CG and c.split("@")[1] in CG[c.split("@")[0]]}
-    lock = "the price trend needs two couples of a current model, and the tiers two frontier couples"
+    lock = "the tiers need two frontier couples"
     if S["id"] == "global":                    # the selection bar: one chip per maker, in its hue (the middle of its models')
         mks = [mk for mk in SET["makers"] if any(S["maker_of"][k] == mk for k in models)]
         S["filt"] = dict(key="makers", lock=lock, of={k: S["maker_of"][k] for k in models},
@@ -708,7 +737,7 @@ def build_page(S, css0, body0, app0):
     body = body.replace("__COSTSPAN__", str(round(span)))
     body = body.replace("__NCOSTROWS__", str(DIAG["cost"]["rows"])).replace("__NSCOREROWS__", str(DIAG["quality"]["rows"]))
     body = body.replace("__NTREND__", str(sum(len(CG[m]) for m in S["current_keys"])))
-    pre = prerender(app, css)
+    pre = prerender(app, css, skip=["pareto-blocks"])   # no list under the Pareto chart on these pages
     body = inject(body, pre)
     text = re.sub(r"\s+", " ", htmlmod.unescape(re.sub(r"<[^>]+>", " ", re.sub(r"<(script|style)\b.*?</\1>", " ", body, flags=re.S))))
     date = content_date(S["path"] or "/", [S["title"], S["description"], text, pre.get("answer-full", ""), CG, QG, GD])
@@ -734,12 +763,16 @@ def build_page(S, css0, body0, app0):
 
 
 def main():
-    global DRAFT
+    global DRAFT, LOCAL_LINKS
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("--stale-fit", action="store_true",
                     help="build from a model/fit-cache.json whose inputs have changed since the fit (local preview only: "
                          "the couples and values are the last fit's, the sources table reads today's data; the banner says so)")
+    ap.add_argument("--local-links", action="store_true",
+                    help="links between the pages to each page's index.html (../openai/index.html), for a copy opened "
+                         "from the disk; without it, the published addresses (/, /openai/)")
     args = ap.parse_args()
+    LOCAL_LINKS = args.local_links
     if args.stale_fit:
         import grids
         cache = json.load(open(grids.FIT_CACHE))
