@@ -342,10 +342,10 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       <div class="tier-head"><span class="tier-name">Everyday tasks</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#a8488d"></span>GPT-6 Luna · Medium</span>
-          <span class="tier-nums">Cost <b>1.9×</b> · Score <b>54.2 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#6f5fc3"></span>GPT-6.1 Terra · Medium</span>
+          <span class="tier-nums">Cost <b>15×</b> · Score <b>66.8 %</b></span>
         </div>
-        <div class="tier-yield">116</div>
+        <div class="tier-yield">265</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
@@ -403,9 +403,9 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
     <details class="fold">
       <summary>Best value by task tier — what to actually run</summary>
       <div class="card pad">
-        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the frontier couples, the one that maximises <b>window × e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend and <b>β</b> the tier's <b>price of quality</b> as a multiple of the market's&nbsp;: grunt work pays a quarter of it (β&nbsp;=&nbsp;0.25), everyday tasks 0.63, advanced reasoning 1.59, cutting-edge thinking four times (β&nbsp;=&nbsp;4) — evenly spread in ratio, symmetric about the market. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the tier is ready to pay for its extra cost. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the frontier couple that sits furthest below the trend. Sliders below override the targets, widths and prices of quality.</p>
+        <p class="sub">Consolidating the frontier into a decision. <b>Four target qualities</b> are <b>derived from the data</b>, not fixed: they are the <b>20th, 40th, 60th and 80th percentiles</b> of the quality of the couples shown on the page, so that the four tiers sit across the bulk of today's couples — as models improve, the targets move with them, and turning makers or models off takes them again on what is shown. They depend on quality only, not on prices. The width follows the mean spacing of the targets on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway between their targets. For each tier we pick, among the frontier couples, the one that maximises <b>window × e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost</b>, λ the slope of the price trend and <b>β</b> the tier's <b>price of quality</b> as a multiple of the market's&nbsp;: grunt work pays a quarter of it (β&nbsp;=&nbsp;0.25), everyday tasks 0.63, advanced reasoning 1.59, cutting-edge thinking four times (β&nbsp;=&nbsp;4) — evenly spread in ratio, symmetric about the market. Below its target a couple is penalised by a Gaussian window&nbsp;; at or above it the window is 1, and e<sup>β·λθ</sup>&nbsp;⁄&nbsp;cost rewards <b>smoothly</b> a couple that brings more quality than the tier is ready to pay for its extra cost. Cost counts in <b>ratios</b>, as people perceive prices&nbsp;: twice as dear weighs the same at every price. The <b>big figure</b> is the pick's <b>value index</b>&nbsp;: <b>100 = the price trend</b>, 500 means five times cheaper than the trend charges for its quality, 50 twice as dear. The <b>crown</b> is the frontier couple that sits furthest below the trend. Sliders below override the targets, widths and prices of quality.</p>
         <div class="grid" id="tier-cards"><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Target 45.7 % – Grunt work</span></div>
+      <div class="tier-head"><span class="tier-name">Target 54.6 % – Grunt work</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#a8488d"></span>GPT-6 Luna · Medium</span>
@@ -415,17 +415,17 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       </div>
       <span class="ex">Classification, tagging, extraction, routing, log/PR triage — run at scale, where throughput and unit cost dominate.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Target 54.0 % – Everyday tasks</span></div>
+      <div class="tier-head"><span class="tier-name">Target 61.1 % – Everyday tasks</span></div>
       <div class="tier-top">
         <div class="tier-left">
-          <span class="tier-pick"><span class="dot" style="background:#a8488d"></span>GPT-6 Luna · Medium</span>
-          <span class="tier-nums">Cost <b>1.9×</b> · Score <b>54.2 %</b></span>
+          <span class="tier-pick"><span class="dot" style="background:#6f5fc3"></span>GPT-6.1 Terra · Medium</span>
+          <span class="tier-nums">Cost <b>15×</b> · Score <b>66.8 %</b></span>
         </div>
-        <div class="tier-yield">116</div>
+        <div class="tier-yield">265</div>
       </div>
       <span class="ex">Routine coding, refactors, unit tests, summaries, first-draft agent steps — solid work that doesn't need the frontier.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Target 63.1 % – Advanced reasoning</span></div>
+      <div class="tier-head"><span class="tier-name">Target 68.1 % – Advanced reasoning</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#6f5fc3"></span>GPT-6.1 Terra · xHigh</span>
@@ -435,7 +435,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
       </div>
       <span class="ex">Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality.</span>
     </div><div class="card pad crit tier">
-      <div class="tier-head"><span class="tier-name">Target 71.4 % – Cutting-Edge thinking</span></div>
+      <div class="tier-head"><span class="tier-name">Target 70.9 % – Cutting-Edge thinking</span></div>
       <div class="tier-top">
         <div class="tier-left">
           <span class="tier-pick"><span class="dot" style="background:#05893e"></span>GPT-6.1 Sol · Max</span>
@@ -532,7 +532,7 @@ details.fold[open]>.card,details.fold[open]>.fold-body{margin-top:0;border-top-l
           <li><b>Weights follow from the data.</b> A group of k couples informs the spacing of couples in proportion to its discrimination² × (k − 2); a saturated or noisy benchmark weighs little; a publisher's weight saturates at its own systematic effect. No weight is set per source; the one weight set by rule is that of a single run: when a source gives k quality measurements of one run (several metrics, sub-scores or slices of the same executions), each weighs 1/k, so the run counts as one measurement.</li>
           <li><b>Nothing counts twice.</b> One execution printed twice — a system card reprinting an earlier card's series, the same run drawn on two charts, a board copying another's numbers, one run scored with two metrics — is detected and counted once: its score and its cost must both agree, within their reading precisions and a rounding made the wrong way. Versions of one board that re-grade the same runs (recognised by identical costs) count those runs once. Before the fit, two groups that still share identical costs on three couples or more stop it until the copy is resolved or the coincidence proven from the sources. An index keeps, for a couple whose index components are already in the data, only what its missing components add, or is left out.</li>
           <li><b>Values and intervals.</b> Quality = a couple's latent quality θ, shown as the score it predicts averaged over the benchmark panel; cost = its cost on a task of typical size, shown as a multiple of the cheapest couple. <b>No couple serves as a reference</b>, in the fit or on the page. Each couple carries its own 16–84&nbsp;% interval, so two couples compare through their two intervals. A couple measured by a single publisher is not shown.</li>
-          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; they are the candidates of every pick. A price trend — what a given quality costs today, fitted on the latest model of each family — says how many times cheaper or dearer each couple is than the going rate. The four tiers spread their targets across the frontier and pick, around each target, the couple that brings the most quality for its cost, each tier paying for quality from a quarter of the market price (grunt work) to four times it (cutting-edge thinking); the crown goes to the couple furthest below the trend.</li>
+          <li><b>From the fit to the picks.</b> Every decision is taken on the latent scale (log cost, θ). The Pareto frontier keeps the couples nothing beats on both axes; they are the candidates of every pick. A price trend — what a given quality costs today, fitted on the latest model of each family — says how many times cheaper or dearer each couple is than the going rate. The four tiers set their targets at the 20th, 40th, 60th and 80th percentiles of the quality of the couples shown and pick, among the frontier couples, around each target, the couple that brings the most quality for its cost, each tier paying for quality from a quarter of the market price (grunt work) to four times it (cutting-edge thinking); the crown goes to the couple furthest below the trend.</li>
         </ol>
         <h3 class="blocktitle" style="margin-top:1.3em">Key values</h3>
         <ul class="steps">
@@ -1080,20 +1080,21 @@ const TIERS=[
   {key:"pro",     name:"Advanced reasoning",     t:0, sig:1, ex:"Production code review, architecture, hard debugging, customer-facing reasoning — you need essentially flagship quality."},
   {key:"frontier",name:"Cutting-Edge thinking",  t:0, sig:1, ex:"Research-grade reasoning, novel or ambiguous problems, the hardest agentic runs — a few extra points of capability are worth a premium."},
 ];
-// DATA-DERIVED targets. Models improve release after release, so fixed targets would go stale. The four θ* spread
-// evenly from (1 − e)·min + e·max to (1 − e)·max + e·min of the frontier's quality (frontier by centres), e = TIER_E:
-// the bottom tier follows the weakest frontier couple as it rises, the top one the best, each drawn 5 % of the span
-// inward so that no target sits on a single couple. They depend on the couples only through these two bounds.
-// σ follows the spacing: adjacent windows cross at half weight midway between their targets, σ = gap ⁄ (2·√ln 2).
-const TIER_E=0.05;
+// DATA-DERIVED targets, multi-site (the maintainer, 19 Nov 2026: « j'ai l'impression que les tiers sont hyper bas
+// maintenant, remonte le seuil de perf min pour grunt », then « B »): the four θ* are the 20th, 40th, 60th and 80th
+// percentiles (TIER_Q) of θ over every couple shown on the page — couples(), the selection and the older-model switch in
+// force —, linearly interpolated between the sorted values at rank f·(n − 1). They depend on θ only, not on the prices,
+// and are taken again on what is shown when the selection changes. σ follows the mean spacing of the targets,
+// gap = (θ*₄ − θ*₁) ⁄ 3: adjacent windows cross at half weight midway, σ = gap ⁄ (2·√ln 2).
+const TIER_Q=[0.2,0.4,0.6,0.8];
 const TIER_BETA=[0.25,4];   // β of the first and last tier; the others spread evenly in ratio between them
 TIERS.forEach((T,i)=>{ T.beta=TIER_BETA[0]*Math.pow(TIER_BETA[1]/TIER_BETA[0], i/Math.max(TIERS.length-1,1)); });
 let TIERQ={lo:0,hi:1,gap:1,sig:1};
 function tierDefaults(){
-  const {front}=frontier(couples()); if(!front.length) return;
-  const a=Math.min(...front.map(p=>p.t)), b=Math.max(...front.map(p=>p.t)), lo=(1-TIER_E)*a+TIER_E*b, hi=(1-TIER_E)*b+TIER_E*a;
-  const gap=(hi-lo)/Math.max(TIERS.length-1,1), sig=gap/(2*Math.sqrt(Math.LN2));
-  TIERS.forEach((T,i)=>{ T.t=lo+i*gap; T.sig=sig; });
+  const th=couples().map(p=>p.t).sort((x,y)=>x-y), n=th.length; if(!n) return;
+  const q=f=>{ const i=f*(n-1), j=Math.floor(i), k=Math.min(j+1,n-1); return th[j]+(th[k]-th[j])*(i-j); };   // linear between sorted values
+  const ts=TIER_Q.map(q), lo=ts[0], hi=ts[ts.length-1], gap=(hi-lo)/Math.max(TIERS.length-1,1), sig=gap/(2*Math.sqrt(Math.LN2));
+  TIERS.forEach((T,i)=>{ T.t=ts[i]; T.sig=sig; });
   TIERQ={lo,hi,gap,sig};
 }
 tierDefaults();

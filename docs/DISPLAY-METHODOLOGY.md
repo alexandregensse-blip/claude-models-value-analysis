@@ -222,6 +222,20 @@ stop the build when one no longer applies. `python3 site/build.py` and the files
 - **Maker pages**: the maker's models in its own colours (the Claude page keeps the catalogue's), its tiers and
   crown among its own couples, its price trend on its current models; the maker's older models are hidden by default,
   as on the Claude page (§ 4).
+- **Tier targets: the 20th, 40th, 60th and 80th percentiles of the couples shown** (19 Nov 2026; the maintainer:
+  « j'ai l'impression que les tiers sont hyper bas maintenant, remonte le seuil de perf min pour grunt », « propose moi
+  des nouveaux parametres de tiers pour mieux les centrer sur les perfs generales », then, of the proposals shown,
+  « B »). On every page of the multi-site draft, and only there, the four targets θ*₁ … θ*₄ (Grunt work, Everyday
+  tasks, Advanced reasoning, Cutting-Edge thinking) are the 20th, 40th, 60th and 80th percentiles of θ over **every
+  couple shown on the page** (the selection and the *Older models* switch in force, the couples `couples()` gives),
+  linearly interpolated between the sorted values at rank f·(n − 1). They replace the even spread between the
+  frontier's bounds drawn inward (§ 10, `TIER_E`), which put the bottom tier at the weakest frontier couple. They
+  depend on θ only, not on the prices. The window width keeps the rule of § 10, σ = gap ⁄ (2·√ln 2), gap now the mean
+  spacing of the targets, (θ*₄ − θ*₁) ⁄ 3. β (0.25, 0.63, 1.59, 4), the score, the pick among the frontier couples,
+  the fixed price trend and the promotions are unchanged. When the reader turns chips off, the targets are taken
+  again on the couples shown, like the frontier; the price trend is not (below). The axis compression of § 6 still
+  starts at the weakest target, θ*₁. The Claude page at the repository root keeps § 10. Applied by `site/multisite.py`
+  as replacements of `tierDefaults()` and of the pages' text.
 - **Outclassed models go into the older models** (the maintainer, 19 Nov 2026: « ensuite tu places dans older models
   tous les modeles qui sont entierement moins bons et plus cher qu'un autre modele du meme fabricant. genre quand un
   modele est entierement surclasse par un autre fait par la meme boite, tu le mets en older models »). A model A is

@@ -445,6 +445,24 @@ const promoTag=k=>{ const v=PROMO[k]; return v?(v.until?`promo until ${fmtD(v.un
     LEGACY_HINT=names.length<=3||HINT_ALL?names.join(" · "):names.slice(0,2).join(" · ")+` and ${names.length-2} more`; } })();
 '''
 
+TIER_Q_HEAD = r'''// DATA-DERIVED targets, multi-site (the maintainer, 19 Nov 2026: « j'ai l'impression que les tiers sont hyper bas
+// maintenant, remonte le seuil de perf min pour grunt », then « B »): the four θ* are the 20th, 40th, 60th and 80th
+// percentiles (TIER_Q) of θ over every couple shown on the page — couples(), the selection and the older-model switch in
+// force —, linearly interpolated between the sorted values at rank f·(n − 1). They depend on θ only, not on the prices,
+// and are taken again on what is shown when the selection changes. σ follows the mean spacing of the targets,
+// gap = (θ*₄ − θ*₁) ⁄ 3: adjacent windows cross at half weight midway, σ = gap ⁄ (2·√ln 2).
+const TIER_Q=[0.2,0.4,0.6,0.8];
+'''
+
+TIER_Q_FN = r'''function tierDefaults(){
+  const th=couples().map(p=>p.t).sort((x,y)=>x-y), n=th.length; if(!n) return;
+  const q=f=>{ const i=f*(n-1), j=Math.floor(i), k=Math.min(j+1,n-1); return th[j]+(th[k]-th[j])*(i-j); };   // linear between sorted values
+  const ts=TIER_Q.map(q), lo=ts[0], hi=ts[ts.length-1], gap=(hi-lo)/Math.max(TIERS.length-1,1), sig=gap/(2*Math.sqrt(Math.LN2));
+  TIERS.forEach((T,i)=>{ T.t=ts[i]; T.sig=sig; });
+  TIERQ={lo,hi,gap,sig};
+}
+'''
+
 HOVER_FN = r'''function hoverTip(s,ells,pts,X,Y,mL,iw,bdg){ const DEF=0.15,HOV=0.78;   // multi-site: the frontier's labels, a tooltip of fixed size on screen
   const tip=el("g",{"pointer-events":"none",opacity:0}), trect=el("rect",{rx:3,fill:cvar('--panel'),stroke:cvar('--line'),"stroke-width":1,"fill-opacity":0.97});
   const ttxt=el("text",{"font-size":9.5,"font-weight":600,"text-anchor":"middle"}); tip.appendChild(trect); tip.appendChild(ttxt); s.appendChild(tip);
@@ -485,6 +503,10 @@ def app_patches(S):
          "// before the prices in force: CURRENT, LEGACY, HIDE_C and LEGACY_HINT are taken from them on load\n"
          "let LEGACY_HINT=\"\", OUTCLASSED={};"),
         ('const PANEL=__PANEL__;\n', 'const PANEL=__PANEL__;\n' + PRICES_FN),
+        # The tier targets (the maintainer, 19 Nov 2026, rule B): the 20th, 40th, 60th and 80th percentiles of θ over the
+        # couples shown, in place of the even spread between the frontier's bounds (TIER_E) of the Claude page.
+        (re.compile(r"// DATA-DERIVED targets\. .*?\nconst TIER_E=0\.05;\n", re.S), TIER_Q_HEAD),
+        (re.compile(r"function tierDefaults\(\)\{\n.*?\n  TIERQ=\{lo,hi,gap,sig\};\n\}\n", re.S), TIER_Q_FN),
         ('  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); }', '  else { delete COSTGRID[m]; delete QUALGRID[m]; } }); hideCouples(); applyFilter(); }'),
         ('const xmn=Math.min(...pts.map(p=>p.clo)), xmx=Math.max(...pts.map(p=>p.chi)),',
          'const xmn=Math.min(...pts.map(p=>p.clo),...variantPts(pts).map(v=>v.c)), xmx=Math.max(...pts.map(p=>p.chi),...variantPts(pts).map(v=>v.c)),', 2),
@@ -627,6 +649,19 @@ def body_patches(S, mc_sentence):
          f"Qwen, GLM, Kimi), on one scale; {shows}."),
         (re.compile(r"in this fit (?:every figure is stable to that digit|[^<]*?far inside their intervals)\."), mc_sentence),
         ("not affiliated with or endorsed by Anthropic", "not affiliated with or endorsed by any model maker"),
+        # the tier targets, rule B (the maintainer, 19 Nov 2026)
+        ("they spread evenly between the frontier's weakest and strongest couples, each end drawn 5&nbsp;% of the span inward, "
+         "so that the bottom tier follows the weakest couple available and the top tier the best — as models improve, the "
+         "targets move with them. The width follows the spacing on one rule&nbsp;: adjacent windows cross at <b>half weight</b> "
+         "midway between their targets.",
+         "they are the <b>20th, 40th, 60th and 80th percentiles</b> of the quality of the couples shown on the page, so that "
+         "the four tiers sit across the bulk of today's couples — as models improve, the targets move with them, and turning "
+         "makers or models off takes them again on what is shown. They depend on quality only, not on prices. The width "
+         "follows the mean spacing of the targets on one rule&nbsp;: adjacent windows cross at <b>half weight</b> midway "
+         "between their targets."),
+        ("The four tiers spread their targets across the frontier and pick, around each target,",
+         "The four tiers set their targets at the 20th, 40th, 60th and 80th percentiles of the quality of the couples shown "
+         "and pick, among the frontier couples, around each target,"),
     ]
 
 
